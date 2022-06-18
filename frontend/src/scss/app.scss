@@ -1,0 +1,51 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import 'react-toastify/scss/main';
+
+// Variables
+$body-bg: #f8fafc;
+
+$font-family-sans-serif: 'Nunito', sans-serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.required-asterisk {
+    color: var(--bs-danger);
+    margin-left: .15rem;
+}
+
+.table {
+    > :not(:first-child) {
+        border-top: unset;
+    }
+
+    td {
+        vertical-align: middle;
+    }
+
+    tfoot tr td {
+        border-bottom-width: 0;
+    }
+
+    .pagination {
+        margin-bottom: unset;
+    }
+}
+
+.users-table {
+    td {
+        max-width: 250px;
+    }
+    .table-cell-link {
+        text-decoration: none;
+        color: var(--bs-table-striped-color);
+
+        &:hover {
+            text-decoration: underline;
+            color: var(--bs-table-striped-color);
+        }
+    }
+}

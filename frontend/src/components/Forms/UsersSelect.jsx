@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Col, FormGroup, InputGroup, Label } from 'reactstrap'
 import { AsyncPaginate } from 'react-select-async-paginate'
-import { userService } from '@/services'
 import { ErrorMessage } from 'formik'
 import { components } from 'react-select'
 
@@ -78,44 +77,6 @@ const UsersSelect = ({ event, setFieldValue, fetch }) => {
                 Users
             </Label>
             <Col sm={10}>
-                <InputGroup>
-                    <AsyncPaginate
-                        value={eventUsers}
-                        className="react-select w-100"
-                        loadOptions={(search, loadedOptions, { page }) =>
-                            userService
-                                .selectData(15, page)
-                                .then(({ data, meta: { to, total } }) => ({
-                                    options: data.map(
-                                        ({ name, id, email }) => ({
-                                            label: name,
-                                            value: id,
-                                            email: email,
-                                        }),
-                                    ),
-                                    hasMore: to < total,
-                                    additional: {
-                                        page: page + 1,
-                                    },
-                                }))
-                        }
-                        isMulti="isMulti"
-                        closeMenuOnSelect={false}
-                        onChange={ids => {
-                            const userIds = ids.map(({ value }) => value)
-                            setFieldValue('users', userIds)
-                            setEventUsers(ids)
-                        }}
-                        placeholder="Select users..."
-                        styles={colourStyles}
-                        additional={{
-                            page: 1,
-                        }}
-                        components={{
-                            Option,
-                        }}
-                    />
-                </InputGroup>
                 <ErrorMessage
                     name="users"
                     render={msg => <small className="text-danger">{msg}</small>}

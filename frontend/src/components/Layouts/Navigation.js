@@ -14,10 +14,7 @@ import {
     UncontrolledDropdown,
 } from 'reactstrap'
 
-const Navigation = ({ }) => {
-    const router = useRouter()
-
-
+const Navigation = ({}) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => setIsOpen(!isOpen)
@@ -25,16 +22,47 @@ const Navigation = ({ }) => {
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <Container>
-                <Link href="/dashboard">
-                    <a className="navbar-brand">
-                        {process.env.NEXT_PUBLIC_APP_NAME}
-                    </a>
-                </Link>
                 <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="me-auto" navbar>
+                        <Link href="/">
+                            <a className="navbar-brand">
+                                {process.env.NEXT_PUBLIC_APP_NAME}
+                            </a>
+                        </Link>
+                        <Link href="/courses">
+                            <a className="navbar-brand">Courses</a>
+                        </Link>
+                        <Link href="/">
+                            <a className="navbar-brand">Reservations</a>
+                        </Link>
+                        <Link href="/">
+                            <a className="navbar-brand">Teachers</a>
+                        </Link>
+                        {/*<UncontrolledDropdown inNavbar nav>*/}
+                        {/*    <DropdownToggle caret nav>*/}
+                        {/*        Users*/}
+                        {/*    </DropdownToggle>*/}
+                        {/*    <DropdownMenu end>*/}
+                        {/*        <Link href="/users">*/}
+                        {/*            <DropdownItem active={'a' === '/users'}>*/}
+                        {/*                Users*/}
+                        {/*            </DropdownItem>*/}
+                        {/*        </Link>*/}
+                        {/*        <Link*/}
+                        {/*            href="/users/create"*/}
+                        {/*            active={*/}
+                        {/*                router.pathname === '/users/create'*/}
+                        {/*            }*/}
+                        {/*        >*/}
+                        {/*            <DropdownItem>Create User</DropdownItem>*/}
+                        {/*        </Link>*/}
+                        {/*    </DropdownMenu>*/}
+                        {/*</UncontrolledDropdown>*/}
+                    </Nav>
+                </Collapse>
             </Container>
         </nav>
-
-
     )
 }
 

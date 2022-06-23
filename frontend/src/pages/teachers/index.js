@@ -17,15 +17,15 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 // import Link from 'next/link'
 
 const Index = () => {
-    const { t } = useTranslation('courses')
+    const { t } = useTranslation('teachers')
 
-    useEffect(() => {
-        courseService.index().then(({ data }) => console.log(data))
-    }, [])
+    // useEffect(() => {
+    //     courseService.index().then(({ data }) => console.log(data))
+    // }, [])
 
     return (
         <>
-            <div> {t('courses')}</div>
+            <div> {t('teachers')}</div>
         </>
     )
 }
@@ -34,7 +34,7 @@ export async function getStaticProps({ locale }) {
     return {
         props: {
             ...(await serverSideTranslations(locale, [
-                'courses',
+                'teachers',
                 'navigation',
             ])),
         },

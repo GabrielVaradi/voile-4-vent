@@ -1,21 +1,18 @@
 import React from 'react'
-import AppLayout from '@/components/Layouts/AppLayout'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Home = () => {
-    return (
-        <AppLayout>
-            <div> test 1</div>
-            <div> test 1</div>
-            <div> test 1</div>
-            <div> test 1</div>
-            <div> test 1</div>
-            <div> test 1</div>
-            <div> test 1</div>
-            <div> test 1</div>
-            <div> test 1</div>
-            <div> test 1</div>
-        </AppLayout>
-    )
+    const { t } = useTranslation('home')
+    return <div> {t('home')}</div>
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, ['home', 'navigation'])),
+        },
+    }
 }
 
 export default Home

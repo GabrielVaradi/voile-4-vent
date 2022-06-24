@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\Course;
 use Illuminate\Database\Seeder;
 
-class CourseSeeder extends Seeder
+class ReservationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,13 +14,13 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        $this->createCourses();
+        $this->createReservations();
     }
 
     /**
      * @return void
      */
-    private function createCourses(): void
+    private function createReservations(): void
     {
         Course::query()
             ->create([

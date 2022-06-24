@@ -6,6 +6,7 @@ import ImageFull from '@/components/Images/ImageFull'
 import Image from 'next/image'
 import picture from '../../public/shutterstock_717244969.jpg'
 import { courseService } from '@/services'
+import Link from 'next/link'
 
 const Home = () => {
     const [courses, setCourses] = useState([])
@@ -21,7 +22,14 @@ const Home = () => {
                 <Container className="h-100 d-flex flex-column justify-content-center">
                     <h1 className="text-uppercase">{t('title')}</h1>
                     <h5 className="text-uppercase">{t('description')}</h5>
-                    <Button className=""> {t('learn_more')}</Button>
+                    {/*<Button className=""> {t('learn_more')}</Button>*/}
+                    <a
+                        href="https://squareup.com/appointments/book/5xqjj79up2ibx0/L5RT2XMJJXK9V/start"
+                        className="btn btn-primary"
+                        target="_blank"
+                        rel="noreferrer">
+                        {t('learn_more')}
+                    </a>
                 </Container>
             </ImageFull>
 
@@ -52,7 +60,11 @@ const Home = () => {
 export async function getStaticProps({ locale }) {
     return {
         props: {
-            ...(await serverSideTranslations(locale, ['home', 'navigation'])),
+            ...(await serverSideTranslations(locale, [
+                'home',
+                'navigation',
+                'footer',
+            ])),
         },
     }
 }

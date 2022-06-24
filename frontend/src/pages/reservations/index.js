@@ -1,32 +1,27 @@
-import React, { useEffect } from 'react'
-import { courseService } from '../../services'
+import React, { useState, useEffect } from 'react'
+import { reservationService } from '../../services'
+import { Container } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-
-// import {
-//     DropdownItem,
-//     DropdownMenu,
-//     Pagination,
-//     PaginationItem,
-//     PaginationLink,
-//     UncontrolledDropdown,
-//     DropdownToggle,
-// } from 'reactstrap'
-// import { toast } from 'react-toastify'
-// import Head from 'next/head'
-// import Link from 'next/link'
+import Calendar from '@/components/Calendar'
+import format from 'date-fns/format'
 
 const Index = () => {
     const { t } = useTranslation('reservations')
 
-    // useEffect(() => {
-    //     courseService.index().then(({ data }) => console.log(data))
-    // }, [])
+    const events = [
+        {
+            start: format(new Date(), 'MM/dd/yyyy'),
+            end: format(new Date(), 'MM/dd/yyyy'),
+            title: 'Some title',
+        },
+    ]
 
     return (
-        <>
+        <Container className="mt-5">
             <div> {t('reservations')}</div>
-        </>
+            <Calendar events={events} className="mt-5" />
+        </Container>
     )
 }
 
@@ -36,6 +31,7 @@ export async function getStaticProps({ locale }) {
             ...(await serverSideTranslations(locale, [
                 'reservations',
                 'navigation',
+                'footer',
             ])),
         },
     }

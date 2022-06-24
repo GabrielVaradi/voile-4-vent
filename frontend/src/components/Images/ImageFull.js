@@ -10,7 +10,7 @@ const ImageFull = ({ src, alt, children, ragged }) => {
                 objectFit="cover"
                 src={src}
                 alt={alt}
-                className={`${styles.imageFull} ${ragged ? styles.ragged : ''}`}
+                className={`${ragged ? styles.ragged : ''}`}
             />
             {children}
         </div>

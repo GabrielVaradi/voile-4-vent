@@ -36,6 +36,7 @@ export async function getStaticProps({ locale }) {
             ...(await serverSideTranslations(locale, [
                 'courses',
                 'navigation',
+                'footer',
             ])),
         },
     }

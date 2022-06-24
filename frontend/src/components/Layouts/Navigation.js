@@ -1,24 +1,13 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import {
-    Collapse,
-    Container,
-    DropdownItem,
-    DropdownMenu,
-    DropdownToggle,
-    Nav,
-    NavbarToggler,
-    NavItem,
-    NavLink,
-    UncontrolledDropdown,
-} from 'reactstrap'
+import { Collapse, Container, Nav, NavbarToggler } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 
-const Navigation = ({}) => {
+const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false)
     const router = useRouter()
-    const { t, i18n } = useTranslation('navigation')
+    const { t } = useTranslation('navigation')
 
     const toggle = () => setIsOpen(!isOpen)
 
@@ -54,26 +43,6 @@ const Navigation = ({}) => {
                                 {t('change-locale')}
                             </button>
                         </Link>
-                        {/*<UncontrolledDropdown inNavbar nav>*/}
-                        {/*    <DropdownToggle caret nav>*/}
-                        {/*        Users*/}
-                        {/*    </DropdownToggle>*/}
-                        {/*    <DropdownMenu end>*/}
-                        {/*        <Link href="/users">*/}
-                        {/*            <DropdownItem active={'a' === '/users'}>*/}
-                        {/*                Users*/}
-                        {/*            </DropdownItem>*/}
-                        {/*        </Link>*/}
-                        {/*        <Link*/}
-                        {/*            href="/users/create"*/}
-                        {/*            active={*/}
-                        {/*                router.pathname === '/users/create'*/}
-                        {/*            }*/}
-                        {/*        >*/}
-                        {/*            <DropdownItem>Create User</DropdownItem>*/}
-                        {/*        </Link>*/}
-                        {/*    </DropdownMenu>*/}
-                        {/*</UncontrolledDropdown>*/}
                     </Nav>
                 </Collapse>
             </Container>

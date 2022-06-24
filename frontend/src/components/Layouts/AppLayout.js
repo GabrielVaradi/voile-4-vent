@@ -1,6 +1,6 @@
 import React from 'react'
 import Navigation from '@/components/Layouts/Navigation'
-import { Container } from 'reactstrap'
+import Footer from '@/components/Layouts/Footer'
 import { ToastContainer } from 'react-toastify'
 
 const AppLayout = ({ children }) => {
@@ -8,11 +8,8 @@ const AppLayout = ({ children }) => {
         <>
             <Navigation />
             <ToastContainer />
-            <Container className={'mt-3'}>
-                <div>
-                    <div>{children}</div>
-                </div>
-            </Container>
+            {children}
+            <Footer />
         </>
     )
 }

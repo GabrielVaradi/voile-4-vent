@@ -18,8 +18,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title', 50);
             $table->longText('description');
+            $table->longText('skills');
             $table->string('duration');
             $table->integer('price');
+
         });
     }
 

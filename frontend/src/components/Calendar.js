@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar'
 import format from 'date-fns/format'
+import compareAsc from 'date-fns/compareAsc'
 import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
@@ -12,6 +13,7 @@ import('react-big-calendar/lib/css/react-big-calendar.css')
 import('../../styles/Components/Calendar.module.scss')
 
 const Calendar = ({ events, className }) => {
+    const [daysSelected, setDaysSelected] = useState([])
     const router = useRouter()
 
     const locales = {
@@ -31,11 +33,37 @@ const Calendar = ({ events, className }) => {
         <Container className="mt-5">
             <BigCalendar
                 events={events}
+                className={className}
                 localizer={localizer}
                 style={{ height: 500 }}
                 culture={router.locale}
                 views={['month']}
-                className={className}
+                selectable
+                onSelectSlot={e => {
+                    const daySelected = e.slots[0]
+                    const days = daysSelected.filter(
+                        day => compareAsc(day, daySelected) !== 0,
+                    )
+                    if (days.length === daysSelected.length) {
+                        if (daysSelected.length === 4) {
+                            return null
+                        }
+                        setDaysSelected(prev => [...prev, daySelected])
+                    } else {
+                        setDaysSelected(days)
+                    }
+                }}
+                dayPropGetter={date => {
+                    const selected = daysSelected.every(
+                        day => compareAsc(day, date) !== 0,
+                    )
+                    // console.log(selected)
+                    return {
+                        style: {
+                            background: selected ? '' : 'green',
+                        },
+                    }
+                }}
             />
         </Container>
     )

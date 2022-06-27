@@ -5,6 +5,8 @@ import compareAsc from 'date-fns/compareAsc'
 import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
+import addDays from 'date-fns/addDays'
+import subDays from 'date-fns/subDays'
 import enUS from 'date-fns/locale/en-US'
 import frCA from 'date-fns/locale/fr-CA'
 import { useRouter } from 'next/router'
@@ -24,10 +26,39 @@ const Calendar = ({ events, className }) => {
     const localizer = dateFnsLocalizer({
         format,
         parse,
-        startOfWeek,
+        startOfWeek: () => startOfWeek(new Date(), { weekStartsOn: 1 }),
         getDay,
         locales,
     })
+
+    const onSelectSlot = e => {
+        let daySelected = [e.slots[0]]
+        if (getDay(daySelected[0]) === 6) {
+            daySelected = [daySelected[0], addDays(daySelected[0], 1)]
+        } else if (getDay(daySelected[0]) === 0) {
+            daySelected = [daySelected[0], subDays(daySelected[0], 1)]
+        }
+        let days = []
+        if (daySelected.length > 1) {
+            days = daySelected.map(d => {
+                return daysSelected.filter(day => compareAsc(day, d) !== 0)
+            })
+        } else {
+            days = daysSelected.filter(
+                day => compareAsc(day, daySelected[0]) !== 0,
+            )
+        }
+        console.log(daysSelected)
+        console.log(days)
+        if (days.length === daysSelected.length) {
+            if (daysSelected.length + daySelected.length > 4) {
+                return null
+            }
+            setDaysSelected(prev => prev.concat(daySelected))
+        } else {
+            setDaysSelected(days)
+        }
+    }
 
     return (
         <Container className="mt-5">
@@ -39,25 +70,11 @@ const Calendar = ({ events, className }) => {
                 culture={router.locale}
                 views={['month']}
                 selectable
-                onSelectSlot={e => {
-                    const daySelected = e.slots[0]
-                    const days = daysSelected.filter(
-                        day => compareAsc(day, daySelected) !== 0,
-                    )
-                    if (days.length === daysSelected.length) {
-                        if (daysSelected.length === 4) {
-                            return null
-                        }
-                        setDaysSelected(prev => [...prev, daySelected])
-                    } else {
-                        setDaysSelected(days)
-                    }
-                }}
+                onSelectSlot={onSelectSlot}
                 dayPropGetter={date => {
                     const selected = daysSelected.every(
                         day => compareAsc(day, date) !== 0,
                     )
-                    // console.log(selected)
                     return {
                         style: {
                             background: selected ? '' : 'green',

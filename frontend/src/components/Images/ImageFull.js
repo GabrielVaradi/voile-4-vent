@@ -11,6 +11,7 @@ const ImageFull = ({ src, alt, children, ragged }) => {
                 src={src}
                 alt={alt}
                 className={`${ragged ? styles.ragged : ''}`}
+                priority
             />
             {children}
         </div>

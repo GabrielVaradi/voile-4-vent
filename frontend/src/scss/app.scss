@@ -1,7 +1,3 @@
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-@import 'react-toastify/scss/main';
-
 // Variables
 $body-bg: #f8fafc;
 
@@ -9,8 +5,17 @@ $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import 'react-toastify/scss/main';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Files
+@import 'styles/Components/Calendar';
+
+
 
 .required-asterisk {
     color: var(--bs-danger);
@@ -53,13 +58,3 @@ $line-height-base: 1.6;
 .btn {
     width: fit-content;
 }
-
-//.rbc-toolbar {
-//    justify-content: space-between !important;
-//    .rbc-toolbar-label {
-//        flex-grow: 0 !important;
-//    }
-//    .rbc-btn-group {
-//        display: none !important;
-//    }
-//}

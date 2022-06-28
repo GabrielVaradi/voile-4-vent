@@ -1,15 +1,16 @@
 import React from 'react'
 import { Col, FormGroup, Input, InputGroup, Label } from 'reactstrap'
-import { ErrorMessage, Field } from 'formik'
+import { ErrorMessage } from 'formik'
 import cn from 'classnames'
 
-const BasicTextInput = ({
+const BasicSelect = ({
     field,
     fieldLabel,
-    placeholder,
     errors,
     touched,
     required,
+    setFieldValue,
+    children,
 }) => {
     return (
         <FormGroup row>
@@ -20,16 +21,16 @@ const BasicTextInput = ({
             <Col sm={10}>
                 <InputGroup>
                     <Input
-                        type="text"
+                        type="select"
                         name={field}
                         id={field}
-                        tag={Field}
+                        onChange={e => setFieldValue(field, e.target.value)}
                         required
                         className={cn({
                             'is-invalid': touched[field] && errors[field],
-                        })}
-                        placeholder={placeholder || 'Type here...'}
-                    />
+                        })}>
+                        {children}
+                    </Input>
                 </InputGroup>
                 <ErrorMessage
                     name={field}
@@ -40,4 +41,4 @@ const BasicTextInput = ({
     )
 }
 
-export default BasicTextInput
+export default BasicSelect

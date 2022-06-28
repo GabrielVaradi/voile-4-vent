@@ -1,0 +1,23 @@
+.rbc-calendar {
+    //.rbc-toolbar {
+    //    justify-content: space-between !important;
+    //    .rbc-toolbar-label {
+    //        flex-grow: 0 !important;
+    //    }
+    //    .rbc-btn-group {
+    //        display: none !important;
+    //    }
+    //}
+    .rbc-month-view {
+        .rbc-month-row {
+            .rbc-date-cell {
+                button {
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+}
+
+
+

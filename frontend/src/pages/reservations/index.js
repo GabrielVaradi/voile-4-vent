@@ -19,12 +19,14 @@ import Calendar from '@/components/Calendar'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
 import BasicTextInput from '@/components/BasicTextInput'
+import BasicSelect from '@/components/BasicSelect'
 import format from 'date-fns/format'
 import { parseISO } from 'date-fns'
 import cn from 'classnames'
 
 const Index = () => {
     const [daysSelected, setDaysSelected] = useState([])
+    const [eventsSelected, setEventsSelected] = useState([])
     const [events, setEvents] = useState([])
     const [mappedEvents, setMappedEvents] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
@@ -48,19 +50,19 @@ const Index = () => {
         }
     }, [events])
 
-    const userEditValidations = Yup.object().shape({
-        name: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('Required'),
-        email: Yup.string().email('Invalid email').required('Required'),
-    })
+    // const userEditValidations = Yup.object().shape({
+    //     name: Yup.string()
+    //         .min(2, 'Too Short!')
+    //         .max(50, 'Too Long!')
+    //         .required('Required'),
+    //     email: Yup.string().email('Invalid email').required('Required'),
+    // })
 
     const createReservation = async (values, { resetForm }) => {
         console.log('hi')
         console.log(values)
         console.log(daysSelected)
-        reservationService.store(values).then(() => setModalIsOpen(false))
+        // reservationService.store(values).then(() => setModalIsOpen(false))
         // axios
         //     .put(`users/${user?.id}`, values)
         //     .then(({ data }) => {
@@ -94,6 +96,8 @@ const Index = () => {
                 events={mappedEvents}
                 daysSelected={daysSelected}
                 setDaysSelected={setDaysSelected}
+                eventsSelected={eventsSelected}
+                setEventsSelected={setEventsSelected}
                 className="mt-5"
             />
             <Button
@@ -104,24 +108,24 @@ const Index = () => {
             <Formik
                 onSubmit={createReservation}
                 initialValues={{
-                    first_name: '',
-                    last_name: '',
-                    email: '',
-                    address: '',
-                    phone_number: '',
-                    birthdate: '',
-                    payment: '',
-                    number_of_people: '',
+                    first_name: 'd23',
+                    last_name: 'd',
+                    email: 'd@d.com',
+                    address: 'd',
+                    phone_number: '123',
+                    birthdate: '123',
+                    payment: 'Full ',
+                    number_of_people: '1',
                 }}
-                validationSchema={userEditValidations}
+                // validationSchema={userEditValidations}
                 enableReinitialize>
                 {({
                     isSubmitting,
                     touched,
                     errors,
                     isValid,
-                    dirty,
                     submitForm,
+                    setFieldValue,
                 }) => (
                     <Modal
                         isOpen={modalIsOpen}
@@ -182,76 +186,28 @@ const Index = () => {
                                         touched={touched}
                                         required
                                     />
-                                    <FormGroup row>
-                                        <Label for="payment" sm={2}>
-                                            Payment
-                                            <span className="required-asterisk">
-                                                *
-                                            </span>
-                                        </Label>
-                                        <Col sm={10}>
-                                            <InputGroup>
-                                                <Input
-                                                    type="select"
-                                                    name="payment"
-                                                    id="payment"
-                                                    required
-                                                    // tag={Field}
-                                                    className={cn({
-                                                        'is-invalid':
-                                                            touched.payment &&
-                                                            errors.payment,
-                                                    })}>
-                                                    <option>Full</option>
-                                                    <option>Deposit</option>
-                                                </Input>
-                                            </InputGroup>
-                                            <ErrorMessage
-                                                name="payment"
-                                                render={msg => (
-                                                    <small className="text-danger">
-                                                        {msg}
-                                                    </small>
-                                                )}
-                                            />
-                                        </Col>
-                                    </FormGroup>
-                                    <FormGroup row>
-                                        <Label for="number_of_people" sm={2}>
-                                            Number of people
-                                            <span className="required-asterisk">
-                                                *
-                                            </span>
-                                        </Label>
-                                        <Col sm={10}>
-                                            <InputGroup>
-                                                <Input
-                                                    type="select"
-                                                    name="number_of_people"
-                                                    id="number_of_people"
-                                                    required
-                                                    // tag={Field}
-                                                    className={cn({
-                                                        'is-invalid':
-                                                            touched.number_of_people &&
-                                                            errors.number_of_people,
-                                                    })}>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                </Input>
-                                            </InputGroup>
-                                            <ErrorMessage
-                                                name="number_of_people"
-                                                render={msg => (
-                                                    <small className="text-danger">
-                                                        {msg}
-                                                    </small>
-                                                )}
-                                            />
-                                        </Col>
-                                    </FormGroup>
+                                    <BasicSelect
+                                        field="payment"
+                                        fieldLabel="Payment"
+                                        errors={errors}
+                                        touched={touched}
+                                        setFieldValue={setFieldValue}
+                                        required>
+                                        <option>Full</option>
+                                        <option>Deposit</option>
+                                    </BasicSelect>
+                                    <BasicSelect
+                                        field="number_of_people"
+                                        fieldLabel="Number of people"
+                                        errors={errors}
+                                        touched={touched}
+                                        setFieldValue={setFieldValue}
+                                        required>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </BasicSelect>
                                 </Form>
                                 {isSubmitting && (
                                     <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">
@@ -266,7 +222,7 @@ const Index = () => {
                         <ModalFooter>
                             <Button
                                 color="primary"
-                                disabled={isSubmitting || !isValid || !dirty}
+                                disabled={isSubmitting || !isValid}
                                 onClick={submitForm}>
                                 Rezervatiosns
                             </Button>

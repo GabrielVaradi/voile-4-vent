@@ -13,9 +13,15 @@ import { useRouter } from 'next/router'
 import { Container } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import('react-big-calendar/lib/css/react-big-calendar.css')
-import('../../styles/Components/Calendar.module.scss')
 
-const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
+const Calendar = ({
+    events,
+    className,
+    daysSelected,
+    setDaysSelected,
+    eventsSelected,
+    setEventsSelected,
+}) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
 
@@ -115,7 +121,6 @@ const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
                 views={['month']}
                 selectable
                 onSelectSlot={onSelectSlot}
-                onSelectEvent={onSelectSlot}
                 dayPropGetter={dayPropGetter}
                 eventPropGetter={eventPropGetter}
                 components={components}

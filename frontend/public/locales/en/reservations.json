@@ -1,3 +1,5 @@
 {
-    "reservations": "Reservations"
+    "reservations": "Reservations",
+    "places_left": "{{places_left}} places left!"
+
 }

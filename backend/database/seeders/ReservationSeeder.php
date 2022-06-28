@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Course;
+use App\Models\Reservation;
 use Illuminate\Database\Seeder;
 
 class ReservationSeeder extends Seeder
@@ -22,29 +22,16 @@ class ReservationSeeder extends Seeder
      */
     private function createReservations(): void
     {
-        Course::query()
+        Reservation::query()
             ->create([
-                'title'       => 'Brevet Niveau initiation ',
-                'description' => 'Apprendre à être un bon équipier en toute sécurité sur un voilier. Ce cours couvre les rudiments de la voile en 15 heures soit  deux jours de formation pratique.',
-                'duration'    => '15 heures',
-                'skills'      => 'Securite nautique',
-                'price'       => 270
-            ]);
-        Course::query()
-            ->create([
-                'title'       => 'Brevet Croisière élémentaire ',
-                'description' => 'Pour ceux qui débutent ou possède un peu d’expérience de la voile. Formation donné en 30 heures. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier.',
-                'duration'    => '30 heures',
-                'skills'      => 'Securite nautique',
-                'price'       => 540
-            ]);
-        Course::query()
-            ->create([
-                'title'       => 'Clinique Spinnaker',
-                'description' => 'Apprivoiser le déploiement sous le vent de cette voile puissante aux coloris d’arc en ciel.',
-                'duration'    => '1 journee ou 2 soiree',
-                'skills'      => 'Securite nautique',
-                'price'       => 135
+                'first_name'       => 'Robert',
+                'last_name'        => 'De Niro',
+                'address'          => '2022-06-11 00:00:01',
+                'phone_number'     => '514-555-5559',
+                'birthdate'        => '28/09/1992',
+                'email'            => 'robert@de.niro',
+                'payment'          => 'Deposit',
+                'number_of_people' => 2,
             ]);
     }
 }

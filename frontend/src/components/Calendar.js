@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar'
 import format from 'date-fns/format'
 import compareAsc from 'date-fns/compareAsc'
@@ -11,12 +11,36 @@ import enUS from 'date-fns/locale/en-US'
 import frCA from 'date-fns/locale/fr-CA'
 import { useRouter } from 'next/router'
 import { Container } from 'reactstrap'
+import { useTranslation } from 'next-i18next'
 import('react-big-calendar/lib/css/react-big-calendar.css')
 import('../../styles/Components/Calendar.module.scss')
 
-const Calendar = ({ events, className }) => {
-    const [daysSelected, setDaysSelected] = useState([])
+const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
     const router = useRouter()
+    const { t } = useTranslation('reservations')
+
+    const Event = e => {
+        return (
+            <>
+                <div>
+                    {router.locale === 'en'
+                        ? e.event.title_en
+                        : e.event.title_fr}
+                </div>
+                <div>
+                    {t('places_left', {
+                        places_left:
+                            e.event.max_reservations - e.event.reservations,
+                    })}
+                </div>
+            </>
+        )
+    }
+    const components = useMemo(() => {
+        return {
+            event: Event,
+        }
+    }, [])
 
     const locales = {
         en: enUS,
@@ -40,16 +64,15 @@ const Calendar = ({ events, className }) => {
         }
         let days = []
         if (daySelected.length > 1) {
-            days = daySelected.map(d => {
-                return daysSelected.filter(day => compareAsc(day, d) !== 0)
-            })
+            days = daysSelected.filter(
+                day => compareAsc(day, daySelected[0]) !== 0,
+            )
+            days = days.filter(day => compareAsc(day, daySelected[1]) !== 0)
         } else {
             days = daysSelected.filter(
                 day => compareAsc(day, daySelected[0]) !== 0,
             )
         }
-        console.log(daysSelected)
-        console.log(days)
         if (days.length === daysSelected.length) {
             if (daysSelected.length + daySelected.length > 4) {
                 return null
@@ -57,6 +80,27 @@ const Calendar = ({ events, className }) => {
             setDaysSelected(prev => prev.concat(daySelected))
         } else {
             setDaysSelected(days)
+        }
+    }
+
+    const dayPropGetter = date => {
+        const selected = daysSelected.every(day => compareAsc(day, date) !== 0)
+        return {
+            style: {
+                background: selected ? '' : '#C1E1C1',
+            },
+        }
+    }
+
+    const eventPropGetter = event => {
+        return {
+            style: {
+                background: 'transparent',
+                color: 'red',
+                zIndex: -1,
+                pointerEvents: 'none',
+                textAlign: 'center',
+            },
         }
     }
 
@@ -71,16 +115,10 @@ const Calendar = ({ events, className }) => {
                 views={['month']}
                 selectable
                 onSelectSlot={onSelectSlot}
-                dayPropGetter={date => {
-                    const selected = daysSelected.every(
-                        day => compareAsc(day, date) !== 0,
-                    )
-                    return {
-                        style: {
-                            background: selected ? '' : 'green',
-                        },
-                    }
-                }}
+                onSelectEvent={onSelectSlot}
+                dayPropGetter={dayPropGetter}
+                eventPropGetter={eventPropGetter}
+                components={components}
             />
         </Container>
     )

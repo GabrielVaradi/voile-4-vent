@@ -7,14 +7,21 @@ import {
     ModalBody,
     ModalFooter,
     Button,
+    Label,
+    FormGroup,
+    Input,
+    Col,
+    InputGroup,
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Calendar from '@/components/Calendar'
-import { Field, Form, Formik } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
 import * as Yup from 'yup'
+import BasicTextInput from '@/components/BasicTextInput'
 import format from 'date-fns/format'
 import { parseISO } from 'date-fns'
+import cn from 'classnames'
 
 const Index = () => {
     const [daysSelected, setDaysSelected] = useState([])
@@ -97,8 +104,14 @@ const Index = () => {
             <Formik
                 onSubmit={createReservation}
                 initialValues={{
-                    name: '',
+                    first_name: '',
+                    last_name: '',
                     email: '',
+                    address: '',
+                    phone_number: '',
+                    birthdate: '',
+                    payment: '',
+                    number_of_people: '',
                 }}
                 validationSchema={userEditValidations}
                 enableReinitialize>
@@ -112,7 +125,8 @@ const Index = () => {
                 }) => (
                     <Modal
                         isOpen={modalIsOpen}
-                        toggle={() => setModalIsOpen(prev => !prev)}>
+                        toggle={() => setModalIsOpen(prev => !prev)}
+                        size="lg">
                         <ModalHeader
                             toggle={() => setModalIsOpen(prev => !prev)}>
                             Modal title
@@ -120,35 +134,124 @@ const Index = () => {
                         <ModalBody>
                             <>
                                 <Form>
-                                    <div className="position-relative d-flex flex-column">
-                                        <label htmlFor="firstName">Name</label>
-                                        <Field
-                                            className="form-control"
-                                            name="name"
-                                        />
-                                        {errors.name && touched.name && (
-                                            <div className="text-danger font-weight-bold">
-                                                {errors.name}
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    <div className="position-relative d-flex flex-column">
-                                        <label
-                                            className="form mt-3"
-                                            htmlFor="firstName">
-                                            Email
-                                        </label>
-                                        <Field
-                                            className="form-control"
-                                            name="email"
-                                        />
-                                        {errors.email && touched.email && (
-                                            <div className="text-danger font-weight-bold">
-                                                {errors.email}
-                                            </div>
-                                        )}
-                                    </div>
+                                    <BasicTextInput
+                                        field="first_name"
+                                        fieldLabel="First name"
+                                        placeholder="First name"
+                                        errors={errors}
+                                        touched={touched}
+                                        required
+                                    />
+                                    <BasicTextInput
+                                        field="last_name"
+                                        fieldLabel="Last name"
+                                        placeholder="Last name"
+                                        errors={errors}
+                                        touched={touched}
+                                        required
+                                    />
+                                    <BasicTextInput
+                                        field="email"
+                                        fieldLabel="Email"
+                                        placeholder="Email"
+                                        errors={errors}
+                                        touched={touched}
+                                        required
+                                    />
+                                    <BasicTextInput
+                                        field="address"
+                                        fieldLabel="Address"
+                                        placeholder="Address"
+                                        errors={errors}
+                                        touched={touched}
+                                        required
+                                    />
+                                    <BasicTextInput
+                                        field="phone_number"
+                                        fieldLabel="Phone Number"
+                                        placeholder="Phone Number"
+                                        errors={errors}
+                                        touched={touched}
+                                        required
+                                    />
+                                    <BasicTextInput
+                                        field="birthdate"
+                                        fieldLabel="Birthdate"
+                                        placeholder="Birthdate"
+                                        errors={errors}
+                                        touched={touched}
+                                        required
+                                    />
+                                    <FormGroup row>
+                                        <Label for="payment" sm={2}>
+                                            Payment
+                                            <span className="required-asterisk">
+                                                *
+                                            </span>
+                                        </Label>
+                                        <Col sm={10}>
+                                            <InputGroup>
+                                                <Input
+                                                    type="select"
+                                                    name="payment"
+                                                    id="payment"
+                                                    required
+                                                    // tag={Field}
+                                                    className={cn({
+                                                        'is-invalid':
+                                                            touched.payment &&
+                                                            errors.payment,
+                                                    })}>
+                                                    <option>Full</option>
+                                                    <option>Deposit</option>
+                                                </Input>
+                                            </InputGroup>
+                                            <ErrorMessage
+                                                name="payment"
+                                                render={msg => (
+                                                    <small className="text-danger">
+                                                        {msg}
+                                                    </small>
+                                                )}
+                                            />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="number_of_people" sm={2}>
+                                            Number of people
+                                            <span className="required-asterisk">
+                                                *
+                                            </span>
+                                        </Label>
+                                        <Col sm={10}>
+                                            <InputGroup>
+                                                <Input
+                                                    type="select"
+                                                    name="number_of_people"
+                                                    id="number_of_people"
+                                                    required
+                                                    // tag={Field}
+                                                    className={cn({
+                                                        'is-invalid':
+                                                            touched.number_of_people &&
+                                                            errors.number_of_people,
+                                                    })}>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                </Input>
+                                            </InputGroup>
+                                            <ErrorMessage
+                                                name="number_of_people"
+                                                render={msg => (
+                                                    <small className="text-danger">
+                                                        {msg}
+                                                    </small>
+                                                )}
+                                            />
+                                        </Col>
+                                    </FormGroup>
                                 </Form>
                                 {isSubmitting && (
                                     <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">

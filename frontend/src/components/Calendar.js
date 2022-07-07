@@ -7,21 +7,17 @@ import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
 import addDays from 'date-fns/addDays'
 import subDays from 'date-fns/subDays'
+import isSaturday from 'date-fns/isSaturday'
+import isSunday from 'date-fns/isSunday'
 import enUS from 'date-fns/locale/en-US'
 import frCA from 'date-fns/locale/fr-CA'
 import { useRouter } from 'next/router'
 import { Container } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
+
 import('react-big-calendar/lib/css/react-big-calendar.css')
 
-const Calendar = ({
-    events,
-    className,
-    daysSelected,
-    setDaysSelected,
-    eventsSelected,
-    setEventsSelected,
-}) => {
+const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
 
@@ -63,9 +59,9 @@ const Calendar = ({
 
     const onSelectSlot = e => {
         let daySelected = [e.slots[0]]
-        if (getDay(daySelected[0]) === 6) {
+        if (isSaturday(daySelected[0])) {
             daySelected = [daySelected[0], addDays(daySelected[0], 1)]
-        } else if (getDay(daySelected[0]) === 0) {
+        } else if (isSunday(daySelected[0])) {
             daySelected = [daySelected[0], subDays(daySelected[0], 1)]
         }
         let days = []

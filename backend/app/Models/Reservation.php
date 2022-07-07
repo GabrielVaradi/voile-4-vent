@@ -23,6 +23,7 @@ class Reservation extends Model
         'email',
         'payment',
         'number_of_people',
+        'type',
     ];
 
     /**

@@ -21,13 +21,14 @@ class Event extends Model
         'end',
         'reservations',
         'max_reservations',
+        'type',
     ];
 
     /**
      * Get the reservations for the event.
      */
-    public function reservations()
-    {
-        return $this->hasMany(Reservation::class);
-    }
+//    public function reservations()
+//    {
+//        return $this->hasMany(Reservation::class);
+//    }
 }

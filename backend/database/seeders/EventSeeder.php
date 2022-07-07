@@ -26,10 +26,22 @@ class EventSeeder extends Seeder
             ->create([
                 'title_en'             => 'Basic sailing something',
                 'title_fr'             => 'Brevet Croisiere elementaire',
-                'start'                => '2022-06-11 00:00:01',
-                'end'                  => '2022-06-12 00:00:01',
+                'start'                => '2022-07-09 00:00:01',
+                'end'                  => '2022-07-10 00:00:01',
                 'reservations'         => 2,
                 'max_reservations'     => 8,
+                'type'                 => 'beginner_skipper'
+            ]);
+
+        Event::query()
+            ->create([
+                'title_en'             => 'Initiation day',
+                'title_fr'             => 'Journee initiation',
+                'start'                => '2022-07-12 00:00:01',
+                'end'                  => '2022-07-12 00:00:01',
+                'reservations'         => 6,
+                'max_reservations'     => 8,
+                'type'                 => 'initiation'
             ]);
     }
 }

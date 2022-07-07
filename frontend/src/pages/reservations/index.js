@@ -23,6 +23,9 @@ import BasicSelect from '@/components/BasicSelect'
 import format from 'date-fns/format'
 import { parseISO } from 'date-fns'
 import cn from 'classnames'
+import isEqual from 'date-fns/isEqual'
+import addSeconds from 'date-fns/addSeconds'
+import compareAsc from 'date-fns/compareAsc'
 
 const Index = () => {
     const [daysSelected, setDaysSelected] = useState([])
@@ -39,6 +42,7 @@ const Index = () => {
     useEffect(() => {
         if (events.length > 0) {
             const mapped = events.map(event => ({
+                id: event.id,
                 start: event.start,
                 end: event.end,
                 title_en: event.title_en,
@@ -59,12 +63,39 @@ const Index = () => {
     // })
 
     const createReservation = async (values, { resetForm }) => {
-        console.log('hi')
-        console.log(values)
-        console.log(daysSelected)
+        let filteredDays = [...daysSelected]
+        if (eventsSelected.length === 0) {
+            filteredDays = daysSelected.map(day =>
+                format(addSeconds(day, 1), 'yyyy-MM-dd HH-mm-ss'),
+            )
+        } else {
+            daysSelected.forEach((day, i) => {
+                for (const event of eventsSelected) {
+                    if (
+                        isEqual(addSeconds(day, 1), new Date(event.start)) ||
+                        isEqual(addSeconds(day, 1), new Date(event.end))
+                    ) {
+                        delete filteredDays[i]
+                    }
+                }
+            })
+        }
+
+        const newEventsData = {
+            dates: filteredDays.filter(n => n),
+            type: 'beginner_skipper',
+            reservations: values.number_of_people,
+        }
+        console.log(newEventsData)
+        if (newEventsData.dates.length > 1) {
+            // eventService.store(newEventsData).then(res => console.log(res))
+        } else {
+            // reservationService.store(values).then(() => setModalIsOpen(false))
+        }
+        // eventService.store(newEventsData).then(res => console.log(res))
         // reservationService.store(values).then(() => setModalIsOpen(false))
         // axios
-        //     .put(`users/${user?.id}`, values)
+        //     .post(`users/${user?.id}`, values)
         //     .then(({ data }) => {
         //         setUser(data.data)
         //         toast.success(`Profile updated for ${data.name}`, {
@@ -89,20 +120,40 @@ const Index = () => {
         //     })
     }
 
+    const addEventsWithSameDate = () => {
+        const newEvents = []
+        daysSelected.forEach(daySelect => {
+            events.forEach(event => {
+                if (
+                    isEqual(addSeconds(daySelect, 1), new Date(event.start)) ||
+                    isEqual(addSeconds(daySelect, 1), new Date(event.end))
+                ) {
+                    newEvents.push(event)
+                }
+            })
+        })
+        setEventsSelected(
+            newEvents.filter(
+                (v, i, a) => a.findIndex(v2 => v2.id === v.id) === i,
+            ),
+        )
+    }
+
     return (
         <Container className="mt-5">
             <div> {t('reservations')}</div>
             <Calendar
+                className="mt-5"
                 events={mappedEvents}
                 daysSelected={daysSelected}
                 setDaysSelected={setDaysSelected}
-                eventsSelected={eventsSelected}
-                setEventsSelected={setEventsSelected}
-                className="mt-5"
             />
             <Button
                 color="danger"
-                onClick={() => setModalIsOpen(prev => !prev)}>
+                onClick={() => {
+                    setModalIsOpen(prev => !prev)
+                    addEventsWithSameDate()
+                }}>
                 Glick
             </Button>
             <Formik
@@ -116,6 +167,7 @@ const Index = () => {
                     birthdate: '123',
                     payment: 'Full ',
                     number_of_people: '1',
+                    type: 'beginner_skipper',
                 }}
                 // validationSchema={userEditValidations}
                 enableReinitialize>

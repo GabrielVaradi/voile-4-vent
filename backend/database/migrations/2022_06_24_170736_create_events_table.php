@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('max_reservations');
             $table->dateTime('start');
             $table->dateTime('end');
+            $table->string('type');
         });
     }
 

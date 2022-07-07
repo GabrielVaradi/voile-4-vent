@@ -32,6 +32,7 @@ class ReservationSeeder extends Seeder
                 'email'            => 'robert@de.niro',
                 'payment'          => 'Deposit',
                 'number_of_people' => 2,
+                'type'             =>'beginner_skipper'
             ]);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Api\Reservation;
+namespace App\Http\Requests\Api\Event;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreReservationRequest extends FormRequest
+class StoreEventRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

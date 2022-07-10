@@ -29,9 +29,16 @@ class ReservationController extends Controller
      */
     public function store(StoreReservationRequest $request): ReservationResource
     {
-        $reservation = new Reservation($request->all());
-        $reservation->save();
+        $events = $request->events;
+        $reservations = [];
+        foreach ($events as $event) {
+            $reservation = new Reservation($request->all());
+            $reservation->event()->associate($event['id']);
+            $reservation->save();
+//            $reservation['id'] = $reservation->id;
+            $reservations[] = $reservation;
+        }
 
-        return new ReservationResource($reservation);
+        return new ReservationResource($reservations);
     }
 }

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('payment');
             $table->integer('number_of_people');
             $table->string('type');
+            $table->integer('event_id');
         });
     }
 

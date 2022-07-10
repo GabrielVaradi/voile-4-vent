@@ -24,12 +24,13 @@ class Reservation extends Model
         'payment',
         'number_of_people',
         'type',
+        'event_id',
     ];
 
     /**
-     * Get the post that owns the comment.
+     * Get the event that owns the reservation.
      */
-    public function post()
+    public function event()
     {
         return $this->belongsTo(Event::class);
     }

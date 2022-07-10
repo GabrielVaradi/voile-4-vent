@@ -65,9 +65,7 @@ const Index = () => {
     const createReservation = async (values, { resetForm }) => {
         let filteredDays = [...daysSelected]
         if (eventsSelected.length === 0) {
-            filteredDays = daysSelected.map(day =>
-                format(addSeconds(day, 1), 'yyyy-MM-dd HH-mm-ss'),
-            )
+            filteredDays = daysSelected.map(day => addSeconds(day, 1))
         } else {
             daysSelected.forEach((day, i) => {
                 for (const event of eventsSelected) {
@@ -81,16 +79,37 @@ const Index = () => {
             })
         }
 
+        const formattedDates = filteredDays
+            .filter(n => n)
+            .map(n => format(new Date(n), 'yyyy-MM-dd HH-mm-ss'))
+
         const newEventsData = {
-            dates: filteredDays.filter(n => n),
+            dates: formattedDates,
             type: 'beginner_skipper',
             reservations: values.number_of_people,
         }
-        console.log(newEventsData)
-        if (newEventsData.dates.length > 1) {
-            // eventService.store(newEventsData).then(res => console.log(res))
+
+        const newValues = {
+            ...values,
+            events: eventsSelected,
+        }
+
+        if (newEventsData.dates.length > 0) {
+            eventService
+                .store(newEventsData)
+                .then(
+                    ({ data }) =>
+                        (newValues.events = newValues.events.concat(data)),
+                )
+                .then(() => {
+                    reservationService
+                        .store(newValues)
+                        .then(() => setModalIsOpen(false))
+                })
         } else {
-            // reservationService.store(values).then(() => setModalIsOpen(false))
+            reservationService
+                .store(newValues)
+                .then(() => setModalIsOpen(false))
         }
         // eventService.store(newEventsData).then(res => console.log(res))
         // reservationService.store(values).then(() => setModalIsOpen(false))

@@ -18,7 +18,6 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title_en');
             $table->string('title_fr');
-            $table->integer('reservations');
             $table->integer('max_reservations');
             $table->dateTime('start');
             $table->dateTime('end');

@@ -17,7 +17,7 @@ class EventController extends Controller
      */
     public function index(): EventCollection
     {
-        return new EventCollection(Event::all());
+        return new EventCollection(Event::all()->load('reservations'));
     }
 
     /**
@@ -29,17 +29,19 @@ class EventController extends Controller
     {
         $dates = $request->dates;
         $type = $request->type;
+        $events = [];
         foreach ($dates as $date) {
             $event = new Event();
             $event->start = $date;
             $event->end = $date;
-            $event->reservations = $request->reservations;
             $event->type = $type;
             $event->title_en = 'Basic skipper course';
             $event->title_fr = 'Brevet croisiere elementaire';
             $event->max_reservations = 4;
             $event->save();
+            $event['id'] = $event->id;
+            $events[] = $event;
         }
-        return new EventResource($event);
+        return new EventResource($events);
     }
 }

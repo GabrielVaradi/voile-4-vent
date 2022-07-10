@@ -22,22 +22,26 @@ const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
     const { t } = useTranslation('reservations')
 
     const Event = e => {
+        const event = e.event
+        let totalReservations = 0
+        event.reservations.forEach(
+            reservation => (totalReservations += reservation.number_of_people),
+        )
+
         return (
             <>
                 <div>
-                    {router.locale === 'en'
-                        ? e.event.title_en
-                        : e.event.title_fr}
+                    {router.locale === 'en' ? event.title_en : event.title_fr}
                 </div>
                 <div>
                     {t('places_left', {
-                        places_left:
-                            e.event.max_reservations - e.event.reservations,
+                        places_left: event.max_reservations - totalReservations,
                     })}
                 </div>
             </>
         )
     }
+
     const components = useMemo(() => {
         return {
             event: Event,

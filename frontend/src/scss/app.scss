@@ -1,5 +1,7 @@
-// Variables
+//////// Variables ////////
+
 $body-bg: #f8fafc;
+$primary: #0b0851;
 
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
@@ -57,4 +59,5 @@ $line-height-base: 1.6;
 
 .btn {
     width: fit-content;
+    border-radius: 30px;
 }

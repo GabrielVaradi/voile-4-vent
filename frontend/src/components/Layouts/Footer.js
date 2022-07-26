@@ -11,11 +11,33 @@ const Footer = () => {
 
     return (
         <div className={`mt-5 ${styles.footer}`}>
-            <Container>
-                <Row>
-                    <Col md={5}>{t('footer')}</Col>
-                    <Col md={2}>Image</Col>
-                    <Col md={2}>Cours de voile</Col>
+            <Container className="w-100 h-100 d-flex ">
+                <Row className="w-100 h-100">
+                    <Col
+                        className="d-flex flex-column justify-content-center"
+                        md={6}>
+                        <h4>Voile 4 vents</h4>
+                        <h4>
+                            Voile 4 ventsVoile 4 ventsVoile 4 ventsVoile 4
+                            ventsVoile 4 ventsVoile 4 ventsVoile 4 vents Voile 4
+                            vents
+                        </h4>
+                        <div> Facebook icon</div>
+                    </Col>
+                    <Col
+                        className="d-flex flex-column justify-content-center"
+                        md={3}>
+                        <div> Logo </div>
+                        <div> Logo </div>
+                    </Col>
+                    <Col
+                        className="d-flex flex-column justify-content-center"
+                        md={3}>
+                        <div> Page </div>
+                        <div> Page </div>
+                        <div> Page </div>
+                        <div> Page </div>
+                    </Col>
                 </Row>
             </Container>
         </div>

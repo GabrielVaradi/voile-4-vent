@@ -22,21 +22,24 @@ class CourseSeeder extends Seeder
      */
     private function createCourses(): void
     {
-        Course::query()
+        $course1 = Course::query()
             ->create([
                 'title'       => 'Brevet Niveau initiation ',
                 'description' => 'Apprendre à être un bon équipier en toute sécurité sur un voilier. Ce cours couvre les rudiments de la voile en 15 heures soit  deux jours de formation pratique.',
                 'duration'    => '15 heures',
                 'skills'      => 'Securite nautique',
-                'price'       => 270
+                'price'       => 270,
+                'image_path'  => "/images/courses/example.jpg"
             ]);
+        $course1->skills()->sync([1,2]);
         Course::query()
             ->create([
                 'title'       => 'Brevet Croisière élémentaire ',
                 'description' => 'Pour ceux qui débutent ou possède un peu d’expérience de la voile. Formation donné en 30 heures. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier.',
                 'duration'    => '30 heures',
                 'skills'      => 'Securite nautique',
-                'price'       => 540
+                'price'       => 540,
+                'image_path'  => "/images/courses/example.jpg"
             ]);
         Course::query()
             ->create([
@@ -44,7 +47,8 @@ class CourseSeeder extends Seeder
                 'description' => 'Apprivoiser le déploiement sous le vent de cette voile puissante aux coloris d’arc en ciel.',
                 'duration'    => '1 journee ou 2 soiree',
                 'skills'      => 'Securite nautique',
-                'price'       => 135
+                'price'       => 135,
+                'image_path'  => "/images/courses/example.jpg"
             ]);
     }
 }

@@ -2,9 +2,9 @@ import React from 'react'
 import Image from 'next/image'
 import styles from '../../../styles/Components/Image.module.scss'
 
-const ImageFull = ({ src, alt, children, ragged }) => {
+const ImageFull = ({ src, alt, children, ragged, containerClasses }) => {
     return (
-        <div className={styles.imageContainer}>
+        <div className={`${containerClasses} ${styles.imageContainer}`}>
             <Image
                 layout="fill"
                 objectFit="cover"

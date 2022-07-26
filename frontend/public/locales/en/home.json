@@ -5,5 +5,9 @@
     "learn_more": "Learn more",
     "courses_title": "Sailing Courses",
     "courses_description": "[EN] Être sur l’eau, pour moi c’est la liberté, la découverte de grands espaces. Ce mode de vie, cette liberté tu l’apprivoises à chaque jour. Larguez les amarres, à tout coup, c’est la joie!",
-    "registration": "Sign up"
+    "registration": "Sign up",
+    "image_first_word" : "Hoist",
+    "image_first_line" : "the",
+    "image_second_line" : "mainsail !",
+    "courses" : "Courses"
 }

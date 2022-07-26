@@ -20,4 +20,9 @@ class Course extends Model
         'duration',
         'price'
     ];
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
+    }
 }

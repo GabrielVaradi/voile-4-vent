@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { reservationService, eventService, courseService } from '../../services'
+import { useRouter } from 'next/router'
+import {
+    reservationService,
+    eventService,
+    courseService,
+    stripeService,
+} from '../../services'
 import {
     Container,
     Modal,
@@ -33,6 +39,8 @@ const Index = () => {
     const [events, setEvents] = useState([])
     const [mappedEvents, setMappedEvents] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
+
+    const router = useRouter()
     const { t } = useTranslation('reservations')
 
     // useEffect(() => {
@@ -99,32 +107,38 @@ const Index = () => {
 
         const newEventsData = {
             dates: formattedDates,
-            type: 'beginner_skipper',
             reservations: values.number_of_people,
         }
 
+        const eventsSelectedIds = eventsSelected.map(event => event.id)
+
         const newValues = {
             ...values,
-            events: eventsSelected,
+            events: eventsSelectedIds,
+            eventsData: newEventsData,
+            language: router.locale,
         }
+        stripeService.createCheckoutSession(newValues).then(res => {
+            router.push(res.url)
+        })
 
-        if (newEventsData.dates.length > 0) {
-            eventService
-                .store(newEventsData)
-                .then(
-                    ({ data }) =>
-                        (newValues.events = newValues.events.concat(data)),
-                )
-                .then(() => {
-                    reservationService
-                        .store(newValues)
-                        .then(() => setModalIsOpen(false))
-                })
-        } else {
-            reservationService
-                .store(newValues)
-                .then(() => setModalIsOpen(false))
-        }
+        // if (newEventsData.dates.length > 0) {
+        //     eventService
+        //         .store(newEventsData)
+        //         .then(
+        //             ({ data }) =>
+        //                 (newValues.events = newValues.events.concat(data)),
+        //         )
+        //         .then(() => {
+        //             reservationService
+        //                 .store(newValues)
+        //                 .then(() => setModalIsOpen(false))
+        //         })
+        // } else {
+        //     reservationService
+        //         .store(newValues)
+        //         .then(() => setModalIsOpen(false))
+        // }
         // eventService.store(newEventsData).then(res => console.log(res))
         // reservationService.store(values).then(() => setModalIsOpen(false))
         // axios
@@ -320,40 +334,6 @@ const Index = () => {
                     </Modal>
                 )}
             </Formik>
-            <form action="/api/checkout_sessions" method="POST">
-                <section>
-                    <button type="submit" role="link">
-                        Checkout
-                    </button>
-                </section>
-                <style jsx>
-                    {`
-                        section {
-                            background: #ffffff;
-                            display: flex;
-                            flex-direction: column;
-                            width: 400px;
-                            height: 112px;
-                            border-radius: 6px;
-                            justify-content: space-between;
-                        }
-                        button {
-                            height: 36px;
-                            background: #556cd6;
-                            border-radius: 4px;
-                            color: white;
-                            border: 0;
-                            font-weight: 600;
-                            cursor: pointer;
-                            transition: all 0.2s ease;
-                            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
-                        }
-                        button:hover {
-                            opacity: 0.8;
-                        }
-                    `}
-                </style>
-            </form>
         </Container>
     )
 }

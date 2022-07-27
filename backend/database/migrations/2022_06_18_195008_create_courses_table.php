@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('duration');
             $table->integer('price');
             $table->string('image_path');
+            $table->string('stripe_product_id');
         });
     }
 

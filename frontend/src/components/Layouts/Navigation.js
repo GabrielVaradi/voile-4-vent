@@ -34,11 +34,11 @@ const Navigation = () => {
                         <Link href="/reservations">
                             <a className="navbar-brand">{t('reservations')}</a>
                         </Link>
-                        <Link href="/teachers">
-                            <a className="navbar-brand">{t('teachers')}</a>
-                        </Link>
                         <Link href="/contact-us">
                             <a className="navbar-brand">{t('contact-us')}</a>
+                        </Link>
+                        <Link href="/faq">
+                            <a className="navbar-brand">{t('faq')}</a>
                         </Link>
                         <Link
                             href={`/${router.locale === 'en' ? 'fr' : 'en'}${

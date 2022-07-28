@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import ImageFull from '@/components/Images/ImageFull'
 import Image from 'next/image'
-import picture from '../../public/images/shutterstock_717244969.jpg'
+import picture from '../../public/images/home/shutterstock_717244969.jpg'
 import { courseService, teacherService } from '@/services'
 import Link from 'next/link'
 import styles from '../../styles/Pages/Home.module.scss'
@@ -124,6 +124,7 @@ const Home = () => {
                                 src={teacher.image_path}
                                 width={500}
                                 height={500}
+                                as="style"
                                 alt=""
                             />
                             <div className="p-3">

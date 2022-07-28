@@ -15,6 +15,6 @@ class CourseController extends Controller
      */
     public function index(): CourseCollection
     {
-        return new CourseCollection(Course::all());
+        return new CourseCollection(Course::all()->load('skills'));
     }
 }

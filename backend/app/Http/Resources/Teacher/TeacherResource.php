@@ -2,12 +2,11 @@
 
 namespace App\Http\Resources\Teacher;
 
-use App\Models\Event;
-use App\Models\Reservation;
+use App\Models\Teacher;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property Reservation $resource
+ * @property Teacher $resource
  */
 class TeacherResource extends JsonResource
 {

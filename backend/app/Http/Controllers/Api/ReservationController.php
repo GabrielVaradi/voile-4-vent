@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Reservation\StoreReservationRequest;
-use App\Http\Resources\Reservation\ReservationResource;
-use App\Http\Resources\Reservation\ReservationCollection;
+use App\Http\Resources\Reservation\TeacherResource;
+use App\Http\Resources\Reservation\TeacherCollection;
 use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\JsonResponse;
@@ -14,20 +14,20 @@ use Illuminate\Http\Request;
 class ReservationController extends Controller
 {
     /**
-     * @return ReservationCollection
+     * @return TeacherCollection
      */
-    public function index(): ReservationCollection
+    public function index(): TeacherCollection
     {
-        return new ReservationCollection(Event::all());
+        return new TeacherCollection(Event::all());
     }
 
 
     /**
      * Store a new event.
      * @param  StoreReservationRequest $request
-     * @return ReservationResource
+     * @return TeacherResource
      */
-    public function store(StoreReservationRequest $request): ReservationResource
+    public function store(StoreReservationRequest $request): TeacherResource
     {
         $events = $request->events;
         $reservations = [];
@@ -39,6 +39,6 @@ class ReservationController extends Controller
             $reservations[] = $reservation;
         }
 
-        return new ReservationResource($reservations);
+        return new TeacherResource($reservations);
     }
 }

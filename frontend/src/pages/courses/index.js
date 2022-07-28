@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { courseService } from '../../services'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -22,7 +23,9 @@ import Link from 'next/link'
 
 const Index = () => {
     const [courses, setCourses] = useState([])
+
     const { t } = useTranslation('courses')
+    const router = useRouter()
 
     useEffect(() => {
         courseService.index().then(({ data }) => setCourses(data))
@@ -35,9 +38,17 @@ const Index = () => {
                     <Col
                         className={`${i % 2 === 0 ? 'order-1' : 'order-2'}`}
                         md={5}>
-                        <div>{course.title}</div>
+                        <div>
+                            {router.locale === 'en'
+                                ? course.title_en
+                                : course.title_fr}
+                        </div>
                         <div>{course.price}</div>
-                        <div> {course.duration}</div>
+                        <div>
+                            {router.locale === 'en'
+                                ? course.duration_en
+                                : course.duration_fr}
+                        </div>
                         <Link href="/reservations">
                             <a className="mt-5 btn btn-primary px-5 py-2">
                                 {t('book')}
@@ -56,10 +67,18 @@ const Index = () => {
                             alt=""
                         />
                     </Col>
-                    <Col className="mt-3" md={12}>
-                        {course.title}
-                        {course.description}
-                        {course.skills}
+                    <Col className="mt-3 order-3" md={12}>
+                        <div>
+                            {router.locale === 'en'
+                                ? course.title_en
+                                : course.title_fr}
+                        </div>
+                        <div>
+                            {router.locale === 'en'
+                                ? course.description_en
+                                : course.description_fr}
+                        </div>
+                        {/* TODO: skills*/}
                     </Col>
                 </Row>
             ))}

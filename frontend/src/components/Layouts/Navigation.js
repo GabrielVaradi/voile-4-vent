@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Collapse, Container, Nav, NavbarToggler } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
+import Image from 'next/image'
 
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -16,10 +17,15 @@ const Navigation = () => {
             <Container>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
-                    <Nav navbar className="w-100">
+                    <Nav navbar className="w-100 d-flex align-items-center">
                         <Link href="/">
                             <a className="navbar-brand">
-                                {process.env.NEXT_PUBLIC_APP_NAME}
+                                <img
+                                    src="/images/logo.png"
+                                    width={126}
+                                    height={102}
+                                    alt=""
+                                />
                             </a>
                         </Link>
                         <Link href="/courses">

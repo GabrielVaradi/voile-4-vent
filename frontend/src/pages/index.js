@@ -1,21 +1,31 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { Container, Row, Col, Button } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import ImageFull from '@/components/Images/ImageFull'
 import Image from 'next/image'
 import picture from '../../public/images/shutterstock_717244969.jpg'
-import { courseService } from '@/services'
+import { courseService, teacherService } from '@/services'
 import Link from 'next/link'
 import styles from '../../styles/Pages/Home.module.scss'
 
 const Home = () => {
     const [courses, setCourses] = useState([])
+    const [teachers, setTeachers] = useState([])
+
     const { t } = useTranslation('home')
+    const router = useRouter()
 
     useEffect(() => {
         courseService.index().then(({ data }) => setCourses(data))
     }, [])
+
+    useEffect(() => {
+        teacherService.index().then(({ data }) => setTeachers(data))
+    }, [])
+
+    console.log(teachers)
 
     return (
         <div className="homepage">
@@ -70,8 +80,16 @@ const Home = () => {
                                 alt=""
                             />
                             <div className="p-3">
-                                <div className="mb-3">{course.title}</div>
-                                <div>{course.description}</div>
+                                <div className="mb-3">
+                                    {router.locale === 'en'
+                                        ? course.title_en
+                                        : course.title_fr}
+                                </div>
+                                <div>
+                                    {router.locale === 'en'
+                                        ? course.description_en
+                                        : course.description_fr}
+                                </div>
                             </div>
                         </Col>
                     ))}
@@ -87,39 +105,42 @@ const Home = () => {
                 <Row>
                     <Col md={8} className="mx-auto">
                         <h1 className="text-center text-uppercase text-primary">
-                            {t('courses_title')}
+                            {t('teachers_title')}
                         </h1>
                         <h5 className="text-center">
-                            {t('courses_description')}
+                            {t('teachers_description')}
                         </h5>
                     </Col>
                 </Row>
                 <Row className="mt-5 justify-content-center">
-                    {courses.map(course => (
+                    {teachers.map(teacher => (
                         <Col
                             className="text-center text-white bg-primary mx-3 p-0"
-                            key={course.id}
+                            key={teacher.id}
                             md={3}>
                             <Image
                                 layout="responsive"
                                 objectFit="cover"
-                                src={course.image_path}
+                                src={teacher.image_path}
                                 width={500}
                                 height={500}
                                 alt=""
                             />
                             <div className="p-3">
-                                <div className="mb-3">{course.title}</div>
-                                <div>{course.description}</div>
+                                <div className="mb-3">
+                                    {router.locale === 'en'
+                                        ? teacher.title_en
+                                        : teacher.title_fr}
+                                </div>
+                                <div>
+                                    {router.locale === 'en'
+                                        ? teacher.description_en
+                                        : teacher.description_fr}
+                                </div>
                             </div>
                         </Col>
                     ))}
                 </Row>
-                <Link href="/courses">
-                    <a className="mt-5 btn btn-primary px-5 py-2">
-                        {t('courses')}
-                    </a>
-                </Link>
             </Container>
 
             <ImageFull containerClasses="mt-5" ragged src={picture} alt="Home">

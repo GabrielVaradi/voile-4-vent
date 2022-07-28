@@ -25,5 +25,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ReservationSeeder::class,
         ]);
+        $this->call([
+            TeacherSeeder::class,
+        ]);
     }
 }

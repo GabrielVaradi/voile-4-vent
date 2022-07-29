@@ -113,17 +113,12 @@ const Index = () => {
             .filter(n => n)
             .map(n => format(new Date(n), 'yyyy-MM-dd HH-mm-ss'))
 
-        const newEventsData = {
-            dates: formattedDates,
-            reservations: values.number_of_people,
-        }
-
         const eventsSelectedIds = eventsSelected.map(event => event.id)
 
         const newValues = {
             ...values,
             events: eventsSelectedIds,
-            eventsData: newEventsData,
+            eventsDates: formattedDates,
             language: router.locale,
         }
         stripeService.createCheckoutSession(newValues).then(res => {
@@ -319,11 +314,11 @@ const Index = () => {
                             address: '',
                             phone_number: '',
                             birthdate: '',
-                            type: '',
                         },
                     ],
-                    // payment: 'Full ',
+                    payment: 'Deposit',
                     number_of_people: '1',
+                    type: 'brevet_elementaire',
                 }}
                 // validationSchema={userEditValidations}
                 enableReinitialize>

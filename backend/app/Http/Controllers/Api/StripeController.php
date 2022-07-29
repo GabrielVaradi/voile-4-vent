@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\CustomerForm;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
@@ -16,28 +17,36 @@ class StripeController extends Controller
 
         $domain = "http://voile.test:3000/$request->language";
 
+        // TODO: Move this somewhere
+        $forms = $request->forms;
+        $customerFormsIds = [];
+        foreach ($forms as $form) {
+            $customerForm = new CustomerForm();
+            $customerForm->first_name = $form['first_name'];
+            $customerForm->last_name = $form['last_name'];
+            $customerForm->email = $form['email'];
+            $customerForm->address = $form['address'];
+            $customerForm->phone_number = $form['phone_number'];
+            $customerForm->birthdate = $form['birthdate'];
+            $customerForm->save();
+            $customerFormsIds[] = $customerForm->id;
+        }
+
         $checkout_session = Session::create([
-            'line_items' => [[
-                'price' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
-                'quantity' => 1,
+            'line_items'  => [[
+                'price'    => 'price_1LQBufGBR8DTe9IEjpeocQPL',
+                'quantity' => $request->number_of_people,
             ]],
-            'metadata' => [
-               'eventDates' => json_encode($request->eventsData['dates']),
-                'reservations' => $request->eventsData['reservations'],
-                'eventsIds' => json_encode($request->events),
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'address' => $request->address,
-                'phone_number' => $request->phone_number,
-                'birthdate' => $request->birthdate,
-                'payment' => $request->payment,
-                'number_of_people' => $request->number_of_people,
-                'type' => $request->type,
+            'metadata'    => [
+                'event_dates'        => json_encode($request->eventsDates),
+                'events_ids'         => json_encode($request->events),
+                'customer_forms_ids' => json_encode($customerFormsIds),
+                'payment'            => $request->payment,
+                'type'               => $request->type,
             ],
-            'mode' => 'payment',
+            'mode'        => 'payment',
             'success_url' => $domain . '/reservations?success=true',
-            'cancel_url' => $domain . '/reservations?canceled=true',
+            'cancel_url'  => $domain . '/reservations?canceled=true',
         ]);
 
         return $checkout_session;

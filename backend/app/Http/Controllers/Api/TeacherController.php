@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Teacher\FaqCollection;
+use App\Http\Resources\Teacher\TeacherCollection;
 use App\Models\Teacher;
 
 class TeacherController extends Controller
 {
     /**
-     * @return FaqCollection
+     * @return TeacherCollection
      */
-    public function index(): FaqCollection
+    public function index(): TeacherCollection
     {
-        return new FaqCollection(Teacher::all());
+        return new TeacherCollection(Teacher::all());
     }
 }

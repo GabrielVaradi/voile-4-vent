@@ -20,6 +20,7 @@ import('react-big-calendar/lib/css/react-big-calendar.css')
 const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
+    console.log(events)
 
     const Event = e => {
         const event = e.event

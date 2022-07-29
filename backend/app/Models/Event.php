@@ -19,7 +19,6 @@ class Event extends Model
         'title_fr',
         'start',
         'end',
-        'reservations',
         'max_reservations',
         'type',
     ];
@@ -29,6 +28,6 @@ class Event extends Model
      */
     public function reservations()
     {
-        return $this->hasMany(Reservation::class);
+        return $this->belongsToMany(Reservation::class);
     }
 }

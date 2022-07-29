@@ -22,18 +22,15 @@ class ReservationSeeder extends Seeder
      */
     private function createReservations(): void
     {
-        Reservation::query()
+        $reservation1 = Reservation::query()
             ->create([
-                'first_name'       => 'Robert',
-                'last_name'        => 'De Niro',
-                'address'          => '2022-06-11 00:00:01',
-                'phone_number'     => '514-555-5559',
-                'birthdate'        => '28/09/1992',
-                'email'            => 'robert@de.niro',
-                'payment'          => 'Deposit',
-                'number_of_people' => 2,
-                'type'             => 'beginner_skipper',
-                'event_id'         => 1
+                'payment' => 'Deposit',
             ]);
+        $reservation1->event()->sync([1]);
+        $reservation2 = Reservation::query()
+            ->create([
+                'payment' => 'Deposit',
+            ]);
+        $reservation2->event()->sync([1]);
     }
 }

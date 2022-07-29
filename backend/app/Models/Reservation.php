@@ -7,24 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
-    use HasFactory;/**
+    use HasFactory;
+/**
  *
  * The attributes that are mass assignable.
  *
  * @var array<int, string>
  */
     protected $fillable = [
-        'title_en',
-        'first_name',
-        'last_name',
-        'address',
-        'phone_number',
-        'birthdate',
-        'email',
         'payment',
-        'number_of_people',
-        'type',
-        'event_id',
     ];
 
     /**
@@ -32,7 +23,15 @@ class Reservation extends Model
      */
     public function event()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsToMany(Event::class);
+    }
+
+    /**
+     * Get the customer forms for the reservation.
+     */
+    public function customer_forms()
+    {
+        return $this->hasMany(CustomerForm::class);
     }
 
 }

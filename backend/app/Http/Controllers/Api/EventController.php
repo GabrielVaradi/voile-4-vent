@@ -17,7 +17,7 @@ class EventController extends Controller
      */
     public function index(): EventCollection
     {
-        return new EventCollection(Event::all()->load('reservations'));
+        return new EventCollection(Event::all()->load(['reservations', 'reservations.customer_forms']));
     }
 
     /**

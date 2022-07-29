@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('payment');
+        Schema::create('event_reservation', function (Blueprint $table) {
+            $table->foreignId('event_id')->references('id')->on('events');
+            $table->foreignId('reservation_id')->references('id')->on('reservations');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservations');
+        Schema::dropIfExists('event_reservation');
     }
 };

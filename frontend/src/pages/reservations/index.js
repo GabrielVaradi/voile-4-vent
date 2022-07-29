@@ -18,11 +18,17 @@ import {
     Input,
     Col,
     InputGroup,
+    Nav,
+    NavItem,
+    NavLink,
+    TabPane,
+    TabContent,
+    Row,
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Calendar from '@/components/Calendar'
-import { ErrorMessage, Field, Form, Formik } from 'formik'
+import { ErrorMessage, Field, Form, Formik, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import BasicTextInput from '@/components/BasicTextInput'
 import BasicSelect from '@/components/BasicSelect'
@@ -40,6 +46,7 @@ const Index = () => {
     const [events, setEvents] = useState([])
     const [mappedEvents, setMappedEvents] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [activeTab, setActiveTab] = useState(1)
 
     const router = useRouter()
     const { t } = useTranslation('reservations')
@@ -187,6 +194,103 @@ const Index = () => {
         )
     }
 
+    const renderCustomerForm = (errors, touched, i = 1) => {
+        return (
+            <>
+                <BasicTextInput
+                    field={`forms.${i}.first_name`}
+                    fieldLabel="First name"
+                    placeholder="First name"
+                    errors={errors}
+                    touched={touched}
+                    required
+                />
+                <BasicTextInput
+                    field={`forms.${i}.last_name`}
+                    fieldLabel="Last name"
+                    placeholder="Last name"
+                    errors={errors}
+                    touched={touched}
+                    required
+                />
+                <BasicTextInput
+                    field={`forms.${i}.email`}
+                    fieldLabel="Email"
+                    placeholder="Email"
+                    errors={errors}
+                    touched={touched}
+                    required
+                />
+                <BasicTextInput
+                    field={`forms.${i}.address`}
+                    fieldLabel="Address"
+                    placeholder="Address"
+                    errors={errors}
+                    touched={touched}
+                    required
+                />
+                <BasicTextInput
+                    field={`forms.${i}.phone_number`}
+                    fieldLabel="Phone Number"
+                    placeholder="Phone Number"
+                    errors={errors}
+                    touched={touched}
+                    required
+                />
+                <BasicTextInput
+                    field={`forms.${i}.birthdate`}
+                    fieldLabel="Birthdate"
+                    placeholder="Birthdate"
+                    errors={errors}
+                    touched={touched}
+                    required
+                />
+            </>
+        )
+    }
+
+    const renderTabs = (errors, touched, values) => {
+        const tabs = []
+        const forms = []
+        let tabNumber = activeTab
+
+        if (values.forms.length < tabNumber) {
+            tabNumber = values.forms.length
+        }
+
+        for (let i = 0; i < values.forms.length; i++) {
+            if (values.forms.length > 1) {
+                tabs.push(
+                    <NavItem key={i} role="button">
+                        <NavLink
+                            className={`${activeTab === i + 1 ? 'active' : ''}`}
+                            onClick={() => setActiveTab(i + 1)}>
+                            {`Person ${i + 1}`}
+                        </NavLink>
+                    </NavItem>,
+                )
+            }
+            forms.push(
+                <TabContent key={i} activeTab={tabNumber}>
+                    <TabPane tabId={i + 1}>
+                        {renderCustomerForm(errors, touched, i)}
+                    </TabPane>
+                </TabContent>,
+            )
+        }
+
+        return (
+            <>
+                {tabs.length > 1 && (
+                    <Nav tabs className="mb-5">
+                        {tabs}
+                    </Nav>
+                )}
+                {forms}
+            </>
+        )
+    }
+
     return (
         <Container className="mt-5">
             <div> {t('reservations')}</div>
@@ -207,15 +311,19 @@ const Index = () => {
             <Formik
                 onSubmit={createReservation}
                 initialValues={{
-                    first_name: 'd23',
-                    last_name: 'd',
-                    email: 'd@d.com',
-                    address: 'd',
-                    phone_number: '123',
-                    birthdate: '123',
-                    payment: 'Full ',
+                    forms: [
+                        {
+                            first_name: '',
+                            last_name: '',
+                            email: '',
+                            address: '',
+                            phone_number: '',
+                            birthdate: '',
+                            type: '',
+                        },
+                    ],
+                    // payment: 'Full ',
                     number_of_people: '1',
-                    type: 'beginner_skipper',
                 }}
                 // validationSchema={userEditValidations}
                 enableReinitialize>
@@ -226,114 +334,128 @@ const Index = () => {
                     isValid,
                     submitForm,
                     setFieldValue,
-                }) => (
-                    <Modal
-                        isOpen={modalIsOpen}
-                        toggle={() => setModalIsOpen(prev => !prev)}
-                        size="lg">
-                        <ModalHeader
-                            toggle={() => setModalIsOpen(prev => !prev)}>
-                            Modal title
-                        </ModalHeader>
-                        <ModalBody>
-                            <>
-                                <Form>
-                                    <BasicTextInput
-                                        field="first_name"
-                                        fieldLabel="First name"
-                                        placeholder="First name"
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicTextInput
-                                        field="last_name"
-                                        fieldLabel="Last name"
-                                        placeholder="Last name"
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicTextInput
-                                        field="email"
-                                        fieldLabel="Email"
-                                        placeholder="Email"
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicTextInput
-                                        field="address"
-                                        fieldLabel="Address"
-                                        placeholder="Address"
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicTextInput
-                                        field="phone_number"
-                                        fieldLabel="Phone Number"
-                                        placeholder="Phone Number"
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicTextInput
-                                        field="birthdate"
-                                        fieldLabel="Birthdate"
-                                        placeholder="Birthdate"
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicSelect
-                                        field="payment"
-                                        fieldLabel="Payment"
-                                        errors={errors}
-                                        touched={touched}
-                                        setFieldValue={setFieldValue}
-                                        required>
-                                        <option>Full</option>
-                                        <option>Deposit</option>
-                                    </BasicSelect>
-                                    <BasicSelect
-                                        field="number_of_people"
-                                        fieldLabel="Number of people"
-                                        errors={errors}
-                                        touched={touched}
-                                        setFieldValue={setFieldValue}
-                                        required>
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                    </BasicSelect>
-                                </Form>
-                                {isSubmitting && (
-                                    <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">
-                                        <div
-                                            className="spinner-border"
-                                            role="status text-center"
+                    values,
+                    initialValues,
+                }) => {
+                    return (
+                        <Modal
+                            isOpen={modalIsOpen}
+                            toggle={() => setModalIsOpen(prev => !prev)}
+                            size="lg">
+                            <ModalHeader
+                                toggle={() => setModalIsOpen(prev => !prev)}>
+                                Titre du cours
+                            </ModalHeader>
+                            <ModalBody>
+                                <>
+                                    <Form>
+                                        <FieldArray
+                                            name="forms"
+                                            render={arrayHelpers => (
+                                                <>
+                                                    <BasicSelect
+                                                        field="number_of_people"
+                                                        fieldLabel="Number of people"
+                                                        errors={errors}
+                                                        touched={touched}
+                                                        setFieldValue={
+                                                            setFieldValue
+                                                        }
+                                                        required
+                                                        formGroupClasses="mb-2"
+                                                        onSelect={e => {
+                                                            if (
+                                                                e.target.value >
+                                                                values.number_of_people
+                                                            ) {
+                                                                for (
+                                                                    let i = 0;
+                                                                    i <
+                                                                    e.target
+                                                                        .value -
+                                                                        values.number_of_people;
+                                                                    i++
+                                                                ) {
+                                                                    arrayHelpers.push(
+                                                                        initialValues
+                                                                            .forms[0],
+                                                                    )
+                                                                }
+                                                            } else if (
+                                                                e.target.value <
+                                                                values.number_of_people
+                                                            ) {
+                                                                for (
+                                                                    let i = 0;
+                                                                    i <
+                                                                    values.number_of_people -
+                                                                        e.target
+                                                                            .value;
+                                                                    i++
+                                                                ) {
+                                                                    arrayHelpers.pop(
+                                                                        '',
+                                                                    )
+                                                                }
+                                                            }
+                                                            setFieldValue(
+                                                                'number_of_people',
+                                                                e.target.value,
+                                                            )
+                                                        }}>
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                    </BasicSelect>
+                                                    {renderTabs(
+                                                        errors,
+                                                        touched,
+                                                        values,
+                                                    )}
+                                                </>
+                                            )}
                                         />
-                                    </div>
-                                )}
-                            </>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button
-                                color="primary"
-                                disabled={isSubmitting || !isValid}
-                                onClick={submitForm}>
-                                Rezervatiosns
-                            </Button>
-                            <Button
-                                color="secondary"
-                                onClick={() => setModalIsOpen(prev => !prev)}>
-                                Cancel
-                            </Button>
-                        </ModalFooter>
-                    </Modal>
-                )}
+
+                                        {/*<BasicSelect*/}
+                                        {/*    field="payment"*/}
+                                        {/*    fieldLabel="Payment"*/}
+                                        {/*    errors={errors}*/}
+                                        {/*    touched={touched}*/}
+                                        {/*    setFieldValue={setFieldValue}*/}
+                                        {/*    required>*/}
+                                        {/*    <option>Full</option>*/}
+                                        {/*    <option>Deposit</option>*/}
+                                        {/*</BasicSelect>*/}
+                                    </Form>
+                                    {isSubmitting && (
+                                        <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">
+                                            <div
+                                                className="spinner-border"
+                                                role="status text-center"
+                                            />
+                                        </div>
+                                    )}
+                                </>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button
+                                    color="primary"
+                                    disabled={isSubmitting || !isValid}
+                                    onClick={submitForm}>
+                                    Rezervatiosns
+                                </Button>
+                                <Button
+                                    color="secondary"
+                                    onClick={() =>
+                                        setModalIsOpen(prev => !prev)
+                                    }>
+                                    Cancel
+                                </Button>
+                            </ModalFooter>
+                        </Modal>
+                    )
+                }}
             </Formik>
         </Container>
     )

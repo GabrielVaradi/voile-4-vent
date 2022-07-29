@@ -11,9 +11,11 @@ const BasicSelect = ({
     required,
     setFieldValue,
     children,
+    formGroupClasses,
+    onSelect,
 }) => {
     return (
-        <FormGroup row>
+        <FormGroup row className={formGroupClasses}>
             <Label for={field} sm={2}>
                 {fieldLabel}
                 {required && <span className="required-asterisk">*</span>}
@@ -24,7 +26,11 @@ const BasicSelect = ({
                         type="select"
                         name={field}
                         id={field}
-                        onChange={e => setFieldValue(field, e.target.value)}
+                        onChange={e =>
+                            onSelect
+                                ? onSelect(e)
+                                : setFieldValue(field, e.target.value)
+                        }
                         required
                         className={cn({
                             'is-invalid': touched[field] && errors[field],

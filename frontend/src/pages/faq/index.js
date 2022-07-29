@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { courseService, faqService } from '../../services'
+import { faqService } from '../../services'
 import {
     Container,
     UncontrolledAccordion,
@@ -19,8 +19,6 @@ const Index = () => {
     useEffect(() => {
         faqService.index().then(({ data }) => setFaqs(data))
     }, [])
-
-    console.log(faqs)
 
     return (
         <Container className="mt-5">

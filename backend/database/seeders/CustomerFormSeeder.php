@@ -24,23 +24,25 @@ class CustomerFormSeeder extends Seeder
     {
         CustomerForm::query()
             ->create([
-                'first_name'     => 'Abigail',
-                'last_name'      => 'Monfils',
-                'email'          => 'abigail@monfils.com',
-                'address'        => '123 fausse rue',
-                'phone_number'   => '514-527-4321',
-                'birthdate'      => '12/12/12',
-                'reservation_id' => 1
+                'first_name'        => 'Abigail',
+                'last_name'         => 'Monfils',
+                'email'             => 'abigail@monfils.com',
+                'address'           => '123 fausse rue',
+                'phone_number'      => '514-527-4321',
+                'birthdate'         => '12/12/12',
+                'transaction_state' => 'completed',
+                'reservation_id'    => 1
             ]);
         CustomerForm::query()
             ->create([
-                'first_name'     => 'George',
-                'last_name'      => 'Lucas',
-                'email'          => 'george@lucas.com',
-                'address'        => 'Lucas ranch',
-                'phone_number'   => '514-527-4321',
-                'birthdate'      => '12/12/12',
-                'reservation_id' => 1
+                'first_name'        => 'George',
+                'last_name'         => 'Lucas',
+                'email'             => 'george@lucas.com',
+                'address'           => 'Lucas ranch',
+                'phone_number'      => '514-527-4321',
+                'birthdate'         => '12/12/12',
+                'transaction_state' => 'completed',
+                'reservation_id'    => 1
             ]);
     }
 }

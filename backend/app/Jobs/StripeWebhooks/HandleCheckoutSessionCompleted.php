@@ -44,11 +44,13 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
         // Reservations
         $reservation = new Reservation();
         $reservation->payment = $payment;
+        $reservation->type = $type;
         $reservation->customer_forms()->saveMany($customerForms);
         $reservation->save();
 
         foreach($customerForms as $customerForm) {
             $customerForm->reservation_id = $reservation->id;
+            $customerForm->transation_state = 'completed';
             $customerForm->save();
         }
 

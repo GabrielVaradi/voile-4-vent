@@ -16,6 +16,7 @@ class Reservation extends Model
  */
     protected $fillable = [
         'payment',
+        'type',
     ];
 
     /**

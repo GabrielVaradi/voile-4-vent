@@ -28,6 +28,7 @@ class StripeController extends Controller
             $customerForm->address = $form['address'];
             $customerForm->phone_number = $form['phone_number'];
             $customerForm->birthdate = $form['birthdate'];
+            $customerForm->transaction_state = 'pending';
             $customerForm->save();
             $customerFormsIds[] = $customerForm->id;
         }

@@ -39,7 +39,7 @@ class EventSeeder extends Seeder
                 'start'                => '2022-07-12 00:00:01',
                 'end'                  => '2022-07-12 00:00:01',
                 'max_reservations'     => 8,
-                'type'                 => 'initiation'
+                'type'                 => 'sailing_initiation'
             ]);
     }
 }

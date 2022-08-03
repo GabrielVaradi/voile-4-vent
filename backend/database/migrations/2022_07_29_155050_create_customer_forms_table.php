@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone_number');
             $table->string('birthdate');
+            $table->string('transaction_state');
             $table->foreignId('reservation_id')->nullable()->constrained()->references('id')->on('reservations');
         });
     }

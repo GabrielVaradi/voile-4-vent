@@ -25,11 +25,13 @@ class ReservationSeeder extends Seeder
         $reservation1 = Reservation::query()
             ->create([
                 'payment' => 'Deposit',
+                'type' => 'beginner_skipper',
             ]);
         $reservation1->event()->sync([1]);
         $reservation2 = Reservation::query()
             ->create([
                 'payment' => 'Deposit',
+                'type' => 'beginner_skipper',
             ]);
         $reservation2->event()->sync([1]);
     }

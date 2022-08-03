@@ -22,6 +22,7 @@ class CustomerForm extends Model
         'birthdate',
         'email',
         'reservation_id',
+        'transaction_state'
     ];
 
     /**

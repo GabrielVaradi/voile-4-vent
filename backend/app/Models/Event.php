@@ -21,6 +21,7 @@ class Event extends Model
         'end',
         'max_reservations',
         'type',
+        'type',
     ];
 
     /**

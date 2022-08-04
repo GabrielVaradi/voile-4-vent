@@ -20,7 +20,8 @@ class Course extends Model
         'description_fr',
         'duration_en',
         'duration_fr',
-        'price'
+        'price',
+        'type',
     ];
 
     public function skills()

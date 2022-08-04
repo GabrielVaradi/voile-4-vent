@@ -4,6 +4,7 @@ import { faqService } from '../../services'
 import {
     Container,
     UncontrolledAccordion,
+    Accordion,
     AccordionBody,
     AccordionHeader,
     AccordionItem,
@@ -13,6 +14,15 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Index = () => {
     const [faqs, setFaqs] = useState([])
+    const [open, setOpen] = useState('0')
+    const toggle = id => {
+        if (open === id) {
+            setOpen('0')
+        } else {
+            setOpen(id)
+        }
+    }
+
     const { t } = useTranslation('faq')
     const router = useRouter()
 
@@ -22,22 +32,22 @@ const Index = () => {
 
     return (
         <Container className="mt-5">
-            <UncontrolledAccordion defaultOpen="0" open="0">
+            <Accordion toggle={toggle} open={open}>
                 {faqs.map(question => (
                     <AccordionItem key={question.id}>
-                        <AccordionHeader targetId={question.id}>
+                        <AccordionHeader targetId={question.id.toString()}>
                             {router.locale === 'en'
                                 ? question.question_en
                                 : question.question_fr}
                         </AccordionHeader>
-                        <AccordionBody accordionId={question.id}>
+                        <AccordionBody accordionId={question.id.toString()}>
                             {router.locale === 'en'
                                 ? question.answer_en
                                 : question.answer_fr}
                         </AccordionBody>
                     </AccordionItem>
                 ))}
-            </UncontrolledAccordion>
+            </Accordion>
         </Container>
     )
 }

@@ -34,8 +34,8 @@ const Index = () => {
     return (
         <Container className="mt-5">
             {courses.map((course, i) => (
-                <>
-                    <Row key={course.id} className="mt-5">
+                <React.Fragment key={course.id}>
+                    <Row className="mt-5">
                         <Col
                             className={`${i % 2 === 0 ? 'order-1' : 'order-2'}`}
                             md={5}>
@@ -67,7 +67,7 @@ const Index = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <Link href="/reservations">
+                            <Link href={`/reservations?type=${course.type}`}>
                                 <a className="mt-5 btn btn-primary px-5 py-2">
                                     {t('book_now')}
                                 </a>
@@ -87,7 +87,7 @@ const Index = () => {
                             />
                         </Col>
                     </Row>
-                </>
+                </React.Fragment>
             ))}
         </Container>
     )

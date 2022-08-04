@@ -47,9 +47,17 @@ const Index = () => {
     const [mappedEvents, setMappedEvents] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [activeTab, setActiveTab] = useState(1)
+    const [type, setType] = useState('beginner_skipper')
 
     const router = useRouter()
     const { t } = useTranslation('reservations')
+
+    useEffect(() => {
+        const type = router.query?.type
+        if (type) {
+            setType(type)
+        }
+    }, [router])
 
     // useEffect(() => {
     //     // Check to see if this is a redirect back from Checkout
@@ -92,6 +100,12 @@ const Index = () => {
     //     email: Yup.string().email('Invalid email').required('Required'),
     // })
 
+    const resetCalendar = () => {
+        setDaysSelected([])
+        setEventsSelected([])
+        setMappedEvents([])
+    }
+
     const createReservation = async (values, { resetForm }) => {
         let filteredDays = [...daysSelected]
         if (eventsSelected.length === 0) {
@@ -120,6 +134,7 @@ const Index = () => {
             events: eventsSelectedIds,
             eventsDates: formattedDates,
             language: router.locale,
+            type: type,
         }
         stripeService.createCheckoutSession(newValues).then(res => {
             router.push(res.url)
@@ -286,17 +301,44 @@ const Index = () => {
         )
     }
 
+    const checkIfAllDaysAreSelected = () => {
+        if (type === 'beginner_skipper' && daysSelected.length === 4) {
+            return false
+        } else if (type === 'initiation_sailing' && daysSelected.length === 2) {
+            return false
+        } else if (type === 'spinnaker' && daysSelected.length === 1) {
+            return false
+        } else {
+            return true
+        }
+    }
+
     return (
         <Container className="mt-5">
             <div> {t('reservations')}</div>
+            <Input
+                type="select"
+                name="type"
+                id="type"
+                onChange={e => {
+                    setType(e.target.value)
+                    resetCalendar()
+                }}
+                value={type}>
+                <option>beginner_skipper</option>
+                <option>initiation_sailing</option>
+                <option>spinnaker</option>
+            </Input>
             <Calendar
                 className="mt-5"
                 events={mappedEvents}
                 daysSelected={daysSelected}
                 setDaysSelected={setDaysSelected}
+                type={type}
             />
             <Button
                 color="danger"
+                disabled={checkIfAllDaysAreSelected()}
                 onClick={() => {
                     setModalIsOpen(prev => !prev)
                     addEventsWithSameDate()

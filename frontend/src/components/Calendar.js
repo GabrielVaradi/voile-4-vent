@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar'
 import format from 'date-fns/format'
 import compareAsc from 'date-fns/compareAsc'
@@ -17,10 +17,27 @@ import { useTranslation } from 'next-i18next'
 
 import('react-big-calendar/lib/css/react-big-calendar.css')
 
-const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
+const Calendar = ({
+    events,
+    className,
+    daysSelected,
+    setDaysSelected,
+    type,
+}) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
-    console.log(events)
+    const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
+
+    useEffect(() => {
+        if (type === 'beginner_skipper') {
+            setMaxNumberOfDays(4)
+        } else if (type === 'initiation_sailing') {
+            setMaxNumberOfDays(2)
+        }
+        if (type === 'spinnaker') {
+            setMaxNumberOfDays(1)
+        }
+    }, [type])
 
     const Event = e => {
         const event = e.event
@@ -81,7 +98,7 @@ const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
             )
         }
         if (days.length === daysSelected.length) {
-            if (daysSelected.length + daySelected.length > 4) {
+            if (daysSelected.length + daySelected.length > maxNumberOfDays) {
                 return null
             }
             setDaysSelected(prev => prev.concat(daySelected))

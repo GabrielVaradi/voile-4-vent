@@ -25,8 +25,6 @@ const Home = () => {
         teacherService.index().then(({ data }) => setTeachers(data))
     }, [])
 
-    console.log(teachers)
-
     return (
         <div className="homepage">
             <ImageFull ragged src={picture} alt="Home">
@@ -42,13 +40,11 @@ const Home = () => {
                                 {t('description')}
                             </h5>
                             {/*<Button className=""> {t('learn_more')}</Button>*/}
-                            <a
-                                href="https://squareup.com/appointments/book/5xqjj79up2ibx0/L5RT2XMJJXK9V/start"
-                                className="btn btn-primary bg-white text-black border-0 mt-3"
-                                target="_blank"
-                                rel="noreferrer">
-                                {t('learn_more')}
-                            </a>
+                            <Link href="/courses">
+                                <a className="btn btn-primary bg-white text-black border-0 mt-3">
+                                    {t('learn_more')}
+                                </a>
+                            </Link>
                         </Col>
                     </Row>
                 </Container>
@@ -68,7 +64,7 @@ const Home = () => {
                 <Row className="mt-5 justify-content-center">
                     {courses.map(course => (
                         <Col
-                            className="text-center text-white bg-primary mx-3 p-0"
+                            className="text-center text-white bg-primary mx-3 p-0 d-flex flex-column"
                             key={course.id}
                             md={3}>
                             <Image
@@ -79,18 +75,21 @@ const Home = () => {
                                 height={500}
                                 alt=""
                             />
-                            <div className="p-3">
-                                <div className="mb-3">
-                                    {router.locale === 'en'
-                                        ? course.title_en
-                                        : course.title_fr}
-                                </div>
-                                <div>
-                                    {router.locale === 'en'
-                                        ? course.description_en
-                                        : course.description_fr}
-                                </div>
+                            <div className="my-3 px-3">
+                                {router.locale === 'en'
+                                    ? course.title_en
+                                    : course.title_fr}
                             </div>
+                            <div className="mb-4 px-3">
+                                {router.locale === 'en'
+                                    ? course.description_en
+                                    : course.description_fr}
+                            </div>
+                            <Link href={`/reservations?type=${course.type}`}>
+                                <a className="btn btn-primary bg-white text-black border-0 mt-auto mx-auto mb-3">
+                                    {t('registration')}
+                                </a>
+                            </Link>
                         </Col>
                     ))}
                 </Row>

@@ -32,7 +32,8 @@ class CourseSeeder extends Seeder
                 'duration_fr'           => '15 heures',
                 'price'                 => 270,
                 'image_path'            => '/images/courses/example.jpg',
-                'stripe_product_id'     => 'price_1LQATaGBR8DTe9IELg49wgFY'
+                'stripe_product_id'     => 'price_1LQATaGBR8DTe9IELg49wgFY',
+                'type'                  => 'initiation_sailing'
             ]);
         $course1->skills()->sync([1,2]);
         Course::query()
@@ -45,7 +46,8 @@ class CourseSeeder extends Seeder
                 'duration_fr'           => '30 heures',
                 'price'                 => 540,
                 'image_path'            => '/images/courses/example.jpg',
-                'stripe_product_id'     => 'price_1LQBtSGBR8DTe9IEUqGItvu3'
+                'stripe_product_id'     => 'price_1LQBtSGBR8DTe9IEUqGItvu3',
+                'type'                  => 'beginner_skipper'
             ]);
         Course::query()
             ->create([
@@ -55,9 +57,10 @@ class CourseSeeder extends Seeder
                 'description_fr'       => 'Apprivoiser le déploiement sous le vent de cette voile puissante aux coloris d’arc en ciel.',
                 'duration_en'          => '1 day or 2 evenings',
                 'duration_fr'          => '1 day or 2 evenings',
-                'price'             => 135,
-                'image_path'        => '/images/courses/example.jpg',
-                'stripe_product_id' => 'price_1LQBufGBR8DTe9IEjpeocQPL'
+                'price'                 => 135,
+                'image_path'            => '/images/courses/example.jpg',
+                'stripe_product_id'     => 'price_1LQBufGBR8DTe9IEjpeocQPL',
+                'type'                  => 'spinnaker'
             ]);
     }
 }

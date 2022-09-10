@@ -31,7 +31,7 @@ class CourseSeeder extends Seeder
                 'duration_en'           => '15 hours',
                 'duration_fr'           => '15 heures',
                 'price'                 => 270,
-                'image_path'            => '/images/courses/example.jpg',
+                'image_path'            => '/images/courses/voile4vents_initiation.jpg',
                 'stripe_product_id'     => 'price_1LQATaGBR8DTe9IELg49wgFY',
                 'type'                  => 'initiation_sailing'
             ]);
@@ -45,7 +45,7 @@ class CourseSeeder extends Seeder
                 'duration_en'           => '30 hours',
                 'duration_fr'           => '30 heures',
                 'price'                 => 540,
-                'image_path'            => '/images/courses/example.jpg',
+                'image_path'            => '/images/courses/voile4vents_elementaire.jpg',
                 'stripe_product_id'     => 'price_1LQBtSGBR8DTe9IEUqGItvu3',
                 'type'                  => 'beginner_skipper'
             ]);
@@ -58,7 +58,7 @@ class CourseSeeder extends Seeder
                 'duration_en'          => '1 day or 2 evenings',
                 'duration_fr'          => '1 day or 2 evenings',
                 'price'                 => 135,
-                'image_path'            => '/images/courses/example.jpg',
+                'image_path'            => '/images/courses/voile4vents_spinnaker.jpg',
                 'stripe_product_id'     => 'price_1LQBufGBR8DTe9IEjpeocQPL',
                 'type'                  => 'spinnaker'
             ]);

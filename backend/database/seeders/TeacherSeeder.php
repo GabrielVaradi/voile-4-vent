@@ -31,7 +31,18 @@ class TeacherSeeder extends Seeder
                 'title_fr'             => 'Capitaine',
                 'description_en'       => 'Description Description Description Description Description Description Description Description',
                 'description_fr'       => 'Description Description Description Description Description Description Description Description',
-                'image_path'         => '/images/teachers/pierre.jpg',
+                'image_path'           => '/images/teachers/pierre_ricard.png',
+            ]);
+        Teacher::query()
+            ->create([
+                'first_name'           => 'Sophie',
+                'last_name'            => 'Duvieusart',
+                'nickname'             => "Sophie",
+                'title_en'             => 'Teacher',
+                'title_fr'             => 'Enseignante',
+                'description_en'       => 'Description Description Description Description Description Description Description Description',
+                'description_fr'       => 'Description Description Description Description Description Description Description Description',
+                'image_path'           => '/images/teachers/sophie_duvieusart.jpg',
             ]);
     }
 }

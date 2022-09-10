@@ -5,7 +5,8 @@ import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import ImageFull from '@/components/Images/ImageFull'
 import Image from 'next/image'
-import picture from '../../public/images/home/shutterstock_717244969.jpg'
+import mainPicture from '../../public/images/home/voile4vents_main.jpg'
+
 import { courseService, teacherService } from '@/services'
 import Link from 'next/link'
 import styles from '../../styles/Pages/Home.module.scss'
@@ -27,7 +28,7 @@ const Home = () => {
 
     return (
         <div className="homepage">
-            <ImageFull ragged src={picture} alt="Home">
+            <ImageFull ragged src={mainPicture} alt="Home">
                 <Container className="h-100 d-flex flex-column justify-content-center">
                     <Row>
                         <Col
@@ -143,25 +144,32 @@ const Home = () => {
                 </Row>
             </Container>
 
-            <ImageFull containerClasses="mt-5" ragged src={picture} alt="Home">
-                <Container className="h-100 d-flex flex-column">
-                    <Row>
-                        <Col
-                            md={4}
-                            className={`d-flex flex-column ${styles.bottom_image}`}>
-                            <h1 className="text-uppercase text-white d-flex">
-                                <div className="text-primary me-2">
-                                    {t('image_first_word')}
-                                </div>
-                                {t('image_first_line')}
-                            </h1>
-                            <h1 className="text-uppercase text-white">
-                                {t('image_second_line')}
-                            </h1>
-                        </Col>
-                    </Row>
-                </Container>
-            </ImageFull>
+            <video autoPlay muted loop id="myVideo">
+                <source
+                    src="/videos/home/voile4vents_video_footer.mov"
+                    type="video/mp4"
+                />
+            </video>
+
+            {/*<ImageFull containerClasses="mt-5" ragged src={picture} alt="Home">*/}
+            {/*    <Container className="h-100 d-flex flex-column">*/}
+            {/*        <Row>*/}
+            {/*            <Col*/}
+            {/*                md={4}*/}
+            {/*                className={`d-flex flex-column ${styles.bottom_image}`}>*/}
+            {/*                <h1 className="text-uppercase text-white d-flex">*/}
+            {/*                    <div className="text-primary me-2">*/}
+            {/*                        {t('image_first_word')}*/}
+            {/*                    </div>*/}
+            {/*                    {t('image_first_line')}*/}
+            {/*                </h1>*/}
+            {/*                <h1 className="text-uppercase text-white">*/}
+            {/*                    {t('image_second_line')}*/}
+            {/*                </h1>*/}
+            {/*            </Col>*/}
+            {/*        </Row>*/}
+            {/*    </Container>*/}
+            {/*</ImageFull>*/}
         </div>
     )
 }

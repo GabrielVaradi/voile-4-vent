@@ -313,6 +313,11 @@ const Index = () => {
         }
     }
 
+    const toggleModal = resetForm => {
+        setModalIsOpen(prev => !prev)
+        resetForm()
+    }
+
     return (
         <Container className="mt-5">
             <div> {t('reservations')}</div>
@@ -345,6 +350,11 @@ const Index = () => {
                 }}>
                 Glick
             </Button>
+            <Button
+                color="danger"
+                onClick={() => eventService.testSendEmail('bob')}>
+                zend emali
+            </Button>
             <Formik
                 onSubmit={createReservation}
                 initialValues={{
@@ -373,14 +383,14 @@ const Index = () => {
                     setFieldValue,
                     values,
                     initialValues,
+                    resetForm,
                 }) => {
                     return (
                         <Modal
                             isOpen={modalIsOpen}
-                            toggle={() => setModalIsOpen(prev => !prev)}
+                            toggle={() => toggleModal(resetForm)}
                             size="lg">
-                            <ModalHeader
-                                toggle={() => setModalIsOpen(prev => !prev)}>
+                            <ModalHeader toggle={() => toggleModal(resetForm)}>
                                 Titre du cours
                             </ModalHeader>
                             <ModalBody>
@@ -484,9 +494,7 @@ const Index = () => {
                                 </Button>
                                 <Button
                                     color="secondary"
-                                    onClick={() =>
-                                        setModalIsOpen(prev => !prev)
-                                    }>
+                                    onClick={() => toggleModal(resetForm)}>
                                     Cancel
                                 </Button>
                             </ModalFooter>

@@ -1,9 +1,12 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import styles from '../../../styles/Layouts/Footer.module.scss'
+import Image from 'next/image'
+import logoVoileCanada from '../../../public/images/footer/voile4vents_voile-canada.png'
+import logoVoileQuebec from '../../../public/images/footer/voile4vents_voile-quebec.png'
 
 const Footer = () => {
     const router = useRouter()
@@ -11,6 +14,9 @@ const Footer = () => {
 
     return (
         <div className={`mt-5 ${styles.footer}`}>
+            <div className={styles.wavy} />
+            {/*<div className={styles.wavy} />*/}
+            {/*<div className={styles.wavy} />*/}
             <Container className="w-100 h-100 d-flex ">
                 <Row className="w-100 h-100">
                     <Col
@@ -27,8 +33,22 @@ const Footer = () => {
                     <Col
                         className="d-flex flex-column justify-content-center"
                         md={3}>
-                        <div> Logo </div>
-                        <div> Logo </div>
+                        <Image
+                            layout="responsive"
+                            objectFit="cover"
+                            src={logoVoileCanada}
+                            width={500}
+                            height={500}
+                            alt=""
+                        />
+                        <Image
+                            layout="responsive"
+                            objectFit="cover"
+                            src={logoVoileQuebec}
+                            width={100}
+                            height={100}
+                            alt=""
+                        />
                     </Col>
                     <Col
                         className="d-flex flex-column justify-content-center"

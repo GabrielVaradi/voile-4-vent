@@ -36,7 +36,7 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'smtp.gmail.com'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
@@ -92,8 +92,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'gvaradi@c2.biz'),
-        'name' => env('MAIL_FROM_NAME', 'Gabriel Varadi'),
+        'address' => env('MAIL_FROM_ADDRESS', 'voile4vents@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Pierre Ricard'),
     ],
 
     'reply_to' => [

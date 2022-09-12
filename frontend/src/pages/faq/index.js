@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { faqService } from '../../services'
 import {
     Container,
-    UncontrolledAccordion,
     Accordion,
     AccordionBody,
     AccordionHeader,
@@ -13,8 +12,22 @@ import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Index = () => {
+    const { t } = useTranslation('faq')
+    const router = useRouter()
+
     const [faqs, setFaqs] = useState([])
     const [open, setOpen] = useState('0')
+
+    const questionLocale = useMemo(
+        () => (router.locale === 'en' ? 'question_en' : 'question_fr'),
+        [],
+    )
+
+    const answerLocale = useMemo(
+        () => (router.locale === 'en' ? 'answer_en' : 'answer_fr'),
+        [],
+    )
+
     const toggle = id => {
         if (open === id) {
             setOpen('0')
@@ -22,9 +35,6 @@ const Index = () => {
             setOpen(id)
         }
     }
-
-    const { t } = useTranslation('faq')
-    const router = useRouter()
 
     useEffect(() => {
         faqService.index().then(({ data }) => setFaqs(data))
@@ -36,14 +46,10 @@ const Index = () => {
                 {faqs.map(question => (
                     <AccordionItem key={question.id}>
                         <AccordionHeader targetId={question.id.toString()}>
-                            {router.locale === 'en'
-                                ? question.question_en
-                                : question.question_fr}
+                            {question[questionLocale]}
                         </AccordionHeader>
                         <AccordionBody accordionId={question.id.toString()}>
-                            {router.locale === 'en'
-                                ? question.answer_en
-                                : question.answer_fr}
+                            {question[answerLocale]}
                         </AccordionBody>
                     </AccordionItem>
                 ))}

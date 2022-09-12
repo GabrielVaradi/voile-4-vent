@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import ImageFull from '@/components/Images/ImageFull'
@@ -10,6 +10,7 @@ import mainPicture from '../../public/images/home/voile4vents_main.jpg'
 import { courseService, teacherService } from '@/services'
 import Link from 'next/link'
 import styles from '../../styles/Pages/Home.module.scss'
+import VideoFull from '@/components/Videos/VideoFull'
 
 const Home = () => {
     const [courses, setCourses] = useState([])
@@ -32,15 +33,14 @@ const Home = () => {
                 <Container className="h-100 d-flex flex-column justify-content-center">
                     <Row>
                         <Col
-                            md={6}
+                            md={5}
                             className="d-flex flex-column align-items-center">
-                            <h1 className="text-uppercase text-primary">
+                            <h1 className="text-uppercase text-primary text-center">
                                 {t('title')}
                             </h1>
                             <h5 className="text-uppercase">
                                 {t('description')}
                             </h5>
-                            {/*<Button className=""> {t('learn_more')}</Button>*/}
                             <Link href="/courses">
                                 <a className="btn btn-primary bg-white text-black border-0 mt-3">
                                     {t('learn_more')}
@@ -144,32 +144,28 @@ const Home = () => {
                 </Row>
             </Container>
 
-            <video autoPlay muted loop id="myVideo">
-                <source
-                    src="/videos/home/voile4vents_video_footer.mov"
-                    type="video/mp4"
-                />
-            </video>
-
-            {/*<ImageFull containerClasses="mt-5" ragged src={picture} alt="Home">*/}
-            {/*    <Container className="h-100 d-flex flex-column">*/}
-            {/*        <Row>*/}
-            {/*            <Col*/}
-            {/*                md={4}*/}
-            {/*                className={`d-flex flex-column ${styles.bottom_image}`}>*/}
-            {/*                <h1 className="text-uppercase text-white d-flex">*/}
-            {/*                    <div className="text-primary me-2">*/}
-            {/*                        {t('image_first_word')}*/}
-            {/*                    </div>*/}
-            {/*                    {t('image_first_line')}*/}
-            {/*                </h1>*/}
-            {/*                <h1 className="text-uppercase text-white">*/}
-            {/*                    {t('image_second_line')}*/}
-            {/*                </h1>*/}
-            {/*            </Col>*/}
-            {/*        </Row>*/}
-            {/*    </Container>*/}
-            {/*</ImageFull>*/}
+            <VideoFull
+                containerClasses="mt-5"
+                ragged
+                src="/videos/home/voile4vents_video_footer.mov">
+                <Container className="h-100 d-flex flex-column justify-content-center">
+                    <Row>
+                        <Col
+                            md={4}
+                            className={`d-flex flex-column ${styles.bottom_image}`}>
+                            <h1 className="text-uppercase text-white d-flex">
+                                <div className="text-primary me-2">
+                                    {t('image_first_word')}
+                                </div>
+                                {t('image_first_line')}
+                            </h1>
+                            <h1 className="text-uppercase text-white">
+                                {t('image_second_line')}
+                            </h1>
+                        </Col>
+                    </Row>
+                </Container>
+            </VideoFull>
         </div>
     )
 }

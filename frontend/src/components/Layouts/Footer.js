@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { faFerry } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { Container, Row, Col } from 'reactstrap'
@@ -15,20 +17,18 @@ const Footer = () => {
     return (
         <div className={`mt-5 ${styles.footer}`}>
             <div className={styles.wavy} />
-            {/*<div className={styles.wavy} />*/}
-            {/*<div className={styles.wavy} />*/}
             <Container className="w-100 h-100 d-flex ">
                 <Row className="w-100 h-100">
                     <Col
                         className="d-flex flex-column justify-content-center"
                         md={6}>
-                        <h4>Voile 4 vents</h4>
-                        <h4>
-                            Voile 4 ventsVoile 4 ventsVoile 4 ventsVoile 4
-                            ventsVoile 4 ventsVoile 4 ventsVoile 4 vents Voile 4
-                            vents
-                        </h4>
-                        <div> Facebook icon</div>
+                        <h4>{t('title')}</h4>
+                        <h4>{t('description')}</h4>
+                        <a
+                            style={{ width: '30px' }}
+                            href="https://facebook.com/profile.php?id=100083298454847">
+                            <FontAwesomeIcon icon={faFerry} size="xs" />
+                        </a>
                     </Col>
                     <Col
                         className="d-flex flex-column justify-content-center"

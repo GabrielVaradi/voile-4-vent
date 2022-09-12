@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styles from '../../../styles/Components/Image.module.scss'
 
-const ImageFull = ({ src, alt, children, ragged, containerClasses }) => {
+const ImageFull = ({ src, alt, children, containerClasses }) => {
     return (
         <div className={`${containerClasses} ${styles.imageContainer}`}>
             <Image
@@ -10,7 +10,6 @@ const ImageFull = ({ src, alt, children, ragged, containerClasses }) => {
                 objectFit="cover"
                 src={src}
                 alt={alt}
-                className={`${ragged ? styles.ragged : ''}`}
                 priority
             />
             {children}

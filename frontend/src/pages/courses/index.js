@@ -5,20 +5,7 @@ import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
 
-import {
-    DropdownItem,
-    DropdownMenu,
-    Pagination,
-    PaginationItem,
-    PaginationLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    Container,
-    Col,
-    Row,
-} from 'reactstrap'
-import { toast } from 'react-toastify'
-import Head from 'next/head'
+import { Container, Col, Row } from 'reactstrap'
 import Link from 'next/link'
 
 const Index = () => {

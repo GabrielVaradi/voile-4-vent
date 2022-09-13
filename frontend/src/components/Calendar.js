@@ -29,12 +29,12 @@ const Calendar = ({
     const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
 
     useEffect(() => {
-        if (type === 'beginner_skipper') {
+        if (type?.value === 'beginner_skipper') {
             setMaxNumberOfDays(4)
-        } else if (type === 'initiation_sailing') {
+        } else if (type?.value === 'initiation_sailing') {
             setMaxNumberOfDays(2)
         }
-        if (type === 'spinnaker') {
+        if (type?.value === 'spinnaker') {
             setMaxNumberOfDays(1)
         }
     }, [type])
@@ -43,7 +43,8 @@ const Calendar = ({
         const event = e.event
         let totalReservations = 0
         event.reservations.forEach(
-            reservation => (totalReservations += reservation.number_of_people),
+            reservation =>
+                (totalReservations += reservation.customer_forms.length),
         )
 
         return (
@@ -81,12 +82,15 @@ const Calendar = ({
 
     const onSelectSlot = e => {
         let daySelected = [e.slots[0]]
+        // If the day selected is a weekend day, add the other weekend day to the array
         if (isSaturday(daySelected[0])) {
             daySelected = [daySelected[0], addDays(daySelected[0], 1)]
         } else if (isSunday(daySelected[0])) {
             daySelected = [daySelected[0], subDays(daySelected[0], 1)]
         }
         let days = []
+
+        // Remove the day if it was already selected
         if (daySelected.length > 1) {
             days = daysSelected.filter(
                 day => compareAsc(day, daySelected[0]) !== 0,

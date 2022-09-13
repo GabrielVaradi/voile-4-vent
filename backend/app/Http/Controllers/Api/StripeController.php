@@ -15,7 +15,6 @@ class StripeController extends Controller
 {
     public function createCheckoutSession(Request $request)
     {
-//        Mail::to('gvaradi@c2.biz')->send(new ReservationCompleted($request->type));
         Stripe::setApiKey(config('app.stripe_secret_key'));
 
         $domain = "http://voile.test:3000/$request->language";

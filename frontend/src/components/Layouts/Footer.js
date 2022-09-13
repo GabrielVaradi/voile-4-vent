@@ -26,37 +26,49 @@ const Footer = () => {
                         <h4>{t('description')}</h4>
                         <a
                             style={{ width: '30px' }}
-                            href="https://facebook.com/profile.php?id=100083298454847">
+                            href="https://facebook.com/voile4vents">
                             <FontAwesomeIcon icon={faFerry} size="xs" />
                         </a>
                     </Col>
                     <Col
                         className="d-flex flex-column justify-content-center"
                         md={3}>
-                        <Image
-                            layout="responsive"
-                            objectFit="cover"
-                            src={logoVoileCanada}
-                            width={500}
-                            height={500}
-                            alt=""
-                        />
-                        <Image
-                            layout="responsive"
-                            objectFit="cover"
-                            src={logoVoileQuebec}
-                            width={100}
-                            height={100}
-                            alt=""
-                        />
+                        <div>
+                            <Image
+                                layout="responsive"
+                                objectFit="cover"
+                                src={logoVoileCanada}
+                                width={500}
+                                height={500}
+                                alt=""
+                            />
+                        </div>
+                        <div>
+                            <Image
+                                layout="responsive"
+                                objectFit="cover"
+                                src={logoVoileQuebec}
+                                width={100}
+                                height={100}
+                                alt=""
+                            />
+                        </div>
                     </Col>
                     <Col
                         className="d-flex flex-column justify-content-center"
                         md={3}>
-                        <div> Page </div>
-                        <div> Page </div>
-                        <div> Page </div>
-                        <div> Page </div>
+                        <Link href="/courses">
+                            <a className="navbar-brand">{t('courses')}</a>
+                        </Link>
+                        <Link href="/reservations">
+                            <a className="navbar-brand">{t('reservations')}</a>
+                        </Link>
+                        <Link href="/contact-us">
+                            <a className="navbar-brand">{t('contact-us')}</a>
+                        </Link>
+                        <Link href="/faq">
+                            <a className="navbar-brand">{t('faq')}</a>
+                        </Link>
                     </Col>
                 </Row>
             </Container>

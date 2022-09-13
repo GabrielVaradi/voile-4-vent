@@ -47,15 +47,4 @@ class EventController extends Controller
         }
         return new EventResource($events);
     }
-
-
-    /**
-    * @param Request $request
-    */
-    public function testSendEmail(Request $request)
-    {
-        $reservation = Reservation::find(1);
-        Mail::to('gvaradi@c2.biz')->send(new ReservationCompleted($reservation));
-        return 'bob';
-    }
 }

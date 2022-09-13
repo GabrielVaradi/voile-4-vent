@@ -6,6 +6,7 @@ import {
     courseService,
     stripeService,
 } from '../../services'
+import Select from 'react-select'
 import {
     Container,
     Modal,
@@ -39,6 +40,9 @@ import isEqual from 'date-fns/isEqual'
 import addSeconds from 'date-fns/addSeconds'
 import compareAsc from 'date-fns/compareAsc'
 import teacherService from '@/services/teacher.service'
+import isSaturday from 'date-fns/isSaturday'
+import addDays from 'date-fns/addDays'
+import isSunday from 'date-fns/isSunday'
 
 const Index = () => {
     const [daysSelected, setDaysSelected] = useState([])
@@ -47,15 +51,26 @@ const Index = () => {
     const [mappedEvents, setMappedEvents] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [activeTab, setActiveTab] = useState(1)
-    const [type, setType] = useState('beginner_skipper')
+    const [type, setType] = useState({
+        value: 'beginner_skipper',
+        label: 'Elementaire',
+    })
+
+    const options = [
+        { value: 'beginner_skipper', label: 'Elementaire' },
+        { value: 'initiation_sailing', label: 'Initiation' },
+        { value: 'spinnaker', label: 'Spinnaker' },
+    ]
 
     const router = useRouter()
     const { t } = useTranslation('reservations')
 
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
     useEffect(() => {
         const type = router.query?.type
         if (type) {
-            setType(type)
+            setType(options.filter(option => option.value === type)[0])
         }
     }, [router])
 
@@ -92,13 +107,25 @@ const Index = () => {
         }
     }, [events])
 
-    // const userEditValidations = Yup.object().shape({
-    //     name: Yup.string()
-    //         .min(2, 'Too Short!')
-    //         .max(50, 'Too Long!')
-    //         .required('Required'),
-    //     email: Yup.string().email('Invalid email').required('Required'),
-    // })
+    const customerFormValidations = Yup.object().shape({
+        forms: Yup.array().of(
+            Yup.object().shape({
+                first_name: Yup.string()
+                    .min(2, 'Too Short!')
+                    .max(50, 'Too Long!')
+                    .required('Required'),
+                last_name: Yup.string()
+                    .min(2, 'Too Short!')
+                    .max(50, 'Too Long!')
+                    .required('Required'),
+                // address:
+                email: Yup.string().email('Invalid email').required('Required'),
+                phone_number: Yup.string()
+                    .matches(phoneRegExp, 'Phone number is not valid')
+                    .required('Required'),
+            }),
+        ),
+    })
 
     const resetCalendar = () => {
         setDaysSelected([])
@@ -108,6 +135,8 @@ const Index = () => {
 
     const createReservation = async (values, { resetForm }) => {
         let filteredDays = [...daysSelected]
+
+        // Remove from selected days if the event already exists
         if (eventsSelected.length === 0) {
             filteredDays = daysSelected.map(day => addSeconds(day, 1))
         } else {
@@ -123,9 +152,26 @@ const Index = () => {
             })
         }
 
+        // Filter out empty values, remove sundays and format time
         const formattedDates = filteredDays
-            .filter(n => n)
-            .map(n => format(new Date(n), 'yyyy-MM-dd HH-mm-ss'))
+            .filter(day => day)
+            .filter(day => !isSunday(day))
+            .map(day => {
+                if (isSaturday(day)) {
+                    return {
+                        start: format(new Date(day), 'yyyy-MM-dd HH-mm-ss'),
+                        end: format(
+                            new Date(addDays(day, 1)),
+                            'yyyy-MM-dd HH-mm-ss',
+                        ),
+                    }
+                } else {
+                    return {
+                        start: format(new Date(day), 'yyyy-MM-dd HH-mm-ss'),
+                        end: format(new Date(day), 'yyyy-MM-dd HH-mm-ss'),
+                    }
+                }
+            })
 
         const eventsSelectedIds = eventsSelected.map(event => event.id)
 
@@ -134,55 +180,12 @@ const Index = () => {
             events: eventsSelectedIds,
             eventsDates: formattedDates,
             language: router.locale,
-            type: type,
+            type: type.value,
         }
-        stripeService.createCheckoutSession(newValues).then(res => {
-            router.push(res.url)
-        })
 
-        // if (newEventsData.dates.length > 0) {
-        //     eventService
-        //         .store(newEventsData)
-        //         .then(
-        //             ({ data }) =>
-        //                 (newValues.events = newValues.events.concat(data)),
-        //         )
-        //         .then(() => {
-        //             reservationService
-        //                 .store(newValues)
-        //                 .then(() => setModalIsOpen(false))
-        //         })
-        // } else {
-        //     reservationService
-        //         .store(newValues)
-        //         .then(() => setModalIsOpen(false))
-        // }
-        // eventService.store(newEventsData).then(res => console.log(res))
-        // reservationService.store(values).then(() => setModalIsOpen(false))
-        // axios
-        //     .post(`users/${user?.id}`, values)
-        //     .then(({ data }) => {
-        //         setUser(data.data)
-        //         toast.success(`Profile updated for ${data.name}`, {
-        //             position: 'top-right',
-        //             autoClose: 5000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //         })
-        //     })
-        //     .catch(({ response }) => {
-        //         resetForm()
-        //         toast.error('Unable to update user', {
-        //             position: 'top-right',
-        //             autoClose: 5000,
-        //             hideProgressBar: false,
-        //             closeOnClick: true,
-        //             pauseOnHover: true,
-        //             draggable: true,
-        //         })
-        //     })
+        // stripeService.createCheckoutSession(newValues).then(res => {
+        //     router.push(res.url)
+        // })
     }
 
     const addEventsWithSameDate = () => {
@@ -302,11 +305,14 @@ const Index = () => {
     }
 
     const checkIfAllDaysAreSelected = () => {
-        if (type === 'beginner_skipper' && daysSelected.length === 4) {
+        if (type?.value === 'beginner_skipper' && daysSelected.length === 4) {
             return false
-        } else if (type === 'initiation_sailing' && daysSelected.length === 2) {
+        } else if (
+            type?.value === 'initiation_sailing' &&
+            daysSelected.length === 2
+        ) {
             return false
-        } else if (type === 'spinnaker' && daysSelected.length === 1) {
+        } else if (type?.value === 'spinnaker' && daysSelected.length === 1) {
             return false
         } else {
             return true
@@ -321,19 +327,16 @@ const Index = () => {
     return (
         <Container className="mt-5">
             <div> {t('reservations')}</div>
-            <Input
-                type="select"
+            <Select
                 name="type"
                 id="type"
-                onChange={e => {
-                    setType(e.target.value)
+                options={options}
+                onChange={option => {
+                    setType(option)
                     resetCalendar()
                 }}
-                value={type}>
-                <option>beginner_skipper</option>
-                <option>initiation_sailing</option>
-                <option>spinnaker</option>
-            </Input>
+                value={type}
+            />
             <Calendar
                 className="mt-5"
                 events={mappedEvents}
@@ -349,11 +352,6 @@ const Index = () => {
                     addEventsWithSameDate()
                 }}>
                 Glick
-            </Button>
-            <Button
-                color="danger"
-                onClick={() => eventService.testSendEmail('bob')}>
-                zend emali
             </Button>
             <Formik
                 onSubmit={createReservation}
@@ -372,7 +370,7 @@ const Index = () => {
                     number_of_people: '1',
                     type: 'brevet_elementaire',
                 }}
-                // validationSchema={userEditValidations}
+                validationSchema={customerFormValidations}
                 enableReinitialize>
                 {({
                     isSubmitting,

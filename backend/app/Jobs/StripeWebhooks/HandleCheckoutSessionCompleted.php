@@ -2,6 +2,7 @@
 
 namespace App\Jobs\StripeWebhooks;
 
+use App\Mail\ReservationCompleted;
 use App\Models\CustomerForm;
 use App\Models\Event;
 use App\Models\Reservation;
@@ -10,6 +11,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Mail;
 use Spatie\WebhookClient\Models\WebhookCall;
 
 class HandleCheckoutSessionCompleted implements ShouldQueue
@@ -35,8 +37,11 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
         $payment = $data['payment'];
 
         $customerForms = [];
-        foreach ($customerFormsIds as $id) {
+        foreach ($customerFormsIds as $key=>$id) {
             $customerForm = CustomerForm::find($id);
+            if ($key == 0) {
+                $firstCustomerForm = $customerForm;
+            }
             array_push($customerForms, $customerForm);
         }
 
@@ -50,7 +55,7 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
 
         foreach($customerForms as $customerForm) {
             $customerForm->reservation_id = $reservation->id;
-            $customerForm->transation_state = 'completed';
+            $customerForm->transaction_state = 'completed';
             $customerForm->save();
         }
 
@@ -59,8 +64,8 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
         // Events
         foreach ($eventDates as $date) {
             $event = new Event();
-            $event->start = $date;
-            $event->end = $date;
+            $event->start = $date->start;
+            $event->end = $date->end;
             $event->type = $type;
             $event->title_en = 'Basic skipper course';
             $event->title_fr = 'Brevet croisiere elementaire';
@@ -74,5 +79,7 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
             $event->save();
             $event->reservations()->sync([$reservation->id]);
         }
+
+        Mail::to($firstCustomerForm['email'])->send(new ReservationCompleted($reservation, $firstCustomerForm));
     }
 }

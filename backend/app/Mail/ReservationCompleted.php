@@ -24,17 +24,17 @@ class ReservationCompleted extends Mailable
      * The customer form instance.
      *
      */
-    public $customerForm;
+    public CustomerForm $customerForm;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Reservation $reservation)
+    public function __construct(Reservation $reservation, CustomerForm $customerForm)
     {
         $this->reservation = $reservation;
-        $this->customerForm = $reservation->customer_forms()->first();
+        $this->customerForm = $customerForm;
     }
 
     /**

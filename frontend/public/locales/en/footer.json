@@ -1,5 +1,10 @@
 {
     "footer": "Footer",
     "title": "Footer title",
-    "description": "footer description footer description footer description footer description"
+    "description": "footer description footer description footer description footer description",
+    "courses": "Courses",
+    "reservations": "Reservations",
+    "teachers": "Teachers",
+    "contact-us": "Contact us",
+    "faq": "FAQ"
 }

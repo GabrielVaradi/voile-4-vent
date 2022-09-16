@@ -26,9 +26,11 @@ import {
     TabContent,
     Row,
 } from 'reactstrap'
+import Script from 'next/script'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Calendar from '@/components/Calendar'
+import Autocomplete from 'react-google-autocomplete'
 import { ErrorMessage, Field, Form, Formik, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import BasicTextInput from '@/components/BasicTextInput'
@@ -43,6 +45,8 @@ import teacherService from '@/services/teacher.service'
 import isSaturday from 'date-fns/isSaturday'
 import addDays from 'date-fns/addDays'
 import isSunday from 'date-fns/isSunday'
+
+import styles from '../../../styles/Pages/Reservation.module.scss'
 
 const Index = () => {
     const [daysSelected, setDaysSelected] = useState([])
@@ -233,6 +237,16 @@ const Index = () => {
                     errors={errors}
                     touched={touched}
                     required
+                />
+                <Autocomplete
+                    apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                    onPlaceSelected={place => {
+                        console.log(place)
+                    }}
+                    options={{
+                        componentRestrictions: { country: 'CA' },
+                        types: ['address'],
+                    }}
                 />
                 <BasicTextInput
                     field={`forms.${i}.address`}

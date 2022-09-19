@@ -34,9 +34,12 @@ import Autocomplete from 'react-google-autocomplete'
 import { ErrorMessage, Field, Form, Formik, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import BasicTextInput from '@/components/BasicTextInput'
+import BasicPhoneInput from '@/components/BasicPhoneInput'
 import BasicSelect from '@/components/BasicSelect'
+import BasicAddressField from '@/components/BasicAddressField'
+import BasicDateInput from '@/components/BasicDateInput'
 import format from 'date-fns/format'
-import { parseISO } from 'date-fns'
+import { getYear, parseISO } from 'date-fns'
 import cn from 'classnames'
 import isEqual from 'date-fns/isEqual'
 import addSeconds from 'date-fns/addSeconds'
@@ -122,11 +125,26 @@ const Index = () => {
                     .min(2, 'Too Short!')
                     .max(50, 'Too Long!')
                     .required('Required'),
-                // address:
+
                 email: Yup.string().email('Invalid email').required('Required'),
+                address: Yup.string().required('Required'),
                 phone_number: Yup.string()
                     .matches(phoneRegExp, 'Phone number is not valid')
                     .required('Required'),
+                birthdate: Yup.object().shape({
+                    day: Yup.number()
+                        .min(1, 'Enter a valid day')
+                        .max(31, 'Enter a valid day')
+                        .required('Day'),
+                    month: Yup.number()
+                        .min(1, 'Enter a valid month')
+                        .max(12, 'Enter a valid month')
+                        .required('Month'),
+                    year: Yup.number()
+                        .min(1, 'Enter a valid year')
+                        .max(getYear(new Date()) - 17, 'Be at least 18')
+                        .required('Year'),
+                }),
             }),
         ),
     })
@@ -187,6 +205,8 @@ const Index = () => {
             type: type.value,
         }
 
+        console.log(newValues)
+
         // stripeService.createCheckoutSession(newValues).then(res => {
         //     router.push(res.url)
         // })
@@ -211,7 +231,7 @@ const Index = () => {
         )
     }
 
-    const renderCustomerForm = (errors, touched, i = 1) => {
+    const renderCustomerForm = (errors, touched, i = 1, setFieldValue) => {
         return (
             <>
                 <BasicTextInput
@@ -238,25 +258,25 @@ const Index = () => {
                     touched={touched}
                     required
                 />
-                <Autocomplete
-                    apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                    onPlaceSelected={place => {
-                        console.log(place)
-                    }}
-                    options={{
-                        componentRestrictions: { country: 'CA' },
-                        types: ['address'],
-                    }}
-                />
-                <BasicTextInput
+                <BasicAddressField
                     field={`forms.${i}.address`}
                     fieldLabel="Address"
                     placeholder="Address"
                     errors={errors}
                     touched={touched}
                     required
+                    onSelect={place =>
+                        setFieldValue(
+                            `forms.${i}.address`,
+                            place.formatted_address,
+                        )
+                    }
+                    options={{
+                        componentRestrictions: { country: 'CA' },
+                        types: ['address'],
+                    }}
                 />
-                <BasicTextInput
+                <BasicPhoneInput
                     field={`forms.${i}.phone_number`}
                     fieldLabel="Phone Number"
                     placeholder="Phone Number"
@@ -264,8 +284,11 @@ const Index = () => {
                     touched={touched}
                     required
                 />
-                <BasicTextInput
+                <BasicDateInput
                     field={`forms.${i}.birthdate`}
+                    dayField={`forms.${i}.birthdate.day`}
+                    monthField={`forms.${i}.birthdate.month`}
+                    yearField={`forms.${i}.birthdate.year`}
                     fieldLabel="Birthdate"
                     placeholder="Birthdate"
                     errors={errors}
@@ -276,7 +299,7 @@ const Index = () => {
         )
     }
 
-    const renderTabs = (errors, touched, values) => {
+    const renderTabs = (errors, touched, values, setFieldValue) => {
         const tabs = []
         const forms = []
         let tabNumber = activeTab
@@ -300,7 +323,7 @@ const Index = () => {
             forms.push(
                 <TabContent key={i} activeTab={tabNumber}>
                     <TabPane tabId={i + 1}>
-                        {renderCustomerForm(errors, touched, i)}
+                        {renderCustomerForm(errors, touched, i, setFieldValue)}
                     </TabPane>
                 </TabContent>,
             )
@@ -377,7 +400,11 @@ const Index = () => {
                             email: '',
                             address: '',
                             phone_number: '',
-                            birthdate: '',
+                            birthdate: {
+                                day: '',
+                                month: '',
+                                year: '',
+                            },
                         },
                     ],
                     payment: 'Deposit',
@@ -471,6 +498,7 @@ const Index = () => {
                                                         errors,
                                                         touched,
                                                         values,
+                                                        setFieldValue,
                                                     )}
                                                 </>
                                             )}

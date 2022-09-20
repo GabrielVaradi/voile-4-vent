@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['api'])
     ->group(function () {
         collect(glob(__DIR__ . '/api/*.php'))
+            ->each(function (string $file) {
+                Route::group([], $file);
+            });
+    });
+
+Route::middleware(['admin'])
+    ->group(function () {
+        collect(glob(__DIR__ . '/api/admin/*.php'))
             ->each(function (string $file) {
                 Route::group([], $file);
             });

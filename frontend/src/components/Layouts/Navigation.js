@@ -40,6 +40,9 @@ const Navigation = () => {
                         <Link href="/faq">
                             <a className="navbar-brand">{t('faq')}</a>
                         </Link>
+                        <Link href="/admin/login">
+                            <a className="navbar-brand">{t('admin')}</a>
+                        </Link>
                         <Link
                             href={`/${router.locale === 'en' ? 'fr' : 'en'}${
                                 router.pathname

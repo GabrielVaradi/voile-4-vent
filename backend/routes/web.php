@@ -13,4 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-require __DIR__ . '/api.php';
+//Route::get('/', function () {
+//    return ['Laravel' => app()->version()];
+//});
+
+require __DIR__.'/api.php';

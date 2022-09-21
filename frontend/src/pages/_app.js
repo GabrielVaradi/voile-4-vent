@@ -2,9 +2,9 @@ import { appWithTranslation } from 'next-i18next'
 import '../scss/app.scss'
 import AppLayout from '@/components/Layouts/AppLayout'
 
-const App = ({ Component, pageProps }) => {
+const App = ({ Component, pageProps, router }) => {
     return (
-        <AppLayout>
+        <AppLayout router={router}>
             <Component {...pageProps} />
         </AppLayout>
     )

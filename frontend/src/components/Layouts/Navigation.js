@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { Collapse, Container, Nav, NavbarToggler } from 'reactstrap'
+import { Collapse, Container, Nav, NavbarToggler, Button } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
+import { useAuth } from '@/hooks/auth'
 
 const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -11,6 +12,8 @@ const Navigation = () => {
     const { t } = useTranslation('navigation')
 
     const toggle = () => setIsOpen(!isOpen)
+
+    const { user, logout } = useAuth()
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -40,9 +43,14 @@ const Navigation = () => {
                         <Link href="/faq">
                             <a className="navbar-brand">{t('faq')}</a>
                         </Link>
-                        <Link href="/admin/login">
+                        <Link href="/admin-login">
                             <a className="navbar-brand">{t('admin')}</a>
                         </Link>
+                        {user && (
+                            <Button onClick={logout}>
+                                <a className="navbar-brand">{t('logout')}</a>
+                            </Button>
+                        )}
                         <Link
                             href={`/${router.locale === 'en' ? 'fr' : 'en'}${
                                 router.pathname

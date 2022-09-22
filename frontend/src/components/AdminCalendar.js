@@ -38,9 +38,6 @@ const Calendar = ({ events, className }) => {
 
         return (
             <div className="d-flex flex-column align-items-start">
-                {/*<div className="m-auto">*/}
-                {/*    {router.locale === 'en' ? event.title_en : event.title_fr}*/}
-                {/*</div>*/}
                 <div className="d-flex flex-wrap">
                     {customers.map((customer, i) => (
                         <div

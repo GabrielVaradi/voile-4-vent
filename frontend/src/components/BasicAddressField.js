@@ -16,11 +16,11 @@ const BasicAddressField = ({
 }) => {
     return (
         <FormGroup row className={formGroupClasses}>
-            <Label for={field} sm={2}>
+            <Label for={field} md={2}>
                 {fieldLabel}
                 {required && <span className="required-asterisk">*</span>}
             </Label>
-            <Col sm={10}>
+            <Col md={10}>
                 <InputGroup>
                     <Autocomplete
                         apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}

@@ -13,11 +13,11 @@ const BasicTextInput = ({
 }) => {
     return (
         <FormGroup row>
-            <Label for={field} sm={2}>
+            <Label for={field} md={2}>
                 {fieldLabel}
                 {required && <span className="required-asterisk">*</span>}
             </Label>
-            <Col sm={10}>
+            <Col md={10}>
                 <InputGroup>
                     <Input
                         type="text"

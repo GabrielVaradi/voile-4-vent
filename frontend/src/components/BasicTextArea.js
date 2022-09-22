@@ -13,11 +13,11 @@ const BasicTextArea = ({
 }) => {
     return (
         <FormGroup row>
-            <Label for={fieldName} sm={2}>
-                {fieldLabel}{' '}
+            <Label for={fieldName} md={2}>
+                {fieldLabel}
                 {required && <span className="required-asterisk">*</span>}
             </Label>
-            <Col sm={10}>
+            <Col md={10}>
                 <InputGroup>
                     <Field name={fieldName}>
                         {({ field }) => (

@@ -1,7 +1,17 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { Collapse, Container, Nav, NavbarToggler, Button } from 'reactstrap'
+import {
+    Collapse,
+    Container,
+    Nav,
+    NavbarToggler,
+    Button,
+    DropdownItem,
+    DropdownToggle,
+    DropdownMenu,
+    UncontrolledDropdown,
+} from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { useAuth } from '@/hooks/auth'
@@ -47,9 +57,38 @@ const Navigation = () => {
                             <a className="navbar-brand">{t('admin')}</a>
                         </Link>
                         {user && (
-                            <Button onClick={logout}>
-                                <a className="navbar-brand">{t('logout')}</a>
-                            </Button>
+                            <UncontrolledDropdown>
+                                <DropdownToggle color="link" caret>
+                                    Dropdown
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem>
+                                        <Link href="/admin">
+                                            <a className="navbar-brand">
+                                                {t('calendar')}
+                                            </a>
+                                        </Link>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <Link href="/admin/todos">
+                                            <a className="navbar-brand">
+                                                {t('todos')}
+                                            </a>
+                                        </Link>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <Link href="/admin/allowed-skippers">
+                                            <a className="navbar-brand">
+                                                {t('location')}
+                                            </a>
+                                        </Link>
+                                    </DropdownItem>
+                                    <DropdownItem divider />
+                                    <DropdownItem onClick={logout}>
+                                        {t('logout')}
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </UncontrolledDropdown>
                         )}
                         <Link
                             href={`/${router.locale === 'en' ? 'fr' : 'en'}${

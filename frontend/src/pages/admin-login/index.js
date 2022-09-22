@@ -1,121 +1,80 @@
-import AuthCard from '@/components/AuthCard'
-import AuthSessionStatus from '@/components/AuthSessionStatus'
-import GuestLayout from '@/components/Layouts/GuestLayout'
-import Link from 'next/link'
 import { useAuth } from '@/hooks/auth'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { Col, FormGroup, Button, Input, Label } from 'reactstrap'
+import React from 'react'
+import { Button, Card, CardHeader, CardBody, Container } from 'reactstrap'
+import { Form, Formik } from 'formik'
+import BasicTextInput from '@/components/BasicTextInput'
+import BasicPasswordInput from '@/components/BasicPasswordInput'
 
 const Index = () => {
-    const router = useRouter()
-
     const { login } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/admin',
     })
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [shouldRemember, setShouldRemember] = useState(false)
-    const [errors, setErrors] = useState([])
-    const [status, setStatus] = useState(null)
-
-    useEffect(() => {
-        if (router.query.reset?.length > 0 && errors.length === 0) {
-            setStatus(atob(router.query.reset))
-        } else {
-            setStatus(null)
-        }
-    })
-
-    const submitForm = async event => {
-        event.preventDefault()
-
+    const submitLogin = (values, { resetForm }) => {
+        const { email, password } = values
         login({
-            email: email,
-            password: password,
-            remember: shouldRemember,
-            setErrors,
-            setStatus,
+            email,
+            password,
         })
+        resetForm()
     }
 
     return (
-        <GuestLayout>
-            <AuthCard
-                logo={
-                    <Link href="/frontend/src/pages">
-                        <a>fu</a>
-                    </Link>
-                }>
-                {/* Session Status */}
-                <AuthSessionStatus className="mb-4" status={status} />
-
-                <form onSubmit={submitForm}>
-                    {/* Email Address */}
-                    <div>
-                        <Label htmlFor="email">Email</Label>
-
-                        <Input
-                            id="email"
-                            type="email"
-                            value={email}
-                            className="block mt-1 w-full"
-                            onChange={event => setEmail(event.target.value)}
-                            // required
-                            autoFocus
-                        />
-                    </div>
-
-                    {/* Password */}
-                    <div className="mt-4">
-                        <Label htmlFor="password">Password</Label>
-
-                        <Input
-                            id="password"
-                            type="password"
-                            value={password}
-                            className="block mt-1 w-full"
-                            onChange={event => setPassword(event.target.value)}
-                            // required
-                            autoComplete="current-password"
-                        />
-                    </div>
-
-                    {/* Remember Me */}
-                    <div className="block mt-4">
-                        <label
-                            htmlFor="remember_me"
-                            className="inline-flex items-center">
-                            <input
-                                id="remember_me"
-                                type="checkbox"
-                                name="remember"
-                                className="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                onChange={event =>
-                                    setShouldRemember(event.target.checked)
-                                }
-                            />
-
-                            <span className="ml-2 text-sm text-gray-600">
-                                Remember me
-                            </span>
-                        </label>
-                    </div>
-
-                    <div className="flex items-center justify-end mt-4">
-                        <Link href="/forgot-password">
-                            <a className="underline text-sm text-gray-600 hover:text-gray-900">
-                                Forgot your password?
-                            </a>
-                        </Link>
-
-                        <Button className="ml-3">Index</Button>
-                    </div>
-                </form>
-            </AuthCard>
-        </GuestLayout>
+        <Container className="mt-5 d-flex justify-content-center">
+            <Card className="w-75">
+                <CardHeader>Login</CardHeader>
+                <CardBody>
+                    <Formik
+                        initialValues={{ email: '', password: '' }}
+                        // validationSchema={}
+                        onSubmit={submitLogin}>
+                        {({
+                            errors,
+                            touched,
+                            isSubmitting,
+                            submitForm,
+                            isValid,
+                        }) => (
+                            <>
+                                <Form>
+                                    <BasicTextInput
+                                        field="email"
+                                        fieldLabel="Email"
+                                        placeholder="Email"
+                                        errors={errors}
+                                        touched={touched}
+                                        required
+                                    />
+                                    <BasicPasswordInput
+                                        field="password"
+                                        fieldLabel="Password"
+                                        placeholder="Password"
+                                        errors={errors}
+                                        touched={touched}
+                                        required
+                                    />
+                                    <div className="d-flex justify-content-end">
+                                        {/*    <div className="flex items-center justify-end mt-4">*/}
+                                        {/*        <Link href="/forgot-password">*/}
+                                        {/*            <a className="underline text-sm text-gray-600 hover:text-gray-900">*/}
+                                        {/*                Forgot your password?*/}
+                                        {/*            </a>*/}
+                                        {/*        </Link>*/}
+                                        <Button
+                                            color="primary"
+                                            disabled={isSubmitting || !isValid}
+                                            onClick={submitForm}>
+                                            Login
+                                        </Button>
+                                    </div>
+                                </Form>
+                            </>
+                        )}
+                    </Formik>
+                </CardBody>
+            </Card>
+        </Container>
     )
 }
 

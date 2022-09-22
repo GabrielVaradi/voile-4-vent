@@ -1,21 +1,18 @@
 import React from 'react'
 import { Col, FormGroup, Input, InputGroup, Label } from 'reactstrap'
-import { ErrorMessage } from 'formik'
+import { ErrorMessage, Field } from 'formik'
 import cn from 'classnames'
 
-const BasicSelect = ({
+const BasicPasswordInput = ({
     field,
     fieldLabel,
+    placeholder,
     errors,
     touched,
     required,
-    setFieldValue,
-    children,
-    formGroupClasses,
-    onSelect,
 }) => {
     return (
-        <FormGroup row className={formGroupClasses}>
+        <FormGroup row>
             <Label for={field} md={2}>
                 {fieldLabel}
                 {required && <span className="required-asterisk">*</span>}
@@ -23,20 +20,16 @@ const BasicSelect = ({
             <Col md={10}>
                 <InputGroup>
                     <Input
-                        type="select"
+                        type="password"
                         name={field}
                         id={field}
-                        onChange={e =>
-                            onSelect
-                                ? onSelect(e)
-                                : setFieldValue(field, e.target.value)
-                        }
+                        tag={Field}
                         required
                         className={cn({
                             'is-invalid': touched[field] && errors[field],
-                        })}>
-                        {children}
-                    </Input>
+                        })}
+                        placeholder={placeholder || 'Type here...'}
+                    />
                 </InputGroup>
                 <ErrorMessage
                     name={field}
@@ -47,4 +40,4 @@ const BasicSelect = ({
     )
 }
 
-export default BasicSelect
+export default BasicPasswordInput

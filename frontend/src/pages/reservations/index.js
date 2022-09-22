@@ -155,7 +155,7 @@ const Index = () => {
         setMappedEvents([])
     }
 
-    const createReservation = async (values, { resetForm }) => {
+    const createReservation = (values, { resetForm }) => {
         let filteredDays = [...daysSelected]
 
         // Remove from selected days if the event already exists
@@ -210,6 +210,8 @@ const Index = () => {
         // stripeService.createCheckoutSession(newValues).then(res => {
         //     router.push(res.url)
         // })
+
+        // resetForm()
     }
 
     const addEventsWithSameDate = () => {

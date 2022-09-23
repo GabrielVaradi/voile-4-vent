@@ -13,21 +13,24 @@ const BasicTextArea = ({
 }) => {
     return (
         <FormGroup row>
-            <Label for={fieldName} md={2}>
-                {fieldLabel}
-                {required && <span className="required-asterisk">*</span>}
-            </Label>
+            {fieldLabel && (
+                <Label for={fieldName} md={2}>
+                    {fieldLabel}
+                    {required && <span className="required-asterisk">*</span>}
+                </Label>
+            )}
             <Col md={10}>
                 <InputGroup>
                     <Field name={fieldName}>
                         {({ field }) => (
                             <Input
-                                id={fieldName}
-                                name={fieldName}
+                                id={field.name}
+                                name={field.name}
                                 type="textarea"
                                 className={cn({
                                     'is-invalid':
-                                        touched[fieldName] && errors[fieldName],
+                                        touched[field.name] &&
+                                        errors[field.name],
                                 })}
                                 placeholder={placeholder}
                                 value={field.value || ''}

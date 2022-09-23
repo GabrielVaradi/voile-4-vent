@@ -4,6 +4,7 @@ import reservationService from './reservation.service'
 import stripeService from './stripe.service'
 import teacherService from './teacher.service'
 import faqService from './faq.service'
+import todoService from './todo.service'
 
 export {
     eventService,
@@ -12,4 +13,5 @@ export {
     stripeService,
     teacherService,
     faqService,
+    todoService,
 }

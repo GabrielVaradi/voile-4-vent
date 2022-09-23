@@ -5,6 +5,7 @@ import stripeService from './stripe.service'
 import teacherService from './teacher.service'
 import faqService from './faq.service'
 import todoService from './todo.service'
+import allowedSkipperService from './allowed-skipper.service'
 
 export {
     eventService,
@@ -14,4 +15,5 @@ export {
     teacherService,
     faqService,
     todoService,
+    allowedSkipperService,
 }

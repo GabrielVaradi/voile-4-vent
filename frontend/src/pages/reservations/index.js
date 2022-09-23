@@ -72,8 +72,6 @@ const Index = () => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
 
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
     useEffect(() => {
         const type = router.query?.type
         if (type) {
@@ -113,6 +111,8 @@ const Index = () => {
             setMappedEvents(mapped)
         }
     }, [events])
+
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
     const customerFormValidations = Yup.object().shape({
         forms: Yup.array().of(

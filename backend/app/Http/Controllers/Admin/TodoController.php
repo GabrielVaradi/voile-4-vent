@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Admin\Todo\StoreTodoRequest;
 use App\Http\Resources\Admin\Todo\TodoCollection;
 use App\Http\Resources\Admin\Todo\TodoResource;
 use App\Models\Admin\Todo;
@@ -21,9 +22,10 @@ class TodoController extends Controller
     }
 
     /**
+     * @param StoreTodoRequest $request
      * @return TodoResource
      */
-    public function store(Request $request): TodoResource
+    public function store(StoreTodoRequest $request): TodoResource
     {
         $todo = new Todo($request->all());
         $todo->save();

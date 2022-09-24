@@ -419,7 +419,6 @@ const Index = () => {
                     isSubmitting,
                     touched,
                     errors,
-                    isValid,
                     submitForm,
                     setFieldValue,
                     values,
@@ -530,7 +529,7 @@ const Index = () => {
                             <ModalFooter>
                                 <Button
                                     color="primary"
-                                    disabled={isSubmitting || !isValid}
+                                    disabled={isSubmitting}
                                     onClick={submitForm}>
                                     Rezervatiosns
                                 </Button>

@@ -22,6 +22,16 @@ class AllowedSkipperController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return AllowedSkipperCollection
+     */
+    public function datatable(Request $request): AllowedSkipperCollection
+    {
+        $allowedSkippers = AllowedSkipper::query()->orderByDesc('id')->paginate($request->input('per_page'), page: $request->input('page'));
+        return new AllowedSkipperCollection($allowedSkippers);
+    }
+
+    /**
      * @param StoreAllowedSkipperRequest $request
      * @return AllowedSkipperResource
      */

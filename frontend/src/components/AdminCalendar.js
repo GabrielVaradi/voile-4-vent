@@ -12,29 +12,39 @@ import isSunday from 'date-fns/isSunday'
 import enUS from 'date-fns/locale/en-US'
 import frCA from 'date-fns/locale/fr-CA'
 import { useRouter } from 'next/router'
-import { Container } from 'reactstrap'
+import {
+    Button,
+    Container,
+    Modal,
+    ModalBody,
+    ModalFooter,
+    ModalHeader,
+    Col,
+    Row,
+} from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import styles from '../../styles/Components/AdminCalendar.module.scss'
+import { FieldArray, Form } from 'formik'
+import BasicSelect from '@/components/Fields/BasicSelect'
 
 import('react-big-calendar/lib/css/react-big-calendar.css')
 
-const Calendar = ({ events, className }) => {
+const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
 
+    const [selectedEvent, setSelectedEvent] = useState(null)
+    const [eventModalIsOpen, setEventModalIsOpen] = useState(false)
+
     const Event = e => {
         const event = e.event
-        const customers = [
-            'Gabriel Varadi',
-            'Gabriel Varadi',
-            'Gabriel Varadi',
-            'Gabriel Varadi',
-        ]
-        // event.reservations.forEach(reservation =>
-        //     reservation.customer_forms.forEach(form =>
-        //         customers.push(`${form.first_name} ${form.last_name}`),
-        //     ),
-        // )
+
+        const customers = []
+        event.reservations.forEach(reservation =>
+            reservation.customer_forms.forEach(form =>
+                customers.push(`${form.first_name} ${form.last_name}`),
+            ),
+        )
 
         return (
             <div className="d-flex flex-column align-items-start">
@@ -78,6 +88,47 @@ const Calendar = ({ events, className }) => {
         }
     }
 
+    const onSelectSlot = e => {
+        let daySelected = [e.slots[0]]
+        // If the day selected is a weekend day, add the other weekend day to the array
+        if (isSaturday(daySelected[0])) {
+            daySelected = [daySelected[0], addDays(daySelected[0], 1)]
+        } else if (isSunday(daySelected[0])) {
+            daySelected = [daySelected[0], subDays(daySelected[0], 1)]
+        }
+        let days = []
+
+        // Remove the day if it was already selected
+        if (daySelected.length > 1) {
+            days = daysSelected.filter(
+                day => compareAsc(day, daySelected[0]) !== 0,
+            )
+            days = days.filter(day => compareAsc(day, daySelected[1]) !== 0)
+        } else {
+            days = daysSelected.filter(
+                day => compareAsc(day, daySelected[0]) !== 0,
+            )
+        }
+        if (days.length === daysSelected.length) {
+            setDaysSelected(prev => prev.concat(daySelected))
+        } else {
+            setDaysSelected(days)
+        }
+    }
+
+    const dayPropGetter = date => {
+        const selected = daysSelected.every(day => compareAsc(day, date) !== 0)
+        return {
+            style: {
+                background: selected ? '' : '#C1E1C1',
+            },
+        }
+    }
+
+    const toggleModal = () => {
+        setEventModalIsOpen(prev => !prev)
+    }
+
     return (
         <Container className="mt-5">
             <BigCalendar
@@ -90,7 +141,64 @@ const Calendar = ({ events, className }) => {
                 selectable
                 eventPropGetter={eventPropGetter}
                 components={components}
+                onSelectEvent={e => {
+                    setSelectedEvent(e)
+                    setEventModalIsOpen(true)
+                }}
+                onSelectSlot={onSelectSlot}
+                dayPropGetter={dayPropGetter}
             />
+            {selectedEvent && (
+                <Modal isOpen={eventModalIsOpen} toggle={toggleModal} size="lg">
+                    <ModalHeader toggle={toggleModal}>
+                        {selectedEvent.title_en}
+                    </ModalHeader>
+                    <ModalBody>
+                        <Row>
+                            {selectedEvent.reservations.map(reservation => (
+                                <Col key={reservation.id}>
+                                    <div>{reservation.type}</div>
+                                    <Row>
+                                        {reservation.customer_forms.map(
+                                            customerForm => {
+                                                const {
+                                                    id,
+                                                    first_name,
+                                                    last_name,
+                                                    email,
+                                                    phone_number,
+                                                    address,
+                                                    birthdate,
+                                                } = customerForm
+                                                return (
+                                                    <Col key={id}>
+                                                        <div>{first_name}</div>
+                                                        <div>{last_name}</div>
+                                                        <div>{email}</div>
+                                                        <div>
+                                                            {phone_number}
+                                                        </div>
+                                                        <div>{address}</div>
+                                                        <div>{birthdate}</div>
+                                                    </Col>
+                                                )
+                                            },
+                                        )}
+                                    </Row>
+                                </Col>
+                            ))}
+                        </Row>
+                    </ModalBody>
+                    <ModalFooter>
+                        {/*<Button*/}
+                        {/*    color="primary"*/}
+                        {/*    disabled={isSubmitting}*/}
+                        {/*    onClick={submitForm}>*/}
+                        {/*    Rezervatiosns*/}
+                        {/*</Button>*/}
+                    </ModalFooter>
+                </Modal>
+            )}
         </Container>
     )
 }

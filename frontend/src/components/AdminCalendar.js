@@ -29,12 +29,30 @@ import BasicSelect from '@/components/Fields/BasicSelect'
 
 import('react-big-calendar/lib/css/react-big-calendar.css')
 
-const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
+const Calendar = ({
+    events,
+    className,
+    daysSelected,
+    setDaysSelected,
+    type,
+}) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
 
     const [selectedEvent, setSelectedEvent] = useState(null)
     const [eventModalIsOpen, setEventModalIsOpen] = useState(false)
+    const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
+
+    useEffect(() => {
+        if (type?.value === 'beginner_skipper') {
+            setMaxNumberOfDays(4)
+        } else if (type?.value === 'initiation_sailing') {
+            setMaxNumberOfDays(2)
+        }
+        if (type?.value === 'spinnaker') {
+            setMaxNumberOfDays(1)
+        }
+    }, [type])
 
     const Event = e => {
         const event = e.event
@@ -80,7 +98,7 @@ const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
         locales,
     })
 
-    const eventPropGetter = event => {
+    const eventPropGetter = () => {
         return {
             style: {
                 textAlign: 'center',
@@ -110,6 +128,9 @@ const Calendar = ({ events, className, daysSelected, setDaysSelected }) => {
             )
         }
         if (days.length === daysSelected.length) {
+            if (daysSelected.length + daySelected.length > maxNumberOfDays) {
+                return null
+            }
             setDaysSelected(prev => prev.concat(daySelected))
         } else {
             setDaysSelected(days)

@@ -56,6 +56,8 @@ import {
     checkIfAllDaysAreSelected,
     resetCalendar,
 } from '@/utils/reservations.utils'
+import subMonths from 'date-fns/subMonths'
+import addYears from 'date-fns/addYears'
 
 const Index = () => {
     const [daysSelected, setDaysSelected] = useState([])
@@ -99,7 +101,7 @@ const Index = () => {
     // }, [])
 
     useEffect(() => {
-        eventService.index().then(({ data }) => setEvents(data))
+        eventService.eventsCalendar().then(({ data }) => setEvents(data))
     }, [])
 
     useEffect(() => {

@@ -115,6 +115,7 @@ const Index = () => {
                 events={mappedEvents}
                 daysSelected={daysSelected}
                 setDaysSelected={setDaysSelected}
+                type={type}
             />
             <ReservationForm
                 eventsSelected={eventsSelected}

@@ -7,13 +7,22 @@ import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
 import addDays from 'date-fns/addDays'
 import subDays from 'date-fns/subDays'
+import addYears from 'date-fns/addYears'
+import subMonths from 'date-fns/subMonths'
 import isSaturday from 'date-fns/isSaturday'
 import isSunday from 'date-fns/isSunday'
+import isBefore from 'date-fns/isBefore'
+import isAfter from 'date-fns/isAfter'
+import parseISO from 'date-fns/parseISO'
 import enUS from 'date-fns/locale/en-US'
 import frCA from 'date-fns/locale/fr-CA'
 import { useRouter } from 'next/router'
 import { Container } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
+import { allowedMonths } from '@/constants/reservations.constants'
+import isEqual from 'date-fns/isEqual'
+import addSeconds from 'date-fns/addSeconds'
+import reservations from '@/pages/reservations'
 
 import('react-big-calendar/lib/css/react-big-calendar.css')
 
@@ -26,6 +35,7 @@ const Calendar = ({
 }) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
+    const [currentDate, setCurrentDate] = useState(new Date())
     const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
 
     useEffect(() => {
@@ -54,7 +64,10 @@ const Calendar = ({
                 </div>
                 <div>
                     {t('places_left', {
-                        places_left: event.max_reservations - totalReservations,
+                        places_left:
+                            event.max_reservations - totalReservations < 0
+                                ? 0
+                                : event.max_reservations - totalReservations,
                     })}
                 </div>
             </>
@@ -82,6 +95,30 @@ const Calendar = ({
 
     const onSelectSlot = e => {
         let daySelected = [e.slots[0]]
+
+        // Disable selecting if the month is not allowed or if the selected day is in the past
+        if (
+            !allowedMonths.includes(daySelected[0].getMonth()) ||
+            isBefore(daySelected[0], subDays(new Date(), 1))
+        )
+            return null
+
+        // Disable selecting events with max capacity
+        const selectedEvent = events.filter(event =>
+            isEqual(addSeconds(daySelected[0], 1), parseISO(event.start)),
+        )[0]
+
+        if (selectedEvent) {
+            let numberOfReservations = 0
+            selectedEvent.reservations.forEach(
+                reservation =>
+                    (numberOfReservations += reservation.customer_forms.length),
+            )
+            if (numberOfReservations >= selectedEvent.max_reservations) {
+                return null
+            }
+        }
+
         // If the day selected is a weekend day, add the other weekend day to the array
         if (isSaturday(daySelected[0])) {
             daySelected = [daySelected[0], addDays(daySelected[0], 1)]
@@ -111,16 +148,34 @@ const Calendar = ({
         }
     }
 
+    const onNavigate = focusDate => {
+        if (
+            !isAfter(focusDate, addYears(new Date(), 1)) &&
+            !isBefore(focusDate, subMonths(new Date(), 3))
+        ) {
+            setCurrentDate(focusDate)
+        }
+    }
+
     const dayPropGetter = date => {
-        const selected = daysSelected.every(day => compareAsc(day, date) !== 0)
+        if (allowedMonths.includes(date.getMonth())) {
+            const selected = daysSelected.every(
+                day => compareAsc(day, date) !== 0,
+            )
+            return {
+                style: {
+                    background: selected ? '' : '#C1E1C1',
+                },
+            }
+        }
         return {
             style: {
-                background: selected ? '' : '#C1E1C1',
+                background: '#e6e6e6',
             },
         }
     }
 
-    const eventPropGetter = event => {
+    const eventPropGetter = () => {
         return {
             style: {
                 background: 'transparent',
@@ -146,6 +201,8 @@ const Calendar = ({
                 dayPropGetter={dayPropGetter}
                 eventPropGetter={eventPropGetter}
                 components={components}
+                onNavigate={onNavigate}
+                date={currentDate}
             />
         </Container>
     )

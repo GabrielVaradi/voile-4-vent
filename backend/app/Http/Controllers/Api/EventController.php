@@ -11,6 +11,7 @@ use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
@@ -22,6 +23,26 @@ class EventController extends Controller
     {
         return new EventCollection(Event::all()->load(['reservations', 'reservations.customer_forms']));
     }
+
+
+    /**
+     * @return EventCollection
+     */
+    public function eventsCalendar(): EventCollection
+    {
+        $events = Event::all()->whereBetween('start',
+            [
+                Carbon::now()->subMonths(4)->toDateTimeString(),
+                Carbon::now()->addMonths(13)->toDateTimeString()
+
+            ]
+        )->load(['reservations', 'reservations.customer_forms']);
+
+        return new EventCollection($events);
+    }
+
+
+    /**
 
     /**
      * Store a new event.

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     Button,
     Col,
@@ -42,6 +42,24 @@ const ReservationForm = ({
     isAdmin,
 }) => {
     const [activeTab, setActiveTab] = useState(1)
+    const [maxNumberOfPeopleOptions, setMaxNumberOfPeopleOptions] = useState(4)
+
+    useEffect(() => {
+        if (!isAdmin) {
+            let maxNumberOfPeople = maxNumberOfPeopleOptions
+            eventsSelected.forEach(event => {
+                let customers = 0
+                event.reservations.forEach(reservation => {
+                    customers += reservation.customer_forms.length
+                })
+                const placesRemaining = event.max_reservations - customers
+                if (placesRemaining < maxNumberOfPeople) {
+                    maxNumberOfPeople = placesRemaining
+                }
+            })
+            setMaxNumberOfPeopleOptions(maxNumberOfPeople)
+        }
+    }, [eventsSelected])
 
     const createReservation = (values, { resetForm }) => {
         let filteredDays = [...daysSelected]
@@ -352,10 +370,34 @@ const ReservationForm = ({
                                                             e.target.value,
                                                         )
                                                     }}>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
+                                                    <option
+                                                        disabled={
+                                                            maxNumberOfPeopleOptions <
+                                                            1
+                                                        }>
+                                                        1
+                                                    </option>
+                                                    <option
+                                                        disabled={
+                                                            maxNumberOfPeopleOptions <
+                                                            2
+                                                        }>
+                                                        2
+                                                    </option>
+                                                    <option
+                                                        disabled={
+                                                            maxNumberOfPeopleOptions <
+                                                            3
+                                                        }>
+                                                        3
+                                                    </option>
+                                                    <option
+                                                        disabled={
+                                                            maxNumberOfPeopleOptions <
+                                                            4
+                                                        }>
+                                                        4
+                                                    </option>
                                                 </BasicSelect>
                                                 {renderTabs(
                                                     errors,

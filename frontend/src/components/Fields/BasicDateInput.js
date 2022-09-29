@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, FormGroup, Input, InputGroup, Label } from 'reactstrap'
+import { Col, FormGroup, Input, Label } from 'reactstrap'
 import { ErrorMessage, Field } from 'formik'
 import cn from 'classnames'
 

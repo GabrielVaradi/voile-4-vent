@@ -46,6 +46,7 @@ class StripeController extends Controller
                 'customer_forms_ids' => json_encode($customerFormsIds),
                 'payment'            => $request->payment,
                 'type'               => $request->type,
+                'language'           => $request->language,
             ],
             'mode'        => 'payment',
             'success_url' => $domain . '/reservations?success=true',

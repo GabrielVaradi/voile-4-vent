@@ -26,7 +26,7 @@ Route::middleware(['api'])
             });
     });
 
-Route::middleware(['admin'])
+Route::middleware(['admin', 'auth'])
     ->group(function () {
         collect(glob(__DIR__ . '/admin/*.php'))
             ->each(function (string $file) {

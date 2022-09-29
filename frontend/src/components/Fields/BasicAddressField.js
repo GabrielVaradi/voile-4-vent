@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, FormGroup, Input, InputGroup, Label } from 'reactstrap'
+import { Col, FormGroup, InputGroup, Label } from 'reactstrap'
 import { ErrorMessage } from 'formik'
 import cn from 'classnames'
 import Autocomplete from 'react-google-autocomplete'

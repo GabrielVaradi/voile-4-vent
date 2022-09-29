@@ -36,6 +36,7 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
         $customerFormsIds = json_decode($data['customer_forms_ids']);
         $type = $data['type'];
         $payment = $data['payment'];
+        $language = $data['language'];
 
         $customerForms = [];
         foreach ($customerFormsIds as $key=>$id) {
@@ -81,6 +82,6 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
             $event->reservations()->sync([$reservation->id]);
         }
 
-        Mail::to($firstCustomerForm['email'])->send(new ReservationCompleted($reservation, $firstCustomerForm));
+        Mail::to($firstCustomerForm['email'])->send(new ReservationCompleted($reservation, $firstCustomerForm, $language));
     }
 }

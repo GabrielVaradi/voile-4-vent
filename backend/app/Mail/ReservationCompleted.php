@@ -31,10 +31,11 @@ class ReservationCompleted extends Mailable
      *
      * @return void
      */
-    public function __construct(Reservation $reservation, CustomerForm $customerForm)
+    public function __construct(Reservation $reservation, CustomerForm $customerForm, string $language)
     {
         $this->reservation = $reservation;
         $this->customerForm = $customerForm;
+        $this->language = $language;
     }
 
     /**

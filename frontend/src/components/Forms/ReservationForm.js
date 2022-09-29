@@ -18,7 +18,7 @@ import {
 } from 'reactstrap'
 import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik'
 import cn from 'classnames'
-import BasicSelect from '@/components/Fields/BasicSelect'
+import { stripeService, eventService } from '@/services/index'
 import addSeconds from 'date-fns/addSeconds'
 import isEqual from 'date-fns/isEqual'
 import isSunday from 'date-fns/isSunday'
@@ -27,6 +27,7 @@ import format from 'date-fns/format'
 import addDays from 'date-fns/addDays'
 import * as Yup from 'yup'
 import { getYear } from 'date-fns'
+import BasicSelect from '@/components/Fields/BasicSelect'
 import BasicTextInput from '@/components/Fields/BasicTextInput'
 import BasicAddressField from '@/components/Fields/BasicAddressField'
 import BasicPhoneInput from '@/components/Fields/BasicPhoneInput'
@@ -112,12 +113,15 @@ const ReservationForm = ({
         }
 
         console.log(newValues)
-
-        // stripeService.createCheckoutSession(newValues).then(res => {
-        //     router.push(res.url)
-        // })
-
-        // resetForm()
+        if (isAdmin) {
+            eventService.store(newValues).then(res => {
+                resetForm()
+            })
+        } else {
+            stripeService.createCheckoutSession(newValues).then(res => {
+                router.push(res.url)
+            })
+        }
     }
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/

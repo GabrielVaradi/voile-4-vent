@@ -7,6 +7,7 @@ const BasicTextArea = ({
     fieldName,
     fieldLabel,
     placeholder,
+    inputGroupClasses,
     errors,
     touched,
     required,
@@ -20,7 +21,7 @@ const BasicTextArea = ({
                 </Label>
             )}
             <Col md={10}>
-                <InputGroup>
+                <InputGroup className={inputGroupClasses}>
                     <Field name={fieldName}>
                         {({ field }) => (
                             <Input
@@ -40,7 +41,7 @@ const BasicTextArea = ({
                     </Field>
                 </InputGroup>
                 <ErrorMessage
-                    name="description"
+                    name={fieldName}
                     render={msg => <small className="text-danger">{msg}</small>}
                 />
             </Col>

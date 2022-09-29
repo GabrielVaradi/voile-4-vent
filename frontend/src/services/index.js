@@ -6,6 +6,7 @@ import teacherService from './teacher.service'
 import faqService from './faq.service'
 import todoService from './todo.service'
 import allowedSkipperService from './allowed-skipper.service'
+import emailService from './email.service'
 
 export {
     eventService,
@@ -16,4 +17,5 @@ export {
     faqService,
     todoService,
     allowedSkipperService,
+    emailService,
 }

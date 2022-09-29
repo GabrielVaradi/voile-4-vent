@@ -7,6 +7,7 @@ use App\Http\Requests\Api\Event\StoreEventRequest;
 use App\Http\Resources\Event\EventCollection;
 use App\Http\Resources\Event\EventResource;
 use App\Mail\ReservationCompleted;
+use App\Models\CustomerForm;
 use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\JsonResponse;
@@ -51,21 +52,62 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request): EventResource
     {
-        $dates = $request->dates;
-        $type = $request->type;
+        // TODO: Move this somewhere else
+        // Customer forms
+        $forms = $request->forms;
+        $customerForms = [];
+        foreach ($forms as $form) {
+            $customerForm = new CustomerForm();
+            $customerForm->first_name = $form['first_name'];
+            $customerForm->last_name = $form['last_name'];
+            $customerForm->email = $form['email'];
+            $customerForm->address = $form['address'];
+            $customerForm->phone_number = $form['phone_number'];
+            $customerForm->birthdate = $form['birthdate'];
+            $customerForm->transaction_state = 'pending';
+            $customerForm->save();
+            $customerForms[] = $customerForm;
+        }
+
+        // TODO: Move this somewhere else
+        // Reservations
+        $reservation = new Reservation();
+        $reservation->payment = $request->payment;
+        $reservation->type = $request->type;
+        $reservation->customer_forms()->saveMany($customerForms);
+        $reservation->save();
+
+        foreach($customerForms as $customerForm) {
+            $customerForm->reservation_id = $reservation->id;
+            $customerForm->transaction_state = 'completed';
+            $customerForm->save();
+        }
+
+        $eventDates = $request->eventDates;
+        $existingEventsId = $request->events;
         $events = [];
-        foreach ($dates as $date) {
+
+        // Events
+        foreach ($eventDates as $date) {
             $event = new Event();
-            $event->start = $date;
-            $event->end = $date;
-            $event->type = $type;
+            $event->start = $date->start;
+            $event->end = $date->end;
+            $event->type = $date->type;
             $event->title_en = 'Basic skipper course';
             $event->title_fr = 'Brevet croisiere elementaire';
             $event->max_reservations = 4;
             $event->save();
+            $event->reservations()->sync([$reservation->id]);
             $event['id'] = $event->id;
             $events[] = $event;
         }
+
+        foreach ($existingEventsId as $id) {
+            $event = Event::find($id);
+            $event->save();
+            $event->reservations()->sync([$reservation->id]);
+        }
+
         return new EventResource($events);
     }
 }

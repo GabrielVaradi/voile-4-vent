@@ -1,8 +1,9 @@
 <html lang="fr">
     <body>
         <div class="container">
-            Hi {{ $customerForm->first_name }}
-            Type: {{ $reservation->type }}
+            From: {{ $email }}
+            <br>
+            {{ $body }}
         </div>
     </body>
 </html>

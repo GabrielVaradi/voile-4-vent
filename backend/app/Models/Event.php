@@ -24,6 +24,21 @@ class Event extends Model
         'type',
     ];
 
+    const types = [
+        'beginner_skipper' => [
+            'title_en' => 'Basic skipper course',
+            'title_fr' => 'Brevet croisiere elementaire'
+        ],
+        'initiation_sailing' => [
+            'title_en' => 'Initiation sailing',
+            'title_fr' => 'Initiation a la voile'
+        ],
+        'spinnaker' => [
+            'title_en' => 'Spinnaker',
+            'title_fr' => 'Spinnaker'
+        ]
+    ];
+
     /**
      * Get the reservations for the event.
      */

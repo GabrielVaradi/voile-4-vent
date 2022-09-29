@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Reservation;
 use App\Models\Skill;
 use Illuminate\Bus\Queueable;
+use Illuminate\Mail\SentMessage;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -27,7 +28,7 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
         $this->webhookCall = $webhookCall;
     }
 
-    public function handle()
+    public function handle(): ?SentMessage
     {
         $data = $this->webhookCall->payload['data']['object']['metadata'];
         $eventsIds = json_decode($data['events_ids']);
@@ -67,8 +68,8 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
             $event->start = $date->start;
             $event->end = $date->end;
             $event->type = $type;
-            $event->title_en = 'Basic skipper course';
-            $event->title_fr = 'Brevet croisiere elementaire';
+            $event->title_en = Event::types[$type]['title_en'];;
+            $event->title_fr = Event::types[$type]['title_fr'];;
             $event->max_reservations = 4;
             $event->save();
             $event->reservations()->sync([$reservation->id]);

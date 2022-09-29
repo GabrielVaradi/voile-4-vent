@@ -52,6 +52,7 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request): EventResource
     {
+        $type = $request->type;
         // TODO: Move this somewhere else
         // Customer forms
         $forms = $request->forms;
@@ -73,7 +74,7 @@ class EventController extends Controller
         // Reservations
         $reservation = new Reservation();
         $reservation->payment = $request->payment;
-        $reservation->type = $request->type;
+        $reservation->type = $type;
         $reservation->customer_forms()->saveMany($customerForms);
         $reservation->save();
 
@@ -92,9 +93,9 @@ class EventController extends Controller
             $event = new Event();
             $event->start = $date->start;
             $event->end = $date->end;
-            $event->type = $date->type;
-            $event->title_en = 'Basic skipper course';
-            $event->title_fr = 'Brevet croisiere elementaire';
+            $event->type = $type;
+            $event->title_en = Event::types[$type]['title_en'];
+            $event->title_fr = Event::types[$type]['title_fr'];
             $event->max_reservations = 4;
             $event->save();
             $event->reservations()->sync([$reservation->id]);

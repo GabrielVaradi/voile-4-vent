@@ -9,7 +9,7 @@ import BasicTextArea from '@/components/Fields/BasicTextArea'
 import styles from '../../../styles/Pages/Contact-us.module.scss'
 import * as Yup from 'yup'
 import { getYear } from 'date-fns'
-import { emailService } from '@/services'
+import { mailService } from '@/services'
 
 const Index = () => {
     const { t } = useTranslation('contact-us')
@@ -25,7 +25,11 @@ const Index = () => {
     }
 
     const sendContactEmail = (values, { resetForm }) => {
-        emailService.sendContactUsEmail(values).then(res => console.log(res))
+        console.log(values)
+        mailService.sendContactUsEmail(values).then(res => {
+            console.log(res)
+            resetForm()
+        })
     }
 
     const contactUsValidations = Yup.object().shape({
@@ -38,7 +42,7 @@ const Index = () => {
             .min(2, 'Too Short!')
             .max(50, 'Too Long!')
             .required('Required'),
-        message: Yup.string()
+        body: Yup.string()
             .min(10, 'Too Short!')
             .max(500, 'Too Long!')
             .required('Required'),
@@ -53,7 +57,7 @@ const Index = () => {
                             name: '',
                             email: '',
                             subject: '',
-                            message: '',
+                            body: '',
                         }}
                         validationSchema={contactUsValidations}
                         onSubmit={sendContactEmail}>
@@ -91,7 +95,7 @@ const Index = () => {
                                         required
                                     />
                                     <BasicTextArea
-                                        fieldName="message"
+                                        fieldName="body"
                                         fieldLabel="Message"
                                         placeholder="Message"
                                         inputGroupClasses={

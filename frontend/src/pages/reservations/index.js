@@ -1,53 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import {
-    reservationService,
-    eventService,
-    courseService,
-    stripeService,
-} from '../../services'
+import { eventService } from '../../services'
 import Select from 'react-select'
-import {
-    Container,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Button,
-    Label,
-    FormGroup,
-    Input,
-    Col,
-    InputGroup,
-    Nav,
-    NavItem,
-    NavLink,
-    TabPane,
-    TabContent,
-    Row,
-} from 'reactstrap'
-import Script from 'next/script'
+import { Container, Button } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Calendar from '@/components/Calendar'
-import Autocomplete from 'react-google-autocomplete'
-import { ErrorMessage, Field, Form, Formik, FieldArray } from 'formik'
-import * as Yup from 'yup'
-import BasicTextInput from '@/components/Fields/BasicTextInput'
-import BasicPhoneInput from '@/components/Fields/BasicPhoneInput'
-import BasicSelect from '@/components/Fields/BasicSelect'
-import BasicAddressField from '@/components/Fields/BasicAddressField'
-import BasicDateInput from '@/components/Fields/BasicDateInput'
-import format from 'date-fns/format'
-import { getYear, parseISO } from 'date-fns'
-import cn from 'classnames'
-import isEqual from 'date-fns/isEqual'
-import addSeconds from 'date-fns/addSeconds'
-import compareAsc from 'date-fns/compareAsc'
-import teacherService from '@/services/teacher.service'
-import isSaturday from 'date-fns/isSaturday'
-import addDays from 'date-fns/addDays'
-import isSunday from 'date-fns/isSunday'
 
 import styles from '../../../styles/Pages/Reservation.module.scss'
 import ReservationForm from '@/components/Forms/ReservationForm'
@@ -56,10 +14,11 @@ import {
     checkIfAllDaysAreSelected,
     resetCalendar,
 } from '@/utils/reservations.utils'
-import subMonths from 'date-fns/subMonths'
-import addYears from 'date-fns/addYears'
 
 const Index = () => {
+    const router = useRouter()
+    const { t } = useTranslation('reservations')
+
     const [daysSelected, setDaysSelected] = useState([])
     const [eventsSelected, setEventsSelected] = useState([])
     const [events, setEvents] = useState([])
@@ -75,9 +34,6 @@ const Index = () => {
         { value: 'initiation_sailing', label: 'Initiation' },
         { value: 'spinnaker', label: 'Spinnaker' },
     ]
-
-    const router = useRouter()
-    const { t } = useTranslation('reservations')
 
     useEffect(() => {
         const type = router.query?.type
@@ -173,6 +129,7 @@ export async function getStaticProps({ locale }) {
         props: {
             ...(await serverSideTranslations(locale, [
                 'reservations',
+                'reservationForm',
                 'navigation',
                 'footer',
             ])),

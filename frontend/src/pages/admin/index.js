@@ -43,6 +43,7 @@ import {
     resetCalendar,
 } from '@/utils/reservations.utils'
 import Select from 'react-select'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Index = () => {
     const router = useRouter()
@@ -95,7 +96,7 @@ const Index = () => {
     }, [events])
 
     return (
-        <Container>
+        <Container className="mt-5">
             <Select
                 name="type"
                 id="type"
@@ -140,6 +141,18 @@ const Index = () => {
             </Button>
         </Container>
     )
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                'reservationForm',
+                'navigation',
+                'footer',
+            ])),
+        },
+    }
 }
 
 export default Index

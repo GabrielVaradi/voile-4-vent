@@ -9,7 +9,9 @@ const BasicDateInput = ({
     monthField,
     yearField,
     fieldLabel,
-    placeholder,
+    dayPlaceholder,
+    monthPlaceholder,
+    yearPlaceholder,
     errors,
     touched,
     required,
@@ -31,7 +33,7 @@ const BasicDateInput = ({
                         className={cn({
                             'is-invalid': touched[dayField] && errors[dayField],
                         })}
-                        placeholder="DD"
+                        placeholder={dayPlaceholder}
                     />
                     <ErrorMessage
                         name={dayField}
@@ -52,7 +54,7 @@ const BasicDateInput = ({
                             'is-invalid':
                                 touched[monthField] && errors[monthField],
                         })}
-                        placeholder="MM"
+                        placeholder={monthPlaceholder}
                     />
                     <ErrorMessage
                         name={monthField}
@@ -72,7 +74,7 @@ const BasicDateInput = ({
                             'is-invalid':
                                 touched[yearField] && errors[yearField],
                         })}
-                        placeholder="YYYY"
+                        placeholder={yearPlaceholder}
                     />
                     <ErrorMessage
                         name={yearField}

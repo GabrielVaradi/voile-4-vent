@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {
     Button,
-    Col,
-    FormGroup,
-    Input,
-    InputGroup,
-    Label,
     Modal,
     ModalBody,
     ModalFooter,
@@ -16,8 +11,7 @@ import {
     TabContent,
     TabPane,
 } from 'reactstrap'
-import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik'
-import cn from 'classnames'
+import { FieldArray, Form, Formik } from 'formik'
 import { stripeService, eventService } from '@/services/index'
 import addSeconds from 'date-fns/addSeconds'
 import isEqual from 'date-fns/isEqual'
@@ -32,6 +26,7 @@ import BasicTextInput from '@/components/Fields/BasicTextInput'
 import BasicAddressField from '@/components/Fields/BasicAddressField'
 import BasicPhoneInput from '@/components/Fields/BasicPhoneInput'
 import BasicDateInput from '@/components/Fields/BasicDateInput'
+import { useTranslation } from 'next-i18next'
 
 const ReservationForm = ({
     eventsSelected,
@@ -42,6 +37,8 @@ const ReservationForm = ({
     setModalIsOpen,
     isAdmin,
 }) => {
+    const { t } = useTranslation('reservationForm')
+
     const [activeTab, setActiveTab] = useState(1)
     const [maxNumberOfPeopleOptions, setMaxNumberOfPeopleOptions] = useState(4)
 
@@ -113,15 +110,15 @@ const ReservationForm = ({
         }
 
         console.log(newValues)
-        if (isAdmin) {
-            eventService.store(newValues).then(res => {
-                resetForm()
-            })
-        } else {
-            stripeService.createCheckoutSession(newValues).then(res => {
-                router.push(res.url)
-            })
-        }
+        // if (isAdmin) {
+        //     eventService.store(newValues).then(res => {
+        //         resetForm()
+        //     })
+        // } else {
+        //     stripeService.createCheckoutSession(newValues).then(res => {
+        //         router.push(res.url)
+        //     })
+        // }
     }
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
@@ -130,32 +127,37 @@ const ReservationForm = ({
         forms: Yup.array().of(
             Yup.object().shape({
                 first_name: Yup.string()
-                    .min(2, 'Too Short!')
-                    .max(50, 'Too Long!')
-                    .required('Required'),
+                    .min(2, t('validation_too_short'))
+                    .max(50, t('validation_too_long'))
+                    .required(t('validation_required')),
                 last_name: Yup.string()
-                    .min(2, 'Too Short!')
-                    .max(50, 'Too Long!')
-                    .required('Required'),
+                    .min(2, t('validation_too_short'))
+                    .max(50, t('validation_too_long'))
+                    .required(t('validation_required')),
 
-                email: Yup.string().email('Invalid email').required('Required'),
-                address: Yup.string().required('Required'),
+                email: Yup.string()
+                    .email(t('validation_email_invalid'))
+                    .required(t('validation_required')),
+                address: Yup.string().required(t('validation_required')),
                 phone_number: Yup.string()
-                    .matches(phoneRegExp, 'Phone number is not valid')
-                    .required('Required'),
+                    .matches(phoneRegExp, t('validation_phone_number_invalid'))
+                    .required(t('validation_required')),
                 birthdate: Yup.object().shape({
                     day: Yup.number()
-                        .min(1, 'Enter a valid day')
-                        .max(31, 'Enter a valid day')
-                        .required('Day'),
+                        .min(1, t('validation_birthdate_day_too_low'))
+                        .max(31, t('validation_birthdate_day_too_high'))
+                        .required(t('validation_required')),
                     month: Yup.number()
-                        .min(1, 'Enter a valid month')
-                        .max(12, 'Enter a valid month')
-                        .required('Month'),
+                        .min(1, t('validation_birthdate_month_too_low'))
+                        .max(12, t('validation_birthdate_month_too_high'))
+                        .required(t('validation_required')),
                     year: Yup.number()
-                        .min(1, 'Enter a valid year')
-                        .max(getYear(new Date()) - 17, 'Be at least 18')
-                        .required('Year'),
+                        .min(1900, t('validation_birthdate_year_too_low'))
+                        .max(
+                            getYear(new Date()) - 17,
+                            t('validation_birthdate_year_too_high'),
+                        )
+                        .required(t('validation_required')),
                 }),
             }),
         ),
@@ -166,32 +168,32 @@ const ReservationForm = ({
             <>
                 <BasicTextInput
                     field={`forms.${i}.first_name`}
-                    fieldLabel="First name"
-                    placeholder="First name"
+                    fieldLabel={t('first_name_label')}
+                    placeholder={t('first_name_placeholder')}
                     errors={errors}
                     touched={touched}
                     required
                 />
                 <BasicTextInput
                     field={`forms.${i}.last_name`}
-                    fieldLabel="Last name"
-                    placeholder="Last name"
+                    fieldLabel={t('last_name_label')}
+                    placeholder={t('last_name_placeholder')}
                     errors={errors}
                     touched={touched}
                     required
                 />
                 <BasicTextInput
                     field={`forms.${i}.email`}
-                    fieldLabel="Email"
-                    placeholder="Email"
+                    fieldLabel={t('email_label')}
+                    placeholder={t('email_placeholder')}
                     errors={errors}
                     touched={touched}
                     required
                 />
                 <BasicAddressField
                     field={`forms.${i}.address`}
-                    fieldLabel="Address"
-                    placeholder="Address"
+                    fieldLabel={t('address_label')}
+                    placeholder={t('address_placeholder')}
                     errors={errors}
                     touched={touched}
                     required
@@ -208,8 +210,8 @@ const ReservationForm = ({
                 />
                 <BasicPhoneInput
                     field={`forms.${i}.phone_number`}
-                    fieldLabel="Phone Number"
-                    placeholder="Phone Number"
+                    fieldLabel={t('phone_number_label')}
+                    placeholder={t('phone_number_placeholder')}
                     errors={errors}
                     touched={touched}
                     required
@@ -219,8 +221,10 @@ const ReservationForm = ({
                     dayField={`forms.${i}.birthdate.day`}
                     monthField={`forms.${i}.birthdate.month`}
                     yearField={`forms.${i}.birthdate.year`}
-                    fieldLabel="Birthdate"
-                    placeholder="Birthdate"
+                    fieldLabel={t('birthdate_label')}
+                    dayPlaceholder={t('day_placeholder')}
+                    monthPlaceholder={t('month_placeholder')}
+                    yearPlaceholder={t('year_placeholder')}
                     errors={errors}
                     touched={touched}
                     required
@@ -316,7 +320,7 @@ const ReservationForm = ({
                         toggle={() => toggleModal(resetForm)}
                         size="lg">
                         <ModalHeader toggle={() => toggleModal(resetForm)}>
-                            Titre du cours
+                            {t('registration')}
                         </ModalHeader>
                         <ModalBody>
                             <>
@@ -327,7 +331,9 @@ const ReservationForm = ({
                                             <>
                                                 <BasicSelect
                                                     field="number_of_people"
-                                                    fieldLabel="Number of people"
+                                                    fieldLabel={t(
+                                                        'number_of_people_label',
+                                                    )}
                                                     errors={errors}
                                                     touched={touched}
                                                     setFieldValue={
@@ -439,12 +445,12 @@ const ReservationForm = ({
                                 color="primary"
                                 disabled={isSubmitting}
                                 onClick={submitForm}>
-                                Rezervatiosns
+                                {t('book')}
                             </Button>
                             <Button
                                 color="secondary"
                                 onClick={() => toggleModal(resetForm)}>
-                                Cancel
+                                {t('cancel')}
                             </Button>
                         </ModalFooter>
                     </Modal>

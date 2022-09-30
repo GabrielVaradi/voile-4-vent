@@ -15,7 +15,6 @@ class Reservation extends Model
  * @var array<int, string>
  */
     protected $fillable = [
-        'payment',
         'type',
     ];
 

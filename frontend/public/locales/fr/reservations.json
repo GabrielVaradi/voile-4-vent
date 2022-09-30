@@ -1,4 +1,8 @@
 {
+    "beginner_skipper_label": "Brevet de croisière élémentaire",
+    "initiation_sailing_label": "Introduction à la navigation",
+    "spinnaker_label": "Clinique Spinnaker",
     "reservations": "Réservations",
-    "places_left": "{{places_left}} disponibles!"
+    "places_left": "{{places_left}} disponibles!",
+    "book_now": "Réserver maintenant"
 }

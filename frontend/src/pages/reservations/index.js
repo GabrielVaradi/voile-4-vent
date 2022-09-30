@@ -26,13 +26,13 @@ const Index = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [type, setType] = useState({
         value: 'beginner_skipper',
-        label: 'Elementaire',
+        label: t('beginner_skipper_label'),
     })
 
     const options = [
-        { value: 'beginner_skipper', label: 'Elementaire' },
-        { value: 'initiation_sailing', label: 'Initiation' },
-        { value: 'spinnaker', label: 'Spinnaker' },
+        { value: 'beginner_skipper', label: t('beginner_skipper_label') },
+        { value: 'initiation_sailing', label: t('initiation_sailing_label') },
+        { value: 'spinnaker', label: t('spinnaker_label') },
     ]
 
     useEffect(() => {

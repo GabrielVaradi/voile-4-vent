@@ -298,7 +298,6 @@ const ReservationForm = ({
                         },
                     },
                 ],
-                payment: 'Deposit',
                 number_of_people: '1',
                 type: 'brevet_elementaire',
             }}
@@ -418,17 +417,6 @@ const ReservationForm = ({
                                             </>
                                         )}
                                     />
-
-                                    {/*<BasicSelect*/}
-                                    {/*    field="payment"*/}
-                                    {/*    fieldLabel="Payment"*/}
-                                    {/*    errors={errors}*/}
-                                    {/*    touched={touched}*/}
-                                    {/*    setFieldValue={setFieldValue}*/}
-                                    {/*    required>*/}
-                                    {/*    <option>Full</option>*/}
-                                    {/*    <option>Deposit</option>*/}
-                                    {/*</BasicSelect>*/}
                                 </Form>
                                 {isSubmitting && (
                                     <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">

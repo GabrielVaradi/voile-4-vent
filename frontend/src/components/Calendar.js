@@ -22,7 +22,6 @@ import { useTranslation } from 'next-i18next'
 import { allowedMonths } from '@/constants/reservations.constants'
 import isEqual from 'date-fns/isEqual'
 import addSeconds from 'date-fns/addSeconds'
-import reservations from '@/pages/reservations'
 
 import('react-big-calendar/lib/css/react-big-calendar.css')
 

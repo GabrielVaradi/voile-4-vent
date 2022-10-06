@@ -4,5 +4,10 @@
     "teachers": "Instructeurs",
     "contact-us": "Contactez-nous",
     "faq": "FAQ",
-    "admin": "Admin"
+    "admin": "Admin",
+    "admin_menu": "Menu administrateur",
+    "calendar": "Calendrier",
+    "todos": "À faire",
+    "allowed_skippers": "Liste des chefs de bords",
+    "logout": "Déconnexion"
 }

@@ -1,0 +1,7 @@
+{
+    "login": "Connexion",
+    "email_label": "Courriel",
+    "email_placeholder": "Entrer votre courriel",
+    "password_label": "Mot de passe",
+    "password_placeholder": "Entrer votre mot de passe"
+}

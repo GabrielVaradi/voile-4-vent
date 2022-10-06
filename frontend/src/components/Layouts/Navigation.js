@@ -59,7 +59,7 @@ const Navigation = () => {
                         {user && (
                             <UncontrolledDropdown>
                                 <DropdownToggle color="link" caret>
-                                    Dropdown
+                                    {t('admin_menu')}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem>
@@ -79,7 +79,7 @@ const Navigation = () => {
                                     <DropdownItem>
                                         <Link href="/admin/allowed-skippers">
                                             <a className="navbar-brand">
-                                                {t('location')}
+                                                {t('allowed_skippers')}
                                             </a>
                                         </Link>
                                     </DropdownItem>

@@ -1,11 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import {
-    Col,
-    FormGroup,
     Button,
-    Input,
-    Label,
     Container,
     Modal,
     ModalHeader,
@@ -19,16 +15,29 @@ import BasicPhoneInput from '@/components/Fields/BasicPhoneInput'
 import * as Yup from 'yup'
 import { allowedSkipperService } from '@/services'
 import DataTable from 'react-data-table-component'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 const Index = () => {
     const router = useRouter()
     const { user } = useAuth()
+    const { t } = useTranslation('allowedSkippers')
 
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [allowedSkippers, setAllowedSkippers] = useState([])
     const [datatableLoading, setDatatableLoading] = useState(false)
     const [totalRows, setTotalRows] = useState(0)
     const [perPage, setPerPage] = useState(10)
+
+    const paginationComponentOptions = useMemo(
+        () => ({
+            rowsPerPageText: t('rows_per_page'),
+            rangeSeparatorText: t('range_separator'),
+            selectAllRowsItem: true,
+            selectAllRowsItemText: t('select_all_rows'),
+        }),
+        [],
+    )
 
     useEffect(() => {
         if (!user) router.push('/admin-login')
@@ -42,18 +51,20 @@ const Index = () => {
 
     const allowedSkipperFormValidations = Yup.object().shape({
         first_name: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('Required'),
+            .min(2, t('validation_too_short'))
+            .max(50, t('validation_too_long'))
+            .required(t('validation_required')),
         last_name: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('Required'),
+            .min(2, t('validation_too_short'))
+            .max(50, t('validation_too_long'))
+            .required(t('validation_required')),
 
-        email: Yup.string().email('Invalid email').required('Required'),
+        email: Yup.string()
+            .email(t('validation_email_invalid'))
+            .required(t('validation_required')),
         phone_number: Yup.string()
-            .matches(phoneRegExp, 'Phone number is not valid')
-            .required('Required'),
+            .matches(phoneRegExp, t('validation_phone_number_invalid'))
+            .required(t('validation_required')),
     })
 
     const toggleModal = resetForm => {
@@ -83,19 +94,19 @@ const Index = () => {
 
     const columns = [
         {
-            name: 'First name',
+            name: t('row_first_name'),
             selector: row => row.first_name,
         },
         {
-            name: 'Last name',
+            name: t('row_last_name'),
             selector: row => row.last_name,
         },
         {
-            name: 'Email',
+            name: t('row_email'),
             selector: row => row.email,
         },
         {
-            name: 'Phone number',
+            name: t('row_phone_number'),
             selector: row => row.phone_number,
         },
     ]
@@ -121,13 +132,14 @@ const Index = () => {
                 paginationTotalRows={totalRows}
                 onChangeRowsPerPage={handlePerRowsChange}
                 onChangePage={handlePageChange}
+                paginationComponentOptions={paginationComponentOptions}
             />
             <Button
                 color="danger"
                 onClick={() => {
                     setModalIsOpen(prev => !prev)
                 }}>
-                Glick
+                {t('add')}
             </Button>
             <Formik
                 onSubmit={createAllowedSkipper}
@@ -146,39 +158,45 @@ const Index = () => {
                             toggle={() => toggleModal(resetForm)}
                             size="lg">
                             <ModalHeader toggle={() => toggleModal(resetForm)}>
-                                Titre du cours
+                                {t('add_allowed_skipper')}
                             </ModalHeader>
                             <ModalBody>
                                 <>
                                     <Form>
                                         <BasicTextInput
                                             field="first_name"
-                                            fieldLabel="First name"
-                                            placeholder="First name"
+                                            fieldLabel={t('first_name_label')}
+                                            placeholder={t(
+                                                'first_name_placeholder',
+                                            )}
                                             errors={errors}
                                             touched={touched}
                                             required
                                         />
                                         <BasicTextInput
                                             field="last_name"
-                                            fieldLabel="Last name"
-                                            placeholder="Last name"
+                                            fieldLabel={t('last_name_label')}
+                                            placeholder={t(
+                                                'last_name_placeholder',
+                                            )}
                                             errors={errors}
                                             touched={touched}
                                             required
                                         />
                                         <BasicTextInput
                                             field="email"
-                                            fieldLabel="Email"
-                                            placeholder="Email"
+                                            fieldLabel={t('email_label')}
+                                            placeholder={t('email_placeholder')}
                                             errors={errors}
                                             touched={touched}
                                             required
                                         />
                                         <BasicPhoneInput
                                             field="phone_number"
-                                            fieldLabel="Phone Number"
-                                            placeholder="Phone Number"
+                                            fieldLabel={t('phone_number_label')}
+                                            placeholder={t(
+                                                'phone_number_placeholder',
+                                            )}
                                             errors={errors}
                                             touched={touched}
                                             required
@@ -199,12 +217,12 @@ const Index = () => {
                                     color="primary"
                                     disabled={isSubmitting}
                                     onClick={submitForm}>
-                                    Rezervatiosns
+                                    {t('add')}
                                 </Button>
                                 <Button
                                     color="secondary"
                                     onClick={() => toggleModal(resetForm)}>
-                                    Cancel
+                                    {t('cancel')}
                                 </Button>
                             </ModalFooter>
                         </Modal>
@@ -213,6 +231,18 @@ const Index = () => {
             </Formik>
         </Container>
     )
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                'allowedSkippers',
+                'navigation',
+                'footer',
+            ])),
+        },
+    }
 }
 
 export default Index

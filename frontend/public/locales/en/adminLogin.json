@@ -1,0 +1,7 @@
+{
+    "login": "Login",
+    "email_label": "Email",
+    "email_placeholder": "Enter your email address",
+    "password_label": "Password",
+    "password_placeholder": "Enter your password"
+}

@@ -1,3 +1,17 @@
 {
-    "teachers": "Contact us"
+    "name_label": "Name",
+    "name_placeholder": "Enter your name",
+    "email_label": "Email",
+    "email_placeholder": "Enter your email address",
+    "subject_label": "Subject",
+    "subject_placeholder": "Enter the subject",
+    "body_label": "Message",
+    "body_placeholder": "Enter your message",
+    "send_button": "Send",
+    "validation_required": "This field is required",
+    "validation_too_short": "Enter at least 2 characters",
+    "validation_too_long": "Enter less than 50 characters",
+    "validation_body_too_short": "Enter at least 10 characters",
+    "validation_body_too_long": "Enter less than 500 characters",
+    "validation_email_invalid": "Email format must be example@email.com"
 }

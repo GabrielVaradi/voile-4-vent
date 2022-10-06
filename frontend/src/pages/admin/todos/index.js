@@ -14,9 +14,15 @@ import { ErrorMessage, Field, Form, Formik } from 'formik'
 
 import cn from 'classnames'
 import { todoService } from '@/services'
+import { faTrash, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
+import * as Yup from 'yup'
 
 const Index = () => {
     const router = useRouter()
+    const { t } = useTranslation('todos')
     const { user } = useAuth()
 
     const [todos, setTodos] = useState([])
@@ -28,6 +34,10 @@ const Index = () => {
     useEffect(() => {
         todoService.index().then(({ data }) => setTodos(data))
     }, [])
+
+    const todosValidation = Yup.object().shape({
+        description: Yup.string().required(t('validation_required')),
+    })
 
     const addTodo = (values, { resetForm }) => {
         todoService
@@ -62,39 +72,45 @@ const Index = () => {
         <Container className="mt-5">
             <Formik
                 initialValues={{ description: '' }}
-                // validationSchema={}
+                validationSchema={todosValidation}
                 onSubmit={addTodo}>
                 {({ errors, touched, isSubmitting, submitForm, isValid }) => (
                     <>
-                        <Form className="d-flex 123 mb-5">
-                            <InputGroup>
-                                <Input
-                                    type="text"
+                        <Form className="d-flex align-items-center mb-5">
+                            <div className="d-flex flex-column w-100">
+                                <InputGroup>
+                                    <Input
+                                        type="text"
+                                        name="description"
+                                        id="description"
+                                        tag={Field}
+                                        required
+                                        className={cn({
+                                            'is-invalid':
+                                                touched['description'] &&
+                                                errors['description'],
+                                        })}
+                                        placeholder={t('todos_placeholder')}
+                                    />
+                                </InputGroup>
+                                <ErrorMessage
                                     name="description"
-                                    id="description"
-                                    tag={Field}
-                                    required
-                                    className={cn({
-                                        'is-invalid':
-                                            touched['description'] &&
-                                            errors['description'],
-                                    })}
-                                    placeholder="Todo"
+                                    render={msg => (
+                                        <small className="text-danger">
+                                            {msg}
+                                        </small>
+                                    )}
                                 />
-                            </InputGroup>
-                            <ErrorMessage
-                                name="description"
-                                render={msg => (
-                                    <small className="text-danger">{msg}</small>
-                                )}
-                            />
-                            <Button
+                            </div>
+
+                            <FontAwesomeIcon
                                 className="ms-4"
-                                color="primary"
-                                disabled={isSubmitting || !isValid}
-                                onClick={submitForm}>
-                                Add
-                            </Button>
+                                type="button"
+                                style={{ color: '#0b0851' }}
+                                icon={faCirclePlus}
+                                onClick={submitForm}
+                                size="2x"
+                            />
                         </Form>
                     </>
                 )}
@@ -102,25 +118,41 @@ const Index = () => {
             {todos.map(todo => (
                 <div className="d-flex justify-content-between" key={todo.id}>
                     <div
-                        className={
+                        className={`mb-2 ${
                             todo.status ? 'text-decoration-line-through' : ''
-                        }>
+                        }`}>
                         {todo.description}
                     </div>
-                    <div>
+                    <div className="d-flex align-items-center justify-content-center">
                         <Input
                             type="checkbox"
                             checked={todo.status}
                             onChange={() => changeTodoStatus(todo)}
+                            className="mt-0 me-4"
                         />
-                        <Button color="danger" onClick={() => deleteTodo(todo)}>
-                            Delete
-                        </Button>
+                        <FontAwesomeIcon
+                            type="button"
+                            onClick={() => deleteTodo(todo)}
+                            icon={faTrash}
+                            color="red"
+                        />
                     </div>
                 </div>
             ))}
         </Container>
     )
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                'todos',
+                'navigation',
+                'footer',
+            ])),
+        },
+    }
 }
 
 export default Index

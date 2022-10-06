@@ -8,21 +8,21 @@ import BasicTextInput from '@/components/Fields/BasicTextInput'
 import BasicTextArea from '@/components/Fields/BasicTextArea'
 import styles from '../../../styles/Pages/Contact-us.module.scss'
 import * as Yup from 'yup'
-import { getYear } from 'date-fns'
 import { mailService } from '@/services'
 
 const Index = () => {
-    const { t } = useTranslation('contact-us')
+    const { t } = useTranslation('contactUs')
 
-    const defaultProps = {
-        id: 1,
-        description: 'ici!',
-        center: {
-            lat: 45.40788320621722,
-            lng: -73.9168146150809,
-        },
-        zoom: 17,
-    }
+    const { center, zoom } = useMemo(
+        () => ({
+            center: {
+                lat: 45.40788320621722,
+                lng: -73.9168146150809,
+            },
+            zoom: 17,
+        }),
+        [],
+    )
 
     const sendContactEmail = (values, { resetForm }) => {
         console.log(values)
@@ -34,18 +34,20 @@ const Index = () => {
 
     const contactUsValidations = Yup.object().shape({
         name: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('Required'),
-        email: Yup.string().email('Invalid email').required('Required'),
+            .min(2, t('validation_too_short'))
+            .max(50, t('validation_too_long'))
+            .required(t('validation_required')),
+        email: Yup.string()
+            .email(t('validation_email_invalid'))
+            .required(t('validation_required')),
         subject: Yup.string()
-            .min(2, 'Too Short!')
-            .max(50, 'Too Long!')
-            .required('Required'),
+            .min(2, t('validation_too_short'))
+            .max(50, t('validation_too_long'))
+            .required(t('validation_required')),
         body: Yup.string()
-            .min(10, 'Too Short!')
-            .max(500, 'Too Long!')
-            .required('Required'),
+            .min(10, t('validation_body_too_short'))
+            .max(500, t('validation_body_too_long'))
+            .required(t('validation_required')),
     })
 
     return (
@@ -72,32 +74,32 @@ const Index = () => {
                                 <Form>
                                     <BasicTextInput
                                         field="name"
-                                        fieldLabel="Name"
-                                        placeholder="Name"
+                                        fieldLabel={t('name_label')}
+                                        placeholder={t('name_placeholder')}
                                         errors={errors}
                                         touched={touched}
                                         required
                                     />
                                     <BasicTextInput
                                         field="email"
-                                        fieldLabel="Email"
-                                        placeholder="Email"
+                                        fieldLabel={t('email_label')}
+                                        placeholder={t('email_placeholder')}
                                         errors={errors}
                                         touched={touched}
                                         required
                                     />
                                     <BasicTextInput
                                         field="subject"
-                                        fieldLabel="Subject"
-                                        placeholder="Subject"
+                                        fieldLabel={t('subject_label')}
+                                        placeholder={t('subject_placeholder')}
                                         errors={errors}
                                         touched={touched}
                                         required
                                     />
                                     <BasicTextArea
                                         fieldName="body"
-                                        fieldLabel="Message"
-                                        placeholder="Message"
+                                        fieldLabel={t('body_label')}
+                                        placeholder={t('body_placeholder')}
                                         inputGroupClasses={
                                             styles.messageTextArea
                                         }
@@ -111,7 +113,7 @@ const Index = () => {
                                             color="primary"
                                             disabled={isSubmitting || !isValid}
                                             onClick={submitForm}>
-                                            Login
+                                            {t('send_button')}
                                         </Button>
                                     </div>
                                 </Form>
@@ -129,8 +131,8 @@ const Index = () => {
                                 height: '50vh',
                                 width: '100%',
                             }}
-                            center={defaultProps.center}
-                            zoom={defaultProps.zoom}
+                            center={center}
+                            zoom={zoom}
                         />
                     </LoadScript>
                 </Col>

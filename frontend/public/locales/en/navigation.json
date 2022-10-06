@@ -4,5 +4,10 @@
     "teachers": "Teachers",
     "contact-us": "Contact us",
     "faq": "FAQ",
-    "admin": "Admin"
+    "admin_menu": "Admin menu",
+    "admin": "Admin",
+    "calendar": "Calendar",
+    "todos": "Todos",
+    "allowed_skippers": "Allowed Skippers",
+    "logout": "Logout"
 }

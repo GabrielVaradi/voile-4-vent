@@ -2,6 +2,9 @@
     "beginner_skipper_label": "Basic skipper certificate",
     "initiation_sailing_label": "Initiation to sailing",
     "spinnaker_label": "Spinnaker course",
+    "previous": "Previous",
+    "next": "Next",
+    "today": "Today",
     "reservations": "Reservations",
     "places_left": "{{places_left}} places left!",
     "book_now": "Book now"

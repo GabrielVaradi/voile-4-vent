@@ -43,6 +43,23 @@ const Calendar = ({
     const [eventModalIsOpen, setEventModalIsOpen] = useState(false)
     const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
 
+    const { messages, formats } = useMemo(
+        () => ({
+            messages: {
+                previous: t('previous'),
+                next: t('next'),
+                today: t('today'),
+            },
+            formats: {
+                monthHeaderFormat: (date, culture, localizer) => {
+                    const string = localizer.format(date, `MMMM yyyy`, culture)
+                    return string.charAt(0).toUpperCase() + string.slice(1)
+                },
+            },
+        }),
+        [],
+    )
+
     useEffect(() => {
         if (type?.value === 'beginner_skipper') {
             setMaxNumberOfDays(4)
@@ -168,6 +185,8 @@ const Calendar = ({
                 }}
                 onSelectSlot={onSelectSlot}
                 dayPropGetter={dayPropGetter}
+                messages={messages}
+                formats={formats}
             />
             {selectedEvent && (
                 <Modal isOpen={eventModalIsOpen} toggle={toggleModal} size="lg">

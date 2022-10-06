@@ -91,6 +91,9 @@ const Index = () => {
                     )
                 }}
                 value={type}
+                styles={{
+                    menu: base => ({ ...base, zIndex: 1000 }),
+                }}
             />
             <Calendar
                 className="mt-5"
@@ -110,7 +113,7 @@ const Index = () => {
                         setEventsSelected,
                     )
                 }}>
-                Glick
+                {t('book_now')}
             </Button>
             <ReservationForm
                 daysSelected={daysSelected}

@@ -4,8 +4,12 @@ import { Button, Card, CardHeader, CardBody, Container } from 'reactstrap'
 import { Form, Formik } from 'formik'
 import BasicTextInput from '@/components/Fields/BasicTextInput'
 import BasicPasswordInput from '@/components/Fields/BasicPasswordInput'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import * as Yup from 'yup'
+import { useTranslation } from 'next-i18next'
 
 const Index = () => {
+    const { t } = useTranslation('adminLogin')
     const { login } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/admin',
@@ -20,14 +24,21 @@ const Index = () => {
         resetForm()
     }
 
+    const adminLoginValidation = Yup.object().shape({
+        email: Yup.string()
+            .email(t('validation_email_invalid'))
+            .required(t('validation_required')),
+        password: Yup.string().required(t('validation_required')),
+    })
+
     return (
         <Container className="mt-5 d-flex justify-content-center">
             <Card className="w-75">
-                <CardHeader>Login</CardHeader>
+                <CardHeader>{t('login')}</CardHeader>
                 <CardBody>
                     <Formik
                         initialValues={{ email: '', password: '' }}
-                        // validationSchema={}
+                        validationSchema={adminLoginValidation}
                         onSubmit={submitLogin}>
                         {({
                             errors,
@@ -40,16 +51,16 @@ const Index = () => {
                                 <Form>
                                     <BasicTextInput
                                         field="email"
-                                        fieldLabel="Email"
-                                        placeholder="Email"
+                                        fieldLabel={t('email_label')}
+                                        placeholder={t('email_placeholder')}
                                         errors={errors}
                                         touched={touched}
                                         required
                                     />
                                     <BasicPasswordInput
                                         field="password"
-                                        fieldLabel="Password"
-                                        placeholder="Password"
+                                        fieldLabel={t('password_label')}
+                                        placeholder={t('password_placeholder')}
                                         errors={errors}
                                         touched={touched}
                                         required
@@ -65,7 +76,7 @@ const Index = () => {
                                             color="primary"
                                             disabled={isSubmitting || !isValid}
                                             onClick={submitForm}>
-                                            Login
+                                            {t('login')}
                                         </Button>
                                     </div>
                                 </Form>
@@ -76,6 +87,18 @@ const Index = () => {
             </Card>
         </Container>
     )
+}
+
+export async function getStaticProps({ locale }) {
+    return {
+        props: {
+            ...(await serverSideTranslations(locale, [
+                'adminLogin',
+                'navigation',
+                'footer',
+            ])),
+        },
+    }
 }
 
 export default Index

@@ -37,6 +37,23 @@ const Calendar = ({
     const [currentDate, setCurrentDate] = useState(new Date())
     const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
 
+    const { messages, formats } = useMemo(
+        () => ({
+            messages: {
+                previous: t('previous'),
+                next: t('next'),
+                today: t('today'),
+            },
+            formats: {
+                monthHeaderFormat: (date, culture, localizer) => {
+                    const string = localizer.format(date, `MMMM yyyy`, culture)
+                    return string.charAt(0).toUpperCase() + string.slice(1)
+                },
+            },
+        }),
+        [],
+    )
+
     useEffect(() => {
         if (type?.value === 'beginner_skipper') {
             setMaxNumberOfDays(4)
@@ -202,6 +219,8 @@ const Calendar = ({
                 components={components}
                 onNavigate={onNavigate}
                 date={currentDate}
+                messages={messages}
+                formats={formats}
             />
         </Container>
     )

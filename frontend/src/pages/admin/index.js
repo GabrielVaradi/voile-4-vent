@@ -1,41 +1,10 @@
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import {
-    Col,
-    FormGroup,
-    Button,
-    Input,
-    Label,
-    Container,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    NavItem,
-    NavLink,
-    TabContent,
-    TabPane,
-    Nav,
-} from 'reactstrap'
+import { Button, Container } from 'reactstrap'
 import axios from '@/lib/axios'
 import AdminCalendar from '@/components/AdminCalendar'
 import { useAuth } from '@/hooks/auth'
 import { eventService } from '@/services'
-import isEqual from 'date-fns/isEqual'
-import addSeconds from 'date-fns/addSeconds'
-import isSunday from 'date-fns/isSunday'
-import isSaturday from 'date-fns/isSaturday'
-import format from 'date-fns/format'
-import addDays from 'date-fns/addDays'
-import { FieldArray, Form, Formik } from 'formik'
-import BasicSelect from '@/components/Fields/BasicSelect'
-import * as Yup from 'yup'
-import { getYear } from 'date-fns'
-import BasicTextInput from '@/components/Fields/BasicTextInput'
-import BasicAddressField from '@/components/Fields/BasicAddressField'
-import BasicPhoneInput from '@/components/Fields/BasicPhoneInput'
-import BasicDateInput from '@/components/Fields/BasicDateInput'
 import ReservationForm from '@/components/Forms/ReservationForm'
 import {
     addEventsWithSameDate,
@@ -44,10 +13,12 @@ import {
 } from '@/utils/reservations.utils'
 import Select from 'react-select'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 
 const Index = () => {
     const router = useRouter()
     const { user } = useAuth()
+    const { t } = useTranslation('reservations')
 
     const [events, setEvents] = useState([])
     const [mappedEvents, setMappedEvents] = useState([])
@@ -56,13 +27,13 @@ const Index = () => {
     const [eventsSelected, setEventsSelected] = useState([])
     const [type, setType] = useState({
         value: 'beginner_skipper',
-        label: 'Elementaire',
+        label: t('beginner_skipper_label'),
     })
 
     const options = [
-        { value: 'beginner_skipper', label: 'Elementaire' },
-        { value: 'initiation_sailing', label: 'Initiation' },
-        { value: 'spinnaker', label: 'Spinnaker' },
+        { value: 'beginner_skipper', label: t('beginner_skipper_label') },
+        { value: 'initiation_sailing', label: t('initiation_sailing_label') },
+        { value: 'spinnaker', label: t('spinnaker_label') },
     ]
 
     useEffect(() => {
@@ -110,6 +81,9 @@ const Index = () => {
                     )
                 }}
                 value={type}
+                styles={{
+                    menu: base => ({ ...base, zIndex: 1000 }),
+                }}
             />
             <AdminCalendar
                 className="mt-5"
@@ -137,7 +111,7 @@ const Index = () => {
                         setEventsSelected,
                     )
                 }}>
-                Glick
+                {t('book_now')}
             </Button>
         </Container>
     )
@@ -147,6 +121,7 @@ export async function getStaticProps({ locale }) {
     return {
         props: {
             ...(await serverSideTranslations(locale, [
+                'reservations',
                 'reservationForm',
                 'navigation',
                 'footer',

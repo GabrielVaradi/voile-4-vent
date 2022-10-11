@@ -43,17 +43,22 @@ const Index = () => {
                                     : course.description_fr}
                             </h6>
                             {course.skills.length > 0 && (
-                                <h3 className="mt-5">{t('skills_title')}</h3>
+                                <>
+                                    <h3 className="mt-5">
+                                        {t('skills_title')}
+                                    </h3>
+                                    <ul className="text-start mt-3">
+                                        {course.skills.map(skill => (
+                                            <li key={skill.id}>
+                                                {router.locale === 'en'
+                                                    ? skill.name_en
+                                                    : skill.name_fr}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </>
                             )}
-                            <ul className="text-start mt-3">
-                                {course.skills.map(skill => (
-                                    <li key={skill.id}>
-                                        {router.locale === 'en'
-                                            ? skill.name_en
-                                            : skill.name_fr}
-                                    </li>
-                                ))}
-                            </ul>
+
                             <Link href={`/reservations?type=${course.type}`}>
                                 <a className="mt-5 btn btn-primary px-5 py-2">
                                     {t('book_now')}

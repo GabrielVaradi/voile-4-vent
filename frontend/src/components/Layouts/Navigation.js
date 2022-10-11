@@ -44,6 +44,9 @@ const Navigation = () => {
                         <Link href="/courses">
                             <a className="navbar-brand">{t('courses')}</a>
                         </Link>
+                        <Link href="/activities">
+                            <a className="navbar-brand">{t('activities')}</a>
+                        </Link>
                         <Link href="/reservations">
                             <a className="navbar-brand">{t('reservations')}</a>
                         </Link>

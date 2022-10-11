@@ -55,14 +55,7 @@ const Calendar = ({
     )
 
     useEffect(() => {
-        if (type?.value === 'beginner_skipper') {
-            setMaxNumberOfDays(4)
-        } else if (type?.value === 'initiation_sailing') {
-            setMaxNumberOfDays(2)
-        }
-        if (type?.value === 'spinnaker') {
-            setMaxNumberOfDays(1)
-        }
+        setMaxNumberOfDays(type.days)
     }, [type])
 
     const Event = e => {
@@ -79,12 +72,12 @@ const Calendar = ({
                     {router.locale === 'en' ? event.title_en : event.title_fr}
                 </div>
                 <div>
-                    {t('places_left', {
-                        places_left:
-                            event.max_reservations - totalReservations < 0
-                                ? 0
-                                : event.max_reservations - totalReservations,
-                    })}
+                    {!isBefore(e.start, subDays(new Date(), 1))
+                        ? t('event_finished')
+                        : t('places_left', {
+                              places_left:
+                                  event.max_reservations - totalReservations,
+                          })}
                 </div>
             </>
         )
@@ -164,17 +157,20 @@ const Calendar = ({
         }
     }
 
-    const onNavigate = focusDate => {
+    const onNavigate = date => {
         if (
-            !isAfter(focusDate, addYears(new Date(), 1)) &&
-            !isBefore(focusDate, subMonths(new Date(), 3))
+            !isAfter(date, addYears(new Date(), 1)) &&
+            !isBefore(date, subMonths(new Date(), 3))
         ) {
-            setCurrentDate(focusDate)
+            setCurrentDate(date)
         }
     }
 
     const dayPropGetter = date => {
-        if (allowedMonths.includes(date.getMonth())) {
+        if (
+            allowedMonths.includes(date.getMonth()) &&
+            !isBefore(date, subDays(new Date(), 1))
+        ) {
             const selected = daysSelected.every(
                 day => compareAsc(day, date) !== 0,
             )
@@ -204,7 +200,7 @@ const Calendar = ({
     }
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-4">
             <BigCalendar
                 events={events}
                 className={className}

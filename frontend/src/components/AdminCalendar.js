@@ -168,7 +168,7 @@ const Calendar = ({
     }
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-4">
             <BigCalendar
                 events={events}
                 className={className}

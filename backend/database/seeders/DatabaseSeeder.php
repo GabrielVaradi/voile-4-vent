@@ -34,5 +34,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FaqSeeder::class,
         ]);
+        $this->call([
+            AllowedSkipperSeeder::class,
+        ]);
+        $this->call([
+            ActivitySeeder::class,
+        ]);
     }
 }

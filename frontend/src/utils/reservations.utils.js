@@ -37,12 +37,7 @@ export const checkIfAllDaysAreSelected = (daysSelected, type) => {
     }
 }
 
-export const resetCalendar = (
-    setDaysSelected,
-    setEventsSelected,
-    setMappedEvents,
-) => {
+export const resetCalendar = (setDaysSelected, setEventsSelected) => {
     setDaysSelected([])
     setEventsSelected([])
-    setMappedEvents([])
 }

@@ -79,7 +79,10 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-.navbar-brand {
-    text-transform: uppercase;
+.navbar {
+    .navbar-brand {
+        text-transform: uppercase;
+    }
 }
+
 

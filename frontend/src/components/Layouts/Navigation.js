@@ -15,17 +15,17 @@ import { useTranslation } from 'next-i18next'
 import { useAuth } from '@/hooks/auth'
 
 const Navigation = () => {
-    const [isOpen, setIsOpen] = useState(false)
     const router = useRouter()
     const { t } = useTranslation('navigation')
+    const { user, logout } = useAuth()
+
+    const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => setIsOpen(!isOpen)
     const inverseLocale = useMemo(
         () => (router.locale === 'en' ? 'fr' : 'en'),
         [router.locale],
     )
-
-    const { user, logout } = useAuth()
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">

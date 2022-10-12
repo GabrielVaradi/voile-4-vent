@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import Script from 'next/script'
 import {
     Button,
     Modal,
@@ -36,6 +37,7 @@ const ReservationForm = ({
     modalIsOpen,
     setModalIsOpen,
     isAdmin,
+    recaptchaRef,
 }) => {
     const { t } = useTranslation('reservationForm')
 
@@ -431,8 +433,12 @@ const ReservationForm = ({
                         <ModalFooter>
                             <Button
                                 color="primary"
+                                className="me-2"
                                 disabled={isSubmitting}
-                                onClick={submitForm}>
+                                onClick={() => {
+                                    recaptchaRef.current.execute()
+                                    submitForm()
+                                }}>
                                 {t('book')}
                             </Button>
                             <Button

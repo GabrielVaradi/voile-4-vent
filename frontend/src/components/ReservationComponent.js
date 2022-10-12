@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { eventService } from '../services'
 import Select from 'react-select'
 import { Container, Button } from 'reactstrap'
-import { Trans, useTranslation } from 'next-i18next'
+import { useTranslation } from 'next-i18next'
 import Calendar from '@/components/Calendar'
 
 import styles from '../../styles/Pages/Reservation.module.scss'
@@ -15,10 +15,12 @@ import {
 } from '@/utils/reservations.utils'
 import AdminCalendar from '@/components/AdminCalendar'
 import Link from 'next/link'
+import Reaptcha from 'reaptcha'
 
 const ReservationComponent = ({ isAdmin }) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
+    const recaptchaRef = useRef()
 
     const [daysSelected, setDaysSelected] = useState([])
     const [eventsSelected, setEventsSelected] = useState([])
@@ -157,6 +159,13 @@ const ReservationComponent = ({ isAdmin }) => {
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
                 isAdmin={isAdmin}
+                recaptchaRef={recaptchaRef}
+            />
+            <Reaptcha
+                sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY}
+                ref={e => (recaptchaRef.current = e)}
+                size="invisible"
+                hl={router.locale}
             />
         </Container>
     )

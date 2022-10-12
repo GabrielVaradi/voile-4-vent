@@ -30,6 +30,7 @@
         "react-table": "^7.7.0",
         "react-toastify": "^8.2.0",
         "reactstrap": "^9.0.2",
+        "reaptcha": "^1.12.1",
         "sass-loader": "^11.0.1",
         "styled-components": "^5.3.5",
         "swr": "^1.2.2",

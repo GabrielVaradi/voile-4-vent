@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { GoogleMap, LoadScript } from '@react-google-maps/api'
+import { GoogleMap } from '@react-google-maps/api'
 import { Container, Row, Col, Button } from 'reactstrap'
 import { Form, Formik } from 'formik'
 import BasicTextInput from '@/components/Fields/BasicTextInput'
@@ -9,9 +9,13 @@ import BasicTextArea from '@/components/Fields/BasicTextArea'
 import styles from '../../../styles/Pages/Contact-us.module.scss'
 import * as Yup from 'yup'
 import { mailService } from '@/services'
+import { useRouter } from 'next/router'
+import Reaptcha from 'reaptcha'
 
 const Index = () => {
     const { t } = useTranslation('contactUs')
+    const router = useRouter()
+    const recaptchaRef = useRef()
 
     const { center, zoom } = useMemo(
         () => ({
@@ -25,9 +29,7 @@ const Index = () => {
     )
 
     const sendContactEmail = (values, { resetForm }) => {
-        console.log(values)
         mailService.sendContactUsEmail(values).then(res => {
-            console.log(res)
             resetForm()
         })
     }
@@ -107,34 +109,39 @@ const Index = () => {
                                         touched={touched}
                                         required
                                     />
-
-                                    <div className="d-flex justify-content-end">
-                                        <Button
-                                            color="primary"
-                                            disabled={isSubmitting || !isValid}
-                                            onClick={submitForm}>
-                                            {t('send_button')}
-                                        </Button>
-                                    </div>
+                                    <Button
+                                        className="mt-3"
+                                        color="primary"
+                                        disabled={isSubmitting || !isValid}
+                                        onClick={() => {
+                                            recaptchaRef.current.execute()
+                                            submitForm()
+                                        }}>
+                                        {t('send_button')}
+                                    </Button>
+                                    <Reaptcha
+                                        sitekey={
+                                            process.env
+                                                .NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY
+                                        }
+                                        ref={e => (recaptchaRef.current = e)}
+                                        size="invisible"
+                                        hl={router.locale}
+                                    />
                                 </Form>
                             </>
                         )}
                     </Formik>
                 </Col>
                 <Col md={6}>
-                    <LoadScript
-                        googleMapsApiKey={
-                            process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-                        }>
-                        <GoogleMap
-                            mapContainerStyle={{
-                                height: '50vh',
-                                width: '100%',
-                            }}
-                            center={center}
-                            zoom={zoom}
-                        />
-                    </LoadScript>
+                    <GoogleMap
+                        mapContainerStyle={{
+                            height: '50vh',
+                            width: '100%',
+                        }}
+                        center={center}
+                        zoom={zoom}
+                    />
                 </Col>
             </Row>
         </Container>

@@ -5,6 +5,7 @@
     "teachers": "Instructeurs",
     "contact-us": "Contactez-nous",
     "faq": "FAQ",
+    "change_locale": "{{locale}}",
     "admin": "Admin",
     "admin_menu": "Menu administrateur",
     "calendar": "Calendrier",

@@ -3,5 +3,7 @@
     "email_label": "Email",
     "email_placeholder": "Enter your email address",
     "password_label": "Password",
-    "password_placeholder": "Enter your password"
+    "password_placeholder": "Enter your password",
+    "validation_required": "This field is required",
+    "validation_email_invalid": "Email format must be example@email.com"
 }

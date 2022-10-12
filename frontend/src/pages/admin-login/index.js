@@ -1,5 +1,5 @@
 import { useAuth } from '@/hooks/auth'
-import React from 'react'
+import React, { useRef } from 'react'
 import { Button, Card, CardHeader, CardBody, Container } from 'reactstrap'
 import { Form, Formik } from 'formik'
 import BasicTextInput from '@/components/Fields/BasicTextInput'
@@ -7,9 +7,14 @@ import BasicPasswordInput from '@/components/Fields/BasicPasswordInput'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import * as Yup from 'yup'
 import { useTranslation } from 'next-i18next'
+import Reaptcha from 'reaptcha'
+import { useRouter } from 'next/router'
 
 const Index = () => {
     const { t } = useTranslation('adminLogin')
+    const recaptchaRef = useRef()
+    const router = useRouter()
+
     const { login } = useAuth({
         middleware: 'guest',
         redirectIfAuthenticated: '/admin',
@@ -75,9 +80,23 @@ const Index = () => {
                                         <Button
                                             color="primary"
                                             disabled={isSubmitting || !isValid}
-                                            onClick={submitForm}>
+                                            onClick={() => {
+                                                recaptchaRef.current.execute()
+                                                submitForm()
+                                            }}>
                                             {t('login')}
                                         </Button>
+                                        <Reaptcha
+                                            sitekey={
+                                                process.env
+                                                    .NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY
+                                            }
+                                            ref={e =>
+                                                (recaptchaRef.current = e)
+                                            }
+                                            size="invisible"
+                                            hl={router.locale}
+                                        />
                                     </div>
                                 </Form>
                             </>

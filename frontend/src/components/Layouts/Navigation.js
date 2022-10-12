@@ -1,19 +1,17 @@
+import React, { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import {
     Collapse,
     Container,
     Nav,
     NavbarToggler,
-    Button,
     DropdownItem,
     DropdownToggle,
     DropdownMenu,
     UncontrolledDropdown,
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
-import Image from 'next/image'
 import { useAuth } from '@/hooks/auth'
 
 const Navigation = () => {
@@ -22,6 +20,10 @@ const Navigation = () => {
     const { t } = useTranslation('navigation')
 
     const toggle = () => setIsOpen(!isOpen)
+    const inverseLocale = useMemo(
+        () => (router.locale === 'en' ? 'fr' : 'en'),
+        [router.locale],
+    )
 
     const { user, logout } = useAuth()
 
@@ -34,9 +36,9 @@ const Navigation = () => {
                         <Link href="/">
                             <a className="navbar-brand">
                                 <img
-                                    src="/images/logo.png"
-                                    width={126}
-                                    height={102}
+                                    src="/images/voile4vents-logo.png"
+                                    width={120}
+                                    height={99}
                                     alt=""
                                 />
                             </a>
@@ -56,32 +58,32 @@ const Navigation = () => {
                         <Link href="/faq">
                             <a className="navbar-brand">{t('faq')}</a>
                         </Link>
-                        <Link href="/admin-login">
-                            <a className="navbar-brand">{t('admin')}</a>
-                        </Link>
                         {user && (
                             <UncontrolledDropdown>
-                                <DropdownToggle color="link" caret>
+                                <DropdownToggle
+                                    className="text-uppercase text-decoration-none text-black"
+                                    color="link"
+                                    caret>
                                     {t('admin_menu')}
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem>
                                         <Link href="/admin">
-                                            <a className="navbar-brand">
+                                            <a className="text-decoration-none text-black">
                                                 {t('calendar')}
                                             </a>
                                         </Link>
                                     </DropdownItem>
                                     <DropdownItem>
                                         <Link href="/admin/todos">
-                                            <a className="navbar-brand">
+                                            <a className="text-decoration-none text-black">
                                                 {t('todos')}
                                             </a>
                                         </Link>
                                     </DropdownItem>
                                     <DropdownItem>
                                         <Link href="/admin/allowed-skippers">
-                                            <a className="navbar-brand">
+                                            <a className="text-decoration-none text-black">
                                                 {t('allowed_skippers')}
                                             </a>
                                         </Link>
@@ -94,13 +96,11 @@ const Navigation = () => {
                             </UncontrolledDropdown>
                         )}
                         <Link
-                            href={`/${router.locale === 'en' ? 'fr' : 'en'}${
-                                router.pathname
-                            }`}
-                            locale={router.locale === 'en' ? 'fr' : 'en'}>
-                            <button className="ms-auto">
-                                {t('change-locale')}
-                            </button>
+                            href={`/${inverseLocale}${router.pathname}`}
+                            locale={inverseLocale}>
+                            <a className="navbar-brand ms-auto">
+                                {t('change_locale', { locale: inverseLocale })}
+                            </a>
                         </Link>
                     </Nav>
                 </Collapse>

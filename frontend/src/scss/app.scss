@@ -6,6 +6,7 @@ $primary: #0b0851;
 $font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
+$navbar-brand-margin-end: 50px;
 
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
@@ -76,5 +77,9 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+.navbar-brand {
+    text-transform: uppercase;
 }
 

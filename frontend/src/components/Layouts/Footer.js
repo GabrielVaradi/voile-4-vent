@@ -1,6 +1,4 @@
 import Link from 'next/link'
-import { faFerry } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { Container, Row, Col } from 'reactstrap'
@@ -24,26 +22,27 @@ const Footer = () => {
                         md={6}>
                         <h4>{t('title')}</h4>
                         <h4>{t('description')}</h4>
-                        <a
-                            style={{ width: '30px' }}
-                            href="https://facebook.com/voile4vents">
-                            <FontAwesomeIcon icon={faFerry} size="xs" />
+                        <a href="https://facebook.com/voile4vents">
+                            <i
+                                className="fa fa-facebook"
+                                style={{ fontSize: '30px' }}
+                            />
                         </a>
                     </Col>
                     <Col
                         className="d-flex flex-column justify-content-center"
                         md={3}>
-                        <div>
+                        <div className=" mb-2 w-50">
                             <Image
                                 layout="responsive"
                                 objectFit="cover"
                                 src={logoVoileCanada}
-                                width={500}
-                                height={500}
+                                width={100}
+                                height={100}
                                 alt=""
                             />
                         </div>
-                        <div>
+                        <div className="w-50">
                             <Image
                                 layout="responsive"
                                 objectFit="cover"
@@ -59,6 +58,9 @@ const Footer = () => {
                         md={3}>
                         <Link href="/courses">
                             <a className="navbar-brand">{t('courses')}</a>
+                        </Link>
+                        <Link href="/activities">
+                            <a className="navbar-brand">{t('activities')}</a>
                         </Link>
                         <Link href="/reservations">
                             <a className="navbar-brand">{t('reservations')}</a>

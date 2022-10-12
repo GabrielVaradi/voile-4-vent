@@ -122,7 +122,7 @@ const Index = () => {
     }
 
     return (
-        <Container className="mt-5">
+        <Container className="d-flex flex-column align-items-end mt-5">
             <DataTable
                 columns={columns}
                 data={allowedSkippers}
@@ -135,7 +135,8 @@ const Index = () => {
                 paginationComponentOptions={paginationComponentOptions}
             />
             <Button
-                color="danger"
+                color="primary"
+                className="mt-3"
                 onClick={() => {
                     setModalIsOpen(prev => !prev)
                 }}>

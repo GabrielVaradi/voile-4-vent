@@ -29,13 +29,14 @@ const Footer = () => {
                             />
                         </a>
                     </Col>
+                    NOUS SOMMES ACCRÉDITÉS PAR 2022 ©Gabriel Varadi
                     <Col
                         className="d-flex flex-column justify-content-center"
                         md={3}>
                         <div className=" mb-2 w-50">
                             <Image
                                 layout="responsive"
-                                objectFit="cover"
+                                objectFit="contain"
                                 src={logoVoileCanada}
                                 width={100}
                                 height={100}
@@ -45,7 +46,7 @@ const Footer = () => {
                         <div className="w-50">
                             <Image
                                 layout="responsive"
-                                objectFit="cover"
+                                objectFit="contain"
                                 src={logoVoileQuebec}
                                 width={100}
                                 height={100}

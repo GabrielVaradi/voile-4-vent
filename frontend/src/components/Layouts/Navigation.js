@@ -37,8 +37,8 @@ const Navigation = () => {
                             <a className="navbar-brand">
                                 <img
                                     src="/images/voile4vents-logo.png"
-                                    width={120}
-                                    height={99}
+                                    width={75}
+                                    height={75}
                                     alt=""
                                 />
                             </a>

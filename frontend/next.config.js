@@ -1,7 +1,7 @@
 const { i18n } = require('./next-i18next.config')
 
 module.exports = {
-    reactStrictMode: false,
+    reactStrictMode: true,
     webpack: (config, dev) => {
         if (dev) {
             config.watchOptions = {

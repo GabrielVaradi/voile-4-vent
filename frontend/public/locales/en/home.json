@@ -1,15 +1,14 @@
 {
     "home": "Home",
-    "title": "[EN] Voile 4 vents",
-    "description": "[EN] Ecole de voile croisiere",
+    "title": "Voile 4 vents",
+    "description": "Sailing school",
     "learn_more": "Learn more",
     "courses_title": "Sailing Courses",
-    "courses_description": "[EN] Être sur l’eau, pour moi c’est la liberté, la découverte de grands espaces. Ce mode de vie, cette liberté tu l’apprivoises à chaque jour. Larguez les amarres, à tout coup, c’est la joie!",
+    "courses_description": "Being on water, for me, is freedom. The exploration of wide open spaces. This way of life, you learn to discover it every day. Cast off the moorings and let's enjoy!",
     "courses" : "Courses",
     "registration": "Sign up",
     "image_first_word" : "Hoist",
-    "image_first_line" : "the",
-    "image_second_line" : "mainsail !",
+    "image_first_line" : "the mainsail !",
     "teachers_title": "Our teachers",
     "teachers_description": "Our brave teachers description"
 }

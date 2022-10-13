@@ -74,7 +74,7 @@ const Index = () => {
                 initialValues={{ description: '' }}
                 validationSchema={todosValidation}
                 onSubmit={addTodo}>
-                {({ errors, touched, isSubmitting, submitForm, isValid }) => (
+                {({ errors, touched, submitForm }) => (
                     <>
                         <Form className="d-flex align-items-center mb-5">
                             <div className="d-flex flex-column w-100">
@@ -115,13 +115,13 @@ const Index = () => {
                     </>
                 )}
             </Formik>
-            {todos.map(todo => (
+            {todos.map((todo, i) => (
                 <div className="d-flex justify-content-between" key={todo.id}>
                     <div
                         className={`mb-2 ${
                             todo.status ? 'text-decoration-line-through' : ''
                         }`}>
-                        {todo.description}
+                        {`${i + 1} - ${todo.description}`}
                     </div>
                     <div className="d-flex align-items-center justify-content-center">
                         <Input

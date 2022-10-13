@@ -68,14 +68,17 @@ const Home = () => {
                             className="text-center text-white bg-primary mx-3 p-0 d-flex flex-column"
                             key={course.id}
                             md={3}>
-                            <Image
-                                layout="responsive"
-                                objectFit="cover"
-                                src={course.image_path}
-                                width={500}
-                                height={500}
-                                alt=""
-                            />
+                            <div>
+                                <Image
+                                    layout="responsive"
+                                    objectFit="cover"
+                                    src={course.image_path}
+                                    width={500}
+                                    height={500}
+                                    alt=""
+                                />
+                            </div>
+
                             <div className="my-3 px-3">
                                 {router.locale === 'en'
                                     ? course.title_en
@@ -118,15 +121,18 @@ const Home = () => {
                             className="text-center text-white bg-primary mx-3 p-0"
                             key={teacher.id}
                             md={3}>
-                            <Image
-                                layout="responsive"
-                                objectFit="cover"
-                                src={teacher.image_path}
-                                width={500}
-                                height={500}
-                                as="style"
-                                alt=""
-                            />
+                            <div>
+                                <Image
+                                    layout="responsive"
+                                    objectFit="cover"
+                                    src={teacher.image_path}
+                                    width={500}
+                                    height={500}
+                                    as="style"
+                                    alt=""
+                                />
+                            </div>
+
                             <div className="p-3">
                                 <div className="mb-3">
                                     {router.locale === 'en'
@@ -143,24 +149,18 @@ const Home = () => {
                     ))}
                 </Row>
             </Container>
-
             <VideoFull
                 containerClasses="mt-5"
                 ragged
                 src="/videos/home/voile4vents_video_footer.mov">
-                <Container className="h-100 d-flex flex-column justify-content-center">
-                    <Row>
-                        <Col
-                            md={4}
-                            className={`d-flex flex-column ${styles.bottom_image}`}>
+                <Container className="h-100 d-flex flex-column align-items-end">
+                    <Row className={`${styles.video_text_container}`}>
+                        <Col md={4} className="d-flex w-100">
                             <h1 className="text-uppercase text-white d-flex">
                                 <div className="text-primary me-2">
                                     {t('image_first_word')}
                                 </div>
                                 {t('image_first_line')}
-                            </h1>
-                            <h1 className="text-uppercase text-white">
-                                {t('image_second_line')}
                             </h1>
                         </Col>
                     </Row>

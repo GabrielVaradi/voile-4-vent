@@ -24,7 +24,9 @@ const Index = () => {
                 <React.Fragment key={activity.id}>
                     <Row className="mt-5">
                         <Col
-                            className={`${i % 2 === 0 ? 'order-1' : 'order-2'}`}
+                            className={`${
+                                i % 2 === 0 ? 'order-1' : 'order-2 ps-5'
+                            }`}
                             md={5}>
                             <h2>
                                 {router.locale === 'en'
@@ -37,7 +39,7 @@ const Index = () => {
                                     ? activity.duration_en
                                     : activity.duration_fr}
                             </h5>
-                            <h6 className="mt-4 w-75">
+                            <h6 className="mt-4 w-75 lh-lg">
                                 {router.locale === 'en'
                                     ? activity.description_en
                                     : activity.description_fr}

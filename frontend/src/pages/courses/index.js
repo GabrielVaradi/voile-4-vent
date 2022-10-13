@@ -24,7 +24,9 @@ const Index = () => {
                 <React.Fragment key={course.id}>
                     <Row className="mt-5">
                         <Col
-                            className={`${i % 2 === 0 ? 'order-1' : 'order-2'}`}
+                            className={`${
+                                i % 2 === 0 ? 'order-1' : 'order-2 ps-5'
+                            }`}
                             md={5}>
                             <h2>
                                 {router.locale === 'en'

@@ -54,6 +54,12 @@ const Index = () => {
 
     return (
         <Container className="mt-5">
+            <h1> Ou nous trouver </h1>
+            <div className="d-flex flex-column justify-content-center align-items-center mb-4">
+                <h5> Addresse</h5>
+                <h5> Telephone</h5>
+                <h5> Email</h5>
+            </div>
             <Row>
                 <Col md={6}>
                     <Formik

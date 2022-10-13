@@ -1,15 +1,14 @@
 {
     "home": "Accueil",
     "title": "Voile 4 vents",
-    "description": "Ecole de voile croisiere",
+    "description": "École de voile croisière",
     "learn_more": "En savoir plus",
     "courses_title": "Cours de voile",
-    "courses_description": "Être sur l’eau, pour moi c’est la liberté, la découverte de grands espaces. Ce mode de vie, cette liberté tu l’apprivoises à chaque jour. Larguez les amarres, à tout coup, c’est la joie!",
+    "courses_description": "Être sur l’eau, pour moi c’est la liberté, la découverte de grands espaces. Ce mode de vie tu l’apprivoises à chaque jour. Larguez les amarres, à tout coup, c’est la joie!",
     "courses" : "Cours",
     "registration": "S'inscrire",
     "image_first_word" : "Hissez",
-    "image_first_line" : "la",
-    "image_second_line" : "grande voile !",
+    "image_first_line" : "la grande voile !",
     "teachers_title": "Nos instructeurs",
     "teachers_description": "Nos braves instructeurs"
 }

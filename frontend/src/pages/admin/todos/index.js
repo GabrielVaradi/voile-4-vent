@@ -70,6 +70,7 @@ const Index = () => {
 
     return (
         <Container className="mt-5">
+            <h1 className="mb-4">{t('page_title')}</h1>
             <Formik
                 initialValues={{ description: '' }}
                 validationSchema={todosValidation}
@@ -118,7 +119,7 @@ const Index = () => {
             {todos.map((todo, i) => (
                 <div className="d-flex justify-content-between" key={todo.id}>
                     <div
-                        className={`mb-2 ${
+                        className={`mb-2 fs-4 ${
                             todo.status ? 'text-decoration-line-through' : ''
                         }`}>
                         {`${i + 1} - ${todo.description}`}
@@ -128,13 +129,14 @@ const Index = () => {
                             type="checkbox"
                             checked={todo.status}
                             onChange={() => changeTodoStatus(todo)}
-                            className="mt-0 me-4"
+                            className="mt-0 me-4 fs-4"
                         />
                         <FontAwesomeIcon
                             type="button"
                             onClick={() => deleteTodo(todo)}
                             icon={faTrash}
                             color="red"
+                            size="lg"
                         />
                     </div>
                 </div>

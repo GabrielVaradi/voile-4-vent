@@ -122,7 +122,8 @@ const Index = () => {
     }
 
     return (
-        <Container className="d-flex flex-column align-items-end mt-5">
+        <Container className="d-flex flex-column mt-5">
+            <h1 className="mb-4">{t('page_title')}</h1>
             <DataTable
                 columns={columns}
                 data={allowedSkippers}
@@ -134,14 +135,17 @@ const Index = () => {
                 onChangePage={handlePageChange}
                 paginationComponentOptions={paginationComponentOptions}
             />
-            <Button
-                color="primary"
-                className="mt-3"
-                onClick={() => {
-                    setModalIsOpen(prev => !prev)
-                }}>
-                {t('add')}
-            </Button>
+            <div className="w-100 d-flex justify-content-end">
+                <Button
+                    color="primary"
+                    className="mt-3 fs-4"
+                    onClick={() => {
+                        setModalIsOpen(prev => !prev)
+                    }}>
+                    {t('add')}
+                </Button>
+            </div>
+
             <Formik
                 onSubmit={createAllowedSkipper}
                 initialValues={{

@@ -20,6 +20,7 @@ const Index = () => {
 
     return (
         <Container className="mt-5">
+            <h1 className="mb-4">{t('page_title')}</h1>
             {activities.map((activity, i) => (
                 <React.Fragment key={activity.id}>
                     <Row className="mt-5">

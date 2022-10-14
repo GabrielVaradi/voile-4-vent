@@ -18,7 +18,3 @@ export async function getStaticProps({ locale }) {
 }
 
 export default Index
-
-// useEffect(() => {
-//     if (!user) router.push('/admin-login')
-// }, [])

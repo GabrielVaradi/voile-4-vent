@@ -6,11 +6,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import ImageFull from '@/components/Images/ImageFull'
 import Image from 'next/image'
 import mainPicture from '../../public/images/home/voile4vents_main.jpg'
+import dynamic from 'next/dynamic'
 
 import { courseService, teacherService } from '@/services'
 import Link from 'next/link'
 import styles from '../../styles/Pages/Home.module.scss'
-import VideoFull from '@/components/Videos/VideoFull'
+const VideoFull = dynamic(() => import('@/components/Videos/VideoFull'), {
+    ssr: false,
+})
 
 const Home = () => {
     const [courses, setCourses] = useState([])

@@ -13,6 +13,9 @@ import {
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { useAuth } from '@/hooks/auth'
+import Image from 'next/image'
+import enIcon from '../../../public/images/voile4vents-english.png'
+import frIcon from '../../../public/images/voile4vents-french.png'
 
 const Navigation = () => {
     const router = useRouter()
@@ -98,10 +101,15 @@ const Navigation = () => {
                         <Link
                             href={`/${inverseLocale}${router.pathname}`}
                             locale={inverseLocale}>
-                            <a className="navbar-brand ms-auto">
+                            <a className="navbar-brand ms-auto me-3">
                                 {t('change_locale', { locale: inverseLocale })}
                             </a>
                         </Link>
+                        <Image
+                            src={router.locale === 'en' ? frIcon : enIcon}
+                            width={40}
+                            height={40}
+                        />
                     </Nav>
                 </Collapse>
             </Container>

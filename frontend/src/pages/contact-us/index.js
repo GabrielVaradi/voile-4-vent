@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { GoogleMap } from '@react-google-maps/api'
+import { GoogleMap, Marker } from '@react-google-maps/api'
 import { Container, Row, Col, Button } from 'reactstrap'
 import { Form, Formik } from 'formik'
 import BasicTextInput from '@/components/Fields/BasicTextInput'
@@ -17,13 +17,17 @@ const Index = () => {
     const router = useRouter()
     const recaptchaRef = useRef()
 
-    const { center, zoom } = useMemo(
+    const { center, zoom, markerPosition } = useMemo(
         () => ({
             center: {
                 lat: 45.40788320621722,
                 lng: -73.9168146150809,
             },
             zoom: 17,
+            markerPosition: {
+                lat: 45.40768,
+                lng: -73.91684,
+            },
         }),
         [],
     )
@@ -54,11 +58,11 @@ const Index = () => {
 
     return (
         <Container className="mt-5">
-            <h1> Ou nous trouver </h1>
+            <h1 className="mb-4">{t('page_title')}</h1>
             <div className="d-flex flex-column justify-content-center align-items-center mb-4">
-                <h5> Addresse</h5>
-                <h5> Telephone</h5>
-                <h5> Email</h5>
+                <h5>{t('contact_us_phone_number')}</h5>
+                <h5>{t('contact_us_email')}</h5>
+                <h5>{t('contact_us_address')}</h5>
             </div>
             <Row>
                 <Col md={6}>
@@ -115,16 +119,19 @@ const Index = () => {
                                         touched={touched}
                                         required
                                     />
-                                    <Button
-                                        className="mt-3"
-                                        color="primary"
-                                        disabled={isSubmitting || !isValid}
-                                        onClick={() => {
-                                            recaptchaRef.current.execute()
-                                            submitForm()
-                                        }}>
-                                        {t('send_button')}
-                                    </Button>
+                                    <div className="w-100 d-flex justify-content-end">
+                                        <Button
+                                            className="mt-3"
+                                            color="primary"
+                                            disabled={isSubmitting || !isValid}
+                                            onClick={() => {
+                                                recaptchaRef.current.execute()
+                                                submitForm()
+                                            }}>
+                                            {t('send_button')}
+                                        </Button>
+                                    </div>
+
                                     <Reaptcha
                                         sitekey={
                                             process.env
@@ -146,8 +153,9 @@ const Index = () => {
                             width: '100%',
                         }}
                         center={center}
-                        zoom={zoom}
-                    />
+                        zoom={zoom}>
+                        <Marker position={markerPosition} clickable={false} />
+                    </GoogleMap>
                 </Col>
             </Row>
         </Container>

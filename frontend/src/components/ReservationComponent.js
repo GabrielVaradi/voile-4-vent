@@ -92,10 +92,12 @@ const ReservationComponent = ({ isAdmin }) => {
 
     return (
         <Container className="mt-5">
-            <div> {t('reservations')}</div>
+            <h1 className="mb-4">{t('page_title')}</h1>
+            <div>{t('type')}</div>
             <Select
                 name="type"
                 id="type"
+                instanceId="type"
                 options={options}
                 onChange={option => {
                     setType(option)
@@ -136,7 +138,6 @@ const ReservationComponent = ({ isAdmin }) => {
                     type={type}
                 />
             )}
-
             <Button
                 color="primary"
                 className="mt-5 w-100"

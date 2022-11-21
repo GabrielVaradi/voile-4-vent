@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import styles from '../../../styles/Layouts/Footer.module.scss'
@@ -9,7 +8,6 @@ import logoVoileCanada from '../../../public/images/footer/voile4vents_voile-can
 import logoVoileQuebec from '../../../public/images/footer/voile4vents_voile-quebec.png'
 
 const Footer = () => {
-    const router = useRouter()
     const { t } = useTranslation('footer')
 
     return (
@@ -22,17 +20,48 @@ const Footer = () => {
                         md={6}>
                         <h4>{t('title')}</h4>
                         <h4>{t('description')}</h4>
-                        <a href="https://facebook.com/voile4vents">
+                        <a
+                            className="mt-2"
+                            href="https://facebook.com/voile4vents">
                             <i
                                 className="fa fa-facebook"
                                 style={{ fontSize: '30px' }}
                             />
                         </a>
                     </Col>
-                    NOUS SOMMES ACCRÉDITÉS PAR 2022 ©Gabriel Varadi
                     <Col
-                        className="d-flex flex-column justify-content-center"
+                        className="d-flex flex-column justify-content-center align-items-center"
                         md={3}>
+                        <Link href="/courses">
+                            <a className="h4 text-decoration-none mt-1 text-black ">
+                                {t('courses')}
+                            </a>
+                        </Link>
+                        <Link href="/activities">
+                            <a className="h4 text-decoration-none mt-1 text-black">
+                                {t('activities')}
+                            </a>
+                        </Link>
+                        <Link href="/reservations">
+                            <a className="h4 text-decoration-none mt-1 text-black">
+                                {t('reservations')}
+                            </a>
+                        </Link>
+                        <Link href="/contact-us">
+                            <a className="h4 text-decoration-none mt-1 text-black">
+                                {t('contact-us')}
+                            </a>
+                        </Link>
+                        <Link href="/faq">
+                            <a className="h4 text-decoration-none mt-1 text-black">
+                                {t('faq')}
+                            </a>
+                        </Link>
+                    </Col>
+                    <Col
+                        className="d-flex flex-column justify-content-center align-items-end"
+                        md={3}>
+                        <div>{t('accreditation')}</div>
                         <div className=" mb-2 w-50">
                             <Image
                                 layout="responsive"
@@ -54,24 +83,8 @@ const Footer = () => {
                             />
                         </div>
                     </Col>
-                    <Col
-                        className="d-flex flex-column justify-content-center"
-                        md={3}>
-                        <Link href="/courses">
-                            <a className="navbar-brand">{t('courses')}</a>
-                        </Link>
-                        <Link href="/activities">
-                            <a className="navbar-brand">{t('activities')}</a>
-                        </Link>
-                        <Link href="/reservations">
-                            <a className="navbar-brand">{t('reservations')}</a>
-                        </Link>
-                        <Link href="/contact-us">
-                            <a className="navbar-brand">{t('contact-us')}</a>
-                        </Link>
-                        <Link href="/faq">
-                            <a className="navbar-brand">{t('faq')}</a>
-                        </Link>
+                    <Col className="d-flex justify-content-end">
+                        ©Gabriel Varadi
                     </Col>
                 </Row>
             </Container>

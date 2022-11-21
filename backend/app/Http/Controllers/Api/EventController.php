@@ -73,7 +73,6 @@ class EventController extends Controller
         // TODO: Move this somewhere else
         // Reservations
         $reservation = new Reservation();
-        $reservation->payment = $request->payment;
         $reservation->type = $type;
         $reservation->customer_forms()->saveMany($customerForms);
         $reservation->save();

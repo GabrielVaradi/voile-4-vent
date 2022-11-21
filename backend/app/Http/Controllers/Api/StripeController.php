@@ -44,7 +44,6 @@ class StripeController extends Controller
                 'event_dates'        => json_encode($request->eventsDates),
                 'events_ids'         => json_encode($request->events),
                 'customer_forms_ids' => json_encode($customerFormsIds),
-                'payment'            => $request->payment,
                 'type'               => $request->type,
                 'language'           => $request->language,
             ],

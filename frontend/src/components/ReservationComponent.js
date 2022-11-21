@@ -2,7 +2,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { eventService } from '../services'
 import Select from 'react-select'
-import { Container, Button } from 'reactstrap'
+import {
+    Container,
+    Button,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+    Modal,
+} from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import Calendar from '@/components/Calendar'
 
@@ -16,6 +23,8 @@ import {
 import AdminCalendar from '@/components/AdminCalendar'
 import Link from 'next/link'
 import Reaptcha from 'reaptcha'
+import { FieldArray, Form } from 'formik'
+import BasicSelect from '@/components/Fields/BasicSelect'
 
 const ReservationComponent = ({ isAdmin }) => {
     const router = useRouter()
@@ -27,6 +36,7 @@ const ReservationComponent = ({ isAdmin }) => {
     const [events, setEvents] = useState([])
     const [mappedEvents, setMappedEvents] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [successModalIsOpen, setSuccessModalIsOpen] = useState(false)
     const [type, setType] = useState({
         value: 'beginner_skipper',
         label: t('beginner_skipper_label'),
@@ -54,19 +64,18 @@ const ReservationComponent = ({ isAdmin }) => {
         }
     }, [router])
 
-    // useEffect(() => {
-    //     // Check to see if this is a redirect back from Checkout
-    //     const query = new URLSearchParams(window.location.search)
-    //     if (query.get('success')) {
-    //         console.log('Order placed! You will receive an email confirmation.')
-    //     }
-    //
-    //     if (query.get('canceled')) {
-    //         console.log(
-    //             'Order canceled -- continue to shop around and checkout when you’re ready.',
-    //         )
-    //     }
-    // }, [])
+    useEffect(() => {
+        const query = new URLSearchParams(window.location.search)
+        if (query.get('success')) {
+            setSuccessModalIsOpen(true)
+        }
+
+        if (query.get('canceled')) {
+            console.log(
+                'Order canceled -- continue to shop around and checkout when you’re ready.',
+            )
+        }
+    }, [])
 
     useEffect(() => {
         const action = isAdmin
@@ -89,6 +98,10 @@ const ReservationComponent = ({ isAdmin }) => {
             setMappedEvents(mapped)
         }
     }, [events])
+
+    const toggleSuccessModal = () => {
+        setSuccessModalIsOpen(prev => !prev)
+    }
 
     return (
         <Container className="mt-5">
@@ -122,6 +135,7 @@ const ReservationComponent = ({ isAdmin }) => {
                     </Link>
                     {t('helper_text_contact_us_description_2')}
                 </li>
+                <li>{t('helper_text_available_months')}</li>
             </ul>
             {isAdmin ? (
                 <AdminCalendar
@@ -168,6 +182,18 @@ const ReservationComponent = ({ isAdmin }) => {
                 size="invisible"
                 hl={router.locale}
             />
+            <Modal
+                centered
+                isOpen={successModalIsOpen}
+                toggle={toggleSuccessModal}
+                size="lg">
+                <ModalHeader toggle={toggleSuccessModal}>
+                    {t('booking_success_title')}
+                </ModalHeader>
+                <ModalBody className="h4 my-3">
+                    {t('booking_success_description')}
+                </ModalBody>
+            </Modal>
         </Container>
     )
 }

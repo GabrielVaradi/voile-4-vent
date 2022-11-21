@@ -9,11 +9,14 @@
     "helper_text_contact_us_description_1" : "Si ces horaires ne vous conviennent pas, ",
     "helper_text_contact_us_link": "contactez-nous",
     "helper_text_contact_us_description_2" : " pour que nous trouvions une solution!",
+    "helper_text_available_months" : "Les cours sont disponibles de Avril à Octobre",
     "previous": "Précédent",
     "next": "Suivant",
     "today": "Aujourd'hui",
     "reservations": "Réservations",
     "places_left": "{{places_left}} disponibles!",
     "event_finished": "Événement terminé",
-    "book_now": "Réserver maintenant"
+    "book_now": "Réserver maintenant",
+    "booking_success_title": "Cours réservé!",
+    "booking_success_description": "Votre cours a été réservé avec succès. Vous recevrez un courriel de confirmation sous peu avec des instructions supplémentaires pour vous préparer adéquatement. Contactez-nous si vous avez des questions!"
 }

@@ -103,6 +103,10 @@ const ReservationForm = ({
 
         const eventsSelectedIds = eventsSelected.map(event => event.id)
 
+        values.forms.forEach(form => {
+            form.birthdate = `${form.birthdate.day.toString()}/${form.birthdate.month.toString()}/${form.birthdate.year.toString()}`
+        })
+
         const newValues = {
             ...values,
             events: eventsSelectedIds,
@@ -111,16 +115,15 @@ const ReservationForm = ({
             type: type.value,
         }
 
-        console.log(newValues)
-        // if (isAdmin) {
-        //     eventService.store(newValues).then(res => {
-        //         resetForm()
-        //     })
-        // } else {
-        //     stripeService.createCheckoutSession(newValues).then(res => {
-        //         router.push(res.url)
-        //     })
-        // }
+        if (isAdmin) {
+            eventService.store(newValues).then(() => {
+                resetForm()
+            })
+        } else {
+            stripeService.createCheckoutSession(newValues).then(res => {
+                router.push(res.url)
+            })
+        }
     }
 
     const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/

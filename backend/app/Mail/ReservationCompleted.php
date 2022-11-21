@@ -27,6 +27,12 @@ class ReservationCompleted extends Mailable
     public CustomerForm $customerForm;
 
     /**
+     * Language
+     *
+     */
+    public string $language;
+
+    /**
      * Create a new message instance.
      *
      * @return void

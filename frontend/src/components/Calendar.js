@@ -72,7 +72,7 @@ const Calendar = ({
                     {router.locale === 'en' ? event.title_en : event.title_fr}
                 </div>
                 <div>
-                    {!isBefore(e.start, subDays(new Date(), 1))
+                    {isBefore(e.start, subDays(new Date(), 1))
                         ? t('event_finished')
                         : t('places_left', {
                               places_left:

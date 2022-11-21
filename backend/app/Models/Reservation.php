@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     use HasFactory;
+
+    const priceIds = [
+        'beginner_skipper' => 'price_1LQBtSGBR8DTe9IEUqGItvu3',
+        'initiation_sailing' => 'price_1LQATaGBR8DTe9IELg49wgFY',
+        'spinnaker' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
+    ];
 /**
  *
  * The attributes that are mass assignable.

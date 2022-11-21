@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\ReservationCompleted;
 use App\Models\CustomerForm;
 use App\Models\Event;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Stripe\Checkout\Session;
 use Stripe\Stripe;
@@ -37,7 +38,7 @@ class StripeController extends Controller
 
         $checkout_session = Session::create([
             'line_items'  => [[
-                'price'    => 'price_1LQBufGBR8DTe9IEjpeocQPL',
+                'price'    => Reservation::priceIds[$request->type],
                 'quantity' => $request->number_of_people,
             ]],
             'metadata'    => [

@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import {
-    Col,
-    FormGroup,
-    Button,
-    Input,
-    Label,
-    Container,
-    InputGroup,
-} from 'reactstrap'
+import { Input, Container, InputGroup } from 'reactstrap'
 import { useAuth } from '@/hooks/auth'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 

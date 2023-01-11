@@ -2,18 +2,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { eventService } from '../services'
 import Select from 'react-select'
-import {
-    Container,
-    Button,
-    ModalHeader,
-    ModalBody,
-    ModalFooter,
-    Modal,
-} from 'reactstrap'
+import { Container, Button, ModalHeader, ModalBody, Modal } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import Calendar from '@/components/Calendar'
 
-import styles from '../../styles/Pages/Reservation.module.scss'
 import ReservationForm from '@/components/Forms/ReservationForm'
 import {
     addEventsWithSameDate,
@@ -23,8 +15,6 @@ import {
 import AdminCalendar from '@/components/AdminCalendar'
 import Link from 'next/link'
 import Reaptcha from 'reaptcha'
-import { FieldArray, Form } from 'formik'
-import BasicSelect from '@/components/Fields/BasicSelect'
 
 const ReservationComponent = ({ isAdmin }) => {
     const router = useRouter()

@@ -13,7 +13,6 @@ import enUS from 'date-fns/locale/en-US'
 import frCA from 'date-fns/locale/fr-CA'
 import { useRouter } from 'next/router'
 import {
-    Button,
     Container,
     Modal,
     ModalBody,
@@ -24,8 +23,6 @@ import {
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import styles from '../../styles/Components/AdminCalendar.module.scss'
-import { FieldArray, Form } from 'formik'
-import BasicSelect from '@/components/Fields/BasicSelect'
 
 import('react-big-calendar/lib/css/react-big-calendar.css')
 

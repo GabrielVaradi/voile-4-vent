@@ -1,20 +1,6 @@
-import React, { useEffect } from 'react'
-import { courseService } from '../../services'
+import React from 'react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-
-// import {
-//     DropdownItem,
-//     DropdownMenu,
-//     Pagination,
-//     PaginationItem,
-//     PaginationLink,
-//     UncontrolledDropdown,
-//     DropdownToggle,
-// } from 'reactstrap'
-// import { toast } from 'react-toastify'
-// import Head from 'next/head'
-// import Link from 'next/link'
 
 const Index = () => {
     const { t } = useTranslation('teachers')

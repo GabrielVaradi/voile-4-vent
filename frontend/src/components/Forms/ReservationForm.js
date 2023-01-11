@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Script from 'next/script'
+import React, { useState, useEffect } from 'react'
 import {
     Button,
     Modal,

@@ -33,7 +33,7 @@ const Index = () => {
     )
 
     const sendContactEmail = (values, { resetForm }) => {
-        mailService.sendContactUsEmail(values).then(res => {
+        mailService.sendContactUsEmail(values).then(() => {
             resetForm()
         })
     }

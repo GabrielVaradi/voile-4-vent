@@ -22,7 +22,7 @@
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.4 || ^8.2"
+                "php": "^8.2.1"
             },
             "require-dev": {
                 "php-coveralls/php-coveralls": "^2.2",

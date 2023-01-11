@@ -41,7 +41,6 @@ const Index = () => {
                 resetForm()
             })
             .catch(e => {
-                console.log(e)
                 resetForm()
             })
     }

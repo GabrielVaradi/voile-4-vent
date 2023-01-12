@@ -66,7 +66,7 @@ const Home = () => {
                     </Col>
                 </Row>
                 <Row className="mt-5 justify-content-center">
-                    {courses.map(course => (
+                    {courses?.map(course => (
                         <Col
                             className="text-center text-white bg-primary mx-3 p-0 d-flex flex-column"
                             key={course.id}
@@ -119,7 +119,7 @@ const Home = () => {
                     </Col>
                 </Row>
                 <Row className="mt-5 justify-content-center">
-                    {teachers.map(teacher => (
+                    {teachers?.map(teacher => (
                         <Col
                             className="text-center text-white bg-primary mx-3 p-0"
                             key={teacher.id}

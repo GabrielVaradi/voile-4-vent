@@ -8,7 +8,6 @@ import Image from 'next/image'
 import mainPicture from '../../public/images/home/voile4vents_main.jpg'
 import dynamic from 'next/dynamic'
 
-import { courseService, teacherService } from '@/services'
 import Link from 'next/link'
 import styles from '../../styles/Pages/Home.module.scss'
 import axios from '@/lib/axios'

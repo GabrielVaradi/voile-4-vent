@@ -7,6 +7,7 @@ import Image from 'next/image'
 
 import { Container, Col, Row } from 'reactstrap'
 import Link from 'next/link'
+import axios from '@/lib/axios'
 
 const Index = ({ activities }) => {
     const { t } = useTranslation('activities')
@@ -70,11 +71,11 @@ const Index = ({ activities }) => {
 }
 
 export async function getStaticProps({ locale }) {
-    const activities = await activityService.index()
+    const activities = await axios.get('/activities')
 
     return {
         props: {
-            activities: activities.data,
+            activities: activities.data.data,
             ...(await serverSideTranslations(locale, [
                 'activities',
                 'navigation',

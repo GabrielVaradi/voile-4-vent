@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic'
 import { courseService, teacherService } from '@/services'
 import Link from 'next/link'
 import styles from '../../styles/Pages/Home.module.scss'
+import axios from '@/lib/axios'
 const VideoFull = dynamic(() => import('@/components/Videos/VideoFull'), {
     ssr: false,
 })
@@ -167,13 +168,13 @@ const Home = ({ courses, teachers }) => {
 }
 
 export async function getStaticProps({ locale }) {
-    const courses = await courseService.index()
-    const teachers = await teacherService.index()
+    const courses = await axios.get('/courses')
+    const teachers = await axios.get('/teachers')
 
     return {
         props: {
-            courses: courses.data,
-            teachers: teachers.data,
+            courses: courses.data.data,
+            teachers: teachers.data.data,
             ...(await serverSideTranslations(locale, [
                 'home',
                 'navigation',

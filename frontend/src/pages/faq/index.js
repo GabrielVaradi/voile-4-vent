@@ -10,6 +10,7 @@ import {
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import axios from '@/lib/axios'
 
 const Index = ({ faqs }) => {
     const { t } = useTranslation('faq')
@@ -59,10 +60,10 @@ const Index = ({ faqs }) => {
 }
 
 export async function getStaticProps({ locale }) {
-    const faqs = await faqService.index()
+    const faqs = await axios.get('/faqs')
     return {
         props: {
-            faqs: faqs.data,
+            faqs: faqs.data.data,
             ...(await serverSideTranslations(locale, [
                 'navigation',
                 'faq',

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { activityService } from '../../services'
+import { activityService, courseService } from '../../services'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
@@ -8,15 +8,9 @@ import Image from 'next/image'
 import { Container, Col, Row } from 'reactstrap'
 import Link from 'next/link'
 
-const Index = () => {
-    const [activities, setActivities] = useState([])
-
+const Index = ({ activities }) => {
     const { t } = useTranslation('activities')
     const router = useRouter()
-
-    useEffect(() => {
-        activityService.index().then(({ data }) => setActivities(data))
-    }, [])
 
     return (
         <Container className="mt-5">
@@ -72,8 +66,11 @@ const Index = () => {
 }
 
 export async function getStaticProps({ locale }) {
+    const activities = await activityService.index()
+
     return {
         props: {
+            activities: activities.data,
             ...(await serverSideTranslations(locale, [
                 'activities',
                 'navigation',

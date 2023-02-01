@@ -3,6 +3,8 @@ import { Col, FormGroup, InputGroup, Label } from 'reactstrap'
 import { ErrorMessage } from 'formik'
 import cn from 'classnames'
 import Autocomplete from 'react-google-autocomplete'
+import { useLoadScript } from '@react-google-maps/api'
+import { libraries } from '@/constants/googlemaps.constants'
 
 const BasicAddressField = ({
     field,
@@ -14,29 +16,38 @@ const BasicAddressField = ({
     onSelect,
     options,
 }) => {
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+        libraries,
+    })
+
     return (
-        <FormGroup row className={formGroupClasses}>
-            <Label for={field} md={2}>
-                {fieldLabel}
-                {required && <span className="required-asterisk">*</span>}
-            </Label>
-            <Col md={10}>
-                <InputGroup>
-                    <Autocomplete
-                        apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-                        onPlaceSelected={onSelect}
-                        options={options}
-                        className={cn('form-control', {
-                            'is-invalid': touched[field] && errors[field],
-                        })}
+        isLoaded && (
+            <FormGroup row className={formGroupClasses}>
+                <Label for={field} md={2}>
+                    {fieldLabel}
+                    {required && <span className="required-asterisk">*</span>}
+                </Label>
+                <Col md={10}>
+                    <InputGroup>
+                        <Autocomplete
+                            apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
+                            onPlaceSelected={onSelect}
+                            options={options}
+                            className={cn('form-control', {
+                                'is-invalid': touched[field] && errors[field],
+                            })}
+                        />
+                    </InputGroup>
+                    <ErrorMessage
+                        name={field}
+                        render={msg => (
+                            <small className="text-danger">{msg}</small>
+                        )}
                     />
-                </InputGroup>
-                <ErrorMessage
-                    name={field}
-                    render={msg => <small className="text-danger">{msg}</small>}
-                />
-            </Col>
-        </FormGroup>
+                </Col>
+            </FormGroup>
+        )
     )
 }
 

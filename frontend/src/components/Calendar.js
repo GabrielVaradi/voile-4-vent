@@ -34,7 +34,7 @@ const Calendar = ({
 }) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
-    const [currentDate, setCurrentDate] = useState(new Date())
+    const [currentDate, setCurrentDate] = useState()
     const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
 
     const { messages, formats } = useMemo(
@@ -57,6 +57,13 @@ const Calendar = ({
     useEffect(() => {
         setMaxNumberOfDays(type.days)
     }, [type])
+
+    useEffect(() => {
+        const today = new Date()
+        allowedMonths.includes(today.getMonth())
+            ? setCurrentDate(today)
+            : setCurrentDate(new Date(`${today.getFullYear()}-05-15`))
+    }, [])
 
     const Event = e => {
         const event = e.event

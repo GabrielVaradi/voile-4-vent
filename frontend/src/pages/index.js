@@ -15,20 +15,9 @@ const VideoFull = dynamic(() => import('@/components/Videos/VideoFull'), {
     ssr: false,
 })
 
-const Home = () => {
-    const [courses, setCourses] = useState([])
-    const [teachers, setTeachers] = useState([])
-
+const Home = ({ courses, teachers }) => {
     const { t } = useTranslation('home')
     const router = useRouter()
-
-    useEffect(() => {
-        courseService.index().then(({ data }) => setCourses(data))
-    }, [])
-
-    useEffect(() => {
-        teacherService.index().then(({ data }) => setTeachers(data))
-    }, [])
 
     return (
         <div className="homepage">
@@ -174,8 +163,13 @@ const Home = () => {
 }
 
 export async function getStaticProps({ locale }) {
+    const courses = await courseService.index()
+    const teachers = await teacherService.index()
+
     return {
         props: {
+            courses: courses.data,
+            teachers: teachers.data,
             ...(await serverSideTranslations(locale, [
                 'home',
                 'navigation',

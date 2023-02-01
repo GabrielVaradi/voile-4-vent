@@ -1,7 +1,7 @@
 import React, { useMemo, useRef } from 'react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { GoogleMap, Marker } from '@react-google-maps/api'
+import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api'
 import { Container, Row, Col, Button } from 'reactstrap'
 import { Form, Formik } from 'formik'
 import BasicTextInput from '@/components/Fields/BasicTextInput'
@@ -16,6 +16,10 @@ const Index = () => {
     const { t } = useTranslation('contactUs')
     const router = useRouter()
     const recaptchaRef = useRef()
+
+    const { isLoaded } = useLoadScript({
+        googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    })
 
     const { center, zoom, markerPosition } = useMemo(
         () => ({
@@ -146,17 +150,22 @@ const Index = () => {
                         )}
                     </Formik>
                 </Col>
-                <Col md={6}>
-                    <GoogleMap
-                        mapContainerStyle={{
-                            height: '50vh',
-                            width: '100%',
-                        }}
-                        center={center}
-                        zoom={zoom}>
-                        <Marker position={markerPosition} clickable={false} />
-                    </GoogleMap>
-                </Col>
+                {isLoaded && (
+                    <Col md={6}>
+                        <GoogleMap
+                            mapContainerStyle={{
+                                height: '50vh',
+                                width: '100%',
+                            }}
+                            center={center}
+                            zoom={zoom}>
+                            <Marker
+                                position={markerPosition}
+                                clickable={false}
+                            />
+                        </GoogleMap>
+                    </Col>
+                )}
             </Row>
         </Container>
     )

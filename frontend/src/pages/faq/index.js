@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import { faqService } from '../../services'
+import { courseService, faqService } from '../../services'
 import {
     Container,
     Accordion,
@@ -11,11 +11,10 @@ import {
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-const Index = () => {
+const Index = ({ faqs }) => {
     const { t } = useTranslation('faq')
     const router = useRouter()
 
-    const [faqs, setFaqs] = useState([])
     const [open, setOpen] = useState('0')
 
     const questionLocale = useMemo(
@@ -35,10 +34,6 @@ const Index = () => {
             setOpen(id)
         }
     }
-
-    useEffect(() => {
-        faqService.index().then(({ data }) => setFaqs(data))
-    }, [])
 
     return (
         <Container className="mt-5">
@@ -60,8 +55,10 @@ const Index = () => {
 }
 
 export async function getStaticProps({ locale }) {
+    const faqs = await faqService.index()
     return {
         props: {
+            faqs: faqs.data,
             ...(await serverSideTranslations(locale, [
                 'navigation',
                 'faq',

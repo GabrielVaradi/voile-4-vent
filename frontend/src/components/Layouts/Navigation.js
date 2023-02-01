@@ -18,17 +18,16 @@ import enIcon from '../../../public/images/voile4vents-english.png'
 import frIcon from '../../../public/images/voile4vents-french.png'
 
 const Navigation = () => {
-    const router = useRouter()
+    const { locale, pathname } = useRouter()
     const { t } = useTranslation('navigation')
     const { user, logout } = useAuth()
 
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => setIsOpen(!isOpen)
-    const inverseLocale = useMemo(
-        () => (router.locale === 'en' ? 'fr' : 'en'),
-        [router.locale],
-    )
+    const inverseLocale = useMemo(() => (locale === 'en' ? 'fr' : 'en'), [
+        locale,
+    ])
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
@@ -47,19 +46,62 @@ const Navigation = () => {
                             </a>
                         </Link>
                         <Link href="/courses">
-                            <a className="navbar-brand">{t('courses')}</a>
+                            <a
+                                className="navbar-brand"
+                                style={{
+                                    color:
+                                        pathname === '/courses'
+                                            ? 'red'
+                                            : 'unset',
+                                }}>
+                                {t('courses')}
+                            </a>
                         </Link>
                         <Link href="/activities">
-                            <a className="navbar-brand">{t('activities')}</a>
+                            <a
+                                className="navbar-brand"
+                                style={{
+                                    color:
+                                        pathname === '/activities'
+                                            ? 'red'
+                                            : 'unset',
+                                }}>
+                                {t('activities')}
+                            </a>
                         </Link>
                         <Link href="/reservations">
-                            <a className="navbar-brand">{t('reservations')}</a>
+                            <a
+                                className="navbar-brand"
+                                style={{
+                                    color:
+                                        pathname === '/reservations'
+                                            ? 'red'
+                                            : 'unset',
+                                }}>
+                                {t('reservations')}
+                            </a>
                         </Link>
                         <Link href="/contact-us">
-                            <a className="navbar-brand">{t('contact-us')}</a>
+                            <a
+                                className="navbar-brand"
+                                style={{
+                                    color:
+                                        pathname === '/contact-us'
+                                            ? 'red'
+                                            : 'unset',
+                                }}>
+                                {t('contact-us')}
+                            </a>
                         </Link>
                         <Link href="/faq">
-                            <a className="navbar-brand">{t('faq')}</a>
+                            <a
+                                className="navbar-brand"
+                                style={{
+                                    color:
+                                        pathname === '/faq' ? 'red' : 'unset',
+                                }}>
+                                {t('faq')}
+                            </a>
                         </Link>
                         {user && (
                             <UncontrolledDropdown>
@@ -99,14 +141,14 @@ const Navigation = () => {
                             </UncontrolledDropdown>
                         )}
                         <Link
-                            href={`/${inverseLocale}${router.pathname}`}
+                            href={`/${inverseLocale}${pathname}`}
                             locale={inverseLocale}>
                             <a className="navbar-brand ms-auto me-3">
                                 {t('change_locale', { locale: inverseLocale })}
                             </a>
                         </Link>
                         <Image
-                            src={router.locale === 'en' ? frIcon : enIcon}
+                            src={locale === 'en' ? frIcon : enIcon}
                             width={40}
                             height={40}
                         />

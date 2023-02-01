@@ -1,3 +1,4 @@
+ii  libapache2-mod-php8.2                 8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        server-side, HTML-embedded scripting language (Apache 2 module)
 ii  php-common                            2:93+ubuntu20.04.1+deb.sury.org+2                                    all          Common files for PHP packages
 ii  php-dev                               2:8.1+92+ubuntu20.04.1+deb.sury.org+2                                all          Files for PHP module development (default)
 ii  php-imagick                           3.6.0-4+ubuntu20.04.1+deb.sury.org+10                                amd64        Provides a wrapper to the ImageMagick library
@@ -6,7 +7,7 @@ ii  php-memcached                         3.1.5+2.2.0-14+ubuntu20.04.1+deb.sury.
 ii  php-pear                              1:1.10.13+submodules+notgz+2022032202-2+ubuntu20.04.1+deb.sury.org+1 all          PEAR Base System
 ii  php-redis                             5.3.6+4.3.0-1+ubuntu20.04.1+deb.sury.org+1                           amd64        PHP extension for interfacing with Redis
 ii  php-xdebug                            3.1.2+2.9.8+2.8.1+2.5.5-4+ubuntu20.04.1+deb.sury.org+10              amd64        Xdebug Module for PHP
-ii  php-xml                               2:8.1+92+ubuntu20.04.1+deb.sury.org+2                                all          DOM, SimpleXML, WDDX, XML, and XSL module for PHP [default]
+ii  php-xml                               2:8.2+93+ubuntu20.04.1+deb.sury.org+2                                all          DOM, SimpleXML, WDDX, XML, and XSL module for PHP [default]
 ii  php5.6-bcmath                         5.6.40-64+ubuntu20.04.1+deb.sury.org+1                               amd64        Bcmath module for PHP
 ii  php5.6-bz2                            5.6.40-64+ubuntu20.04.1+deb.sury.org+1                               amd64        bzip2 module for PHP
 ii  php5.6-cgi                            5.6.40-64+ubuntu20.04.1+deb.sury.org+1                               amd64        server-side, HTML-embedded scripting language (CGI binary)
@@ -327,4 +328,16 @@ ii  php8.1-xml                            8.1.14-1+ubuntu20.04.1+deb.sury.org+1 
 ii  php8.1-xmlrpc                         3:1.0.0~rc3-5+ubuntu20.04.1+deb.sury.org+1                           amd64        XML-RPC servers and clients functions for PHP
 ii  php8.1-xsl                            8.1.14-1+ubuntu20.04.1+deb.sury.org+1                                all          XSL module for PHP (dummy)
 ii  php8.1-zip                            8.1.14-1+ubuntu20.04.1+deb.sury.org+1                                amd64        Zip module for PHP
+ii  php8.2                                8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 all          server-side, HTML-embedded scripting language (metapackage)
+ii  php8.2-bz2                            8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        bzip2 module for PHP
+ii  php8.2-cli                            8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        command-line interpreter for the PHP scripting language
+ii  php8.2-common                         8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        documentation, examples and common module for PHP
+ii  php8.2-curl                           8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        CURL module for PHP
+ii  php8.2-fpm                            8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        server-side, HTML-embedded scripting language (FPM-CGI binary)
+ii  php8.2-intl                           8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        Internationalisation module for PHP
+ii  php8.2-mbstring                       8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        MBSTRING module for PHP
+ii  php8.2-mysql                          8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        MySQL module for PHP
+ii  php8.2-opcache                        8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        Zend OpCache module for PHP
+ii  php8.2-readline                       8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        readline module for PHP
+ii  php8.2-xml                            8.2.1-1+ubuntu20.04.1+deb.sury.org+1                                 amd64        DOM, SimpleXML, XML, and XSL module for PHP
 ii  pkg-php-tools                         1.38                                                                 all          various packaging tools and scripts for PHP packages

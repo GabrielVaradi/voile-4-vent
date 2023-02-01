@@ -8,15 +8,9 @@ import Image from 'next/image'
 import { Container, Col, Row } from 'reactstrap'
 import Link from 'next/link'
 
-const Index = () => {
-    const [courses, setCourses] = useState([])
-
+const Index = ({ courses }) => {
     const { t } = useTranslation('courses')
     const router = useRouter()
-
-    useEffect(() => {
-        courseService.index().then(({ data }) => setCourses(data))
-    }, [])
 
     return (
         <Container className="mt-5">
@@ -89,8 +83,10 @@ const Index = () => {
 }
 
 export async function getStaticProps({ locale }) {
+    const courses = await courseService.index()
     return {
         props: {
+            courses: courses.data,
             ...(await serverSideTranslations(locale, [
                 'courses',
                 'navigation',

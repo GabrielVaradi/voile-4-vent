@@ -40,7 +40,7 @@ const Index = () => {
                 setTodos(newTodos)
                 resetForm()
             })
-            .catch(e => {
+            .catch(() => {
                 resetForm()
             })
     }

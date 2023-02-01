@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { useRouter } from 'next/router'
+import { faqService } from '../../services'
 import {
     Container,
     Accordion,
@@ -9,7 +10,6 @@ import {
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import axios from '@/lib/axios'
 
 const Index = ({ faqs }) => {
     const { t } = useTranslation('faq')
@@ -59,10 +59,10 @@ const Index = ({ faqs }) => {
 }
 
 export async function getStaticProps({ locale }) {
-    const faqs = await axios.get('/faqs')
+    const faqs = await faqService.index()
     return {
         props: {
-            faqs: faqs.data.data,
+            faqs: faqs.data,
             ...(await serverSideTranslations(locale, [
                 'navigation',
                 'faq',

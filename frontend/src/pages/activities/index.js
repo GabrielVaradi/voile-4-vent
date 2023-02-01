@@ -1,12 +1,12 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import { activityService } from '../../services'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Image from 'next/image'
 
 import { Container, Col, Row } from 'reactstrap'
 import Link from 'next/link'
-import axios from '@/lib/axios'
 
 const Index = ({ activities }) => {
     const { t } = useTranslation('activities')
@@ -70,11 +70,11 @@ const Index = ({ activities }) => {
 }
 
 export async function getStaticProps({ locale }) {
-    const activities = await axios.get('/activities')
+    const activities = await activityService.index()
 
     return {
         props: {
-            activities: activities.data.data,
+            activities: activities.data,
             ...(await serverSideTranslations(locale, [
                 'activities',
                 'navigation',

@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import { courseService, faqService } from '../../services'
+import { faqService } from '../../services'
 import {
     Container,
     Accordion,

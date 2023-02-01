@@ -15,6 +15,10 @@ const Index = ({ faqs }) => {
     const { t } = useTranslation('faq')
     const router = useRouter()
 
+    if (!router.isFallback && !faqs) {
+        return <div>Error</div>
+    }
+
     const [open, setOpen] = useState('0')
 
     const questionLocale = useMemo(

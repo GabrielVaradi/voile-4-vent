@@ -12,6 +12,10 @@ const Index = ({ courses }) => {
     const { t } = useTranslation('courses')
     const router = useRouter()
 
+    if (!router.isFallback && !courses) {
+        return <div>Error</div>
+    }
+
     return (
         <Container className="mt-5">
             <h1 className="mb-4">{t('page_title')}</h1>

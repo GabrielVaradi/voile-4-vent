@@ -12,6 +12,10 @@ const Index = ({ activities }) => {
     const { t } = useTranslation('activities')
     const router = useRouter()
 
+    if (!router.isFallback && !activities) {
+        return <div>Error</div>
+    }
+
     return (
         <Container className="mt-5">
             <h1 className="mb-4">{t('page_title')}</h1>

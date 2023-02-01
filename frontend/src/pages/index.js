@@ -19,6 +19,10 @@ const Home = ({ courses, teachers }) => {
     const { t } = useTranslation('home')
     const router = useRouter()
 
+    if (!router.isFallback && (!courses || !teachers)) {
+        return <div>Error</div>
+    }
+
     return (
         <div className="homepage">
             <ImageFull ragged src={mainPicture} alt="Home">

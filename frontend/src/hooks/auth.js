@@ -9,7 +9,10 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
     const { data: user, error, mutate } = useSWR('/user', () =>
         axios
             .get('/user')
-            .then(res => res.data)
+            .then(res => {
+                console.log(res)
+                return res.data
+            })
             .catch(error => {
                 if (error.response.status !== 409) throw error
 
@@ -36,11 +39,7 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const login = async ({ ...props }) => {
         await csrf()
-        axios.post('/login', props).then(res => {
-            console.log('RES')
-            console.log(res)
-            return mutate()
-        })
+        axios.post('/login', props).then(() => mutate())
     }
 
     const forgotPassword = async ({ setErrors, setStatus, email }) => {

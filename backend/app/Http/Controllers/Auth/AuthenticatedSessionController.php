@@ -28,10 +28,6 @@ class AuthenticatedSessionController extends Controller
         $response = new Response($token);
         $response->withCookie($cookie);
         $request->session()->regenerate();
-        $response->setContent([
-            'cookie' => $cookie,
-            'user' => $user
-        ]);
         return $response;
     }
 

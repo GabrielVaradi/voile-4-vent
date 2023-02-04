@@ -36,7 +36,11 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
     const login = async ({ ...props }) => {
         await csrf()
-        axios.post('/login', props).then(() => mutate())
+        axios.post('/login', props).then(res => {
+            console.log('ho')
+            console.log(res)
+            mutate()
+        })
     }
 
     const forgotPassword = async ({ setErrors, setStatus, email }) => {

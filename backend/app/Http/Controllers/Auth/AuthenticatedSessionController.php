@@ -29,11 +29,6 @@ class AuthenticatedSessionController extends Controller
         $response->withCookie($cookie);
         $request->session()->regenerate();
         return $response;
-//        $request->authenticate();
-//
-//        $request->session()->regenerate();
-//
-//        return response()->noContent();
     }
 
     /**

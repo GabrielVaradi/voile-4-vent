@@ -9,7 +9,7 @@ import BasicTextArea from '@/components/Fields/BasicTextArea'
 import styles from '../../../styles/Pages/Contact-us.module.scss'
 import * as Yup from 'yup'
 import { mailService } from '@/services'
-import { useRouter } from 'next/router'
+// import { useRouter } from 'next/router'
 // import Reaptcha from 'reaptcha'
 
 const Index = () => {

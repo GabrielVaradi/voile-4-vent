@@ -1,5 +1,5 @@
 import { useAuth } from '@/hooks/auth'
-import React, { useRef } from 'react'
+import React from 'react'
 import { Button, Card, CardHeader, CardBody, Container } from 'reactstrap'
 import { Form, Formik } from 'formik'
 import BasicTextInput from '@/components/Fields/BasicTextInput'

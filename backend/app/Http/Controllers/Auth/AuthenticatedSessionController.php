@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -16,27 +14,21 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      *
      * @param LoginRequest $request
+     * @return Response
      */
     public function store(LoginRequest $request)
     {
-        try {
-            $request->authenticate();
+        $request->authenticate();
 
-            $user = Auth::user();
+        $user = Auth::user();
 
-            $token = $user->createToken('jwt')->accessToken;
-            $cookie = cookie('jwt', $token, 60 * 24); //one day
+        $token = $user->createToken('jwt')->accessToken;
+        $cookie = cookie('jwt', $token, 60 * 24); //one day
 
-            $response = new Response($token);
-            $response->withCookie($cookie);
-            $request->session()->regenerate();
-            return $response;
-        }
-        catch (Exception $e) {
-            return $e;
-        }
-
-
+        $response = new Response($token);
+        $response->withCookie($cookie);
+        $request->session()->regenerate();
+        return $response;
     }
 
     /**

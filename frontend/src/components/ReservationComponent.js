@@ -14,7 +14,7 @@ import {
 } from '@/utils/reservations.utils'
 import AdminCalendar from '@/components/AdminCalendar'
 import Link from 'next/link'
-import Reaptcha from 'reaptcha'
+// import Reaptcha from 'reaptcha'
 
 const ReservationComponent = ({ isAdmin }) => {
     const router = useRouter()
@@ -166,12 +166,12 @@ const ReservationComponent = ({ isAdmin }) => {
                 isAdmin={isAdmin}
                 recaptchaRef={recaptchaRef}
             />
-            <Reaptcha
-                sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY}
-                ref={e => (recaptchaRef.current = e)}
-                size="invisible"
-                hl={router.locale}
-            />
+            {/*<Reaptcha*/}
+            {/*    sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY}*/}
+            {/*    ref={e => (recaptchaRef.current = e)}*/}
+            {/*    size="invisible"*/}
+            {/*    hl={router.locale}*/}
+            {/*/>*/}
             <Modal
                 centered
                 isOpen={successModalIsOpen}

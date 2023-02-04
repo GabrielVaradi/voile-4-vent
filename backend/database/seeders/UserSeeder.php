@@ -24,11 +24,11 @@ class UserSeeder extends Seeder
      */
     private function createUsers(): void
     {
-        User::query()
-            ->create([
-                'name'     => 'Admin',
-                'email'    => 'admin@admin.com',
-                'password' => Hash::make('password'),
-            ]);
+//        User::query()
+//            ->create([
+//                'name'     => 'Admin',
+//                'email'    => 'admin@admin.com',
+//                'password' => Hash::make('password'),
+//            ]);
     }
 }

@@ -10,7 +10,7 @@ import styles from '../../../styles/Pages/Contact-us.module.scss'
 import * as Yup from 'yup'
 import { mailService } from '@/services'
 import { useRouter } from 'next/router'
-import Reaptcha from 'reaptcha'
+// import Reaptcha from 'reaptcha'
 
 const Index = () => {
     const { t } = useTranslation('contactUs')
@@ -136,15 +136,15 @@ const Index = () => {
                                         </Button>
                                     </div>
 
-                                    <Reaptcha
-                                        sitekey={
-                                            process.env
-                                                .NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY
-                                        }
-                                        ref={e => (recaptchaRef.current = e)}
-                                        size="invisible"
-                                        hl={router.locale}
-                                    />
+                                    {/*<Reaptcha*/}
+                                    {/*    sitekey={*/}
+                                    {/*        process.env*/}
+                                    {/*            .NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY*/}
+                                    {/*    }*/}
+                                    {/*    ref={e => (recaptchaRef.current = e)}*/}
+                                    {/*    size="invisible"*/}
+                                    {/*    hl={router.locale}*/}
+                                    {/*/>*/}
                                 </Form>
                             </>
                         )}

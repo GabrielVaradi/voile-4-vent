@@ -7,13 +7,13 @@ import BasicPasswordInput from '@/components/Fields/BasicPasswordInput'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import * as Yup from 'yup'
 import { useTranslation } from 'next-i18next'
-import Reaptcha from 'reaptcha'
-import { useRouter } from 'next/router'
+// import Reaptcha from 'reaptcha'
+// import { useRouter } from 'next/router'
 
 const Index = () => {
     const { t } = useTranslation('adminLogin')
     const recaptchaRef = useRef()
-    const router = useRouter()
+    // const router = useRouter()
 
     const { login } = useAuth({
         middleware: 'guest',
@@ -80,17 +80,17 @@ const Index = () => {
                                             }}>
                                             {t('login')}
                                         </Button>
-                                        <Reaptcha
-                                            sitekey={
-                                                process.env
-                                                    .NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY
-                                            }
-                                            ref={e =>
-                                                (recaptchaRef.current = e)
-                                            }
-                                            size="invisible"
-                                            hl={router.locale}
-                                        />
+                                        {/*<Reaptcha*/}
+                                        {/*    sitekey={*/}
+                                        {/*        process.env*/}
+                                        {/*            .NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY*/}
+                                        {/*    }*/}
+                                        {/*    ref={e =>*/}
+                                        {/*        (recaptchaRef.current = e)*/}
+                                        {/*    }*/}
+                                        {/*    size="invisible"*/}
+                                        {/*    hl={router.locale}*/}
+                                        {/*/>*/}
                                     </div>
                                 </Form>
                             </>

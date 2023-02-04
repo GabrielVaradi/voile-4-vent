@@ -14,7 +14,7 @@ import { useRouter } from 'next/router'
 
 const Index = () => {
     const { t } = useTranslation('contactUs')
-    const router = useRouter()
+    // const router = useRouter()
     const recaptchaRef = useRef()
 
     const { isLoaded } = useLoadScript({

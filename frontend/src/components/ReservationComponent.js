@@ -19,7 +19,7 @@ import Link from 'next/link'
 const ReservationComponent = ({ isAdmin }) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
-    const recaptchaRef = useRef()
+    // const recaptchaRef = useRef()
 
     const [daysSelected, setDaysSelected] = useState([])
     const [eventsSelected, setEventsSelected] = useState([])
@@ -164,7 +164,7 @@ const ReservationComponent = ({ isAdmin }) => {
                 modalIsOpen={modalIsOpen}
                 setModalIsOpen={setModalIsOpen}
                 isAdmin={isAdmin}
-                recaptchaRef={recaptchaRef}
+                // recaptchaRef={recaptchaRef}
             />
             {/*<Reaptcha*/}
             {/*    sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY}*/}

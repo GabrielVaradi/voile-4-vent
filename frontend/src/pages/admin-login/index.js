@@ -12,7 +12,7 @@ import { useTranslation } from 'next-i18next'
 
 const Index = () => {
     const { t } = useTranslation('adminLogin')
-    const recaptchaRef = useRef()
+    // const recaptchaRef = useRef()
     // const router = useRouter()
 
     const { login } = useAuth({
@@ -75,7 +75,7 @@ const Index = () => {
                                             color="primary"
                                             disabled={isSubmitting || !isValid}
                                             onClick={() => {
-                                                recaptchaRef.current.execute()
+                                                // recaptchaRef.current.execute()
                                                 submitForm()
                                             }}>
                                             {t('login')}

@@ -36,7 +36,7 @@ const ReservationForm = ({
     modalIsOpen,
     setModalIsOpen,
     isAdmin,
-    recaptchaRef,
+    // recaptchaRef,
 }) => {
     const { t } = useTranslation('reservationForm')
 
@@ -438,7 +438,7 @@ const ReservationForm = ({
                                 className="me-2"
                                 disabled={isSubmitting}
                                 onClick={() => {
-                                    recaptchaRef.current.execute()
+                                    // recaptchaRef.current.execute()
                                     submitForm()
                                 }}>
                                 {t('book')}

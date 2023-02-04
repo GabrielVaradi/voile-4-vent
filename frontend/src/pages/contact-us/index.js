@@ -15,7 +15,7 @@ import { mailService } from '@/services'
 const Index = () => {
     const { t } = useTranslation('contactUs')
     // const router = useRouter()
-    const recaptchaRef = useRef()
+    // const recaptchaRef = useRef()
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -129,7 +129,7 @@ const Index = () => {
                                             color="primary"
                                             disabled={isSubmitting || !isValid}
                                             onClick={() => {
-                                                recaptchaRef.current.execute()
+                                                // recaptchaRef.current.execute()
                                                 submitForm()
                                             }}>
                                             {t('send_button')}

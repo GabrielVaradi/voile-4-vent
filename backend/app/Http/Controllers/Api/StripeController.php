@@ -18,7 +18,10 @@ class StripeController extends Controller
     {
         Stripe::setApiKey(config('app.stripe_secret_key'));
 
-        $domain = "http://voile.test:3000/$request->language";
+        $domain = "https://voile-4-vent-omm6.vercel.app//$request->language";
+        if (config('app.env') == 'local') {
+            $domain = "http://voile.test:3000/$request->language";
+        }
 
         // TODO: Move this somewhere
         $forms = $request->forms;

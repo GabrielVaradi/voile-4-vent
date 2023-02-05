@@ -97,7 +97,7 @@ class EventController extends Controller
             $event->title_fr = Event::types[$type]['title_fr'];
             $event->max_reservations = 4;
             $event->save();
-            $event->reservations()->sync([$reservation->id]);
+            $event->reservations()->attach([$reservation->id]);
             $event['id'] = $event->id;
             $events[] = $event;
         }
@@ -105,7 +105,7 @@ class EventController extends Controller
         foreach ($existingEventsId as $id) {
             $event = Event::find($id);
             $event->save();
-            $event->reservations()->sync([$reservation->id]);
+            $event->reservations()->attach([$reservation->id]);
         }
 
         return new EventResource($events);

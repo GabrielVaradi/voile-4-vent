@@ -58,8 +58,8 @@ const ReservationComponent = ({ isAdmin }) => {
         const query = new URLSearchParams(window.location.search)
         if (query.get('success')) {
             setSuccessModalIsOpen(true)
+            router.push('/reservations', undefined, { shallow: true })
         }
-
         if (query.get('canceled')) {
             console.log(
                 'Order canceled -- continue to shop around and checkout when you’re ready.',

@@ -71,13 +71,13 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
             $event->title_fr = Event::types[$type]['title_fr'];;
             $event->max_reservations = 4;
             $event->save();
-            $event->reservations()->sync([$reservation->id]);
+            $event->reservations()->attach([$reservation->id]);
         }
 
         foreach ($eventsIds as $id) {
             $event = Event::find($id);
             $event->save();
-            $event->reservations()->sync([$reservation->id]);
+            $event->reservations()->attach([$reservation->id]);
         }
 
         return Mail::to($firstCustomerForm['email'])->send(new ReservationCompleted($reservation, $firstCustomerForm, $language));

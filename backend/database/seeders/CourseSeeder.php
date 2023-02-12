@@ -57,7 +57,7 @@ class CourseSeeder extends Seeder
                 'description_en'       => 'Learn the leeward deployment of this powerful sail in rainbow colours.',
                 'description_fr'       => 'Apprivoiser le déploiement sous le vent de cette voile puissante aux coloris d’arc en ciel.',
                 'duration_en'          => '1 day or 2 evenings',
-                'duration_fr'          => '1 jour or 2 soirs',
+                'duration_fr'          => '1 jour ou 2 soirs',
                 'price'                 => 135,
                 'image_path'            => '/images/courses/voile4vents_spinnaker.jpg',
                 'stripe_product_id'     => 'price_1LQBufGBR8DTe9IEjpeocQPL',

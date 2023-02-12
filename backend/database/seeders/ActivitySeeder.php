@@ -53,7 +53,7 @@ class ActivitySeeder extends Seeder
                 'description_en'       => '[EN] REGATE',
                 'description_fr'       => 'REGATE',
                 'duration_en'          => '1 day or 2 evenings',
-                'duration_fr'          => '1 jour or 2 soirs',
+                'duration_fr'          => '1 jour ou 2 soirs',
                 'price'                 => 135,
                 'image_path'            => '/images/activities/voile4vents_regate.jpg',
                 'type'                  => 'regatta'

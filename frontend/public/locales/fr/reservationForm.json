@@ -1,6 +1,10 @@
 {
     "registration": "Inscription",
     "number_of_people_label": "Nombre de personne",
+    "person_tab_name_0": "Première personne",
+    "person_tab_name_1": "Deuxième personne",
+    "person_tab_name_2": "Troisième personne",
+    "person_tab_name_3": "Quatrième personne",
     "first_name_label": "Prénom",
     "first_name_placeholder": "Entrer votre prénom ",
     "last_name_label": "Nom de famille",

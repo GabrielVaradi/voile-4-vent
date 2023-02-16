@@ -5,6 +5,7 @@ import Select from 'react-select'
 import { Container, Button, ModalHeader, ModalBody, Modal } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import Calendar from '@/components/Calendar'
+import { coursesTypes } from '@/constants/reservations.constants'
 
 import ReservationForm from '@/components/Forms/ReservationForm'
 import {
@@ -28,23 +29,27 @@ const ReservationComponent = ({ isAdmin }) => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [successModalIsOpen, setSuccessModalIsOpen] = useState(false)
     const [type, setType] = useState({
-        value: 'beginner_skipper',
-        label: t('beginner_skipper_label'),
-        days: 4,
+        value: coursesTypes.beginner_skipper.value,
+        label: t(coursesTypes.beginner_skipper.label),
+        days: coursesTypes.beginner_skipper.days,
     })
 
     const options = [
         {
-            value: 'beginner_skipper',
-            label: t('beginner_skipper_label'),
-            days: 4,
+            value: coursesTypes.beginner_skipper.value,
+            label: t(coursesTypes.beginner_skipper.label),
+            days: coursesTypes.beginner_skipper.days,
         },
         {
-            value: 'initiation_sailing',
-            label: t('initiation_sailing_label'),
-            days: 2,
+            value: coursesTypes.initiation_sailing.value,
+            label: t(coursesTypes.initiation_sailing.label),
+            days: coursesTypes.initiation_sailing.days,
         },
-        { value: 'spinnaker', label: t('spinnaker_label'), days: 1 },
+        {
+            value: coursesTypes.regata.value,
+            label: t(coursesTypes.regata.label),
+            days: coursesTypes.regata.days,
+        },
     ]
 
     useEffect(() => {

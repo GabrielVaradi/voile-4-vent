@@ -12,14 +12,14 @@ class Reservation extends Model
     const priceIds = [
         'beginner_skipper' => 'price_1LQBtSGBR8DTe9IEUqGItvu3',
         'initiation_sailing' => 'price_1LQATaGBR8DTe9IELg49wgFY',
-        'spinnaker' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
+        'regata' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
     ];
-/**
- *
- * The attributes that are mass assignable.
- *
- * @var array<int, string>
- */
+    /**
+     *
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
         'type',
     ];

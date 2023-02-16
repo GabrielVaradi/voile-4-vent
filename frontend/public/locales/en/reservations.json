@@ -3,13 +3,13 @@
     "type": "Type",
     "beginner_skipper_label": "Basic skipper certificate",
     "initiation_sailing_label": "Initiation to sailing",
-    "spinnaker_label": "Spinnaker course",
+    "regata_label": "Regata",
     "helper_text_select_days_one" : "Select {{days}} day for your reservation (weekend always come in blocks)",
     "helper_text_select_days_other" : "Select {{days}} days for your reservation (weekend always come in blocks)",
     "helper_text_contact_us_description_1" : "If these time slots don't work for you, ",
     "helper_text_contact_us_link": "contact us",
     "helper_text_contact_us_description_2" : " so we can find a solution!",
-    "helper_text_available_months" : "Courses are available from April to October",
+    "helper_text_available_months" : "Courses are available from Mai to October",
     "previous": "Previous",
     "next": "Next",
     "today": "Today",
@@ -19,5 +19,4 @@
     "book_now": "Book now",
     "booking_success_title": "Course booked!",
     "booking_success_description": "You're course was successfully booked. You will receive a confirmation email with additional instructions to help you prepare. Contact us if you have any questions!"
-
 }

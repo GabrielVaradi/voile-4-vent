@@ -19,7 +19,10 @@ import frCA from 'date-fns/locale/fr-CA'
 import { useRouter } from 'next/router'
 import { Container } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
-import { allowedMonths } from '@/constants/reservations.constants'
+import {
+    allowedMonths,
+    regataAllowedDays,
+} from '@/constants/reservations.constants'
 import isEqual from 'date-fns/isEqual'
 import addSeconds from 'date-fns/addSeconds'
 
@@ -178,6 +181,16 @@ const Calendar = ({
             allowedMonths.includes(date.getMonth()) &&
             !isBefore(date, subDays(new Date(), 1))
         ) {
+            if (
+                type.value === 'regata' &&
+                !regataAllowedDays.includes(date.getDay())
+            ) {
+                return {
+                    style: {
+                        background: '#e6e6e6',
+                    },
+                }
+            }
             const selected = daysSelected.every(
                 day => compareAsc(day, date) !== 0,
             )

@@ -46,16 +46,19 @@ const ReservationForm = ({
     useEffect(() => {
         if (!isAdmin) {
             let maxNumberOfPeople = maxNumberOfPeopleOptions
-            eventsSelected.forEach(event => {
-                let customers = 0
-                event.reservations.forEach(reservation => {
-                    customers += reservation.customer_forms.length
-                })
-                const placesRemaining = event.max_reservations - customers
-                if (placesRemaining < maxNumberOfPeople) {
+            if (eventsSelected.length === 0) {
+                maxNumberOfPeople = 4
+            } else {
+                eventsSelected.forEach(event => {
+                    let customers = 0
+                    event.reservations.forEach(reservation => {
+                        customers += reservation.customer_forms.length
+                    })
+                    const placesRemaining = event.max_reservations - customers
                     maxNumberOfPeople = placesRemaining
-                }
-            })
+                })
+            }
+
             setMaxNumberOfPeopleOptions(maxNumberOfPeople)
         }
     }, [eventsSelected])
@@ -253,7 +256,7 @@ const ReservationForm = ({
                         <NavLink
                             className={`${activeTab === i + 1 ? 'active' : ''}`}
                             onClick={() => setActiveTab(i + 1)}>
-                            {`Person ${i + 1}`}
+                            {t(`person_tab_name_${i}`)}
                         </NavLink>
                     </NavItem>,
                 )
@@ -439,6 +442,11 @@ const ReservationForm = ({
                                 disabled={isSubmitting}
                                 onClick={() => {
                                     // recaptchaRef.current.execute()
+                                    errors.forms?.forEach((form, i) => {
+                                        if (form !== undefined) {
+                                            setActiveTab(i + 1)
+                                        }
+                                    })
                                     submitForm()
                                 }}>
                                 {t('book')}

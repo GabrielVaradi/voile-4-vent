@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
-    use HasFactory;/**
- *
- * The attributes that are mass assignable.
- *
- * @var array<int, string>
- *
- */
+    use HasFactory; /**
+       *
+       * The attributes that are mass assignable.
+       *
+       * @var array<int, string>
+       *
+       */
     protected $fillable = [
         'title_en',
         'title_fr',
@@ -33,9 +33,9 @@ class Event extends Model
             'title_en' => 'Initiation sailing',
             'title_fr' => 'Initiation a la voile'
         ],
-        'spinnaker' => [
-            'title_en' => 'Spinnaker',
-            'title_fr' => 'Spinnaker'
+        'regata' => [
+            'title_en' => 'Regata',
+            'title_fr' => 'Régate'
         ]
     ];
 

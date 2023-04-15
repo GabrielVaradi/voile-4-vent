@@ -64,7 +64,7 @@ const Footer = () => {
                         </Link>
                     </Col>
                     <Col
-                        className="d-flex flex-column justify-content-center align-items-end"
+                        className="d-flex flex-column justify-content-center align-items-center"
                         lg={3}>
                         <div>{t('accreditation')}</div>
                         <div className=" mb-2 w-50">
@@ -87,8 +87,7 @@ const Footer = () => {
                                 alt=""
                             />
                         </div>
-                    </Col>
-                    <Col className="d-flex justify-content-end">
+                        <br />
                         ©Gabriel Varadi
                     </Col>
                 </Row>

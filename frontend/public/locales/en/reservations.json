@@ -1,7 +1,7 @@
 {
     "page_title": "Reservations",
     "type": "Type",
-    "beginner_skipper_label": "Basic skipper certificate",
+    "beginner_skipper_label": "Basic skipper course",
     "initiation_sailing_label": "Initiation to sailing",
     "regata_label": "Regata",
     "helper_text_select_days_one" : "Select {{days}} day for your reservation (weekend always come in blocks)",

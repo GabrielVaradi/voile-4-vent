@@ -27,11 +27,11 @@ class Event extends Model
     const types = [
         'beginner_skipper' => [
             'title_en' => 'Basic skipper course',
-            'title_fr' => 'Brevet croisiere elementaire'
+            'title_fr' => 'Brevet croisière élémentaire'
         ],
         'initiation_sailing' => [
-            'title_en' => 'Initiation sailing',
-            'title_fr' => 'Initiation a la voile'
+            'title_en' => 'Initiation to sailing',
+            'title_fr' => 'Initiation à la voile'
         ],
         'regata' => [
             'title_en' => 'Regata',

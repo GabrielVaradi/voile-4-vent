@@ -34,6 +34,7 @@ const Calendar = ({
     daysSelected,
     setDaysSelected,
     type,
+    setTooManyDaysError,
 }) => {
     const router = useRouter()
     const { t } = useTranslation('reservations')
@@ -148,17 +149,20 @@ const Calendar = ({
 
         // Remove the day if it was already selected
         if (daySelected.length > 1) {
+            setTooManyDaysError(false)
             days = daysSelected.filter(
                 day => compareAsc(day, daySelected[0]) !== 0,
             )
             days = days.filter(day => compareAsc(day, daySelected[1]) !== 0)
         } else {
+            setTooManyDaysError(false)
             days = daysSelected.filter(
                 day => compareAsc(day, daySelected[0]) !== 0,
             )
         }
         if (days.length === daysSelected.length) {
             if (daysSelected.length + daySelected.length > maxNumberOfDays) {
+                setTooManyDaysError(true)
                 return null
             }
             setDaysSelected(prev => prev.concat(daySelected))

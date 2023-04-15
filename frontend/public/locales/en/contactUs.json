@@ -1,6 +1,6 @@
 {
     "page_title": "Where to find us",
-    "contact_us_phone_number": "514-817-3612",
+    "contact_us_phone_number": "(+1) 514-817-3612",
     "contact_us_email": "voile4vents@gmail.com",
     "contact_us_address": "Baie-D'Urfe, Quebec H9X 1P7",
     "name_label": "Name",
@@ -17,5 +17,7 @@
     "validation_too_long": "Enter less than 50 characters",
     "validation_body_too_short": "Enter at least 10 characters",
     "validation_body_too_long": "Enter less than 500 characters",
-    "validation_email_invalid": "Email format must be example@email.com"
+    "validation_email_invalid": "Email format must be example@email.com",
+    "message_sent_success_title": "Message sent!",
+    "message_sent_success_description": "We will contact you as soon as possible."
 }

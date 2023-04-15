@@ -56,6 +56,10 @@ const Home = ({ courses, teachers }) => {
                         <h5 className="text-center">
                             {t('courses_description')}
                         </h5>
+                        <br />
+                        <h5 className="text-center fw-bold">
+                            {t('courses_pierre')}
+                        </h5>
                     </Col>
                 </Row>
                 <Row className="mt-5 justify-content-center">
@@ -85,11 +89,19 @@ const Home = ({ courses, teachers }) => {
                                     ? course.description_en
                                     : course.description_fr}
                             </div>
-                            <Link href={`/reservations?type=${course.type}`}>
-                                <a className="btn btn-primary bg-white text-black border-0 mt-auto mx-auto mb-3">
-                                    {t('registration')}
-                                </a>
-                            </Link>
+                            <div className="d-flex mt-auto">
+                                <Link href={`/courses#${course.type}`}>
+                                    <a className="btn btn-link text-white border-0 mx-auto mb-3">
+                                        {t('learn_more')}
+                                    </a>
+                                </Link>
+                                <Link
+                                    href={`/reservations?type=${course.type}`}>
+                                    <a className="btn btn-primary bg-white text-black border-0 mx-auto mb-3">
+                                        {t('registration')}
+                                    </a>
+                                </Link>
+                            </div>
                         </Col>
                     ))}
                 </Row>

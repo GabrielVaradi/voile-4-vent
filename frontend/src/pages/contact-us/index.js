@@ -1,8 +1,16 @@
-import React, { useMemo } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api'
-import { Container, Row, Col, Button } from 'reactstrap'
+import {
+    Container,
+    Row,
+    Col,
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+} from 'reactstrap'
 import { Form, Formik } from 'formik'
 import BasicTextInput from '@/components/Fields/BasicTextInput'
 import BasicTextArea from '@/components/Fields/BasicTextArea'
@@ -13,6 +21,7 @@ import { mailService } from '@/services'
 // import Reaptcha from 'reaptcha'
 
 const Index = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false)
     const { t } = useTranslation('contactUs')
     // const router = useRouter()
     // const recaptchaRef = useRef()
@@ -39,6 +48,7 @@ const Index = () => {
     const sendContactEmail = (values, { resetForm }) => {
         mailService.sendContactUsEmail(values).then(() => {
             resetForm()
+            setModalIsOpen(true)
         })
     }
 
@@ -61,113 +71,131 @@ const Index = () => {
     })
 
     return (
-        <Container className="mt-5">
-            <h1 className="mb-4">{t('page_title')}</h1>
-            <div className="d-flex flex-column justify-content-center align-items-center mb-4">
-                <h5>{t('contact_us_phone_number')}</h5>
-                <h5>{t('contact_us_email')}</h5>
-                <h5>{t('contact_us_address')}</h5>
-            </div>
-            <Row>
-                <Col md={6}>
-                    <Formik
-                        initialValues={{
-                            name: '',
-                            email: '',
-                            subject: '',
-                            body: '',
-                        }}
-                        validationSchema={contactUsValidations}
-                        onSubmit={sendContactEmail}>
-                        {({
-                            errors,
-                            touched,
-                            isSubmitting,
-                            submitForm,
-                            isValid,
-                        }) => (
-                            <>
-                                <Form>
-                                    <BasicTextInput
-                                        field="name"
-                                        fieldLabel={t('name_label')}
-                                        placeholder={t('name_placeholder')}
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicTextInput
-                                        field="email"
-                                        fieldLabel={t('email_label')}
-                                        placeholder={t('email_placeholder')}
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicTextInput
-                                        field="subject"
-                                        fieldLabel={t('subject_label')}
-                                        placeholder={t('subject_placeholder')}
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <BasicTextArea
-                                        fieldName="body"
-                                        fieldLabel={t('body_label')}
-                                        placeholder={t('body_placeholder')}
-                                        inputGroupClasses={
-                                            styles.messageTextArea
-                                        }
-                                        errors={errors}
-                                        touched={touched}
-                                        required
-                                    />
-                                    <div className="w-100 d-flex justify-content-end">
-                                        <Button
-                                            className="mt-3"
-                                            color="primary"
-                                            disabled={isSubmitting || !isValid}
-                                            onClick={() => {
-                                                // recaptchaRef.current.execute()
-                                                submitForm()
-                                            }}>
-                                            {t('send_button')}
-                                        </Button>
-                                    </div>
-
-                                    {/*<Reaptcha*/}
-                                    {/*    sitekey={*/}
-                                    {/*        process.env*/}
-                                    {/*            .NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY*/}
-                                    {/*    }*/}
-                                    {/*    ref={e => (recaptchaRef.current = e)}*/}
-                                    {/*    size="invisible"*/}
-                                    {/*    hl={router.locale}*/}
-                                    {/*/>*/}
-                                </Form>
-                            </>
-                        )}
-                    </Formik>
-                </Col>
-                {isLoaded && (
+        <>
+            <Container className="mt-5">
+                <h1 className="mb-4">{t('page_title')}</h1>
+                <div className="d-flex flex-column justify-content-center align-items-center mb-4">
+                    <h5>{t('contact_us_phone_number')}</h5>
+                    <h5>{t('contact_us_email')}</h5>
+                    <h5>{t('contact_us_address')}</h5>
+                </div>
+                <Row>
                     <Col md={6}>
-                        <GoogleMap
-                            mapContainerStyle={{
-                                height: '50vh',
-                                width: '100%',
+                        <Formik
+                            initialValues={{
+                                name: '',
+                                email: '',
+                                subject: '',
+                                body: '',
                             }}
-                            center={center}
-                            zoom={zoom}>
-                            <Marker
-                                position={markerPosition}
-                                clickable={false}
-                            />
-                        </GoogleMap>
+                            validationSchema={contactUsValidations}
+                            onSubmit={sendContactEmail}>
+                            {({
+                                errors,
+                                touched,
+                                isSubmitting,
+                                submitForm,
+                                isValid,
+                            }) => (
+                                <>
+                                    <Form>
+                                        <BasicTextInput
+                                            field="name"
+                                            fieldLabel={t('name_label')}
+                                            placeholder={t('name_placeholder')}
+                                            errors={errors}
+                                            touched={touched}
+                                            required
+                                        />
+                                        <BasicTextInput
+                                            field="email"
+                                            fieldLabel={t('email_label')}
+                                            placeholder={t('email_placeholder')}
+                                            errors={errors}
+                                            touched={touched}
+                                            required
+                                        />
+                                        <BasicTextInput
+                                            field="subject"
+                                            fieldLabel={t('subject_label')}
+                                            placeholder={t(
+                                                'subject_placeholder',
+                                            )}
+                                            errors={errors}
+                                            touched={touched}
+                                            required
+                                        />
+                                        <BasicTextArea
+                                            fieldName="body"
+                                            fieldLabel={t('body_label')}
+                                            placeholder={t('body_placeholder')}
+                                            inputGroupClasses={
+                                                styles.messageTextArea
+                                            }
+                                            errors={errors}
+                                            touched={touched}
+                                            required
+                                        />
+                                        <div className="w-100 d-flex justify-content-end">
+                                            <Button
+                                                className="mt-3"
+                                                color="primary"
+                                                disabled={
+                                                    isSubmitting || !isValid
+                                                }
+                                                onClick={() => {
+                                                    // recaptchaRef.current.execute()
+                                                    submitForm()
+                                                }}>
+                                                {t('send_button')}
+                                            </Button>
+                                        </div>
+
+                                        {/*<Reaptcha*/}
+                                        {/*    sitekey={*/}
+                                        {/*        process.env*/}
+                                        {/*            .NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY*/}
+                                        {/*    }*/}
+                                        {/*    ref={e => (recaptchaRef.current = e)}*/}
+                                        {/*    size="invisible"*/}
+                                        {/*    hl={router.locale}*/}
+                                        {/*/>*/}
+                                    </Form>
+                                </>
+                            )}
+                        </Formik>
                     </Col>
-                )}
-            </Row>
-        </Container>
+                    {isLoaded && (
+                        <Col md={6}>
+                            <GoogleMap
+                                mapContainerStyle={{
+                                    height: '50vh',
+                                    width: '100%',
+                                }}
+                                center={center}
+                                zoom={zoom}>
+                                <Marker
+                                    position={markerPosition}
+                                    clickable={false}
+                                />
+                            </GoogleMap>
+                        </Col>
+                    )}
+                </Row>
+            </Container>
+            <Modal
+                centered
+                isOpen={modalIsOpen}
+                toggle={() => setModalIsOpen(prev => !prev)}
+                size="lg">
+                <ModalHeader toggle={() => setModalIsOpen(prev => !prev)}>
+                    {t('message_sent_success_title')}
+                </ModalHeader>
+                <ModalBody className="h4 my-3">
+                    {t('message_sent_success_description')}
+                </ModalBody>
+            </Modal>
+        </>
     )
 }
 

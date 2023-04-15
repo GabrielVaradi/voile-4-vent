@@ -21,7 +21,7 @@ const Index = ({ courses }) => {
             <h1 className="mb-4">{t('page_title')}</h1>
             {courses.map((course, i) => (
                 <React.Fragment key={course.id}>
-                    <Row className="mt-5">
+                    <Row className="mt-5" id={course.type}>
                         <Col
                             className={`${
                                 i % 2 === 0 ? 'order-1' : 'order-2 ps-5'

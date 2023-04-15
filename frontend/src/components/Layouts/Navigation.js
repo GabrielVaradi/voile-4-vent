@@ -45,6 +45,15 @@ const Navigation = () => {
                                 />
                             </a>
                         </Link>
+                        <Link href="/">
+                            <a
+                                className="navbar-brand me-0 me-md-5"
+                                style={{
+                                    color: pathname === '/' ? 'red' : 'unset',
+                                }}>
+                                {t('home')}
+                            </a>
+                        </Link>
                         <Link href="/courses">
                             <a
                                 className="navbar-brand me-0 me-md-5"

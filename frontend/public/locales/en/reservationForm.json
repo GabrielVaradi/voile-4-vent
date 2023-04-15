@@ -23,7 +23,7 @@
     "validation_too_short": "Enter at least 2 characters",
     "validation_too_long": "Enter less than 50 characters",
     "validation_email_invalid": "Email format must be example@email.com",
-    "validation_phone_number_invalid": "Enter a valid format",
+    "validation_phone_number_invalid": "Enter a valid format (555-555-5555)",
     "validation_birthdate_day_too_low": "Must be more than 0",
     "validation_birthdate_day_too_high": "Must be less than 31",
     "validation_birthdate_month_too_low": "Must be more than 0",

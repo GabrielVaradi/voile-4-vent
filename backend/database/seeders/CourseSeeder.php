@@ -25,7 +25,7 @@ class CourseSeeder extends Seeder
         $course1 = Course::query()
             ->create([
                 'title_en' => 'Initiation to sailing',
-                'title_fr' => 'Brevet niveau initiation',
+                'title_fr' => 'Introduction à la navigation',
                 'description_en' => 'Learn to be a good crew member in complete safety on a sailboat. This course covers the basics of sailing.',
                 'description_fr' => 'Apprendre à être un bon équipier en toute sécurité sur un voilier. Ce cours couvre les rudiments de la voile.',
                 'duration_en' => '15 hours',
@@ -38,7 +38,7 @@ class CourseSeeder extends Seeder
         $course1->skills()->sync([1, 2, 3, 4, 5, 6]);
         $course2 = Course::query()
             ->create([
-                'title_en' => 'Beginer skipper certificate',
+                'title_en' => 'Basic skipper certificate',
                 'title_fr' => 'Brevet croisière élémentaire',
                 'description_en' => 'For those who are new to sailing or have some sailing experience. The aim of the course: to acquire the necessary skills to be able to sail safely, as skipper or crew member, on a sailboat.',
                 'description_fr' => 'Pour ceux qui débutent ou possède un peu d’expérience de la voile. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier.',
@@ -52,8 +52,8 @@ class CourseSeeder extends Seeder
         $course2->skills()->sync([7, 8, 9, 10, 11, 12, 13, 14]);
         $course3 = Course::query()
             ->create([
-                'title_en' => 'Regata [EN]',
-                'title_fr' => 'Regata',
+                'title_en' => 'Regata',
+                'title_fr' => 'Régate',
                 'description_en' => '[EN] REGATE',
                 'description_fr' => 'REGATE',
                 'duration_en' => '5 evenings',

@@ -27,6 +27,7 @@ const ReservationComponent = ({ isAdmin }) => {
     const [events, setEvents] = useState([])
     const [mappedEvents, setMappedEvents] = useState([])
     const [modalIsOpen, setModalIsOpen] = useState(false)
+    const [tooManyDaysError, setTooManyDaysError] = useState(false)
     const [successModalIsOpen, setSuccessModalIsOpen] = useState(false)
     const [type, setType] = useState({
         value: coursesTypes.beginner_skipper.value,
@@ -131,6 +132,11 @@ const ReservationComponent = ({ isAdmin }) => {
                     {t('helper_text_contact_us_description_2')}
                 </li>
                 <li>{t('helper_text_available_months')}</li>
+                {tooManyDaysError && (
+                    <li className="text-danger">
+                        {t('helper_text_too_many_days_error')}
+                    </li>
+                )}
             </ul>
             {isAdmin ? (
                 <AdminCalendar
@@ -145,6 +151,7 @@ const ReservationComponent = ({ isAdmin }) => {
                     daysSelected={daysSelected}
                     setDaysSelected={setDaysSelected}
                     type={type}
+                    setTooManyDaysError={setTooManyDaysError}
                 />
             )}
             <Button

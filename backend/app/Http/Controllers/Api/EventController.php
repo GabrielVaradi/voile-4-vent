@@ -31,7 +31,8 @@ class EventController extends Controller
      */
     public function eventsCalendar(): EventCollection
     {
-        $events = Event::all()->whereBetween('start',
+        $events = Event::all()->whereBetween(
+            'start',
             [
                 Carbon::now()->subMonths(4)->toDateTimeString(),
                 Carbon::now()->addMonths(13)->toDateTimeString()
@@ -44,12 +45,11 @@ class EventController extends Controller
 
 
     /**
-
     /**
-     * Store a new event.
-     * @param  StoreEventRequest $request
-     * @return EventResource
-     */
+    * Store a new event.
+    * @param  StoreEventRequest $request
+    * @return EventResource
+    */
     public function store(StoreEventRequest $request): EventResource
     {
         $type = $request->type;
@@ -77,7 +77,7 @@ class EventController extends Controller
         $reservation->customer_forms()->saveMany($customerForms);
         $reservation->save();
 
-        foreach($customerForms as $customerForm) {
+        foreach ($customerForms as $customerForm) {
             $customerForm->reservation_id = $reservation->id;
             $customerForm->transaction_state = 'completed';
             $customerForm->save();
@@ -95,7 +95,7 @@ class EventController extends Controller
             $event->type = $type;
             $event->title_en = Event::types[$type]['title_en'];
             $event->title_fr = Event::types[$type]['title_fr'];
-            $event->max_reservations = 4;
+            $event->max_reservations = Event::maxReservations;
             $event->save();
             $event->reservations()->attach([$reservation->id]);
             $event['id'] = $event->id;

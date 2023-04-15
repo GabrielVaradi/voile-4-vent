@@ -24,12 +24,12 @@ class EventSeeder extends Seeder
     {
         Event::query()
             ->create([
-                'title_en'             => 'Basic skipper course',
-                'title_fr'             => 'Brevet croisière élémentaire',
-                'start'                => '2022-10-08 00:00:01',
-                'end'                  => '2022-10-09 00:00:01',
-                'max_reservations'     => 8,
-                'type'                 => 'beginner_skipper'
+                'title_en' => 'Basic skipper course',
+                'title_fr' => 'Brevet croisière élémentaire',
+                'start' => '2022-10-08 00:00:01',
+                'end' => '2022-10-09 00:00:01',
+                'max_reservations' => Event::maxReservations,
+                'type' => 'beginner_skipper'
             ]);
     }
 }

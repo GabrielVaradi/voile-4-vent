@@ -39,6 +39,8 @@ class Event extends Model
         ]
     ];
 
+    const maxReservations = 8;
+
     /**
      * Get the reservations for the event.
      */

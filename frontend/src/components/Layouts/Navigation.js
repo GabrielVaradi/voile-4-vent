@@ -29,6 +29,8 @@ const Navigation = () => {
         locale,
     ])
 
+    const selectedStyles = { fontWeight: 'bold', textDecoration: 'underline' }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
             <Container>
@@ -48,67 +50,60 @@ const Navigation = () => {
                         <Link href="/">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
-                                style={{
-                                    color: pathname === '/' ? 'red' : 'unset',
-                                }}>
+                                style={pathname === '/' ? selectedStyles : {}}>
                                 {t('home')}
                             </a>
                         </Link>
                         <Link href="/courses">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
-                                style={{
-                                    color:
-                                        pathname === '/courses'
-                                            ? 'red'
-                                            : 'unset',
-                                }}>
+                                style={
+                                    pathname === '/courses'
+                                        ? selectedStyles
+                                        : {}
+                                }>
                                 {t('courses')}
                             </a>
                         </Link>
                         <Link href="/activities">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
-                                style={{
-                                    color:
-                                        pathname === '/activities'
-                                            ? 'red'
-                                            : 'unset',
-                                }}>
+                                style={
+                                    pathname === '/activities'
+                                        ? selectedStyles
+                                        : {}
+                                }>
                                 {t('activities')}
                             </a>
                         </Link>
                         <Link href="/reservations">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
-                                style={{
-                                    color:
-                                        pathname === '/reservations'
-                                            ? 'red'
-                                            : 'unset',
-                                }}>
+                                style={
+                                    pathname === '/reservations'
+                                        ? selectedStyles
+                                        : {}
+                                }>
                                 {t('reservations')}
                             </a>
                         </Link>
                         <Link href="/contact-us">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
-                                style={{
-                                    color:
-                                        pathname === '/contact-us'
-                                            ? 'red'
-                                            : 'unset',
-                                }}>
+                                style={
+                                    pathname === '/contact-us'
+                                        ? selectedStyles
+                                        : {}
+                                }>
                                 {t('contact-us')}
                             </a>
                         </Link>
                         <Link href="/faq">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
-                                style={{
-                                    color:
-                                        pathname === '/faq' ? 'red' : 'unset',
-                                }}>
+                                style={
+                                    pathname === '/faq' ? selectedStyles : {}
+                                }>
                                 {t('faq')}
                             </a>
                         </Link>

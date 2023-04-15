@@ -6,7 +6,6 @@ use App\Mail\ReservationCompleted;
 use App\Models\CustomerForm;
 use App\Models\Event;
 use App\Models\Reservation;
-use App\Models\Skill;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\SentMessage;
 use Illuminate\Queue\SerializesModels;
@@ -38,7 +37,7 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
         $language = $data['language'];
 
         $customerForms = [];
-        foreach ($customerFormsIds as $key=>$id) {
+        foreach ($customerFormsIds as $key => $id) {
             $customerForm = CustomerForm::find($id);
             if ($key == 0) {
                 $firstCustomerForm = $customerForm;
@@ -53,7 +52,7 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
         $reservation->customer_forms()->saveMany($customerForms);
         $reservation->save();
 
-        foreach($customerForms as $customerForm) {
+        foreach ($customerForms as $customerForm) {
             $customerForm->reservation_id = $reservation->id;
             $customerForm->transaction_state = 'completed';
             $customerForm->save();
@@ -67,9 +66,11 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
             $event->start = $date->start;
             $event->end = $date->end;
             $event->type = $type;
-            $event->title_en = Event::types[$type]['title_en'];;
-            $event->title_fr = Event::types[$type]['title_fr'];;
-            $event->max_reservations = 4;
+            $event->title_en = Event::types[$type]['title_en'];
+            ;
+            $event->title_fr = Event::types[$type]['title_fr'];
+            ;
+            $event->max_reservations = Event::maxReservations;
             $event->save();
             $event->reservations()->attach([$reservation->id]);
         }

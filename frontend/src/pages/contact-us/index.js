@@ -77,7 +77,8 @@ const Index = () => {
                 <div className="d-flex flex-column justify-content-center align-items-center mb-4">
                     <h5>{t('contact_us_phone_number')}</h5>
                     <h5>{t('contact_us_email')}</h5>
-                    <h5>{t('contact_us_address')}</h5>
+                    <h5>{t('contact_us_address_1')}</h5>
+                    <h5>{t('contact_us_address_2')}</h5>
                 </div>
                 <Row>
                     <Col lg={6}>

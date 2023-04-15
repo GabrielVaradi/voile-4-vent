@@ -97,8 +97,8 @@ return [
     ],
 
     'reply_to' => [
-        'address' => 'example@example.com',
-        'name' => 'App Name'
+        'address' => env('MAIL_FROM_ADDRESS', 'voile4vents@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Pierre Ricard'),
     ],
 
     /*

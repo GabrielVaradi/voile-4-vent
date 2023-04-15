@@ -24,7 +24,8 @@ const Footer = () => {
                         <h4 className="fw-bold">{t('email_key')}</h4>
                         <h4>{t('email_value')}</h4>
                         <h4 className="fw-bold">{t('address_key')}</h4>
-                        <h4>{t('address_value')}</h4>
+                        <h4>{t('address_value_1')}</h4>
+                        <h4>{t('address_value_2')}</h4>
                         <a
                             className="mt-2"
                             href="https://facebook.com/voile4vents">

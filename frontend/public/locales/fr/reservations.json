@@ -6,7 +6,7 @@
     "regata_label": "Régate",
     "helper_text_select_days_one" : "Sélectionner {{days}} jour pour votre réservation (les jours de fin de semaine sont réservés en bloc)",
     "helper_text_select_days_other" : "Sélectionner {{days}} jours pour votre réservation (les jours de fin de semaine sont réservés en bloc)",
-    "helper_text_contact_us_description_1" : "Si ces horaires ne vous conviennent pas, ",
+    "helper_text_contact_us_description_1" : "Si ces horaires ne vous conviennent pas ou que vous souhaitez réserver pour un plus grand groupe, ",
     "helper_text_contact_us_link": "contactez-nous",
     "helper_text_contact_us_description_2" : " pour que nous trouvions une solution!",
     "helper_text_available_months" : "Les cours sont disponibles de Mai à Octobre",

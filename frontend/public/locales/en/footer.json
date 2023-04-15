@@ -1,7 +1,12 @@
 {
     "footer": "Footer",
     "title": "Footer title",
-    "description": "footer description footer description footer description footer description",
+    "phone_key": "Phone:",
+    "phone_value": "514-817-3612",
+    "email_key": "Email:",
+    "email_value": "voile4vents@gmail.com",
+    "address_key": "Boarding:",
+    "address_value": "Club nautique de Baie D'Urfé, 20436 chemin Lakeshore",
     "accreditation": "We are accredited by",
     "courses": "Courses",
     "activities": "Activities",

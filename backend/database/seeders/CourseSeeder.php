@@ -41,7 +41,7 @@ class CourseSeeder extends Seeder
                 'title_en' => 'Basic skipper certificate',
                 'title_fr' => 'Brevet croisière élémentaire',
                 'description_en' => 'For those who are new to sailing or have some sailing experience. The aim of the course: to acquire the necessary skills to be able to sail safely, as skipper or crew member, on a sailboat.',
-                'description_fr' => 'Pour ceux qui débutent ou possède un peu d’expérience de la voile. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier.',
+                'description_fr' => 'Pour ceux qui débutent ou possèdent un peu d’expérience de la voile. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier.',
                 'duration_en' => '30 hours',
                 'duration_fr' => '30 heures',
                 'price' => 540,

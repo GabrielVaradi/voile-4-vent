@@ -24,11 +24,11 @@ const BasicAddressField = ({
     return (
         isLoaded && (
             <FormGroup row className={formGroupClasses}>
-                <Label for={field} md={2}>
+                <Label for={field} lg={2}>
                     {fieldLabel}
                     {required && <span className="required-asterisk">*</span>}
                 </Label>
-                <Col md={10}>
+                <Col lg={10}>
                     <InputGroup>
                         <Autocomplete
                             apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}

@@ -15,12 +15,12 @@ const BasicTextArea = ({
     return (
         <FormGroup row>
             {fieldLabel && (
-                <Label for={fieldName} md={2}>
+                <Label for={fieldName} lg={2}>
                     {fieldLabel}
                     {required && <span className="required-asterisk">*</span>}
                 </Label>
             )}
-            <Col md={10}>
+            <Col lg={10}>
                 <InputGroup className={inputGroupClasses}>
                     <Field name={fieldName}>
                         {({ field }) => (

@@ -80,7 +80,7 @@ const Index = () => {
                     <h5>{t('contact_us_address')}</h5>
                 </div>
                 <Row>
-                    <Col md={6}>
+                    <Col lg={6}>
                         <Formik
                             initialValues={{
                                 name: '',
@@ -166,7 +166,7 @@ const Index = () => {
                         </Formik>
                     </Col>
                     {isLoaded && (
-                        <Col md={6}>
+                        <Col lg={6}>
                             <GoogleMap
                                 mapContainerStyle={{
                                     height: '50vh',

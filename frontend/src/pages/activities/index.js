@@ -26,7 +26,7 @@ const Index = ({ activities }) => {
                             className={`${
                                 i % 2 === 0 ? 'order-1' : 'order-2 ps-5'
                             }`}
-                            md={5}>
+                            lg={5}>
                             <h2>
                                 {router.locale === 'en'
                                     ? activity.title_en
@@ -51,7 +51,7 @@ const Index = ({ activities }) => {
                         </Col>
                         <Col
                             className={`${i % 2 === 0 ? 'order-2' : 'order-1'}`}
-                            md={7}>
+                            lg={7}>
                             <Image
                                 layout="responsive"
                                 objectFit="cover"

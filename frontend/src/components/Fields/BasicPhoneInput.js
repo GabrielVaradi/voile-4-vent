@@ -13,11 +13,11 @@ const BasicPhoneInput = ({
 }) => {
     return (
         <FormGroup row>
-            <Label for={field} md={2}>
+            <Label for={field} lg={2}>
                 {fieldLabel}
                 {required && <span className="required-asterisk">*</span>}
             </Label>
-            <Col md={10}>
+            <Col lg={10}>
                 <InputGroup>
                     <Input
                         type="tel"

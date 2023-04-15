@@ -18,11 +18,11 @@ const BasicDateInput = ({
 }) => {
     return (
         <FormGroup row>
-            <Label for={field} md={2}>
+            <Label for={field} lg={2}>
                 {fieldLabel}
                 {required && <span className="required-asterisk">*</span>}
             </Label>
-            <Col md={5} className="d-flex">
+            <Col lg={5} className="d-flex">
                 <div className="me-2">
                     <Input
                         type="number"

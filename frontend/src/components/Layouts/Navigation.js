@@ -36,7 +36,7 @@ const Navigation = () => {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar className="w-100 d-flex align-items-center">
                         <Link href="/">
-                            <a className="navbar-brand me-0 me-md-5">
+                            <a className="navbar-brand me-0 me-lg-5">
                                 <img
                                     src="/images/voile4vents-logo.png"
                                     width={75}
@@ -47,7 +47,7 @@ const Navigation = () => {
                         </Link>
                         <Link href="/">
                             <a
-                                className="navbar-brand me-0 me-md-5"
+                                className="navbar-brand me-0 me-lg-5"
                                 style={{
                                     color: pathname === '/' ? 'red' : 'unset',
                                 }}>
@@ -56,7 +56,7 @@ const Navigation = () => {
                         </Link>
                         <Link href="/courses">
                             <a
-                                className="navbar-brand me-0 me-md-5"
+                                className="navbar-brand me-0 me-lg-5"
                                 style={{
                                     color:
                                         pathname === '/courses'
@@ -68,7 +68,7 @@ const Navigation = () => {
                         </Link>
                         <Link href="/activities">
                             <a
-                                className="navbar-brand me-0 me-md-5"
+                                className="navbar-brand me-0 me-lg-5"
                                 style={{
                                     color:
                                         pathname === '/activities'
@@ -80,7 +80,7 @@ const Navigation = () => {
                         </Link>
                         <Link href="/reservations">
                             <a
-                                className="navbar-brand me-0 me-md-5"
+                                className="navbar-brand me-0 me-lg-5"
                                 style={{
                                     color:
                                         pathname === '/reservations'
@@ -92,7 +92,7 @@ const Navigation = () => {
                         </Link>
                         <Link href="/contact-us">
                             <a
-                                className="navbar-brand me-0 me-md-5"
+                                className="navbar-brand me-0 me-lg-5"
                                 style={{
                                     color:
                                         pathname === '/contact-us'
@@ -104,7 +104,7 @@ const Navigation = () => {
                         </Link>
                         <Link href="/faq">
                             <a
-                                className="navbar-brand me-0 me-md-5"
+                                className="navbar-brand me-0 me-lg-5"
                                 style={{
                                     color:
                                         pathname === '/faq' ? 'red' : 'unset',
@@ -154,7 +154,7 @@ const Navigation = () => {
                             locale={inverseLocale}>
                             <div
                                 role="button"
-                                className="d-flex ms-0 ms-md-auto">
+                                className="d-flex ms-0 ms-lg-auto">
                                 <a className="navbar-brand me-3">
                                     {t('change_locale', {
                                         locale: inverseLocale,

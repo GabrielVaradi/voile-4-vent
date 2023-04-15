@@ -29,7 +29,7 @@ const Home = ({ courses, teachers }) => {
                 <Container className="h-100 d-flex flex-column justify-content-center">
                     <Row>
                         <Col
-                            md={5}
+                            lg={5}
                             className="d-flex flex-column align-items-center">
                             <h1 className="text-uppercase text-primary text-center">
                                 {t('title')}
@@ -49,7 +49,7 @@ const Home = ({ courses, teachers }) => {
 
             <Container className="d-flex flex-column justify-content-center align-items-center mt-5">
                 <Row>
-                    <Col md={8} className="mx-auto">
+                    <Col lg={12} className="mx-auto">
                         <h1 className="text-center text-uppercase text-primary">
                             {t('courses_title')}
                         </h1>
@@ -65,9 +65,9 @@ const Home = ({ courses, teachers }) => {
                 <Row className="mt-5 justify-content-center">
                     {courses?.map(course => (
                         <Col
-                            className="text-center text-white bg-primary mx-3 p-0 d-flex flex-column"
+                            className="text-center text-white bg-primary mx-3 p-0 d-flex flex-column my-3 my-lg-0"
                             key={course.id}
-                            md={3}>
+                            lg={3}>
                             <div>
                                 <Image
                                     layout="responsive"
@@ -114,7 +114,7 @@ const Home = ({ courses, teachers }) => {
 
             <Container className="d-flex flex-column justify-content-center align-items-center mt-5">
                 <Row>
-                    <Col md={8} className="mx-auto">
+                    <Col lg={8} className="mx-auto">
                         <h1 className="text-center text-uppercase text-primary">
                             {t('teachers_title')}
                         </h1>
@@ -128,7 +128,7 @@ const Home = ({ courses, teachers }) => {
                         <Col
                             className="text-center text-white bg-primary mx-3 p-0"
                             key={teacher.id}
-                            md={3}>
+                            lg={3}>
                             <div>
                                 <Image
                                     layout="responsive"
@@ -163,7 +163,7 @@ const Home = ({ courses, teachers }) => {
                 src="/videos/home/voile4vents_video_footer.mov">
                 <Container className="h-100 d-flex flex-column align-items-end">
                     <Row className={`${styles.video_text_container}`}>
-                        <Col md={4} className="d-flex w-100">
+                        <Col lg={4} className="d-flex w-100">
                             <h1 className="text-uppercase text-white d-flex">
                                 <div className="text-primary me-2">
                                     {t('image_first_word')}

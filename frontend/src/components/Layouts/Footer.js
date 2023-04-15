@@ -17,9 +17,14 @@ const Footer = () => {
                 <Row className="w-100 h-100">
                     <Col
                         className="d-flex flex-column justify-content-center"
-                        md={6}>
+                        lg={6}>
                         <h4>{t('title')}</h4>
-                        <h4>{t('description')}</h4>
+                        <h4 className="fw-bold">{t('phone_key')}</h4>
+                        <h4>{t('phone_value')}</h4>
+                        <h4 className="fw-bold">{t('email_key')}</h4>
+                        <h4>{t('email_value')}</h4>
+                        <h4 className="fw-bold">{t('address_key')}</h4>
+                        <h4>{t('address_value')}</h4>
                         <a
                             className="mt-2"
                             href="https://facebook.com/voile4vents">
@@ -31,7 +36,7 @@ const Footer = () => {
                     </Col>
                     <Col
                         className="d-flex flex-column justify-content-center align-items-center"
-                        md={3}>
+                        lg={3}>
                         <Link href="/courses">
                             <a className="h4 text-decoration-none mt-1 text-black ">
                                 {t('courses')}
@@ -60,7 +65,7 @@ const Footer = () => {
                     </Col>
                     <Col
                         className="d-flex flex-column justify-content-center align-items-end"
-                        md={3}>
+                        lg={3}>
                         <div>{t('accreditation')}</div>
                         <div className=" mb-2 w-50">
                             <Image

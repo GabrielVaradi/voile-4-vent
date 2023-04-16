@@ -19,6 +19,7 @@
     "day_placeholder": "JJ",
     "month_placeholder": "MM",
     "year_placeholder": "AAAA",
+    "has_manual_label": "Avez-vous besoin du manuel d'initiation à la voile croisière de la fédération de voile? (50$)",
     "validation_required": "Ce champs est requis",
     "validation_too_short": "Entrer au moins 2 charactères",
     "validation_too_long": "Entrer un maximum de 50 charactères",

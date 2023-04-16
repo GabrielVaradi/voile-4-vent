@@ -26,6 +26,7 @@ class StripeController extends Controller
         // TODO: Move this somewhere
         $forms = $request->forms;
         $customerFormsIds = [];
+        $numberOfManuals = 0;
         foreach ($forms as $form) {
             $customerForm = new CustomerForm();
             $customerForm->first_name = $form['first_name'];
@@ -34,26 +35,38 @@ class StripeController extends Controller
             $customerForm->address = $form['address'];
             $customerForm->phone_number = $form['phone_number'];
             $customerForm->birthdate = $form['birthdate'];
+            $customerForm->has_manual = $form['has_manual'];
             $customerForm->transaction_state = 'pending';
             $customerForm->save();
             $customerFormsIds[] = $customerForm->id;
+
+            if ($form['has_manual']) {
+                $numberOfManuals++;
+            }
+        }
+        $lineItems[] = [
+            'price' => Reservation::priceIds[$request->type],
+            'quantity' => $request->number_of_people,
+        ];
+        if ($numberOfManuals > 0) {
+            $lineItems[] = [
+                'price' => Reservation::priceIds['manual'],
+                'quantity' => $numberOfManuals,
+            ];
         }
 
         $checkout_session = Session::create([
-            'line_items'  => [[
-                'price'    => Reservation::priceIds[$request->type],
-                'quantity' => $request->number_of_people,
-            ]],
-            'metadata'    => [
-                'event_dates'        => json_encode($request->eventsDates),
-                'events_ids'         => json_encode($request->events),
+            'line_items' => [$lineItems],
+            'metadata' => [
+                'event_dates' => json_encode($request->eventsDates),
+                'events_ids' => json_encode($request->events),
                 'customer_forms_ids' => json_encode($customerFormsIds),
-                'type'               => $request->type,
-                'language'           => $request->language,
+                'type' => $request->type,
+                'language' => $request->language,
             ],
-            'mode'        => 'payment',
+            'mode' => 'payment',
             'success_url' => $domain . '/reservations?success=true',
-            'cancel_url'  => $domain . '/reservations?canceled=true',
+            'cancel_url' => $domain . '/reservations?canceled=true',
         ]);
 
         return $checkout_session;

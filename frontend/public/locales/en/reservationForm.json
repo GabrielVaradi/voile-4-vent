@@ -19,6 +19,7 @@
     "day_placeholder": "DD",
     "month_placeholder": "MM",
     "year_placeholder": "YYYY",
+    "has_manual_label": "Do you need an introduction to sailing manual? (50$)",
     "validation_required": "This field is required",
     "validation_too_short": "Enter at least 2 characters",
     "validation_too_long": "Enter less than 50 characters",

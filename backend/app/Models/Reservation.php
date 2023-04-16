@@ -13,7 +13,9 @@ class Reservation extends Model
         'beginner_skipper' => 'price_1LQBtSGBR8DTe9IEUqGItvu3',
         'initiation_sailing' => 'price_1LQATaGBR8DTe9IELg49wgFY',
         'regata' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
+        'manual' => 'price_1MxH9JGBR8DTe9IEa3AURVsC',
     ];
+
     /**
      *
      * The attributes that are mass assignable.

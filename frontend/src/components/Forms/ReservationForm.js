@@ -26,6 +26,7 @@ import BasicTextInput from '@/components/Fields/BasicTextInput'
 import BasicAddressField from '@/components/Fields/BasicAddressField'
 import BasicPhoneInput from '@/components/Fields/BasicPhoneInput'
 import BasicDateInput from '@/components/Fields/BasicDateInput'
+import BasicCheckbox from '@/components/Fields/BasicCheckbox'
 import { useTranslation } from 'next-i18next'
 
 const ReservationForm = ({
@@ -236,6 +237,14 @@ const ReservationForm = ({
                     touched={touched}
                     required
                 />
+                <BasicCheckbox
+                    field={`forms.${i}.has_manual`}
+                    fieldLabel={t('has_manual_label')}
+                    placeholder={t('has_manual_placeholder')}
+                    errors={errors}
+                    touched={touched}
+                    required
+                />
             </>
         )
     }
@@ -303,6 +312,7 @@ const ReservationForm = ({
                             month: '',
                             year: '',
                         },
+                        has_manual: false,
                     },
                 ],
                 number_of_people: '1',

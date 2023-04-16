@@ -21,6 +21,13 @@ class ContactUsEmail extends Mailable
     public string $email;
 
     /**
+     * The name.
+     *
+     * @var string
+     */
+    public string $name;
+
+    /**
      * The message.
      *
      * @var string

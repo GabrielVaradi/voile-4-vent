@@ -22,6 +22,12 @@ const ReservationComponent = ({ isAdmin }) => {
     const { t } = useTranslation('reservations')
     // const recaptchaRef = useRef()
 
+    return (
+        <h1 className="d-flex justify-content-center mt-5">
+            {t('available_soon')}
+        </h1>
+    )
+
     const [daysSelected, setDaysSelected] = useState([])
     const [eventsSelected, setEventsSelected] = useState([])
     const [events, setEvents] = useState([])

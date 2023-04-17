@@ -95,12 +95,12 @@ const Home = ({ courses, teachers }) => {
                                         {t('learn_more')}
                                     </a>
                                 </Link>
-                                <Link
+                                {/* <Link
                                     href={`/reservations?type=${course.type}`}>
                                     <a className="btn btn-primary bg-white text-black border-0 mx-auto mb-3">
                                         {t('registration')}
                                     </a>
-                                </Link>
+                                </Link> */}
                             </div>
                         </Col>
                     ))}

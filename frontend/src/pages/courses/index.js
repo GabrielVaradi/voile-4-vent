@@ -60,9 +60,14 @@ const Index = ({ courses }) => {
                                 </>
                             )}
 
-                            <Link href={`/reservations?type=${course.type}`}>
+                            {/* <Link href={`/reservations?type=${course.type}`}>
                                 <a className="mt-5 btn btn-primary px-5 py-2">
                                     {t('book_now')}
+                                </a>
+                            </Link> */}
+                            <Link href={`/contact-us`}>
+                                <a className="mt-5 btn btn-primary px-5 py-2">
+                                    {t('contact_us')}
                                 </a>
                             </Link>
                         </Col>

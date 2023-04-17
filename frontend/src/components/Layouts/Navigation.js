@@ -76,7 +76,7 @@ const Navigation = () => {
                                 {t('activities')}
                             </a>
                         </Link>
-                        <Link href="/reservations">
+                        {/* <Link href="/reservations">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
                                 style={
@@ -86,7 +86,7 @@ const Navigation = () => {
                                 }>
                                 {t('reservations')}
                             </a>
-                        </Link>
+                        </Link> */}
                         <Link href="/contact-us">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
@@ -98,7 +98,7 @@ const Navigation = () => {
                                 {t('contact-us')}
                             </a>
                         </Link>
-                        <Link href="/faq">
+                        {/* <Link href="/faq">
                             <a
                                 className="navbar-brand me-0 me-lg-5"
                                 style={
@@ -106,7 +106,7 @@ const Navigation = () => {
                                 }>
                                 {t('faq')}
                             </a>
-                        </Link>
+                        </Link> */}
                         {user && (
                             <UncontrolledDropdown>
                                 <DropdownToggle

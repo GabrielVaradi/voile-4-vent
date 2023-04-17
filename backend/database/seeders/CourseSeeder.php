@@ -54,8 +54,8 @@ class CourseSeeder extends Seeder
             ->create([
                 'title_en' => 'Regata',
                 'title_fr' => 'Régate',
-                'description_en' => '[EN] REGATE',
-                'description_fr' => 'REGATE',
+                'description_en' => 'Regata is a race between multiple boats. This course will allow you to acquire the skills to maximize the speed of your boat, notably by using the spinnaker.',
+                'description_fr' => "La régate est une course de vitesse entre plusieurs bateaux. Ce cours vous permettra d'acquérir les compétences requises pour maximiser la vitesse de votre voilier, notamment grâche à l'utilisation du spinnaker.",
                 'duration_en' => '5 evenings',
                 'duration_fr' => '5 soirs',
                 'price' => 135,

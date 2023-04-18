@@ -3,7 +3,7 @@ import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import styles from '../../../styles/Layouts/Footer.module.scss'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import logoVoileCanada from '../../../public/images/footer/voile4vents_voile-canada.png'
 import logoVoileQuebec from '../../../public/images/footer/voile4vents_voile-quebec.png'
 

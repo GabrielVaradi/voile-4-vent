@@ -13,7 +13,7 @@ import {
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { useAuth } from '@/hooks/auth'
-import Image from 'next/image'
+import Image from "next/legacy/image"
 import enIcon from '../../../public/images/voile4vents-english.png'
 import frIcon from '../../../public/images/voile4vents-french.png'
 

@@ -37,44 +37,47 @@ const Navigation = () => {
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav navbar className="w-100 d-flex align-items-center">
-                        <Link href="/">
-                            <a className="navbar-brand me-0 me-lg-5">
-                                <img
-                                    src="/images/voile4vents-logo.png"
-                                    width={75}
-                                    height={75}
-                                    alt=""
-                                />
-                            </a>
+                        <Link href="/" className="navbar-brand me-0 me-lg-5">
+
+                            <img
+                                src="/images/voile4vents-logo.png"
+                                width={75}
+                                height={75}
+                                alt=""
+                            />
+
                         </Link>
-                        <Link href="/">
-                            <a
-                                className="navbar-brand me-0 me-lg-5"
-                                style={pathname === '/' ? selectedStyles : {}}>
-                                {t('home')}
-                            </a>
+                        <Link
+                            href="/"
+                            className="navbar-brand me-0 me-lg-5"
+                            style={pathname === '/' ? selectedStyles : {}}>
+
+                            {t('home')}
+
                         </Link>
-                        <Link href="/courses">
-                            <a
-                                className="navbar-brand me-0 me-lg-5"
-                                style={
-                                    pathname === '/courses'
-                                        ? selectedStyles
-                                        : {}
-                                }>
-                                {t('courses')}
-                            </a>
+                        <Link
+                            href="/courses"
+                            className="navbar-brand me-0 me-lg-5"
+                            style={
+                                pathname === '/courses'
+                                    ? selectedStyles
+                                    : {}
+                            }>
+
+                            {t('courses')}
+
                         </Link>
-                        <Link href="/activities">
-                            <a
-                                className="navbar-brand me-0 me-lg-5"
-                                style={
-                                    pathname === '/activities'
-                                        ? selectedStyles
-                                        : {}
-                                }>
-                                {t('activities')}
-                            </a>
+                        <Link
+                            href="/activities"
+                            className="navbar-brand me-0 me-lg-5"
+                            style={
+                                pathname === '/activities'
+                                    ? selectedStyles
+                                    : {}
+                            }>
+
+                            {t('activities')}
+
                         </Link>
                         {/* <Link href="/reservations">
                             <a
@@ -87,16 +90,17 @@ const Navigation = () => {
                                 {t('reservations')}
                             </a>
                         </Link> */}
-                        <Link href="/contact-us">
-                            <a
-                                className="navbar-brand me-0 me-lg-5"
-                                style={
-                                    pathname === '/contact-us'
-                                        ? selectedStyles
-                                        : {}
-                                }>
-                                {t('contact-us')}
-                            </a>
+                        <Link
+                            href="/contact-us"
+                            className="navbar-brand me-0 me-lg-5"
+                            style={
+                                pathname === '/contact-us'
+                                    ? selectedStyles
+                                    : {}
+                            }>
+
+                            {t('contact-us')}
+
                         </Link>
                         {/* <Link href="/faq">
                             <a
@@ -117,24 +121,26 @@ const Navigation = () => {
                                 </DropdownToggle>
                                 <DropdownMenu>
                                     <DropdownItem>
-                                        <Link href="/admin">
-                                            <a className="text-decoration-none text-black">
-                                                {t('calendar')}
-                                            </a>
+                                        <Link href="/admin" className="text-decoration-none text-black">
+
+                                            {t('calendar')}
+
                                         </Link>
                                     </DropdownItem>
                                     <DropdownItem>
-                                        <Link href="/admin/todos">
-                                            <a className="text-decoration-none text-black">
-                                                {t('todos')}
-                                            </a>
+                                        <Link href="/admin/todos" className="text-decoration-none text-black">
+
+                                            {t('todos')}
+
                                         </Link>
                                     </DropdownItem>
                                     <DropdownItem>
-                                        <Link href="/admin/allowed-skippers">
-                                            <a className="text-decoration-none text-black">
-                                                {t('allowed_skippers')}
-                                            </a>
+                                        <Link
+                                            href="/admin/allowed-skippers"
+                                            className="text-decoration-none text-black">
+
+                                            {t('allowed_skippers')}
+
                                         </Link>
                                     </DropdownItem>
                                     <DropdownItem divider />
@@ -146,7 +152,8 @@ const Navigation = () => {
                         )}
                         <Link
                             href={`/${inverseLocale}${pathname}`}
-                            locale={inverseLocale}>
+                            locale={inverseLocale}
+                            legacyBehavior>
                             <div
                                 role="button"
                                 className="d-flex ms-0 ms-lg-auto">
@@ -166,7 +173,7 @@ const Navigation = () => {
                 </Collapse>
             </Container>
         </nav>
-    )
+    );
 }
 
 export default Navigation

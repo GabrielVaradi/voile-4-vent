@@ -37,10 +37,10 @@ const Home = ({ courses, teachers }) => {
                             <h5 className="text-uppercase">
                                 {t('description')}
                             </h5>
-                            <Link href="/courses">
-                                <a className="btn btn-primary bg-white text-black border-0 mt-3">
-                                    {t('learn_more')}
-                                </a>
+                            <Link
+                                href="/courses"
+                                className="btn btn-primary bg-white text-black border-0 mt-3">
+                                {t('learn_more')}
                             </Link>
                         </Col>
                     </Row>
@@ -90,10 +90,10 @@ const Home = ({ courses, teachers }) => {
                                     : course.description_fr}
                             </div>
                             <div className="d-flex mt-auto">
-                                <Link href={`/courses#${course.type}`}>
-                                    <a className="btn btn-link text-white border-0 mx-auto mb-3">
-                                        {t('learn_more')}
-                                    </a>
+                                <Link
+                                    href={`/courses#${course.type}`}
+                                    className="btn btn-link text-white border-0 mx-auto mb-3">
+                                    {t('learn_more')}
                                 </Link>
                                 {/* <Link
                                     href={`/reservations?type=${course.type}`}>
@@ -105,10 +105,10 @@ const Home = ({ courses, teachers }) => {
                         </Col>
                     ))}
                 </Row>
-                <Link href="/courses">
-                    <a className="mt-5 btn btn-primary px-5 py-2">
-                        {t('courses')}
-                    </a>
+                <Link
+                    href="/courses"
+                    className="mt-5 btn btn-primary px-5 py-2">
+                    {t('courses')}
                 </Link>
             </Container>
 

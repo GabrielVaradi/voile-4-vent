@@ -43,10 +43,10 @@ const Index = ({ activities }) => {
                                     ? activity.description_en
                                     : activity.description_fr}
                             </h6>
-                            <Link href={`/contact-us`}>
-                                <a className="mt-5 btn btn-primary px-5 py-2">
-                                    {t('contact_us')}
-                                </a>
+                            <Link href={`/contact-us`} className="mt-5 btn btn-primary px-5 py-2">
+
+                                {t('contact_us')}
+
                             </Link>
                         </Col>
                         <Col
@@ -66,7 +66,7 @@ const Index = ({ activities }) => {
                 </React.Fragment>
             ))}
         </Container>
-    )
+    );
 }
 
 export async function getStaticProps({ locale }) {

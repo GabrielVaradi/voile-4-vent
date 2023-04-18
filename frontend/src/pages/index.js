@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import ImageFull from '@/components/Images/ImageFull'
-import Image from "next/legacy/image"
+import Image from 'next/legacy/image'
 import mainPicture from '../../public/images/home/voile4vents_main.jpg'
 import dynamic from 'next/dynamic'
 

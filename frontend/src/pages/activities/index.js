@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { activityService } from '../../services'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import Image from "next/legacy/image"
+import Image from 'next/legacy/image'
 
 import { Container, Col, Row } from 'reactstrap'
 import Link from 'next/link'
@@ -43,10 +43,10 @@ const Index = ({ activities }) => {
                                     ? activity.description_en
                                     : activity.description_fr}
                             </h6>
-                            <Link href={`/contact-us`} className="mt-5 btn btn-primary px-5 py-2">
-
+                            <Link
+                                href={`/contact-us`}
+                                className="mt-5 btn btn-primary px-5 py-2">
                                 {t('contact_us')}
-
                             </Link>
                         </Col>
                         <Col
@@ -66,7 +66,7 @@ const Index = ({ activities }) => {
                 </React.Fragment>
             ))}
         </Container>
-    );
+    )
 }
 
 export async function getStaticProps({ locale }) {

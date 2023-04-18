@@ -3,7 +3,7 @@ import React from 'react'
 import { Container, Row, Col } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import styles from '../../../styles/Layouts/Footer.module.scss'
-import Image from "next/legacy/image"
+import Image from 'next/legacy/image'
 import logoVoileCanada from '../../../public/images/footer/voile4vents_voile-canada.png'
 import logoVoileQuebec from '../../../public/images/footer/voile4vents_voile-quebec.png'
 
@@ -38,30 +38,30 @@ const Footer = () => {
                     <Col
                         className="d-flex flex-column justify-content-center align-items-center"
                         lg={3}>
-                        <Link href="/courses" className="h4 text-decoration-none mt-1 text-black ">
-
+                        <Link
+                            href="/courses"
+                            className="h4 text-decoration-none mt-1 text-black ">
                             {t('courses')}
-
                         </Link>
-                        <Link href="/activities" className="h4 text-decoration-none mt-1 text-black">
-
+                        <Link
+                            href="/activities"
+                            className="h4 text-decoration-none mt-1 text-black">
                             {t('activities')}
-
                         </Link>
-                        <Link href="/reservations" className="h4 text-decoration-none mt-1 text-black">
-
+                        <Link
+                            href="/reservations"
+                            className="h4 text-decoration-none mt-1 text-black">
                             {t('reservations')}
-
                         </Link>
-                        <Link href="/contact-us" className="h4 text-decoration-none mt-1 text-black">
-
+                        <Link
+                            href="/contact-us"
+                            className="h4 text-decoration-none mt-1 text-black">
                             {t('contact-us')}
-
                         </Link>
-                        <Link href="/faq" className="h4 text-decoration-none mt-1 text-black">
-
+                        <Link
+                            href="/faq"
+                            className="h4 text-decoration-none mt-1 text-black">
                             {t('faq')}
-
                         </Link>
                     </Col>
                     <Col
@@ -94,7 +94,7 @@ const Footer = () => {
                 </Row>
             </Container>
         </div>
-    );
+    )
 }
 
 export default Footer

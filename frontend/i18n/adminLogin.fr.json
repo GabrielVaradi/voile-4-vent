@@ -1,9 +1,0 @@
-{
-    "login": "Connexion",
-    "email_label": "Courriel",
-    "email_placeholder": "Entrer votre courriel",
-    "password_label": "Mot de passe",
-    "password_placeholder": "Entrer votre mot de passe",
-    "validation_required": "Ce champs est requis",
-    "validation_email_invalid": "Le format du courriel doit être exemple@email.com"
-}

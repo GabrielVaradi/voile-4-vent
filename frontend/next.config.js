@@ -1,4 +1,7 @@
 module.exports = {
+    images: {
+        unoptimized: true,
+    },
     reactStrictMode: true,
     webpack: (config, dev) => {
         if (dev) {

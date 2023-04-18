@@ -17,12 +17,10 @@ import LanguageSwitchLink from '../LanguageSwitchLink'
 import i18nextConfig from '../../../next-i18next.config'
 
 const Navigation = () => {
-    const router = useRouter()
     const { query, pathname } = useRouter()
     const { t } = useTranslation('navigation')
     const { user, logout } = useAuth()
     const currentLocale = query.locale || i18nextConfig.i18n.defaultLocale
-    console.log(router)
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -47,14 +45,18 @@ const Navigation = () => {
                         <Link
                             href="/"
                             className="navbar-brand me-0 me-lg-5"
-                            style={pathname === '/' ? selectedStyles : {}}>
+                            style={
+                                pathname === '/[locale]' ? selectedStyles : {}
+                            }>
                             {t('home')}
                         </Link>
                         <Link
                             href="/courses"
                             className="navbar-brand me-0 me-lg-5"
                             style={
-                                pathname === '/courses' ? selectedStyles : {}
+                                pathname === '/[locale]/courses'
+                                    ? selectedStyles
+                                    : {}
                             }>
                             {t('courses')}
                         </Link>
@@ -62,7 +64,9 @@ const Navigation = () => {
                             href="/activities"
                             className="navbar-brand me-0 me-lg-5"
                             style={
-                                pathname === '/activities' ? selectedStyles : {}
+                                pathname === '/[locale]/activities'
+                                    ? selectedStyles
+                                    : {}
                             }>
                             {t('activities')}
                         </Link>
@@ -70,7 +74,7 @@ const Navigation = () => {
                             <a
                                 className="navbar-brand me-0 me-lg-5"
                                 style={
-                                    pathname === '/reservations'
+                                    pathname === '/[locale]/reservations'
                                         ? selectedStyles
                                         : {}
                                 }>
@@ -81,7 +85,9 @@ const Navigation = () => {
                             href="/contact-us"
                             className="navbar-brand me-0 me-lg-5"
                             style={
-                                pathname === '/contact-us' ? selectedStyles : {}
+                                pathname === '/[locale]/contact-us'
+                                    ? selectedStyles
+                                    : {}
                             }>
                             {t('contact-us')}
                         </Link>
@@ -89,7 +95,7 @@ const Navigation = () => {
                             <a
                                 className="navbar-brand me-0 me-lg-5"
                                 style={
-                                    pathname === '/faq' ? selectedStyles : {}
+                                    pathname === '/[locale]/faq' ? selectedStyles : {}
                                 }>
                                 {t('faq')}
                             </a>

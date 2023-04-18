@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'next-i18next'
-import { getStaticPaths, getI18nProps } from '../../lib/getStatic'
+import { getStaticPaths, getI18nProps } from '../../../lib/getStatic'
 import { teacherService } from '@/services'
 
 const Index = () => {

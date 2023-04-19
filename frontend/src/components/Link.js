@@ -16,8 +16,8 @@ const LinkComponent = ({ children, skipLocaleHandling, ...rest }) => {
 
     return (
         <>
-            <Link href={href} {...rest}>
-                {children}
+            <Link href={href} legacyBehavior>
+                <a {...rest}>{children}</a>
             </Link>
         </>
     )

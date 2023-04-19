@@ -13,18 +13,14 @@ export const getStaticPaths = () => ({
     paths: getI18nPaths(),
 })
 
-export async function getI18nProps(ctx, ns = ['common']) {
-    const locale = ctx?.params?.locale
+export const getI18nProps = async (ctx, ns = ['common']) => {
+    const locale = ctx?.params?.locale || i18nextConfig.i18n.defaultLocale
     let props = {
         ...(await serverSideTranslations(locale, ns)),
     }
     return props
 }
 
-export function makeStaticProps(ns = {}) {
-    return async function getStaticProps(ctx) {
-        return {
-            props: await getI18nProps(ctx, ns),
-        }
-    }
-}
+export const makeStaticProps = (ns = []) => async ctx => ({
+    props: await getI18nProps(ctx, ns),
+})

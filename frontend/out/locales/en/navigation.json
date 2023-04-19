@@ -1,0 +1,16 @@
+{
+    "home": "Home",
+    "courses": "Courses",
+    "reservations": "Reservations",
+    "activities": "Activities",
+    "teachers": "Teachers",
+    "contact-us": "Contact us",
+    "faq": "FAQ",
+    "change_locale": "{{locale}}",
+    "admin_menu": "Admin menu",
+    "admin": "Admin",
+    "calendar": "Calendar",
+    "todos": "Todos",
+    "allowed_skippers": "Allowed Skippers",
+    "logout": "Logout"
+}

@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import languageDetector from '../lib/languageDetector'
 import { useRouter } from 'next/router'
-import Link from './Link'
+import Link from 'next/link'
 import Image from 'next/legacy/image'
 import enIcon from '../../public/images/voile4vents-english.png'
 import frIcon from '../../public/images/voile4vents-french.png'
@@ -13,9 +13,6 @@ const LanguageSwitchLink = ({ locale, ...rest }) => {
 
     let href = rest.href || router.asPath
     let pName = router.pathname
-    const inverseLocale = useMemo(() => (locale === 'en' ? 'fr' : 'en'), [
-        locale,
-    ])
 
     Object.keys(router.query).forEach(k => {
         if (k === 'locale') {
@@ -36,7 +33,7 @@ const LanguageSwitchLink = ({ locale, ...rest }) => {
             <div className="d-flex">
                 <div className="navbar-brand me-3">
                     {t('change_locale', {
-                        locale: inverseLocale,
+                        locale: locale,
                     })}
                 </div>
                 <Image

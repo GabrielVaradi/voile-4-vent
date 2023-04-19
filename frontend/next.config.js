@@ -2,6 +2,7 @@ module.exports = {
     images: {
         unoptimized: true,
     },
+    trailingSlash: true,
     reactStrictMode: true,
     webpack: (config, dev) => {
         if (dev) {

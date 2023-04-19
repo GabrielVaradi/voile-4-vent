@@ -15,7 +15,7 @@ import { useTranslation } from 'next-i18next'
 //     resetCalendar,
 // } from '@/utils/reservations.utils'
 // import AdminCalendar from '@/components/AdminCalendar'
-// import Link from 'next/link'
+// import Link from './Link'
 // import Reaptcha from 'reaptcha'
 
 const ReservationComponent = () => {

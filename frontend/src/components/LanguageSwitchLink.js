@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import languageDetector from '../lib/languageDetector'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
+import Link from './Link'
 import Image from 'next/legacy/image'
 import enIcon from '../../public/images/voile4vents-english.png'
 import frIcon from '../../public/images/voile4vents-french.png'

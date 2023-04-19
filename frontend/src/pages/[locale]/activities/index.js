@@ -6,7 +6,7 @@ import { getStaticPaths, getI18nProps } from '../../../lib/getStatic'
 import Image from 'next/legacy/image'
 
 import { Container, Col, Row } from 'reactstrap'
-import Link from 'next/link'
+import Link from '../../../components/Link'
 
 const Index = ({ activities }) => {
     const { t } = useTranslation('activities')

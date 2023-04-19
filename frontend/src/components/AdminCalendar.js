@@ -171,7 +171,7 @@ const Calendar = ({
                 className={className}
                 localizer={localizer}
                 style={{ height: 500 }}
-                culture={router.locale}
+                culture={router.query.locale}
                 views={['month']}
                 selectable
                 eventPropGetter={eventPropGetter}

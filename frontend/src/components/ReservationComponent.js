@@ -190,7 +190,7 @@ const ReservationComponent = () => {
     //         {/*    sitekey={process.env.NEXT_PUBLIC_GOOGLE_RECAPTCHA_PUBLIC_KEY}*/}
     //         {/*    ref={e => (recaptchaRef.current = e)}*/}
     //         {/*    size="invisible"*/}
-    //         {/*    hl={router.locale}*/}
+    //         {/*    hl={router.query.locale}*/}
     //         {/*/>*/}
     //         <Modal
     //             centered

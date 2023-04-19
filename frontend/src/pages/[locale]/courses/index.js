@@ -10,9 +10,9 @@ import Link from 'next/link'
 
 const Index = ({ courses }) => {
     const { t } = useTranslation('courses')
-    const router = useRouter()
+    const { isFallback, query } = useRouter()
 
-    if (!router.isFallback && !courses) {
+    if (isFallback && !courses) {
         return <div>Error</div>
     }
 
@@ -28,18 +28,18 @@ const Index = ({ courses }) => {
                             }`}
                             lg={5}>
                             <h2>
-                                {router.locale === 'en'
+                                {query.locale === 'en'
                                     ? course.title_en
                                     : course.title_fr}
                             </h2>
                             <h5>{course.price}$</h5>
                             <h5>
-                                {router.locale === 'en'
+                                {query.locale === 'en'
                                     ? course.duration_en
                                     : course.duration_fr}
                             </h5>
                             <h6 className="mt-4 w-75">
-                                {router.locale === 'en'
+                                {query.locale === 'en'
                                     ? course.description_en
                                     : course.description_fr}
                             </h6>
@@ -51,7 +51,7 @@ const Index = ({ courses }) => {
                                     <ul className="text-start mt-3">
                                         {course.skills.map(skill => (
                                             <li key={skill.id}>
-                                                {router.locale === 'en'
+                                                {query.locale === 'en'
                                                     ? skill.name_en
                                                     : skill.name_fr}
                                             </li>

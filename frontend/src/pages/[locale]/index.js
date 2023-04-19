@@ -18,9 +18,9 @@ const VideoFull = dynamic(() => import('@/components/Videos/VideoFull'), {
 
 const Home = ({ courses, teachers }) => {
     const { t } = useTranslation('home')
-    const router = useRouter()
+    const { isFallback, query } = useRouter()
 
-    if (!router.isFallback && (!courses || !teachers)) {
+    if (!isFallback.isFallback && (!courses || !teachers)) {
         return <div>Error</div>
     }
 
@@ -81,12 +81,12 @@ const Home = ({ courses, teachers }) => {
                             </div>
 
                             <div className="my-3 px-3">
-                                {router.locale === 'en'
+                                {query.locale === 'en'
                                     ? course.title_en
                                     : course.title_fr}
                             </div>
                             <div className="mb-4 px-3">
-                                {router.locale === 'en'
+                                {query.locale === 'en'
                                     ? course.description_en
                                     : course.description_fr}
                             </div>
@@ -144,12 +144,12 @@ const Home = ({ courses, teachers }) => {
 
                             <div className="p-3">
                                 <div className="mb-3">
-                                    {router.locale === 'en'
+                                    {query.locale === 'en'
                                         ? teacher.title_en
                                         : teacher.title_fr}
                                 </div>
                                 <div>
-                                    {router.locale === 'en'
+                                    {query.locale === 'en'
                                         ? teacher.description_en
                                         : teacher.description_fr}
                                 </div>

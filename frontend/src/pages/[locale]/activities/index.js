@@ -10,9 +10,9 @@ import Link from 'next/link'
 
 const Index = ({ activities }) => {
     const { t } = useTranslation('activities')
-    const router = useRouter()
+    const { isFallback, query } = useRouter()
 
-    if (!router.isFallback && !activities) {
+    if (isFallback && !activities) {
         return <div>Error</div>
     }
 
@@ -28,18 +28,18 @@ const Index = ({ activities }) => {
                             }`}
                             lg={5}>
                             <h2>
-                                {router.locale === 'en'
+                                {query.locale === 'en'
                                     ? activity.title_en
                                     : activity.title_fr}
                             </h2>
                             <h5>{activity.price}$</h5>
                             <h5>
-                                {router.locale === 'en'
+                                {query.locale === 'en'
                                     ? activity.duration_en
                                     : activity.duration_fr}
                             </h5>
                             <h6 className="mt-4 w-75 lh-lg">
-                                {router.locale === 'en'
+                                {query.locale === 'en'
                                     ? activity.description_en
                                     : activity.description_fr}
                             </h6>

@@ -13,7 +13,7 @@ import { useTranslation } from 'next-i18next'
 const Index = () => {
     const { t } = useTranslation('adminLogin')
     // const recaptchaRef = useRef()
-    // const router = useRouter()
+    // const { query } = useRouter()
 
     const { login } = useAuth({
         middleware: 'guest',
@@ -89,7 +89,7 @@ const Index = () => {
                                         {/*        (recaptchaRef.current = e)*/}
                                         {/*    }*/}
                                         {/*    size="invisible"*/}
-                                        {/*    hl={router.locale}*/}
+                                        {/*    hl={query.locale}*/}
                                         {/*/>*/}
                                     </div>
                                 </Form>

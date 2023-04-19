@@ -36,7 +36,7 @@ const Calendar = ({
     type,
     setTooManyDaysError,
 }) => {
-    const router = useRouter()
+    const { query } = useRouter()
     const { t } = useTranslation('reservations')
     const [currentDate, setCurrentDate] = useState()
     const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
@@ -80,7 +80,7 @@ const Calendar = ({
         return (
             <>
                 <div>
-                    {router.locale === 'en' ? event.title_en : event.title_fr}
+                    {query.locale === 'en' ? event.title_en : event.title_fr}
                 </div>
                 <div>
                     {isBefore(e.start, subDays(new Date(), 1))
@@ -230,7 +230,7 @@ const Calendar = ({
                 className={className}
                 localizer={localizer}
                 style={{ height: 500 }}
-                culture={router.locale}
+                culture={query.locale}
                 views={['month']}
                 selectable
                 onSelectSlot={onSelectSlot}

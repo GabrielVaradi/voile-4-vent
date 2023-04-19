@@ -114,7 +114,7 @@ const ReservationForm = ({
             ...values,
             events: eventsSelectedIds,
             eventsDates: formattedDates,
-            language: router.locale,
+            language: router.query.locale,
             type: type.value,
         }
 

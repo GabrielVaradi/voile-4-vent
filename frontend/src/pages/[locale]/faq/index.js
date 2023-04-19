@@ -13,21 +13,21 @@ import { getStaticPaths, getI18nProps } from '../../../lib/getStatic'
 
 const Index = ({ faqs }) => {
     const { t } = useTranslation('faq')
-    const router = useRouter()
+    const { isFallback, query } = useRouter()
 
-    if (!router.isFallback && !faqs) {
+    if (isFallback && !faqs) {
         return <div>Error</div>
     }
 
     const [open, setOpen] = useState('0')
 
     const questionLocale = useMemo(
-        () => (router.locale === 'en' ? 'question_en' : 'question_fr'),
+        () => (query.locale === 'en' ? 'question_en' : 'question_fr'),
         [],
     )
 
     const answerLocale = useMemo(
-        () => (router.locale === 'en' ? 'answer_en' : 'answer_fr'),
+        () => (query.locale === 'en' ? 'answer_en' : 'answer_fr'),
         [],
     )
 

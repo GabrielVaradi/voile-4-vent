@@ -23,7 +23,7 @@ import { mailService } from '@/services'
 const Index = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const { t } = useTranslation('contactUs')
-    // const router = useRouter()
+    // const { query } = useRouter()
     // const recaptchaRef = useRef()
 
     const { isLoaded } = useLoadScript({
@@ -159,7 +159,7 @@ const Index = () => {
                                         {/*    }*/}
                                         {/*    ref={e => (recaptchaRef.current = e)}*/}
                                         {/*    size="invisible"*/}
-                                        {/*    hl={router.locale}*/}
+                                        {/*    hl={query.locale}*/}
                                         {/*/>*/}
                                     </Form>
                                 </>

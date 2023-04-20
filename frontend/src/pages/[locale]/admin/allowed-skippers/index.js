@@ -17,6 +17,7 @@ import { allowedSkipperService } from '@/services'
 import DataTable from 'react-data-table-component'
 import { getStaticPaths, makeStaticProps } from '../../../../lib/getStatic'
 import { useTranslation } from 'next-i18next'
+import Head from 'next/head'
 
 const Index = () => {
     const router = useRouter()
@@ -122,119 +123,143 @@ const Index = () => {
     }
 
     return (
-        <Container className="d-flex flex-column mt-5">
-            <h1 className="mb-4">{t('page_title')}</h1>
-            <DataTable
-                columns={columns}
-                data={allowedSkippers}
-                progressPending={datatableLoading}
-                pagination
-                paginationServer
-                paginationTotalRows={totalRows}
-                onChangeRowsPerPage={handlePerRowsChange}
-                onChangePage={handlePageChange}
-                paginationComponentOptions={paginationComponentOptions}
-            />
-            <div className="w-100 d-flex justify-content-end">
-                <Button
-                    color="primary"
-                    className="mt-3 fs-4"
-                    onClick={() => {
-                        setModalIsOpen(prev => !prev)
-                    }}>
-                    {t('add')}
-                </Button>
-            </div>
+        <>
+            <Head>
+                <title> Voile 4 vents allowed skippers page </title>
+                <meta
+                    name="description"
+                    content="Check and add people to the allowed skippers list to whom you are willing to rent a boat"
+                />
+            </Head>
+            <Container className="d-flex flex-column mt-5">
+                <h1 className="mb-4">{t('page_title')}</h1>
+                <DataTable
+                    columns={columns}
+                    data={allowedSkippers}
+                    progressPending={datatableLoading}
+                    pagination
+                    paginationServer
+                    paginationTotalRows={totalRows}
+                    onChangeRowsPerPage={handlePerRowsChange}
+                    onChangePage={handlePageChange}
+                    paginationComponentOptions={paginationComponentOptions}
+                />
+                <div className="w-100 d-flex justify-content-end">
+                    <Button
+                        color="primary"
+                        className="mt-3 fs-4"
+                        onClick={() => {
+                            setModalIsOpen(prev => !prev)
+                        }}>
+                        {t('add')}
+                    </Button>
+                </div>
 
-            <Formik
-                onSubmit={createAllowedSkipper}
-                initialValues={{
-                    first_name: '',
-                    last_name: '',
-                    email: '',
-                    phone_number: '',
-                }}
-                validationSchema={allowedSkipperFormValidations}
-                enableReinitialize>
-                {({ isSubmitting, touched, errors, submitForm, resetForm }) => {
-                    return (
-                        <Modal
-                            isOpen={modalIsOpen}
-                            toggle={() => toggleModal(resetForm)}
-                            size="lg">
-                            <ModalHeader toggle={() => toggleModal(resetForm)}>
-                                {t('add_allowed_skipper')}
-                            </ModalHeader>
-                            <ModalBody>
-                                <>
-                                    <Form>
-                                        <BasicTextInput
-                                            field="first_name"
-                                            fieldLabel={t('first_name_label')}
-                                            placeholder={t(
-                                                'first_name_placeholder',
-                                            )}
-                                            errors={errors}
-                                            touched={touched}
-                                            required
-                                        />
-                                        <BasicTextInput
-                                            field="last_name"
-                                            fieldLabel={t('last_name_label')}
-                                            placeholder={t(
-                                                'last_name_placeholder',
-                                            )}
-                                            errors={errors}
-                                            touched={touched}
-                                            required
-                                        />
-                                        <BasicTextInput
-                                            field="email"
-                                            fieldLabel={t('email_label')}
-                                            placeholder={t('email_placeholder')}
-                                            errors={errors}
-                                            touched={touched}
-                                            required
-                                        />
-                                        <BasicPhoneInput
-                                            field="phone_number"
-                                            fieldLabel={t('phone_number_label')}
-                                            placeholder={t(
-                                                'phone_number_placeholder',
-                                            )}
-                                            errors={errors}
-                                            touched={touched}
-                                            required
-                                        />
-                                    </Form>
-                                    {isSubmitting && (
-                                        <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">
-                                            <div
-                                                className="spinner-border"
-                                                role="status text-center"
+                <Formik
+                    onSubmit={createAllowedSkipper}
+                    initialValues={{
+                        first_name: '',
+                        last_name: '',
+                        email: '',
+                        phone_number: '',
+                    }}
+                    validationSchema={allowedSkipperFormValidations}
+                    enableReinitialize>
+                    {({
+                        isSubmitting,
+                        touched,
+                        errors,
+                        submitForm,
+                        resetForm,
+                    }) => {
+                        return (
+                            <Modal
+                                isOpen={modalIsOpen}
+                                toggle={() => toggleModal(resetForm)}
+                                size="lg">
+                                <ModalHeader
+                                    toggle={() => toggleModal(resetForm)}>
+                                    {t('add_allowed_skipper')}
+                                </ModalHeader>
+                                <ModalBody>
+                                    <>
+                                        <Form>
+                                            <BasicTextInput
+                                                field="first_name"
+                                                fieldLabel={t(
+                                                    'first_name_label',
+                                                )}
+                                                placeholder={t(
+                                                    'first_name_placeholder',
+                                                )}
+                                                errors={errors}
+                                                touched={touched}
+                                                required
                                             />
-                                        </div>
-                                    )}
-                                </>
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button
-                                    color="primary"
-                                    disabled={isSubmitting}
-                                    onClick={submitForm}>
-                                    {t('add')}
-                                </Button>
-                                <Button
-                                    color="secondary"
-                                    onClick={() => toggleModal(resetForm)}>
-                                    {t('cancel')}
-                                </Button>
-                            </ModalFooter>
-                        </Modal>
-                    )
-                }}
-            </Formik>
-        </Container>
+                                            <BasicTextInput
+                                                field="last_name"
+                                                fieldLabel={t(
+                                                    'last_name_label',
+                                                )}
+                                                placeholder={t(
+                                                    'last_name_placeholder',
+                                                )}
+                                                errors={errors}
+                                                touched={touched}
+                                                required
+                                            />
+                                            <BasicTextInput
+                                                field="email"
+                                                fieldLabel={t('email_label')}
+                                                placeholder={t(
+                                                    'email_placeholder',
+                                                )}
+                                                errors={errors}
+                                                touched={touched}
+                                                required
+                                            />
+                                            <BasicPhoneInput
+                                                field="phone_number"
+                                                fieldLabel={t(
+                                                    'phone_number_label',
+                                                )}
+                                                placeholder={t(
+                                                    'phone_number_placeholder',
+                                                )}
+                                                errors={errors}
+                                                touched={touched}
+                                                required
+                                            />
+                                        </Form>
+                                        {isSubmitting && (
+                                            <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">
+                                                <div
+                                                    className="spinner-border"
+                                                    role="status text-center"
+                                                />
+                                            </div>
+                                        )}
+                                    </>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button
+                                        color="primary"
+                                        disabled={isSubmitting}
+                                        onClick={submitForm}>
+                                        {t('add')}
+                                    </Button>
+                                    <Button
+                                        color="secondary"
+                                        onClick={() => toggleModal(resetForm)}>
+                                        {t('cancel')}
+                                    </Button>
+                                </ModalFooter>
+                            </Modal>
+                        )
+                    }}
+                </Formik>
+            </Container>
+        </>
     )
 }
 

@@ -40,6 +40,7 @@ const LanguageSwitchLink = ({ locale, ...rest }) => {
                     src={locale === 'en' ? frIcon : enIcon}
                     width={40}
                     height={40}
+                    alt="Switch language Icon"
                 />
             </div>
         </Link>

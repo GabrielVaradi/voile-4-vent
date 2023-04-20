@@ -39,7 +39,7 @@ const Navigation = () => {
                                 src="/images/voile4vents-logo.png"
                                 width={75}
                                 height={75}
-                                alt=""
+                                alt="Voile4vents logo"
                             />
                         </Link>
                         <Link

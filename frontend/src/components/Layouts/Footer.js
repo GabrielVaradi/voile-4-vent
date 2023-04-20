@@ -75,7 +75,7 @@ const Footer = () => {
                                 src={logoVoileCanada}
                                 width={100}
                                 height={100}
-                                alt=""
+                                alt="Logo voile canada"
                             />
                         </div>
                         <div className="w-50">
@@ -85,7 +85,7 @@ const Footer = () => {
                                 src={logoVoileQuebec}
                                 width={100}
                                 height={100}
-                                alt=""
+                                alt="Logo voile quebec"
                             />
                         </div>
                         <br />

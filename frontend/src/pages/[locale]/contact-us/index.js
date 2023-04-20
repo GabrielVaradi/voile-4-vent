@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'next-i18next'
 import { getStaticPaths, makeStaticProps } from '../../../lib/getStatic'
 import { GoogleMap, Marker, useLoadScript } from '@react-google-maps/api'
+import Head from 'next/head'
 import {
     Container,
     Row,
@@ -72,6 +73,13 @@ const Index = () => {
 
     return (
         <>
+            <Head>
+                <title> Voile 4 vents contact us page </title>
+                <meta
+                    name="description"
+                    content="Contact us if you have any questions or if you want to book an activity, or even a course with more people"
+                />
+            </Head>
             <Container className="mt-5">
                 <h1 className="mb-4">{t('page_title')}</h1>
                 <div className="d-flex flex-column justify-content-center align-items-center mb-4">

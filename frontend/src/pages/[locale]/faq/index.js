@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { faqService } from '../../../services'
 import {
@@ -40,21 +41,30 @@ const Index = ({ faqs }) => {
     }
 
     return (
-        <Container className="mt-5">
-            <h1 className="mb-4">{t('page_title')}</h1>
-            <Accordion toggle={toggle} open={open}>
-                {faqs?.data.map(question => (
-                    <AccordionItem key={question.id}>
-                        <AccordionHeader targetId={question.id.toString()}>
-                            {question[questionLocale]}
-                        </AccordionHeader>
-                        <AccordionBody accordionId={question.id.toString()}>
-                            {question[answerLocale]}
-                        </AccordionBody>
-                    </AccordionItem>
-                ))}
-            </Accordion>
-        </Container>
+        <>
+            <Head>
+                <title> Voile 4 vents FAQ page </title>
+                <meta
+                    name="description"
+                    content="Here you can get an answer to all frequently asked questions about sailing and voile4vents"
+                />
+            </Head>
+            <Container className="mt-5">
+                <h1 className="mb-4">{t('page_title')}</h1>
+                <Accordion toggle={toggle} open={open}>
+                    {faqs?.data.map(question => (
+                        <AccordionItem key={question.id}>
+                            <AccordionHeader targetId={question.id.toString()}>
+                                {question[questionLocale]}
+                            </AccordionHeader>
+                            <AccordionBody accordionId={question.id.toString()}>
+                                {question[answerLocale]}
+                            </AccordionBody>
+                        </AccordionItem>
+                    ))}
+                </Accordion>
+            </Container>
+        </>
     )
 }
 

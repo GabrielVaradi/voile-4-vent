@@ -66,28 +66,28 @@ class FaqSeeder extends Seeder
                 'question_en' => "How can I properly prepare for the course?",
                 'question_fr' => "Comment me préparer adéquatement au cours?",
                 'answer_en' => "We strongly recommends that you read the manual “Initiation to cruising sailing“. Essential technical manual to familiarize yourself with the maneuvers and the rich 
-                                vocabulary of sailing. Cost $35.00, plus postage, if applicable.",
+                                vocabulary of sailing. It costs $35.00, plus postage, if applicable. You can add it directly when you book if wanted.",
                 'answer_fr' => "Nous vous recommandons fortement la lecture du manuel “Initiation à la voile croisière“. Manuel technique indispensable pour vous familiariser avec les 
-                                manœuvres et le riche vocabulaire de la voile. Coût $35.00, plus frais d’envoi postal, si il y a.",
+                                manœuvres et le riche vocabulaire de la voile. Son coût est $35.00, plus frais d’envoi postal, si il y a. Vous pouvez vous le procurer directement en effectuant votre réservation sur notre site.",
 
             ]);
         Faq::query()
             ->create([
-                'question_en' => "How many crew member can we expect?",
-                'question_fr' => "Combien il y a t'il de membres d'équipage?",
-                'answer_en' => "The crew consists of 3 to 4 trainees plus the instructor. You will be paired with other trainees to form the crew. After your training, you can rent an identical sailboat by communicating through 
-                                the school's Facebook, with other trainees to share the rental and the pleasure.",
-                'answer_fr' => "L’équipage se compose de 3 à 4 stagiaires en plus de l'instructeur. Vous serez jumelés à d’autres stagiaires pour former l’équipage. Après votre formation, vous pourrez louer un voilier
-                                identique en communiquant par le Facebook de l’école, avec d’autres stagiaires pour partager la location et le plaisir. ",
+                'question_en' => "How many crew member can we expect on board?",
+                'question_fr' => "Combien il y a t'il de membres d'équipage à bord?",
+                'answer_en' => "The crew consists of 3 to 4 trainees plus the instructor. You will be paired with other trainees to form the crew. After your training, you can rent an identical 
+                                sailboat by communicating through the school's Facebook, with other trainees to share the rental and the pleasure.",
+                'answer_fr' => "L’équipage se compose de 3 à 4 stagiaires en plus de l'instructeur. Vous serez jumelés à d’autres stagiaires pour former l’équipage. Après votre formation, vous 
+                                pourrez louer un voilier identique en communiquant par le Facebook de l’école, avec d’autres stagiaires pour partager la location et le plaisir. ",
             ]);
         Faq::query()
             ->create([
                 'question_en' => "Do I need to have my Pleasure Craft Operator Card (PCOC)?",
                 'question_fr' => "Est-ce que je dois posséder ma carte de conducteur d'embarcation de plaisance (CCEP)?",
-                'answer_en' => "In Canada, any boat operator equipped with a motor must have an operator card. However, you are not required to take formal training.
+                'answer_en' => "In Canada, any boat operator equipped with a motor must have an operator card. However, you are not required to take formal training prior the sailcourse.
                                 All you need to do is take the exam online on the platform of your choice after your course.",
-                'answer_fr' => "Au Canada, tout conducteur d’embarcation muni d’un moteur doit détenir sa carte d’opérateur. Cependant, vous n'êtes pas obligés de suivre la formation officielle.
-                                Il vous suffira de passer l'examen en ligne sur la plateforme de votre choix après votre cours.",
+                'answer_fr' => "Au Canada, tout conducteur d’embarcation muni d’un moteur doit détenir sa carte d’opérateur. Cependant, vous n'êtes pas obligés de suivre la formation officielle 
+                                avant le cours de voile. Il vous suffira de passer l'examen en ligne sur la plateforme de votre choix après votre cours.",
             ]);
         Faq::query()
             ->create([

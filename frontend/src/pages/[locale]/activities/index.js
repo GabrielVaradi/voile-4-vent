@@ -7,6 +7,7 @@ import Image from 'next/legacy/image'
 import Head from 'next/head'
 import { Container, Col, Row } from 'reactstrap'
 import Link from '../../../components/Link'
+import styles from '../../../../styles/Pages/Activities.module.scss'
 
 const Index = ({ activities }) => {
     const { t } = useTranslation('activities')
@@ -26,16 +27,18 @@ const Index = ({ activities }) => {
                 />
             </Head>
             <Container className="mt-5">
-                <h1 className="mb-4">{t('page_title')}</h1>
+                <h1 className="mb-5">{t('page_title')}</h1>
                 {activities?.data.map((activity, i) => (
                     <React.Fragment key={activity.id}>
-                        <Row className="mt-5">
+                        <Row className={`${styles.activityContainer}`}>
                             <Col
-                                className={`${
-                                    i % 2 === 0 ? 'order-1' : 'order-2 ps-5'
+                                className={`text-center text-lg-start ${
+                                    i % 2 === 0
+                                        ? 'order-lg-1 pe-lg-5'
+                                        : 'order-lg-2 ps-lg-5'
                                 }`}
                                 lg={5}>
-                                <h2>
+                                <h2 className="fw-bold">
                                     {query.locale === 'en'
                                         ? activity.title_en
                                         : activity.title_fr}
@@ -46,28 +49,35 @@ const Index = ({ activities }) => {
                                         ? activity.duration_en
                                         : activity.duration_fr}
                                 </h5>
-                                <h6 className="mt-4 w-75 lh-lg">
+                                <h5 className="mt-4 lh-lg">
                                     {query.locale === 'en'
                                         ? activity.description_en
                                         : activity.description_fr}
-                                </h6>
+                                </h5>
+                                {activity.pdf_path && (
+                                    <h5 className="mt-3">
+                                        <Link
+                                            href="/files/courses/programme_croisiere_elementaire.pdf"
+                                            target="_blank">
+                                            {t('more_details')}
+                                        </Link>
+                                    </h5>
+                                )}
                                 <Link
                                     href={`/contact-us`}
-                                    className="mt-5 btn btn-primary px-5 py-2">
+                                    className="mt-0 mb-4 mb-lg-0 mt-lg-4 btn btn-primary px-5 py-2">
                                     {t('contact_us')}
                                 </Link>
                             </Col>
                             <Col
-                                className={`${
-                                    i % 2 === 0 ? 'order-2' : 'order-1'
+                                className={`${styles.image} position-relative ${
+                                    i % 2 === 0 ? 'order-lg-2' : 'order-lg-1'
                                 }`}
                                 lg={7}>
                                 <Image
-                                    layout="responsive"
+                                    layout="fill"
                                     objectFit="cover"
                                     src={activity.image_path}
-                                    width={500}
-                                    height={500}
                                     priority
                                     alt={
                                         query.locale === 'en'

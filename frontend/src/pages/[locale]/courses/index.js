@@ -27,14 +27,16 @@ const Index = ({ courses }) => {
                 />
             </Head>
             <Container className="mt-5">
-                <h1 className="mb-4">{t('page_title')}</h1>
+                <h1 className="mb-5">{t('page_title')}</h1>
                 {courses?.data.map((course, i) => (
                     <React.Fragment key={course.id}>
-                        <Row className="mt-5" id={course.type}>
+                        <Row
+                            className={`${styles.courseContainer}`}
+                            id={course.type}>
                             <Col
                                 className={`text-center text-lg-start ${
                                     i % 2 === 0
-                                        ? 'order-lg-1'
+                                        ? 'order-lg-1 pe-lg-5'
                                         : 'order-lg-2 ps-lg-5'
                                 }`}
                                 lg={5}>
@@ -49,7 +51,7 @@ const Index = ({ courses }) => {
                                         ? course.duration_en
                                         : course.duration_fr}
                                 </h5>
-                                <h5 className="mt-4">
+                                <h5 className="mt-4 lh-lg">
                                     {query.locale === 'en'
                                         ? course.description_en
                                         : course.description_fr}
@@ -95,16 +97,14 @@ const Index = ({ courses }) => {
                                 </Link>
                             </Col>
                             <Col
-                                className={`${
+                                className={`${styles.image} position-relative ${
                                     i % 2 === 0 ? 'order-lg-2' : 'order-lg-1'
                                 }`}
                                 lg={7}>
                                 <Image
-                                    layout="responsive"
+                                    layout="fill"
                                     objectFit="cover"
                                     src={course.image_path}
-                                    width={500}
-                                    height={500}
                                     priority
                                     alt={
                                         query.locale === 'en'

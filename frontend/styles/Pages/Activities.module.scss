@@ -1,0 +1,16 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';
+
+.image {
+    @include media-breakpoint-down(lg) {
+        height: 500px;
+    }  
+}
+
+.activityContainer {
+    margin-bottom: 8rem;
+    @include media-breakpoint-down(lg) {
+        margin-bottom: 5rem;
+    }  
+}

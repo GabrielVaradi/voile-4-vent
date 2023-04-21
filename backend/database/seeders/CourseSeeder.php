@@ -41,8 +41,10 @@ class CourseSeeder extends Seeder
             ->create([
                 'title_en' => 'Basic skipper certificate',
                 'title_fr' => 'Brevet croisière élémentaire',
-                'description_en' => 'For those who are new to sailing or have some sailing experience. The aim of the course: to acquire the necessary skills to be able to sail safely, as skipper or crew member, on a 6 to 10 meters sailboat.',
-                'description_fr' => 'Pour ceux qui débutent ou possèdent un peu d’expérience de la voile. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier de 6 à 10 mètre.',
+                'description_en' => 'For those who are new to sailing or have some sailing experience. The aim of the course: to acquire the necessary skills to be able to sail safely, as skipper or crew member, on a 6 to 10 meters sailboat.
+                                     Opportunity to pass the Sailing Canada exam to obtain the patent.',
+                'description_fr' => "Pour ceux qui débutent ou possèdent un peu d’expérience de la voile. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier de 6 à 10 mètre.
+                                     Possibilité de passer l'examen de voile Canada pour obtenir le brevet.",
                 'duration_en' => '30 hours',
                 'duration_fr' => '30 heures',
                 'price' => 540,

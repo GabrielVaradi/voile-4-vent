@@ -70,16 +70,15 @@ const Navigation = () => {
                             }>
                             {t('activities')}
                         </Link>
-                        {/* <Link href="/reservations">
-                            <a
-                                className="navbar-brand me-0 me-lg-5"
-                                style={
-                                    pathname === '/[locale]/reservations'
-                                        ? selectedStyles
-                                        : {}
-                                }>
-                                {t('reservations')}
-                            </a>
+                        {/* <Link
+                            href="/reservations"
+                            className="navbar-brand me-0 me-lg-5"
+                            style={
+                                pathname === '/[locale]/reservations'
+                                    ? selectedStyles
+                                    : {}
+                            }>
+                            {t('reservations')}
                         </Link> */}
                         <Link
                             href="/contact-us"
@@ -91,15 +90,16 @@ const Navigation = () => {
                             }>
                             {t('contact-us')}
                         </Link>
-                        {/* <Link href="/faq">
-                            <a
-                                className="navbar-brand me-0 me-lg-5"
-                                style={
-                                    pathname === '/[locale]/faq' ? selectedStyles : {}
-                                }>
-                                {t('faq')}
-                            </a>
-                        </Link> */}
+                        <Link
+                            href="/faq"
+                            className="navbar-brand me-0 me-lg-5"
+                            style={
+                                pathname === '/[locale]/faq'
+                                    ? selectedStyles
+                                    : {}
+                            }>
+                            {t('faq')}
+                        </Link>
                         {user && (
                             <UncontrolledDropdown>
                                 <DropdownToggle

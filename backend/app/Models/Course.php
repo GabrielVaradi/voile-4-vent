@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
-    use HasFactory;/**
- *
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    use HasFactory; /**
+       *
+       * The attributes that are mass assignable.
+       *
+       * @var array<int, string>
+       */
     protected $fillable = [
         'title_en',
         'title_fr',
@@ -22,6 +22,8 @@ class Course extends Model
         'duration_fr',
         'price',
         'type',
+        'image_path',
+        'pdf_path',
     ];
 
     public function skills()

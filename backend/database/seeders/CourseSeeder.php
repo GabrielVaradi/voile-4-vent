@@ -32,6 +32,7 @@ class CourseSeeder extends Seeder
                 'duration_fr' => '15 heures',
                 'price' => 270,
                 'image_path' => '/images/courses/voile4vents_initiation.jpg',
+                'pdf_path' => '/files/courses/programme_croisiere_initiation.pdf',
                 'stripe_product_id' => 'price_1LQATaGBR8DTe9IELg49wgFY',
                 'type' => 'initiation_sailing'
             ]);
@@ -40,12 +41,13 @@ class CourseSeeder extends Seeder
             ->create([
                 'title_en' => 'Basic skipper certificate',
                 'title_fr' => 'Brevet croisière élémentaire',
-                'description_en' => 'For those who are new to sailing or have some sailing experience. The aim of the course: to acquire the necessary skills to be able to sail safely, as skipper or crew member, on a sailboat.',
-                'description_fr' => 'Pour ceux qui débutent ou possèdent un peu d’expérience de la voile. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier.',
+                'description_en' => 'For those who are new to sailing or have some sailing experience. The aim of the course: to acquire the necessary skills to be able to sail safely, as skipper or crew member, on a 6 to 10 meters sailboat.',
+                'description_fr' => 'Pour ceux qui débutent ou possèdent un peu d’expérience de la voile. Le but du cours : acquérir les compétences nécessaires pour pouvoir naviguer en toute sécurité, à titre de chef de bord ou d’équipier, sur un voilier de 6 à 10 mètre.',
                 'duration_en' => '30 hours',
                 'duration_fr' => '30 heures',
                 'price' => 540,
                 'image_path' => '/images/courses/voile4vents_elementaire.jpg',
+                'pdf_path' => '/files/courses/programme_croisiere_elementaire.pdf',
                 'stripe_product_id' => 'price_1LQBtSGBR8DTe9IEUqGItvu3',
                 'type' => 'beginner_skipper'
             ]);
@@ -59,7 +61,7 @@ class CourseSeeder extends Seeder
                 'duration_en' => '5 evenings',
                 'duration_fr' => '5 soirs',
                 'price' => 135,
-                'image_path' => '/images/activities/voile4vents_regate.jpg',
+                'image_path' => '/images/courses/voile4vents_regata.jpg',
                 'stripe_product_id' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
                 'type' => 'regatta'
             ]);

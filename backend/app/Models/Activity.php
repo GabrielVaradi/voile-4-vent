@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
-    use HasFactory;/**
- *
- * The attributes that are mass assignable.
- *
- * @var array<int, string>
- */
+    use HasFactory; /**
+       *
+       * The attributes that are mass assignable.
+       *
+       * @var array<int, string>
+       */
     protected $fillable = [
         'title_en',
         'title_fr',
@@ -22,5 +22,7 @@ class Activity extends Model
         'duration_fr',
         'price',
         'type',
+        'image_path',
+        'pdf_path',
     ];
 }

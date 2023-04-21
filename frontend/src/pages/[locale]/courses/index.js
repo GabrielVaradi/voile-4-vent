@@ -7,6 +7,7 @@ import Image from 'next/legacy/image'
 import Head from 'next/head'
 import { Container, Col, Row } from 'reactstrap'
 import Link from '../../../components/Link'
+import styles from '../../../../styles/Pages/Courses.module.scss'
 
 const Index = ({ courses }) => {
     const { t } = useTranslation('courses')
@@ -31,11 +32,13 @@ const Index = ({ courses }) => {
                     <React.Fragment key={course.id}>
                         <Row className="mt-5" id={course.type}>
                             <Col
-                                className={`${
-                                    i % 2 === 0 ? 'order-1' : 'order-2 ps-5'
+                                className={`text-center text-lg-start ${
+                                    i % 2 === 0
+                                        ? 'order-lg-1'
+                                        : 'order-lg-2 ps-lg-5'
                                 }`}
                                 lg={5}>
-                                <h2>
+                                <h2 className="fw-bold">
                                     {query.locale === 'en'
                                         ? course.title_en
                                         : course.title_fr}
@@ -46,22 +49,34 @@ const Index = ({ courses }) => {
                                         ? course.duration_en
                                         : course.duration_fr}
                                 </h5>
-                                <h6 className="mt-4 w-75">
+                                <h5 className="mt-4">
                                     {query.locale === 'en'
                                         ? course.description_en
                                         : course.description_fr}
-                                </h6>
+                                </h5>
+                                {course.pdf_path && (
+                                    <h5 className="mt-3">
+                                        <Link
+                                            href="/files/courses/programme_croisiere_elementaire.pdf"
+                                            target="_blank">
+                                            {t('more_details')}
+                                        </Link>
+                                    </h5>
+                                )}
                                 {course.skills.length > 0 && (
                                     <>
                                         <h3 className="mt-5">
                                             {t('skills_title')}
                                         </h3>
-                                        <ul className="text-start mt-3">
+                                        <ul
+                                            className={`mt-3 ${styles.unorderedList}`}>
                                             {course.skills.map(skill => (
                                                 <li key={skill.id}>
-                                                    {query.locale === 'en'
-                                                        ? skill.name_en
-                                                        : skill.name_fr}
+                                                    <h5>
+                                                        {query.locale === 'en'
+                                                            ? skill.name_en
+                                                            : skill.name_fr}
+                                                    </h5>
                                                 </li>
                                             ))}
                                         </ul>
@@ -69,19 +84,19 @@ const Index = ({ courses }) => {
                                 )}
 
                                 {/* <Link href={`/reservations?type=${course.type}`}>
-                                <a className="mt-5 btn btn-primary px-5 py-2">
+                                <a className="mt-4 btn btn-primary px-5 py-2">
                                     {t('book_now')}
                                 </a>
                             </Link> */}
                                 <Link
                                     href={`/contact-us`}
-                                    className="mt-5 btn btn-primary px-5 py-2">
+                                    className="mt-0 mb-4 mb-lg-0 mt-lg-4 btn btn-primary px-5 py-2">
                                     {t('contact_us')}
                                 </Link>
                             </Col>
                             <Col
                                 className={`${
-                                    i % 2 === 0 ? 'order-2' : 'order-1'
+                                    i % 2 === 0 ? 'order-lg-2' : 'order-lg-1'
                                 }`}
                                 lg={7}>
                                 <Image

@@ -3,18 +3,30 @@ import { Col, FormGroup, Input, InputGroup, Label } from 'reactstrap'
 import { ErrorMessage, Field } from 'formik'
 import cn from 'classnames'
 
-const BasicCheckbox = ({
+const TermsCheckbox = ({
     field,
     fieldLabel,
     errors,
     touched,
     required,
     labelClasses,
+    labelRole,
+    labelOnClick,
 }) => {
     return (
         <FormGroup row className="align-items-center">
             <Label className="d-flex" for={field} lg={11}>
-                <div className={labelClasses}>{fieldLabel}</div>
+                <div
+                    role={labelRole}
+                    className={labelClasses}
+                    onClick={e => {
+                        e.preventDefault()
+                        if (labelOnClick) {
+                            labelOnClick()
+                        }
+                    }}>
+                    {fieldLabel}
+                </div>
                 {required && <span className="required-asterisk">*</span>}
             </Label>
             <Col lg={1}>
@@ -39,4 +51,4 @@ const BasicCheckbox = ({
     )
 }
 
-export default BasicCheckbox
+export default TermsCheckbox

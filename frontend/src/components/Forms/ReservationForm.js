@@ -27,6 +27,8 @@ import BasicAddressField from '@/components/Fields/BasicAddressField'
 import BasicPhoneInput from '@/components/Fields/BasicPhoneInput'
 import BasicDateInput from '@/components/Fields/BasicDateInput'
 import BasicCheckbox from '@/components/Fields/BasicCheckbox'
+import TermsCheckbox from '@/components/Fields/TermsCheckbox'
+
 import { useTranslation } from 'next-i18next'
 import { coursesTypes } from '@/constants/reservations.constants'
 
@@ -268,7 +270,7 @@ const ReservationForm = ({
                         touched={touched}
                     />
                 )}
-                <BasicCheckbox
+                <TermsCheckbox
                     field={`forms.${i}.terms_accepted`}
                     fieldLabel={t('terms_accepted_label')}
                     labelClasses="text-decoration-underline"

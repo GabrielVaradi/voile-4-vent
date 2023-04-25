@@ -14,6 +14,8 @@ class Reservation extends Model
         'initiation_sailing' => 'price_1LQATaGBR8DTe9IELg49wgFY',
         'regata' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
         'manual' => 'price_1MxH9JGBR8DTe9IEa3AURVsC',
+        'logbook' => 'price_1N0rsSGBR8DTe9IEwGRkPtKQ',
+        'exam' => 'price_1N0ruHGBR8DTe9IEMVKIl8D6',
     ];
 
     /**

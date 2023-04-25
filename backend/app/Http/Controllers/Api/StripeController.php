@@ -27,6 +27,9 @@ class StripeController extends Controller
         $forms = $request->forms;
         $customerFormsIds = [];
         $numberOfManuals = 0;
+        $numberOfLogbooks = 0;
+        $numberOfExams = 0;
+
         foreach ($forms as $form) {
             $customerForm = new CustomerForm();
             $customerForm->first_name = $form['first_name'];
@@ -36,12 +39,21 @@ class StripeController extends Controller
             $customerForm->phone_number = $form['phone_number'];
             $customerForm->birthdate = $form['birthdate'];
             $customerForm->has_manual = $form['has_manual'];
+            $customerForm->has_logbook = $form['has_logbook'];
+            $customerForm->has_exam = $form['has_exam'];
+            $customerForm->terms_accepted = $form['terms_accepted'];
             $customerForm->transaction_state = 'pending';
             $customerForm->save();
             $customerFormsIds[] = $customerForm->id;
 
             if ($form['has_manual']) {
                 $numberOfManuals++;
+            }
+            if ($form['has_logbook']) {
+                $numberOfLogbooks++;
+            }
+            if ($form['has_exam']) {
+                $numberOfExams++;
             }
         }
         $lineItems[] = [
@@ -52,6 +64,18 @@ class StripeController extends Controller
             $lineItems[] = [
                 'price' => Reservation::priceIds['manual'],
                 'quantity' => $numberOfManuals,
+            ];
+        }
+        if ($numberOfLogbooks > 0) {
+            $lineItems[] = [
+                'price' => Reservation::priceIds['logbook'],
+                'quantity' => $numberOfLogbooks,
+            ];
+        }
+        if ($numberOfExams > 0) {
+            $lineItems[] = [
+                'price' => Reservation::priceIds['exam'],
+                'quantity' => $numberOfExams,
             ];
         }
 

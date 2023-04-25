@@ -22,6 +22,9 @@ return new class extends Migration {
             $table->string('phone_number');
             $table->string('birthdate');
             $table->boolean('has_manual');
+            $table->boolean('has_logbook');
+            $table->boolean('has_exam');
+            $table->boolean('terms_accepted');
             $table->string('transaction_state');
             $table->foreignId('reservation_id')->nullable()->constrained()->references('id')->on('reservations');
         });

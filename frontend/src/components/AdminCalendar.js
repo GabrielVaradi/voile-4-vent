@@ -23,7 +23,6 @@ import {
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import styles from '../../styles/Components/AdminCalendar.module.scss'
-
 import('react-big-calendar/lib/css/react-big-calendar.css')
 
 const Calendar = ({

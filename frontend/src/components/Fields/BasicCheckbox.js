@@ -6,18 +6,28 @@ import cn from 'classnames'
 const BasicCheckbox = ({
     field,
     fieldLabel,
-    placeholder,
     errors,
     touched,
     required,
+    labelClasses,
+    labelRole,
+    labelOnClick,
 }) => {
     return (
         <FormGroup row className="align-items-center">
-            <Label for={field} lg={4}>
-                {fieldLabel}
+            <Label className="d-flex" for={field} lg={11}>
+                <div
+                    role={labelRole}
+                    className={labelClasses}
+                    onClick={e => {
+                        e.preventDefault()
+                        labelOnClick()
+                    }}>
+                    {fieldLabel}
+                </div>
                 {required && <span className="required-asterisk">*</span>}
             </Label>
-            <Col lg={2}>
+            <Col lg={1}>
                 <InputGroup>
                     <Input
                         type="checkbox"
@@ -28,14 +38,13 @@ const BasicCheckbox = ({
                         className={cn({
                             'is-invalid': touched[field] && errors[field],
                         })}
-                        placeholder={placeholder || 'Type here...'}
                     />
                 </InputGroup>
-                <ErrorMessage
-                    name={field}
-                    render={msg => <small className="text-danger">{msg}</small>}
-                />
             </Col>
+            <ErrorMessage
+                name={field}
+                render={msg => <small className="text-danger">{msg}</small>}
+            />
         </FormGroup>
     )
 }

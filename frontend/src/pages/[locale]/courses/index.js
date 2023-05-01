@@ -59,7 +59,7 @@ const Index = ({ courses }) => {
                                 {course.pdf_path && (
                                     <h5 className="mt-3">
                                         <Link
-                                            href="/files/courses/programme_croisiere_elementaire.pdf"
+                                            href={course.pdf_path}
                                             target="_blank">
                                             {t('more_details')}
                                         </Link>
@@ -84,17 +84,19 @@ const Index = ({ courses }) => {
                                         </ul>
                                     </>
                                 )}
-
-                                {/* <Link href={`/reservations?type=${course.type}`}>
-                                <a className="mt-4 btn btn-primary px-5 py-2">
-                                    {t('book_now')}
-                                </a>
-                            </Link> */}
-                                <Link
-                                    href={`/contact-us`}
-                                    className="mt-0 mb-4 mb-lg-0 mt-lg-4 btn btn-primary px-5 py-2">
-                                    {t('contact_us')}
-                                </Link>
+                                {course.type === 'intermediate_skipper' ? (
+                                    <Link
+                                        href={`/contact-us`}
+                                        className="mt-0 mb-4 mb-lg-0 mt-lg-4 btn btn-primary px-5 py-2">
+                                        {t('contact_us')}
+                                    </Link>
+                                ) : (
+                                    <Link
+                                        href={`/reservations?type=${course.type}`}
+                                        className="mt-4 btn btn-primary px-5 py-2">
+                                        {t('book_now')}
+                                    </Link>
+                                )}
                             </Col>
                             <Col
                                 className={`${styles.image} position-relative ${

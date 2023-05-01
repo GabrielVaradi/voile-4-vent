@@ -23,7 +23,6 @@ import {
 } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import styles from '../../styles/Components/AdminCalendar.module.scss'
-
 import('react-big-calendar/lib/css/react-big-calendar.css')
 
 const Calendar = ({
@@ -63,7 +62,7 @@ const Calendar = ({
         } else if (type?.value === 'initiation_sailing') {
             setMaxNumberOfDays(2)
         }
-        if (type?.value === 'regata') {
+        if (type?.value === 'regatta') {
             setMaxNumberOfDays(5)
         }
     }, [type])

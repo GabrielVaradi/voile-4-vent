@@ -23,7 +23,10 @@ class CustomerForm extends Model
         'email',
         'reservation_id',
         'transaction_state',
-        'has_manual'
+        'has_manual',
+        'has_logbook',
+        'has_exam',
+        'terms_accepted'
     ];
 
     /**

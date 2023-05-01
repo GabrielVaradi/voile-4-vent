@@ -26,11 +26,11 @@ class ReservationSeeder extends Seeder
             ->create([
                 'type' => 'beginner_skipper',
             ]);
-        $reservation1->event()->sync([1]);
+        $reservation1->events()->sync([1]);
         $reservation2 = Reservation::query()
             ->create([
                 'type' => 'beginner_skipper',
             ]);
-        $reservation2->event()->sync([1]);
+        $reservation2->events()->sync([1]);
     }
 }

@@ -33,6 +33,9 @@ class CustomerFormSeeder extends Seeder
                 'transaction_state' => 'completed',
                 'reservation_id' => 1,
                 'has_manual' => false,
+                'has_logbook' => false,
+                'has_exam' => false,
+                'terms_accepted' => false,
             ]);
         CustomerForm::query()
             ->create([
@@ -45,6 +48,9 @@ class CustomerFormSeeder extends Seeder
                 'transaction_state' => 'completed',
                 'reservation_id' => 1,
                 'has_manual' => true,
+                'has_logbook' => true,
+                'has_exam' => true,
+                'terms_accepted' => true,
             ]);
     }
 }

@@ -75,7 +75,7 @@ const Home = ({ courses, teachers }) => {
                     <Row className="mt-5 justify-content-center">
                         {courses?.data.map(course => (
                             <Col
-                                className="text-center text-white bg-primary mx-3 p-0 d-flex flex-column my-3 my-lg-0"
+                                className="text-center text-white bg-primary mx-3 p-0 d-flex flex-column my-3"
                                 key={course.id}
                                 lg={3}>
                                 <div>
@@ -103,18 +103,19 @@ const Home = ({ courses, teachers }) => {
                                         ? course.description_en
                                         : course.description_fr}
                                 </div>
-                                <div className="d-flex mt-auto">
+                                <div className="d-flex justify-content-around mt-auto">
                                     <Link
                                         href={`/courses#${course.type}`}
-                                        className="btn btn-link text-white border-0 mx-auto mb-3">
+                                        className="btn btn-link text-white border-0 mb-3">
                                         {t('learn_more')}
                                     </Link>
-                                    {/* <Link
-                                    href={`/reservations?type=${course.type}`}>
-                                    <a className="btn btn-primary bg-white text-black border-0 mx-auto mb-3">
-                                        {t('registration')}
-                                    </a>
-                                </Link> */}
+                                    {course.type !== 'intermediate_skipper' && (
+                                        <Link
+                                            href={`/reservations?type=${course.type}`}
+                                            className="btn btn-primary bg-white text-black border-0 mb-3 ms-5 ms-lg-0">
+                                            {t('registration')}
+                                        </Link>
+                                    )}
                                 </div>
                             </Col>
                         ))}

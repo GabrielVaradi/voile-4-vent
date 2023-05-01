@@ -65,6 +65,10 @@ class EventController extends Controller
             $customerForm->address = $form['address'];
             $customerForm->phone_number = $form['phone_number'];
             $customerForm->birthdate = $form['birthdate'];
+            $customerForm->has_manual = $form['has_manual'];
+            $customerForm->has_logbook = $form['has_logbook'];
+            $customerForm->has_exam = $form['has_exam'];
+            $customerForm->terms_accepted = $form['terms_accepted'];
             $customerForm->transaction_state = 'pending';
             $customerForm->save();
             $customerForms[] = $customerForm;

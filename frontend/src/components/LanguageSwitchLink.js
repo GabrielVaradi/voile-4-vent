@@ -30,7 +30,7 @@ const LanguageSwitchLink = ({ locale, ...rest }) => {
             className="text-decoration-none ms-auto"
             href={href}
             onClick={() => languageDetector.cache(locale)}>
-            <div className="d-flex">
+            <div className="d-flex align-items-center">
                 <div className="navbar-brand me-3">
                     {t('change_locale', {
                         locale: locale,

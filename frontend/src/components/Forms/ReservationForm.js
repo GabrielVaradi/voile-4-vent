@@ -27,7 +27,10 @@ import BasicAddressField from '@/components/Fields/BasicAddressField'
 import BasicPhoneInput from '@/components/Fields/BasicPhoneInput'
 import BasicDateInput from '@/components/Fields/BasicDateInput'
 import BasicCheckbox from '@/components/Fields/BasicCheckbox'
+import TermsCheckbox from '@/components/Fields/TermsCheckbox'
+
 import { useTranslation } from 'next-i18next'
+import { coursesTypes } from '@/constants/reservations.constants'
 
 const ReservationForm = ({
     eventsSelected,
@@ -43,6 +46,7 @@ const ReservationForm = ({
 
     const [activeTab, setActiveTab] = useState(1)
     const [maxNumberOfPeopleOptions, setMaxNumberOfPeopleOptions] = useState(4)
+    const [showTerms, setShowTerms] = useState(false)
 
     useEffect(() => {
         if (!isAdmin) {
@@ -167,6 +171,10 @@ const ReservationForm = ({
                         )
                         .required(t('validation_required')),
                 }),
+                terms_accepted: Yup.boolean().oneOf(
+                    [true],
+                    t('validation_required'),
+                ),
             }),
         ),
     })
@@ -237,10 +245,37 @@ const ReservationForm = ({
                     touched={touched}
                     required
                 />
-                <BasicCheckbox
-                    field={`forms.${i}.has_manual`}
-                    fieldLabel={t('has_manual_label')}
-                    placeholder={t('has_manual_placeholder')}
+                {(type.value === coursesTypes.initiation_sailing.value ||
+                    type.value === coursesTypes.beginner_skipper.value) && (
+                    <BasicCheckbox
+                        field={`forms.${i}.has_manual`}
+                        fieldLabel={t('has_manual_label')}
+                        errors={errors}
+                        touched={touched}
+                    />
+                )}
+                {type.value !== coursesTypes.regatta.value && (
+                    <BasicCheckbox
+                        field={`forms.${i}.has_logbook`}
+                        fieldLabel={t('has_logbook_label')}
+                        errors={errors}
+                        touched={touched}
+                    />
+                )}
+                {type.value !== coursesTypes.regatta.value && (
+                    <BasicCheckbox
+                        field={`forms.${i}.has_exam`}
+                        fieldLabel={t('has_exam_label')}
+                        errors={errors}
+                        touched={touched}
+                    />
+                )}
+                <TermsCheckbox
+                    field={`forms.${i}.terms_accepted`}
+                    fieldLabel={t('terms_accepted_label')}
+                    labelClasses="text-decoration-underline"
+                    labelOnClick={() => setShowTerms(true)}
+                    labelRole="button"
                     errors={errors}
                     touched={touched}
                     required
@@ -297,180 +332,198 @@ const ReservationForm = ({
     }
 
     return (
-        <Formik
-            onSubmit={createReservation}
-            initialValues={{
-                forms: [
-                    {
-                        first_name: '',
-                        last_name: '',
-                        email: '',
-                        address: '',
-                        phone_number: '',
-                        birthdate: {
-                            day: '',
-                            month: '',
-                            year: '',
+        <>
+            <Formik
+                onSubmit={createReservation}
+                initialValues={{
+                    forms: [
+                        {
+                            first_name: '',
+                            last_name: '',
+                            email: '',
+                            address: '',
+                            phone_number: '',
+                            birthdate: {
+                                day: '',
+                                month: '',
+                                year: '',
+                            },
+                            has_manual: false,
+                            has_logbook: false,
+                            has_exam: false,
+                            terms_accepted: false,
                         },
-                        has_manual: false,
-                    },
-                ],
-                number_of_people: '1',
-                type: 'brevet_elementaire',
-            }}
-            validationSchema={customerFormValidations}
-            enableReinitialize>
-            {({
-                isSubmitting,
-                touched,
-                errors,
-                submitForm,
-                setFieldValue,
-                values,
-                initialValues,
-                resetForm,
-            }) => {
-                return (
-                    <Modal
-                        isOpen={modalIsOpen}
-                        toggle={() => toggleModal(resetForm)}
-                        size="lg">
-                        <ModalHeader toggle={() => toggleModal(resetForm)}>
-                            {t('registration')}
-                        </ModalHeader>
-                        <ModalBody>
-                            <>
-                                <Form>
-                                    <FieldArray
-                                        name="forms"
-                                        render={arrayHelpers => (
-                                            <>
-                                                <BasicSelect
-                                                    field="number_of_people"
-                                                    fieldLabel={t(
-                                                        'number_of_people_label',
-                                                    )}
-                                                    errors={errors}
-                                                    touched={touched}
-                                                    setFieldValue={
-                                                        setFieldValue
-                                                    }
-                                                    required
-                                                    formGroupClasses="mb-2"
-                                                    onSelect={e => {
-                                                        if (
-                                                            e.target.value >
-                                                            values.number_of_people
-                                                        ) {
-                                                            for (
-                                                                let i = 0;
-                                                                i <
-                                                                e.target.value -
-                                                                    values.number_of_people;
-                                                                i++
-                                                            ) {
-                                                                arrayHelpers.push(
-                                                                    initialValues
-                                                                        .forms[0],
-                                                                )
-                                                            }
-                                                        } else if (
-                                                            e.target.value <
-                                                            values.number_of_people
-                                                        ) {
-                                                            for (
-                                                                let i = 0;
-                                                                i <
-                                                                values.number_of_people -
-                                                                    e.target
-                                                                        .value;
-                                                                i++
-                                                            ) {
-                                                                arrayHelpers.pop(
-                                                                    '',
-                                                                )
-                                                            }
+                    ],
+                    number_of_people: '1',
+                    type: 'brevet_elementaire',
+                }}
+                validationSchema={customerFormValidations}
+                enableReinitialize>
+                {({
+                    isSubmitting,
+                    touched,
+                    errors,
+                    submitForm,
+                    setFieldValue,
+                    values,
+                    initialValues,
+                    resetForm,
+                }) => {
+                    return (
+                        <Modal
+                            isOpen={modalIsOpen}
+                            toggle={() => toggleModal(resetForm)}
+                            size="lg">
+                            <ModalHeader toggle={() => toggleModal(resetForm)}>
+                                {t('registration')}
+                            </ModalHeader>
+                            <ModalBody>
+                                <>
+                                    <Form>
+                                        <FieldArray
+                                            name="forms"
+                                            render={arrayHelpers => (
+                                                <>
+                                                    <BasicSelect
+                                                        field="number_of_people"
+                                                        fieldLabel={t(
+                                                            'number_of_people_label',
+                                                        )}
+                                                        errors={errors}
+                                                        touched={touched}
+                                                        setFieldValue={
+                                                            setFieldValue
                                                         }
-                                                        setFieldValue(
-                                                            'number_of_people',
-                                                            e.target.value,
-                                                        )
-                                                    }}>
-                                                    <option
-                                                        disabled={
-                                                            maxNumberOfPeopleOptions <
+                                                        required
+                                                        formGroupClasses="mb-2"
+                                                        onSelect={e => {
+                                                            if (
+                                                                e.target.value >
+                                                                values.number_of_people
+                                                            ) {
+                                                                for (
+                                                                    let i = 0;
+                                                                    i <
+                                                                    e.target
+                                                                        .value -
+                                                                        values.number_of_people;
+                                                                    i++
+                                                                ) {
+                                                                    arrayHelpers.push(
+                                                                        initialValues
+                                                                            .forms[0],
+                                                                    )
+                                                                }
+                                                            } else if (
+                                                                e.target.value <
+                                                                values.number_of_people
+                                                            ) {
+                                                                for (
+                                                                    let i = 0;
+                                                                    i <
+                                                                    values.number_of_people -
+                                                                        e.target
+                                                                            .value;
+                                                                    i++
+                                                                ) {
+                                                                    arrayHelpers.pop(
+                                                                        '',
+                                                                    )
+                                                                }
+                                                            }
+                                                            setFieldValue(
+                                                                'number_of_people',
+                                                                e.target.value,
+                                                            )
+                                                        }}>
+                                                        <option
+                                                            disabled={
+                                                                maxNumberOfPeopleOptions <
+                                                                1
+                                                            }>
                                                             1
-                                                        }>
-                                                        1
-                                                    </option>
-                                                    <option
-                                                        disabled={
-                                                            maxNumberOfPeopleOptions <
+                                                        </option>
+                                                        <option
+                                                            disabled={
+                                                                maxNumberOfPeopleOptions <
+                                                                2
+                                                            }>
                                                             2
-                                                        }>
-                                                        2
-                                                    </option>
-                                                    <option
-                                                        disabled={
-                                                            maxNumberOfPeopleOptions <
+                                                        </option>
+                                                        <option
+                                                            disabled={
+                                                                maxNumberOfPeopleOptions <
+                                                                3
+                                                            }>
                                                             3
-                                                        }>
-                                                        3
-                                                    </option>
-                                                    <option
-                                                        disabled={
-                                                            maxNumberOfPeopleOptions <
+                                                        </option>
+                                                        <option
+                                                            disabled={
+                                                                maxNumberOfPeopleOptions <
+                                                                4
+                                                            }>
                                                             4
-                                                        }>
-                                                        4
-                                                    </option>
-                                                </BasicSelect>
-                                                {renderTabs(
-                                                    errors,
-                                                    touched,
-                                                    values,
-                                                    setFieldValue,
-                                                )}
-                                            </>
-                                        )}
-                                    />
-                                </Form>
-                                {isSubmitting && (
-                                    <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">
-                                        <div
-                                            className="spinner-border"
-                                            role="status text-center"
+                                                        </option>
+                                                    </BasicSelect>
+                                                    {renderTabs(
+                                                        errors,
+                                                        touched,
+                                                        values,
+                                                        setFieldValue,
+                                                    )}
+                                                </>
+                                            )}
                                         />
-                                    </div>
-                                )}
-                            </>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button
-                                color="primary"
-                                className="me-2"
-                                disabled={isSubmitting}
-                                onClick={() => {
-                                    // recaptchaRef.current.execute()
-                                    errors.forms?.forEach((form, i) => {
-                                        if (form !== undefined) {
-                                            setActiveTab(i + 1)
-                                        }
-                                    })
-                                    submitForm()
-                                }}>
-                                {t('book')}
-                            </Button>
-                            <Button
-                                color="secondary"
-                                onClick={() => toggleModal(resetForm)}>
-                                {t('cancel')}
-                            </Button>
-                        </ModalFooter>
-                    </Modal>
-                )
-            }}
-        </Formik>
+                                    </Form>
+                                    {isSubmitting && (
+                                        <div className="h-100 w-100 bg-light bg-opacity-10 mt-3">
+                                            <div
+                                                className="spinner-border"
+                                                role="status text-center"
+                                            />
+                                        </div>
+                                    )}
+                                </>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button
+                                    color="primary"
+                                    className="me-2"
+                                    disabled={isSubmitting}
+                                    onClick={() => {
+                                        // recaptchaRef.current.execute()
+                                        errors.forms?.forEach((form, i) => {
+                                            if (form !== undefined) {
+                                                setActiveTab(i + 1)
+                                            }
+                                        })
+                                        submitForm()
+                                    }}>
+                                    {t('book')}
+                                </Button>
+                                <Button
+                                    color="secondary"
+                                    onClick={() => toggleModal(resetForm)}>
+                                    {t('cancel')}
+                                </Button>
+                            </ModalFooter>
+                        </Modal>
+                    )
+                }}
+            </Formik>
+            <Modal
+                centered
+                isOpen={showTerms}
+                toggle={() => setShowTerms(prev => !prev)}
+                size="lg">
+                <ModalHeader toggle={() => setShowTerms(prev => !prev)}>
+                    {t('terms__accepted_label')}
+                </ModalHeader>
+                <ModalBody className="h4 my-3">
+                    {t('terms_accepted_description')}
+                </ModalBody>
+            </Modal>
+        </>
     )
 }
 

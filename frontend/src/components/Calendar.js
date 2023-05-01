@@ -222,7 +222,7 @@ const Calendar = ({
                 color: 'red',
                 zIndex: -1,
                 pointerEvents: 'none',
-                // textAlign: 'center',
+                textAlign: '-webkit-center',
             },
         }
     }

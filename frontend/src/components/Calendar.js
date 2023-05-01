@@ -7,12 +7,12 @@ import startOfWeek from 'date-fns/startOfWeek'
 import getDay from 'date-fns/getDay'
 import addDays from 'date-fns/addDays'
 import subDays from 'date-fns/subDays'
-// import addYears from 'date-fns/addYears'
-// import subMonths from 'date-fns/subMonths'
+import addYears from 'date-fns/addYears'
+import subMonths from 'date-fns/subMonths'
 import isSaturday from 'date-fns/isSaturday'
 import isSunday from 'date-fns/isSunday'
 import isBefore from 'date-fns/isBefore'
-// import isAfter from 'date-fns/isAfter'
+import isAfter from 'date-fns/isAfter'
 import parseISO from 'date-fns/parseISO'
 import enUS from 'date-fns/locale/en-US'
 import frCA from 'date-fns/locale/fr-CA'
@@ -36,10 +36,9 @@ const Calendar = ({
     type,
     setTooManyDaysError,
 }) => {
-    console.log(events)
     const { query } = useRouter()
     const { t } = useTranslation('reservations')
-    // const [currentDate, setCurrentDate] = useState()
+    const [currentDate, setCurrentDate] = useState()
     const [maxNumberOfDays, setMaxNumberOfDays] = useState(4)
 
     const { messages, formats } = useMemo(
@@ -63,13 +62,13 @@ const Calendar = ({
         setMaxNumberOfDays(type.days)
     }, [type])
 
-    // useEffect(() => {
-    //     const today = new Date()
-    //     setCurrentDate(today)
-    //     allowedMonths.includes(today.getMonth())
-    //         ? setCurrentDate(today)
-    //         : setCurrentDate(new Date(`${today.getFullYear()}-05-15`))
-    // }, [])
+    useEffect(() => {
+        const today = new Date()
+        setCurrentDate(today)
+        allowedMonths.includes(today.getMonth())
+            ? setCurrentDate(today)
+            : setCurrentDate(new Date(`${today.getFullYear()}-05-15`))
+    }, [])
 
     const Event = e => {
         const event = e.event
@@ -176,14 +175,14 @@ const Calendar = ({
         }
     }
 
-    // const onNavigate = date => {
-    //     if (
-    //         !isAfter(date, addYears(new Date(), 1)) &&
-    //         !isBefore(date, subMonths(new Date(), 3))
-    //     ) {
-    //         setCurrentDate(date)
-    //     }
-    // }
+    const onNavigate = date => {
+        if (
+            !isAfter(date, addYears(new Date(), 1)) &&
+            !isBefore(date, subMonths(new Date(), 3))
+        ) {
+            setCurrentDate(date)
+        }
+    }
 
     const dayPropGetter = date => {
         if (
@@ -242,8 +241,8 @@ const Calendar = ({
                 dayPropGetter={dayPropGetter}
                 // eventPropGetter={eventPropGetter}
                 components={components}
-                // onNavigate={onNavigate}
-                // date={currentDate}
+                onNavigate={onNavigate}
+                date={currentDate}
                 messages={messages}
                 formats={formats}
             />

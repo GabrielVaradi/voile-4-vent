@@ -64,9 +64,10 @@ const Calendar = ({
 
     useEffect(() => {
         const today = new Date()
-        allowedMonths.includes(today.getMonth())
-            ? setCurrentDate(today)
-            : setCurrentDate(new Date(`${today.getFullYear()}-05-15`))
+        setCurrentDate(today)
+        // allowedMonths.includes(today.getMonth())
+        //     ? setCurrentDate(today)
+        //     : setCurrentDate(new Date(`${today.getFullYear()}-05-15`))
     }, [])
 
     const Event = e => {
@@ -78,7 +79,19 @@ const Calendar = ({
         )
 
         return (
-            <div>{query.locale === 'en' ? event.title_en : event.title_fr}</div>
+            <>
+                <div>
+                    {query.locale === 'en' ? event.title_en : event.title_fr}
+                </div>
+                <div>
+                    {isBefore(e.start, subDays(new Date(), 1))
+                        ? t('event_finished')
+                        : t('places_left', {
+                              places_left:
+                                  event.max_reservations - totalReservations,
+                          })}
+                </div>
+            </>
         )
     }
 

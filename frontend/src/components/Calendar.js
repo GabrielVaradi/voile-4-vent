@@ -36,6 +36,7 @@ const Calendar = ({
     type,
     setTooManyDaysError,
 }) => {
+    console.log(events)
     const { query } = useRouter()
     const { t } = useTranslation('reservations')
     const [currentDate, setCurrentDate] = useState()
@@ -65,9 +66,9 @@ const Calendar = ({
     useEffect(() => {
         const today = new Date()
         setCurrentDate(today)
-        // allowedMonths.includes(today.getMonth())
-        //     ? setCurrentDate(today)
-        //     : setCurrentDate(new Date(`${today.getFullYear()}-05-15`))
+        allowedMonths.includes(today.getMonth())
+            ? setCurrentDate(today)
+            : setCurrentDate(new Date(`${today.getFullYear()}-05-15`))
     }, [])
 
     const Event = e => {

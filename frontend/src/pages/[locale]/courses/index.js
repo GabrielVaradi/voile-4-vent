@@ -34,7 +34,7 @@ const Index = ({ courses }) => {
                             className={`${styles.courseContainer}`}
                             id={course.type}>
                             <Col
-                                className={`text-center text-lg-start ${
+                                className={`text-center text-lg-start mb-4 mb-0-lg ${
                                     i % 2 === 0
                                         ? 'order-lg-1 pe-lg-5'
                                         : 'order-lg-2 ps-lg-5'

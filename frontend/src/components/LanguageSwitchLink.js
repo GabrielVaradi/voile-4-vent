@@ -27,7 +27,7 @@ const LanguageSwitchLink = ({ locale, ...rest }) => {
 
     return (
         <Link
-            className="text-decoration-none ms-auto"
+            className="text-decoration-none ms-lg-auto"
             href={href}
             onClick={() => languageDetector.cache(locale)}>
             <div className="d-flex align-items-center">

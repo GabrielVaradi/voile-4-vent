@@ -16,7 +16,7 @@
     "next": "Suivant",
     "today": "Aujourd'hui",
     "reservations": "Réservations",
-    "places_left": "{{places_left}} disponibles!",
+    "places_left": "{{places_left}} places disponibles!",
     "event_finished": "Événement terminé",
     "book_now": "Réserver maintenant",
     "booking_success_title": "Cours réservé!",

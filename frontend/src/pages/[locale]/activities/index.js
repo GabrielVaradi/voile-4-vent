@@ -9,7 +9,7 @@ import { Container, Col, Row } from 'reactstrap'
 import Link from '../../../components/Link'
 import styles from '../../../../styles/Pages/Activities.module.scss'
 
-const Index = ({ activities = null }) => {
+const Index = ({ activities }) => {
     const { t } = useTranslation('activities')
     const { isFallback, query } = useRouter()
 

@@ -216,17 +216,17 @@ const Calendar = ({
         }
     }
 
-    const eventPropGetter = () => {
-        return {
-            style: {
-                background: 'transparent',
-                color: 'red',
-                zIndex: -1,
-                pointerEvents: 'none',
-                textAlign: 'center',
-            },
-        }
-    }
+    // const eventPropGetter = () => {
+    //     return {
+    //         style: {
+    //             background: 'transparent',
+    //             color: 'red',
+    //             zIndex: -1,
+    //             pointerEvents: 'none',
+    //             textAlign: 'center',
+    //         },
+    //     }
+    // }
 
     return (
         <Container className="mt-4">
@@ -240,7 +240,7 @@ const Calendar = ({
                 selectable
                 onSelectSlot={onSelectSlot}
                 dayPropGetter={dayPropGetter}
-                eventPropGetter={eventPropGetter}
+                // eventPropGetter={eventPropGetter}
                 components={components}
                 onNavigate={onNavigate}
                 // date={currentDate}

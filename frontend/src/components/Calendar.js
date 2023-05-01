@@ -21,7 +21,7 @@ import { Container } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import {
     allowedMonths,
-    regataAllowedDays,
+    regattaAllowedDays,
 } from '@/constants/reservations.constants'
 import isEqual from 'date-fns/isEqual'
 import addSeconds from 'date-fns/addSeconds'
@@ -186,8 +186,8 @@ const Calendar = ({
             !isBefore(date, subDays(new Date(), 1))
         ) {
             if (
-                type.value === 'regata' &&
-                !regataAllowedDays.includes(date.getDay())
+                type.value === 'regatta' &&
+                !regattaAllowedDays.includes(date.getDay())
             ) {
                 return {
                     style: {

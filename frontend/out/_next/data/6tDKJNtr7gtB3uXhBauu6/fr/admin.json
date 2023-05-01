@@ -1,1 +1,115 @@
-{"pageProps":{"_nextI18Next":{"initialI18nStore":{"fr":{"reservations":{"page_title":"Réservations","available_soon":"Disponible très bientôt!","type":"Type","beginner_skipper_label":"Brevet de croisière élémentaire","initiation_sailing_label":"Introduction à la navigation","regata_label":"Régate","helper_text_select_days_one":"Sélectionner {{days}} jour pour votre réservation (les jours de fin de semaine sont réservés en bloc)","helper_text_select_days_other":"Sélectionner {{days}} jours pour votre réservation (les jours de fin de semaine sont réservés en bloc)","helper_text_contact_us_description_1":"Si ces horaires ne vous conviennent pas ou que vous souhaitez réserver pour un plus grand groupe, ","helper_text_contact_us_link":"contactez-nous","helper_text_contact_us_description_2":" pour que nous trouvions une solution!","helper_text_available_months":"Les cours sont disponibles de Mai à Octobre","helper_text_too_many_days_error":"Vous avez déjà sélectionné le nombre maximum de jours ou vous essayez de réserver plus de jours que permis.","previous":"Précédent","next":"Suivant","today":"Aujourd'hui","reservations":"Réservations","places_left":"{{places_left}} disponibles!","event_finished":"Événement terminé","book_now":"Réserver maintenant","booking_success_title":"Cours réservé!","booking_success_description":"Merci! Votre cours a été réservé avec succès. Vous recevrez un courriel de confirmation sous peu avec des instructions supplémentaires pour vous préparer adéquatement. Contactez-nous si vous avez des questions!"},"reservationForm":{"registration":"Inscription","number_of_people_label":"Nombre de personne","person_tab_name_0":"Première personne","person_tab_name_1":"Deuxième personne","person_tab_name_2":"Troisième personne","person_tab_name_3":"Quatrième personne","first_name_label":"Prénom","first_name_placeholder":"Entrer votre prénom ","last_name_label":"Nom de famille","last_name_placeholder":"Entrer votre nom de famile","email_label":"Courriel","email_placeholder":"Entrer votre courriel","address_label":"Adresse","address_placeholder":"Entrer votre adresse","phone_number_label":"Numéro de téléphone","phone_number_placeholder":"999-999-9999","birthdate_label":"Date de naissance","day_placeholder":"JJ","month_placeholder":"MM","year_placeholder":"AAAA","has_manual_label":"Avez-vous besoin du manuel d'initiation à la voile croisière de la fédération de voile? (50$)","validation_required":"Ce champs est requis","validation_too_short":"Entrer au moins 2 charactères","validation_too_long":"Entrer un maximum de 50 charactères","validation_email_invalid":"Le format du courriel doit être exemple@email.com","validation_phone_number_invalid":"Entrer un format valide (555-555-5555)","validation_birthdate_day_too_low":"Doit être plus que 0","validation_birthdate_day_too_high":"Doit être moins que 31","validation_birthdate_month_too_low":"Doit être plus que 0","validation_birthdate_month_too_high":"Doit être moins que 12","validation_birthdate_year_too_low":"Vous n'êtes pas si vieux!","validation_birthdate_year_too_high":"Vous devez avoir 18 ans","book":"Réserver","cancel":"Annuler"},"navigation":{"home":"Accueil","courses":"Cours","reservations":"Réservations","activities":"Activités","teachers":"Instructeurs","contact-us":"Contactez-nous","faq":"FAQ","change_locale":"{{locale}}","admin":"Admin","admin_menu":"Administrateur","calendar":"Calendrier","todos":"À faire","allowed_skippers":"Liste des chefs de bords","logout":"Déconnexion"},"footer":{"footer":"Footer","title":"École de voile 4 vents","phone_key":"Téléphone:","phone_value":"514-817-3612","email_key":"Courriel:","email_value":"voile4vents@gmail.com","address_key":"Embarquement:","address_value_1":"Club nautique de Baie D'Urfé","address_value_2":"20436 chemin Lakeshore","accreditation":"Nous sommes accrédités par","courses":"Cours","activities":"Activités","reservations":"Réservations","teachers":"Instructeurs","contact-us":"Contactez-nous","faq":"FAQ"}}},"initialLocale":"fr","ns":["reservations","reservationForm","navigation","footer"],"userConfig":{"i18n":{"defaultLocale":"fr","locales":["fr","en"]},"react":{"useSuspense":false},"default":{"i18n":{"defaultLocale":"fr","locales":["fr","en"]},"react":{"useSuspense":false}}}}},"__N_SSG":true}
+{
+    "pageProps": {
+        "_nextI18Next": {
+            "initialI18nStore": {
+                "fr": {
+                    "reservations": {
+                        "page_title": "Réservations",
+                        "available_soon": "Disponible très bientôt!",
+                        "type": "Type",
+                        "beginner_skipper_label": "Brevet de croisière élémentaire",
+                        "initiation_sailing_label": "Introduction à la navigation",
+                        "regatta_label": "Régate",
+                        "helper_text_select_days_one": "Sélectionner {{days}} jour pour votre réservation (les jours de fin de semaine sont réservés en bloc)",
+                        "helper_text_select_days_other": "Sélectionner {{days}} jours pour votre réservation (les jours de fin de semaine sont réservés en bloc)",
+                        "helper_text_contact_us_description_1": "Si ces horaires ne vous conviennent pas ou que vous souhaitez réserver pour un plus grand groupe, ",
+                        "helper_text_contact_us_link": "contactez-nous",
+                        "helper_text_contact_us_description_2": " pour que nous trouvions une solution!",
+                        "helper_text_available_months": "Les cours sont disponibles de Mai à Octobre",
+                        "helper_text_too_many_days_error": "Vous avez déjà sélectionné le nombre maximum de jours ou vous essayez de réserver plus de jours que permis.",
+                        "previous": "Précédent",
+                        "next": "Suivant",
+                        "today": "Aujourd'hui",
+                        "reservations": "Réservations",
+                        "places_left": "{{places_left}} disponibles!",
+                        "event_finished": "Événement terminé",
+                        "book_now": "Réserver maintenant",
+                        "booking_success_title": "Cours réservé!",
+                        "booking_success_description": "Merci! Votre cours a été réservé avec succès. Vous recevrez un courriel de confirmation sous peu avec des instructions supplémentaires pour vous préparer adéquatement. Contactez-nous si vous avez des questions!"
+                    },
+                    "reservationForm": {
+                        "registration": "Inscription",
+                        "number_of_people_label": "Nombre de personne",
+                        "person_tab_name_0": "Première personne",
+                        "person_tab_name_1": "Deuxième personne",
+                        "person_tab_name_2": "Troisième personne",
+                        "person_tab_name_3": "Quatrième personne",
+                        "first_name_label": "Prénom",
+                        "first_name_placeholder": "Entrer votre prénom ",
+                        "last_name_label": "Nom de famille",
+                        "last_name_placeholder": "Entrer votre nom de famile",
+                        "email_label": "Courriel",
+                        "email_placeholder": "Entrer votre courriel",
+                        "address_label": "Adresse",
+                        "address_placeholder": "Entrer votre adresse",
+                        "phone_number_label": "Numéro de téléphone",
+                        "phone_number_placeholder": "999-999-9999",
+                        "birthdate_label": "Date de naissance",
+                        "day_placeholder": "JJ",
+                        "month_placeholder": "MM",
+                        "year_placeholder": "AAAA",
+                        "has_manual_label": "Avez-vous besoin du manuel d'initiation à la voile croisière de la fédération de voile? (50$)",
+                        "validation_required": "Ce champs est requis",
+                        "validation_too_short": "Entrer au moins 2 charactères",
+                        "validation_too_long": "Entrer un maximum de 50 charactères",
+                        "validation_email_invalid": "Le format du courriel doit être exemple@email.com",
+                        "validation_phone_number_invalid": "Entrer un format valide (555-555-5555)",
+                        "validation_birthdate_day_too_low": "Doit être plus que 0",
+                        "validation_birthdate_day_too_high": "Doit être moins que 31",
+                        "validation_birthdate_month_too_low": "Doit être plus que 0",
+                        "validation_birthdate_month_too_high": "Doit être moins que 12",
+                        "validation_birthdate_year_too_low": "Vous n'êtes pas si vieux!",
+                        "validation_birthdate_year_too_high": "Vous devez avoir 18 ans",
+                        "book": "Réserver",
+                        "cancel": "Annuler"
+                    },
+                    "navigation": {
+                        "home": "Accueil",
+                        "courses": "Cours",
+                        "reservations": "Réservations",
+                        "activities": "Activités",
+                        "teachers": "Instructeurs",
+                        "contact-us": "Contactez-nous",
+                        "faq": "FAQ",
+                        "change_locale": "{{locale}}",
+                        "admin": "Admin",
+                        "admin_menu": "Administrateur",
+                        "calendar": "Calendrier",
+                        "todos": "À faire",
+                        "allowed_skippers": "Liste des chefs de bords",
+                        "logout": "Déconnexion"
+                    },
+                    "footer": {
+                        "footer": "Footer",
+                        "title": "École de voile 4 vents",
+                        "phone_key": "Téléphone:",
+                        "phone_value": "514-817-3612",
+                        "email_key": "Courriel:",
+                        "email_value": "voile4vents@gmail.com",
+                        "address_key": "Embarquement:",
+                        "address_value_1": "Club nautique de Baie D'Urfé",
+                        "address_value_2": "20436 chemin Lakeshore",
+                        "accreditation": "Nous sommes accrédités par",
+                        "courses": "Cours",
+                        "activities": "Activités",
+                        "reservations": "Réservations",
+                        "teachers": "Instructeurs",
+                        "contact-us": "Contactez-nous",
+                        "faq": "FAQ"
+                    }
+                }
+            },
+            "initialLocale": "fr",
+            "ns": ["reservations", "reservationForm", "navigation", "footer"],
+            "userConfig": {
+                "i18n": { "defaultLocale": "fr", "locales": ["fr", "en"] },
+                "react": { "useSuspense": false },
+                "default": {
+                    "i18n": { "defaultLocale": "fr", "locales": ["fr", "en"] },
+                    "react": { "useSuspense": false }
+                }
+            }
+        }
+    },
+    "__N_SSG": true
+}

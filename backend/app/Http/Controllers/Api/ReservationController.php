@@ -32,9 +32,9 @@ class ReservationController extends Controller
         $reservations = [];
         foreach ($events as $event) {
             $reservation = new Reservation($request->all());
-            $reservation->event()->associate($event['id']);
+            $reservation->events()->associate($event['id']);
             $reservation->save();
-//            $reservation['id'] = $reservation->id;
+            //            $reservation['id'] = $reservation->id;
             $reservations[] = $reservation;
         }
 

@@ -62,7 +62,7 @@ const Calendar = ({
         } else if (type?.value === 'initiation_sailing') {
             setMaxNumberOfDays(2)
         }
-        if (type?.value === 'regata') {
+        if (type?.value === 'regatta') {
             setMaxNumberOfDays(5)
         }
     }, [type])

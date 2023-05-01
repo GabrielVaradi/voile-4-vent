@@ -54,30 +54,30 @@ class CourseSeeder extends Seeder
                 'type' => 'beginner_skipper'
             ]);
         $basicSkipper->skills()->sync([7, 8, 9, 10, 11, 12, 13, 14]);
-        $regata = Course::query()
+        $regatta = Course::query()
             ->create([
-                'title_en' => 'Regata',
+                'title_en' => 'regatta',
                 'title_fr' => 'Régate',
-                'description_en' => 'Regata is a race between multiple boats. This course will allow you to acquire the skills to maximize the speed of your boat, notably by using the spinnaker.',
+                'description_en' => 'regatta is a race between multiple boats. This course will allow you to acquire the skills to maximize the speed of your boat, notably by using the spinnaker.',
                 'description_fr' => "La régate est une course de vitesse entre plusieurs bateaux. Ce cours vous permettra d'acquérir les compétences requises pour maximiser la vitesse de votre voilier, notamment grâche à l'utilisation du spinnaker.",
                 'duration_en' => '5 evenings',
                 'duration_fr' => '5 soirs',
                 'price' => 135,
-                'image_path' => '/images/courses/voile4vents_regata.jpg',
+                'image_path' => '/images/courses/voile4vents_regatta.jpg',
                 'stripe_product_id' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
                 'type' => 'regatta'
             ]);
-        $regata->skills()->sync([15, 16, 17, 18, 19, 20]);
+        $regatta->skills()->sync([15, 16, 17, 18, 19, 20]);
         $intermediateSkipper = Course::query()
             ->create([
                 'title_en' => 'Intermediate skipper certificate',
                 'title_fr' => 'Brevet croisière intermédiaire',
-                'description_en' => 'Regata is a race between multiple boats. This course will allow you to acquire the skills to maximize the speed of your boat, notably by using the spinnaker.',
+                'description_en' => 'regatta is a race between multiple boats. This course will allow you to acquire the skills to maximize the speed of your boat, notably by using the spinnaker.',
                 'description_fr' => "La régate est une course de vitesse entre plusieurs bateaux. Ce cours vous permettra d'acquérir les compétences requises pour maximiser la vitesse de votre voilier, notamment grâche à l'utilisation du spinnaker.",
                 'duration_en' => '5 evenings',
                 'duration_fr' => '5 soirs',
                 'price' => 135,
-                'image_path' => '/images/courses/voile4vents_regata.jpg',
+                'image_path' => '/images/courses/voile4vents_regatta.jpg',
                 'stripe_product_id' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
                 'type' => 'intermediate_skipper'
             ]);

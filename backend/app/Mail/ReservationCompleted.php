@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\CustomerForm;
+use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -33,6 +34,12 @@ class ReservationCompleted extends Mailable
     public string $language;
 
     /**
+     * Event name
+     *
+     */
+    public string $eventName;
+
+    /**
      * Create a new message instance.
      *
      * @return void
@@ -42,6 +49,7 @@ class ReservationCompleted extends Mailable
         $this->reservation = $reservation;
         $this->customerForm = $customerForm;
         $this->language = $language;
+        $this->eventName = Event::types[$reservation->type]['title_' . $language];
     }
 
     /**
@@ -51,6 +59,8 @@ class ReservationCompleted extends Mailable
      */
     public function build(): static
     {
-        return $this->view('emails.reservation_completed');
+        $mailable = 'emails.' . $this->language . '.reservation_completed';
+        $subject = $this->language == 'en' ? 'Reservation confirmation' : 'Confirmation de réservation';
+        return $this->subject($subject)->view($mailable);
     }
 }

@@ -47,9 +47,9 @@ const ReservationComponent = ({ isAdmin }) => {
             days: coursesTypes.initiation_sailing.days,
         },
         {
-            value: coursesTypes.regata.value,
-            label: t(coursesTypes.regata.label),
-            days: coursesTypes.regata.days,
+            value: coursesTypes.regatta.value,
+            label: t(coursesTypes.regatta.label),
+            days: coursesTypes.regatta.days,
         },
     ]
 
@@ -64,7 +64,6 @@ const ReservationComponent = ({ isAdmin }) => {
         const query = new URLSearchParams(window.location.search)
         if (query.get('success')) {
             setSuccessModalIsOpen(true)
-            router.push('/reservations', undefined, { shallow: true })
         }
         if (query.get('canceled')) {
             console.log(
@@ -97,6 +96,7 @@ const ReservationComponent = ({ isAdmin }) => {
 
     const toggleSuccessModal = () => {
         setSuccessModalIsOpen(prev => !prev)
+        router.push('/reservations', undefined, { shallow: true })
     }
 
     return (

@@ -30,7 +30,7 @@ export const checkIfAllDaysAreSelected = (daysSelected, type) => {
         daysSelected.length === 2
     ) {
         return false
-    } else if (type?.value === 'regata' && daysSelected.length === 5) {
+    } else if (type?.value === 'regatta' && daysSelected.length === 5) {
         return false
     } else {
         return true

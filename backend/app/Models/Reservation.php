@@ -12,7 +12,7 @@ class Reservation extends Model
     const priceIds = [
         'beginner_skipper' => 'price_1LQBtSGBR8DTe9IEUqGItvu3',
         'initiation_sailing' => 'price_1LQATaGBR8DTe9IELg49wgFY',
-        'regata' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
+        'regatta' => 'price_1LQBufGBR8DTe9IEjpeocQPL',
         'manual' => 'price_1MxH9JGBR8DTe9IEa3AURVsC',
         'logbook' => 'price_1N0rsSGBR8DTe9IEwGRkPtKQ',
         'exam' => 'price_1N0ruHGBR8DTe9IEMVKIl8D6',
@@ -31,7 +31,7 @@ class Reservation extends Model
     /**
      * Get the event that owns the reservation.
      */
-    public function event()
+    public function events()
     {
         return $this->belongsToMany(Event::class);
     }

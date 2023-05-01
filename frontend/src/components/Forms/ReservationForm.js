@@ -254,7 +254,7 @@ const ReservationForm = ({
                         touched={touched}
                     />
                 )}
-                {type.value !== coursesTypes.regata.value && (
+                {type.value !== coursesTypes.regatta.value && (
                     <BasicCheckbox
                         field={`forms.${i}.has_logbook`}
                         fieldLabel={t('has_logbook_label')}
@@ -262,7 +262,7 @@ const ReservationForm = ({
                         touched={touched}
                     />
                 )}
-                {type.value !== coursesTypes.regata.value && (
+                {type.value !== coursesTypes.regatta.value && (
                     <BasicCheckbox
                         field={`forms.${i}.has_exam`}
                         fieldLabel={t('has_exam_label')}

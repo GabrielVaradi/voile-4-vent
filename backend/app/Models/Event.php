@@ -33,8 +33,8 @@ class Event extends Model
             'title_en' => 'Initiation to sailing',
             'title_fr' => 'Initiation à la voile'
         ],
-        'regata' => [
-            'title_en' => 'Regata',
+        'regatta' => [
+            'title_en' => 'regatta',
             'title_fr' => 'Régate'
         ]
     ];

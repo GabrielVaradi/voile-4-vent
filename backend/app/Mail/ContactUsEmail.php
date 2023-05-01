@@ -54,6 +54,6 @@ class ContactUsEmail extends Mailable
      */
     public function build(): static
     {
-        return $this->from((config('mail.from.address')), $this->name)->subject($this->subject)->view('emails.contact_us_email');
+        return $this->from((config('mail.from.address')), $this->name)->subject('Voile4Vents: ' . $this->subject)->view('emails.common.contact_us_email');
     }
 }

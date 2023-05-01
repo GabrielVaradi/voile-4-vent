@@ -84,7 +84,8 @@ class HandleCheckoutSessionCompleted implements ShouldQueue
                 $event->reservations()->attach([$reservation->id]);
             }
             \DB::commit();
-            return Mail::to($firstCustomerForm['email'])->cc(config('mail.from.address'))->send(new ReservationCompleted($reservation, $firstCustomerForm, $language));
+            return Mail::to($firstCustomerForm['email'])->send(new ReservationCompleted($reservation, $firstCustomerForm, $language));
+            // return Mail::to($firstCustomerForm['email'])->cc(config('mail.from.address'))->send(new ReservationCompleted($reservation, $firstCustomerForm, $language));
         } catch (Exception $e) {
             \DB::rollback();
             report($e);

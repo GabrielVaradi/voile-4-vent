@@ -78,27 +78,18 @@ const Calendar = ({
         )
 
         return (
-            <>
-                <div>
-                    {query.locale === 'en' ? event.title_en : event.title_fr}
-                </div>
-                <div>
-                    {isBefore(e.start, subDays(new Date(), 1))
-                        ? t('event_finished')
-                        : t('places_left', {
-                              places_left:
-                                  event.max_reservations - totalReservations,
-                          })}
-                </div>
-            </>
+            <div>{query.locale === 'en' ? event.title_en : event.title_fr}</div>
         )
     }
 
-    const components = useMemo(() => {
-        return {
-            event: Event,
-        }
-    }, [])
+    const { components } = useMemo(
+        () => ({
+            components: {
+                event: Event,
+            },
+        }),
+        [],
+    )
 
     const locales = {
         en: enUS,

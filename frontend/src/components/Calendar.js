@@ -220,7 +220,7 @@ const Calendar = ({
             style: {
                 background: 'transparent',
                 color: 'red',
-                // zIndex: -1,
+                zIndex: -1,
                 pointerEvents: 'none',
                 // textAlign: 'center',
             },

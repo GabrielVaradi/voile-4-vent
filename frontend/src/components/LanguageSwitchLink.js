@@ -37,7 +37,7 @@ const LanguageSwitchLink = ({ locale, ...rest }) => {
                     })}
                 </div>
                 <Image
-                    src={locale === 'en' ? frIcon : enIcon}
+                    src={locale === 'en' ? enIcon : frIcon}
                     width={40}
                     height={40}
                     alt="Switch language Icon"

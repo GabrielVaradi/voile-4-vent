@@ -243,7 +243,7 @@ const Calendar = ({
                 eventPropGetter={eventPropGetter}
                 components={components}
                 onNavigate={onNavigate}
-                date={currentDate}
+                // date={currentDate}
                 messages={messages}
                 formats={formats}
             />

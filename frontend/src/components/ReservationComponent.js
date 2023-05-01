@@ -6,6 +6,7 @@ import { Container, Button, ModalHeader, ModalBody, Modal } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import Calendar from '@/components/Calendar'
 import { coursesTypes } from '@/constants/reservations.constants'
+import parseISO from 'date-fns/parseISO'
 
 import ReservationForm from '@/components/Forms/ReservationForm'
 import {
@@ -83,8 +84,8 @@ const ReservationComponent = ({ isAdmin }) => {
         if (events.length > 0) {
             const mapped = events.map(event => ({
                 id: event.id,
-                start: event.start,
-                end: event.end,
+                start: parseISO(event.start),
+                end: parseISO(event.end),
                 title_en: event.title_en,
                 title_fr: event.title_fr,
                 reservations: event.reservations,

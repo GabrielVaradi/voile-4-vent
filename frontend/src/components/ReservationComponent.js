@@ -101,7 +101,7 @@ const ReservationComponent = ({ isAdmin }) => {
     }
 
     return (
-        <Container className="mt-5">
+        <Container className="my-5">
             <h1 className="mb-4">{t('page_title')}</h1>
             <div>{t('type')}</div>
             <Select

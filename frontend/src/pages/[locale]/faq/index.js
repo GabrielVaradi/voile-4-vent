@@ -49,7 +49,7 @@ const Index = ({ faqs }) => {
                     content="Here you can get an answer to all frequently asked questions about sailing and voile4vents"
                 />
             </Head>
-            <Container className="mt-5">
+            <Container className="my-5">
                 <h1 className="mb-4">{t('page_title')}</h1>
                 <Accordion toggle={toggle} open={open}>
                     {faqs?.data.map(question => (

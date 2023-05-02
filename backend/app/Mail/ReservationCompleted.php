@@ -60,7 +60,7 @@ class ReservationCompleted extends Mailable
     public function build(): static
     {
         $mailable = 'emails.' . $this->language . '.reservation_completed';
-        $subject = $this->language == 'en' ? 'Reservation confirmation' : 'Confirmation de réservation';
+        $subject = $this->language == 'en' ? 'Reservation confirmation - Voile4Vents' : 'Confirmation de réservation - Voile4Vents';
         return $this->subject($subject)->view($mailable);
     }
 }

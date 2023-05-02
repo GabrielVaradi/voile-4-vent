@@ -80,7 +80,7 @@ const Index = () => {
                     content="Contact us if you have any questions or if you want to book an activity, or even a course with more people"
                 />
             </Head>
-            <Container className="mt-5">
+            <Container className="my-5">
                 <h1 className="mb-4">{t('page_title')}</h1>
                 <div className="d-flex flex-column justify-content-center align-items-center mb-4">
                     <h5>{t('contact_us_phone_number')}</h5>

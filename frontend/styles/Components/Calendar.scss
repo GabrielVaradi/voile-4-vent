@@ -10,6 +10,9 @@
     //}
     .rbc-month-view {
         .rbc-month-row {
+            .rbc-row-content {
+                cursor: pointer;
+            }
             .rbc-date-cell {
                 button {
                     pointer-events: none;

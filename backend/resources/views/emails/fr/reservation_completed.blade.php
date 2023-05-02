@@ -24,7 +24,7 @@
                 est le cas, nous entrerons rapidement en contact avec vous.</p>
 
             <p class="mb-2">À très bientôt sur l'eau, </p>
-            <p class="mb-2">Instructor</p>
+            <p class="mb-2">Instructeur</p>
             <p class="mb-2">Capi Pier'eau</p>
         </div>
     </div>

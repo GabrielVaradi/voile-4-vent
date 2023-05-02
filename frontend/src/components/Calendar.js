@@ -205,6 +205,7 @@ const Calendar = ({
             return {
                 style: {
                     background: selected ? '' : '#C1E1C1',
+                    cursor: 'pointer',
                 },
             }
         }
@@ -218,11 +219,12 @@ const Calendar = ({
     const eventPropGetter = () => {
         return {
             style: {
-                background: 'transparent',
-                color: 'red',
+                // background: 'transparent',
+                // color: 'red',
                 zIndex: -1,
                 pointerEvents: 'none',
                 textAlign: '-webkit-center',
+                borderRadius: 0,
             },
         }
     }

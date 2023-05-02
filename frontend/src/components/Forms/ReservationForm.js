@@ -492,11 +492,17 @@ const ReservationForm = ({
                                     disabled={isSubmitting}
                                     onClick={() => {
                                         // recaptchaRef.current.execute()
-                                        errors.forms?.forEach((form, i) => {
-                                            if (form !== undefined) {
-                                                setActiveTab(i + 1)
+                                        if (errors.forms) {
+                                            for (const [
+                                                i,
+                                                form,
+                                            ] of errors.forms.entries()) {
+                                                if (form !== undefined) {
+                                                    setActiveTab(i + 1)
+                                                    break
+                                                }
                                             }
-                                        })
+                                        }
                                         submitForm()
                                     }}>
                                     {t('book')}

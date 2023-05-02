@@ -125,6 +125,7 @@ const ReservationComponent = ({ isAdmin }) => {
                         days: type.days,
                     })}
                 </li>
+                <li>{t('helper_text_join_or_create_event')}</li>
                 <li>
                     {t('helper_text_contact_us_description_1')}
                     <Link href="/contact-us">

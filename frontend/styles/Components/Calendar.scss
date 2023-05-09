@@ -1,15 +1,22 @@
 .rbc-calendar {
-    //.rbc-toolbar {
-    //    justify-content: space-between !important;
-    //    .rbc-toolbar-label {
-    //        flex-grow: 0 !important;
-    //    }
-    //    .rbc-btn-group {
-    //        display: none !important;
-    //    }
-    //}
     .rbc-month-view {
         .rbc-month-row {
+            .rbc-day-bg {
+                height: 100%;
+                width: 100%;
+            }
+            // .rbc-day-bg::before {
+            //     content: '+';
+            //     color: green;
+            //     position: absolute;
+            //     width: 20px;
+            //     height: 20px;
+            //     display: flex;
+            //     justify-content: center;
+            //     align-items: center;
+            //     top: 40%;
+            //     transform: translateX(200%)
+            // }
             .rbc-row-content {
                 cursor: pointer;
             }

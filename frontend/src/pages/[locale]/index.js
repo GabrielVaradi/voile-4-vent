@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic'
 import { getStaticPaths, getI18nProps } from '../../lib/getStatic'
 
 import { courseService, teacherService } from '@/services'
+import { reservableCoursesType } from '@/constants/courses.constants'
 import Link from '../../components/Link'
 import styles from '../../../styles/Pages/Home.module.scss'
 const VideoFull = dynamic(() => import('@/components/Videos/VideoFull'), {
@@ -109,7 +110,9 @@ const Home = ({ courses, teachers }) => {
                                         className="btn btn-link text-white border-0 mb-3">
                                         {t('learn_more')}
                                     </Link>
-                                    {course.type !== 'intermediate_skipper' && (
+                                    {reservableCoursesType.includes(
+                                        course.type,
+                                    ) && (
                                         <Link
                                             href={`/reservations?type=${course.type}`}
                                             className="btn btn-primary bg-white text-black border-0 mb-3 ms-5 ms-lg-0">

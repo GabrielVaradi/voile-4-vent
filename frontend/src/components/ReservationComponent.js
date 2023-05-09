@@ -5,7 +5,7 @@ import Select from 'react-select'
 import { Container, Button, ModalHeader, ModalBody, Modal } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
 import Calendar from '@/components/Calendar'
-import { coursesTypes } from '@/constants/reservations.constants'
+import { coursesTypes } from '@/constants/courses.constants'
 import parseISO from 'date-fns/parseISO'
 
 import ReservationForm from '@/components/Forms/ReservationForm'
@@ -46,11 +46,6 @@ const ReservationComponent = ({ isAdmin }) => {
             value: coursesTypes.initiation_sailing.value,
             label: t(coursesTypes.initiation_sailing.label),
             days: coursesTypes.initiation_sailing.days,
-        },
-        {
-            value: coursesTypes.regatta.value,
-            label: t(coursesTypes.regatta.label),
-            days: coursesTypes.regatta.days,
         },
     ]
 

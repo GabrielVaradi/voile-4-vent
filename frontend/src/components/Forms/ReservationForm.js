@@ -30,7 +30,7 @@ import BasicCheckbox from '@/components/Fields/BasicCheckbox'
 import TermsCheckbox from '@/components/Fields/TermsCheckbox'
 
 import { useTranslation } from 'next-i18next'
-import { coursesTypes } from '@/constants/reservations.constants'
+import { coursesTypes } from '@/constants/courses.constants'
 
 const ReservationForm = ({
     eventsSelected,
@@ -163,13 +163,24 @@ const ReservationForm = ({
                         .min(1, t('validation_birthdate_month_too_low'))
                         .max(12, t('validation_birthdate_month_too_high'))
                         .required(t('validation_required')),
-                    year: Yup.number()
-                        .min(1900, t('validation_birthdate_year_too_low'))
-                        .max(
-                            getYear(new Date()) - 17,
-                            t('validation_birthdate_year_too_high'),
-                        )
-                        .required(t('validation_required')),
+                    year:
+                        activeTab === 1
+                            ? Yup.number()
+                                  .min(
+                                      1900,
+                                      t('validation_birthdate_year_too_low'),
+                                  )
+                                  .max(
+                                      getYear(new Date()) - 17,
+                                      t('validation_birthdate_year_too_high'),
+                                  )
+                                  .required(t('validation_required'))
+                            : Yup.number()
+                                  .min(
+                                      1900,
+                                      t('validation_birthdate_year_too_low'),
+                                  )
+                                  .required(t('validation_required')),
                 }),
                 terms_accepted: Yup.boolean().oneOf(
                     [true],

@@ -30,7 +30,6 @@ import('react-big-calendar/lib/css/react-big-calendar.css')
 
 const Calendar = ({
     events,
-    className,
     daysSelected,
     setDaysSelected,
     type,
@@ -219,8 +218,6 @@ const Calendar = ({
     const eventPropGetter = () => {
         return {
             style: {
-                // background: 'transparent',
-                // color: 'red',
                 zIndex: -1,
                 pointerEvents: 'none',
                 textAlign: '-webkit-center',
@@ -233,7 +230,6 @@ const Calendar = ({
         <Container className="mt-4">
             <BigCalendar
                 events={events}
-                className={className}
                 localizer={localizer}
                 style={{ height: 500 }}
                 culture={query.locale}

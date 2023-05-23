@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic'
 import { getStaticPaths, getI18nProps } from '../../lib/getStatic'
 
 import { courseService, teacherService } from '@/services'
-import { reservableCoursesType } from '@/constants/courses.constants'
+// import { reservableCoursesType } from '@/constants/courses.constants'
 import Link from '../../components/Link'
 import styles from '../../../styles/Pages/Home.module.scss'
 const VideoFull = dynamic(() => import('@/components/Videos/VideoFull'), {

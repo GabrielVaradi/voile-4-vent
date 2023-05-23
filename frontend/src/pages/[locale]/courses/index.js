@@ -8,7 +8,7 @@ import Head from 'next/head'
 import { Container, Col, Row } from 'reactstrap'
 import Link from '../../../components/Link'
 import styles from '../../../../styles/Pages/Courses.module.scss'
-import { reservableCoursesType } from '@/constants/courses.constants'
+// import { reservableCoursesType } from '@/constants/courses.constants'
 
 const Index = ({ courses }) => {
     const { t } = useTranslation('courses')

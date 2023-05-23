@@ -43,7 +43,9 @@ const Index = ({ activities }) => {
                                         ? activity.title_en
                                         : activity.title_fr}
                                 </h2>
-                                <h5>{activity.price}$</h5>
+                                <h5>
+                                    {activity.price}$ {t('per_person')}
+                                </h5>
                                 <h5>
                                     {query.locale === 'en'
                                         ? activity.duration_en

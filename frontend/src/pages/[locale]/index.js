@@ -110,7 +110,7 @@ const Home = ({ courses, teachers }) => {
                                         className="btn btn-link text-white border-0 mb-3">
                                         {t('learn_more')}
                                     </Link>
-                                    {reservableCoursesType.includes(
+                                    {/* {reservableCoursesType.includes(
                                         course.type,
                                     ) && (
                                         <Link
@@ -118,7 +118,7 @@ const Home = ({ courses, teachers }) => {
                                             className="btn btn-primary bg-white text-black border-0 mb-3 ms-5 ms-lg-0">
                                             {t('registration')}
                                         </Link>
-                                    )}
+                                    )} */}
                                 </div>
                             </Col>
                         ))}

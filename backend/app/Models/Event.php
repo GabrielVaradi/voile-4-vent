@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
+
 
 class Event extends Model
 {
@@ -47,5 +49,10 @@ class Event extends Model
     public function reservations()
     {
         return $this->belongsToMany(Reservation::class);
+    }
+
+    public function checkIfSaturday()
+    {
+        return Carbon::parse($this->start)->dayName === 'Saturday';
     }
 }

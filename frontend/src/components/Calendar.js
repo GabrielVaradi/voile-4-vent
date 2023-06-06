@@ -13,7 +13,6 @@ import isSaturday from 'date-fns/isSaturday'
 import isSunday from 'date-fns/isSunday'
 import isBefore from 'date-fns/isBefore'
 import isAfter from 'date-fns/isAfter'
-import parseISO from 'date-fns/parseISO'
 import enUS from 'date-fns/locale/en-US'
 import frCA from 'date-fns/locale/fr-CA'
 import { useRouter } from 'next/router'
@@ -127,9 +126,13 @@ const Calendar = ({
             return null
 
         // Disable selecting events with max capacity
-        const selectedEvent = events.filter(event =>
-            isEqual(addSeconds(daySelected[0], 1), parseISO(event.start)),
-        )[0]
+        const selectedEvent = events.filter(event => {
+            let day = daySelected[0]
+            if (isSunday(day)) {
+                day = subDays(day, 1)
+            }
+            return isEqual(addSeconds(day, 1), event.start)
+        })[0]
 
         if (selectedEvent) {
             let numberOfReservations = 0

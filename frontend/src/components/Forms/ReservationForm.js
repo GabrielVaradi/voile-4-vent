@@ -69,12 +69,9 @@ const ReservationForm = ({
     }, [eventsSelected])
 
     const createReservation = (values, { resetForm }) => {
-        let filteredDays = [...daysSelected]
-
+        let filteredDays = daysSelected.map(day => addSeconds(day, 1))
         // Remove from selected days if the event already exists
-        if (eventsSelected.length === 0) {
-            filteredDays = daysSelected.map(day => addSeconds(day, 1))
-        } else {
+        if (eventsSelected.length !== 0) {
             daysSelected.forEach((day, i) => {
                 for (const event of eventsSelected) {
                     if (

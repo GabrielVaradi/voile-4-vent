@@ -3,7 +3,6 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Container, Row, Col } from 'reactstrap'
 import { useTranslation } from 'next-i18next'
-// import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import ImageFull from '@/components/Images/ImageFull'
 import Image from 'next/legacy/image'
 import mainPicture from '../../../public/images/home/voile4vents_main.jpg'
@@ -11,7 +10,7 @@ import dynamic from 'next/dynamic'
 import { getStaticPaths, getI18nProps } from '../../lib/getStatic'
 
 import { courseService, teacherService } from '@/services'
-// import { reservableCoursesType } from '@/constants/courses.constants'
+import { reservableCoursesType } from '@/constants/courses.constants'
 import Link from '../../components/Link'
 import styles from '../../../styles/Pages/Home.module.scss'
 const VideoFull = dynamic(() => import('@/components/Videos/VideoFull'), {
@@ -110,7 +109,7 @@ const Home = ({ courses, teachers }) => {
                                         className="btn btn-link text-white border-0 mb-3">
                                         {t('learn_more')}
                                     </Link>
-                                    {/* {reservableCoursesType.includes(
+                                    {reservableCoursesType.includes(
                                         course.type,
                                     ) && (
                                         <Link
@@ -118,7 +117,7 @@ const Home = ({ courses, teachers }) => {
                                             className="btn btn-primary bg-white text-black border-0 mb-3 ms-5 ms-lg-0">
                                             {t('registration')}
                                         </Link>
-                                    )} */}
+                                    )}
                                 </div>
                             </Col>
                         ))}

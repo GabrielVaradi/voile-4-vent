@@ -92,7 +92,7 @@ const ReservationComponent = ({ isAdmin }) => {
 
     const toggleSuccessModal = () => {
         setSuccessModalIsOpen(prev => !prev)
-        router.push('/reservations', undefined, { shallow: true })
+        window.history.replaceState(null, '', '/reservations')
     }
 
     return (

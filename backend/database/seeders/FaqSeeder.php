@@ -27,11 +27,11 @@ class FaqSeeder extends Seeder
                 'question_en' => "What equipment should I bring with me?",
                 'question_fr' => "Quel équipement est-il nécessaire d'apporter?",
                 'answer_en' => "It is very important to bring food and a lot of water for the day. 
-                                It is preferable to bring your life jacket however it can be provided on board the sailboat. It is recommended to wear shoes that do not mark the deck of the boat.
+                                It is preferable to bring your life jacket, however it can be provided on board the sailboat. It is recommended to wear shoes that do not mark the deck of the boat.
                                 Sailing is dependent on the weather conditions, the foreseeing sailor will have to bring in his luggage: fleece, raincoat, sunglasses, sunscreen, hat, swimsuit and towel.
                                 Poseidon and Aeolus are usually kind to new sailors, maybe...",
                 'answer_fr' => "Il est très important d'amener de la nourriture ainsi que beaucoup d'eau pour la journée.
-                                Il est préférable d’apporter votre veste de flottaison cependant elle peut être fournie à bord du voilier. Il est recommandé de porter des chaussures 
+                                Il est préférable d’apporter votre veste de flottaison, cependant elle peut être fournie à bord du voilier. Il est recommandé de porter des chaussures 
                                 qui ne marquent pas le pont du bateau.  La voile est tributaire des conditions météo, le marin prévoyant devra apporter dans son bagage: laine polaire,
                                 imperméable, lunette de soleil, crème solaire, chapeau, maillot de bain et serviette. Poséidon et Éole sont habituellement cléments pour les nouveaux marins, peut-être...",
             ]);

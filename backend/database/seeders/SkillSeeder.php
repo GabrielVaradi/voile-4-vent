@@ -115,7 +115,7 @@ class SkillSeeder extends Seeder
         Skill::query()
             ->create([
                 'name_en' => 'Hoist the spinnaker and adjust it to give the best lift',
-                'name_fr' => 'Hisser le spi et régler pour qu’il donne la meilleure portance',
+                'name_fr' => 'Hisser le spinnaker et régler le pour qu’il donne la meilleure portance',
             ]); // 18
         Skill::query()
             ->create([

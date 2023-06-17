@@ -70,7 +70,7 @@ const Navigation = () => {
                             }>
                             {t('activities')}
                         </Link>
-                        <Link
+                        {/* <Link
                             href="/reservations"
                             className="navbar-brand me-0 me-lg-5"
                             style={
@@ -79,7 +79,7 @@ const Navigation = () => {
                                     : {}
                             }>
                             {t('reservations')}
-                        </Link>
+                        </Link> */}
                         <Link
                             href="/contact-us"
                             className="navbar-brand me-0 me-lg-5"

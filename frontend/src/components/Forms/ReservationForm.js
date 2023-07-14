@@ -531,7 +531,7 @@ const ReservationForm = ({
                 toggle={() => setShowTerms(prev => !prev)}
                 size="lg">
                 <ModalHeader toggle={() => setShowTerms(prev => !prev)}>
-                    {t('terms__accepted_label')}
+                    {t('terms_accepted_label')}
                 </ModalHeader>
                 <ModalBody className="h4 my-3">
                     {t('terms_accepted_description')}

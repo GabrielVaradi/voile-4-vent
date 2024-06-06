@@ -18,6 +18,6 @@ class MailController extends Controller
         $name = $request->name;
         $subject = $request->subject;
         $body = $request->body;
-        Mail::to(config('mail.from.address'))->send(new ContactUsEmail($email, $name, $subject, $body));
+        Mail::to(config('mail.to.address'))->send(new ContactUsEmail($email, $name, $subject, $body));
     }
 }

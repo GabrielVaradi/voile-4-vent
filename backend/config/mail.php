@@ -96,6 +96,11 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Pierre Ricard'),
     ],
 
+    'to' => [
+        'address' => env('MAIL_TO_ADDRESS', 'voile4vents@voile4vents.ca'),
+        'name' => env('MAIL_FROM_NAME', 'Pierre Ricard'),
+    ],
+
     'reply_to' => [
         'address' => env('MAIL_FROM_ADDRESS', 'voile4vents@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Pierre Ricard'),

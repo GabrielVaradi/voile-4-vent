@@ -44,11 +44,11 @@ const Footer = () => {
                             className="fs-5 text-decoration-none my-2 text-white">
                             {t('activities')}
                         </Link>
-                        <Link
+                        {/* <Link
                             href="/reservations"
                             className="fs-5 text-decoration-none my-2 text-white">
                             {t('reservations')}
-                        </Link>
+                        </Link> */}
                         <Link
                             href="/contact-us"
                             className="fs-5 text-decoration-none my-2 text-white">

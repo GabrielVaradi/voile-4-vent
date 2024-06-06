@@ -87,19 +87,19 @@ const Index = ({ courses }) => {
                                         </ul>
                                     </>
                                 )}
-                                {reservableCoursesType.includes(course.type) ? (
-                                    <Link
+                                {/* {reservableCoursesType.includes(course.type) ? ( */}
+                                {/* <Link
                                         href={`/reservations?type=${course.type}`}
                                         className="mt-4 btn btn-primary px-5 py-2">
                                         {t('book_now')}
                                     </Link>
-                                ) : (
-                                    <Link
-                                        href={`/contact-us`}
-                                        className="mt-0 mb-4 mb-lg-0 mt-lg-4 btn btn-primary px-5 py-2">
-                                        {t('contact_us')}
-                                    </Link>
-                                )}
+                                ) : ( */}
+                                <Link
+                                    href={`/contact-us`}
+                                    className="mt-0 mb-4 mb-lg-0 mt-lg-4 btn btn-primary px-5 py-2">
+                                    {t('contact_us')}
+                                </Link>
+                                {/* )} */}
                             </Col>
                             <Col
                                 className={`${styles.image} position-relative ${
